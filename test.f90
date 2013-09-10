@@ -6,11 +6,10 @@ complex(dp), allocatable :: xdft(:)
 print *, "test"
 call init_random()
 n = 1024 * 1024
-allocate(x(n), xdft(n), wsave(n+int(log(real(n, dp))/log(2._dp)) + 4))
+allocate(x(n), xdft(n), wsave(4*n+15))
 call random_number(x)
 call cpu_time(t1)
-call cffti1(n, wsave, size(wsave), ier)
-call assert(ier == 0)
+call zffti(n, wsave)
 call cpu_time(t2)
 print *, "time:", (t2-t1)*1000, "ms"
 
