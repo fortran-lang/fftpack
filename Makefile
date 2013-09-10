@@ -88,8 +88,8 @@ installshared:lib$(LIB).so
 	rm *.o
 	ldconfig 
 
-test: test.o
-	$(FC) test.o -L./ -l$(LIB)
+test: test.f90
+	$(FC) $(FFLAGS) test.f90 -L./ -l$(LIB)
 	time ./a.out
 
 clean: 
