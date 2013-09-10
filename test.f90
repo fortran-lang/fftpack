@@ -85,4 +85,24 @@ print *, msg
 stop 1
 end subroutine
 
+subroutine precalculate_coeffs(wa)
+real(dp), intent(out) :: wa(:)
+integer :: n, k, i, idx
+n = size(wa) / 2
+k = n / 2
+wa = -1
+wa(1) = 1
+wa(2) = 0
+idx = 2
+do while (k > 0)
+    do i = 1, k
+        idx = idx + 2
+        wa(idx-1) = cos(i*pi/k)
+        wa(idx) = sin(i*pi/k)
+        !print *, idx, i*pi/k, wa(idx-1), wa(idx)
+    end do
+    k = k/2
+end do
+end subroutine
+
 end program
