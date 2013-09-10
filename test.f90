@@ -18,6 +18,11 @@ print *, "Total time:", (t3-t1)*1000, "ms"
 print *, "zffti:", (t2-t1)*1000, "ms"
 print *, "zfftf:", (t3-t2)*1000, "ms"
 
+call cpu_time(t1)
+call dfour1(x, size(x), 1)
+call cpu_time(t2)
+print *, "Total time:", (t2-t1)*1000, "ms"
+
 contains
 
 subroutine init_random()

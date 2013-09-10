@@ -72,7 +72,8 @@ dsinqf.o\
 dsinqi.o\
 dsint.o\
 sint1.o\
-dsinti.o
+dsinti.o\
+dfour1.o
 
 lib$(LIB).a:	$(OBJ)
 	ar -rcs lib$(LIB).a $(OBJ)
