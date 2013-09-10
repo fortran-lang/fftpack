@@ -1,20 +1,41 @@
 program test
 integer, parameter :: dp=kind(0.d0)
+real(dp), parameter :: pi    = 3.1415926535897932384626433832795_dp
 real(dp) :: t1, t2, t3
-real(dp), allocatable :: x_real(:), wsave(:)
+real(dp), allocatable :: x_real(:), wsave(:), C(:), D(:)
+integer, allocatable :: ifac(:)
 complex(dp), allocatable :: x(:), xdft(:), B(:)
 call init_random()
-n = 1024 * 1024
+!n = 1024 * 1024
+n = 32
 allocate(x_real(n), x(n), xdft(n), wsave(4*n+15), B(n*2))
-print *, "FFTPACK"
+allocate(C(2*n), D(2*n), ifac(20))
 call random_number(x_real)
+
+print *, "FFTPACK"
 x = x_real
 call cpu_time(t1)
 call zffti(n, wsave)
 call cpu_time(t2)
 call zfftf(n, x, wsave)
 call cpu_time(t3)
-!print *, x(:10)
+print *, x(:10)
+print *, "Total time:", (t3-t1)*1000, "ms"
+print *, "zffti:", (t2-t1)*1000, "ms"
+print *, "zfftf:", (t3-t2)*1000, "ms"
+
+print *, "MY"
+x = x_real
+call cpu_time(t1)
+call precalculate_coeffs(C)
+C = wsave(2*n+1:4*n)
+ifac(1) = n
+ifac(2) = 5
+ifac(3:3+ifac(2)) = 2
+call cpu_time(t2)
+call cfftf1(n, x, D, C, ifac)
+call cpu_time(t3)
+print *, x(:10)
 print *, "Total time:", (t3-t1)*1000, "ms"
 print *, "zffti:", (t2-t1)*1000, "ms"
 print *, "zfftf:", (t3-t2)*1000, "ms"
