@@ -1,17 +1,22 @@
 program test
 integer, parameter :: dp=kind(0.d0)
-real(dp) :: t1, t2
-real(dp), allocatable :: x(:), wsave(:)
-complex(dp), allocatable :: xdft(:)
+real(dp) :: t1, t2, t3
+real(dp), allocatable :: x_real(:), wsave(:)
+complex(dp), allocatable :: x(:), xdft(:)
 print *, "test"
 call init_random()
 n = 1024 * 1024
-allocate(x(n), xdft(n), wsave(4*n+15))
-call random_number(x)
+allocate(x_real(n), x(n), xdft(n), wsave(4*n+15))
+call random_number(x_real)
+x = x_real
 call cpu_time(t1)
 call zffti(n, wsave)
 call cpu_time(t2)
-print *, "time:", (t2-t1)*1000, "ms"
+call zfftf(n, x, wsave)
+call cpu_time(t3)
+print *, "Total time:", (t3-t1)*1000, "ms"
+print *, "zffti:", (t2-t1)*1000, "ms"
+print *, "zfftf:", (t3-t2)*1000, "ms"
 
 contains
 
