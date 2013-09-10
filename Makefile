@@ -73,7 +73,21 @@ dsinqi.o\
 dsint.o\
 sint1.o\
 dsinti.o\
-dfour1.o
+dfour1.o\
+dzfft2d.o\
+dzfft3d.o\
+fft235.o\
+kernel.o\
+mfft235.o\
+vzfft1d.o\
+vzfft2d.o\
+vzfft3d.o\
+zdfft2d.o\
+zdfft3d.o\
+zfft1d.o\
+zfft2d.o\
+zfft3d.o
+
 
 lib$(LIB).a:	$(OBJ)
 	ar -rcs lib$(LIB).a $(OBJ)
