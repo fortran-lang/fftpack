@@ -2,11 +2,11 @@ program test
 integer, parameter :: dp=kind(0.d0)
 real(dp) :: t1, t2, t3
 real(dp), allocatable :: x_real(:), wsave(:)
-complex(dp), allocatable :: x(:), xdft(:)
-print *, "test"
+complex(dp), allocatable :: x(:), xdft(:), B(:)
 call init_random()
 n = 1024 * 1024
-allocate(x_real(n), x(n), xdft(n), wsave(4*n+15))
+allocate(x_real(n), x(n), xdft(n), wsave(4*n+15), B(n*2))
+print *, "FFTPACK"
 call random_number(x_real)
 x = x_real
 call cpu_time(t1)
@@ -14,14 +14,30 @@ call zffti(n, wsave)
 call cpu_time(t2)
 call zfftf(n, x, wsave)
 call cpu_time(t3)
+!print *, x(:10)
 print *, "Total time:", (t3-t1)*1000, "ms"
 print *, "zffti:", (t2-t1)*1000, "ms"
 print *, "zfftf:", (t3-t2)*1000, "ms"
 
+print *, "NR"
+x = x_real
 call cpu_time(t1)
-call dfour1(x, size(x), 1)
+call dfour1(x, size(x), -1)
 call cpu_time(t2)
+!print *, x(:10)
 print *, "Total time:", (t2-t1)*1000, "ms"
+
+print *, "FFTE"
+x = x_real
+call cpu_time(t1)
+call zfft1d(x, size(x), 0, B)
+call cpu_time(t2)
+call zfft1d(x, size(x), -1, B)
+call cpu_time(t3)
+!print *, x(:10)
+print *, "Total time:", (t3-t1)*1000, "ms"
+print *, "zfft1d init:", (t2-t1)*1000, "ms"
+print *, "zfft1d:", (t3-t2)*1000, "ms"
 
 contains
 
