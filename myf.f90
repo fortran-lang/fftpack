@@ -77,11 +77,11 @@ implicit none
 contains
 
 subroutine precalculate_coeffs(wa)
+! Precalculates all cos/sin factors
 real(dp), intent(out) :: wa(:)
 integer :: n, k, i, idx
 n = size(wa) / 2
 k = n / 2
-wa = -1
 idx = 2
 do while (k > 0)
     wa(idx-1) = 1
