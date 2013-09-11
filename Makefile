@@ -16,8 +16,8 @@ LIB=dfftpack
 
 # Use these lines for Linux/g77
 FC=gfortran
-FFLAGS=-std=legacy -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops
-#FFLAGS = -std=legacy -Wall -Wextra -fPIC -g -fcheck=all -fbacktrace
+#FFLAGS=-std=legacy -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops
+FFLAGS = -std=legacy -Wall -Wextra -Wimplicit-interface -fPIC -g -fcheck=all -fbacktrace
 
 # Use these lines for Solaris
 #FC=f77
@@ -106,6 +106,10 @@ installshared:lib$(LIB).so
 
 test: test.f90
 	$(FC) $(FFLAGS) test.f90 -L./ -l$(LIB)
+	time ./a.out
+
+myf: myf.f90
+	$(FC) $(FFLAGS) myf.f90
 	time ./a.out
 
 clean: 
