@@ -96,6 +96,7 @@ end do
 end subroutine
 
 subroutine passf2(IDO, L1, CC, CH, WA1)
+! FFT pass of factor 2
 integer, intent(in) :: IDO, L1
 real(dp), intent(in) :: CC(IDO, 2, L1), WA1(:)
 real(dp), intent(out) :: CH(IDO, L1, 2)
@@ -178,14 +179,19 @@ allocate(WA(2*n), C(2*n), CH(2*n), ifac(20))
 call random_number(x_real)
 
 x = x_real
+
+! Convert complex x(n) to real C(2*n) array
 C(::2) = real(x, dp)
-C(1::2) = imag(x)
-call cpu_time(t1)
-call precalculate_coeffs(WA)
-call cpu_time(t2)
+C(2::2) = imag(x)
+
+! Initialize the factors:
 ifac(1) = n
 ifac(2) = 5
 ifac(3:) = 2
+
+call cpu_time(t1)
+call precalculate_coeffs(WA)
+call cpu_time(t2)
 call cfftf1(n, C, CH, WA, ifac)
 call cpu_time(t3)
 print *, C(:10)
