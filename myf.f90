@@ -163,24 +163,32 @@ end module
 program myf
 use types, only: dp
 use utils, only: init_random
-use fourier, only: precalculate_coeffs
+use fourier, only: precalculate_coeffs, cfftf1
 implicit none
 real(dp) :: t1, t2, t3
-real(dp), allocatable :: x_real(:), C(:)
+real(dp), allocatable :: x_real(:), WA(:), C(:), CH(:)
 complex(dp), allocatable :: x(:), xdft(:)
+integer, allocatable :: ifac(:)
 integer :: n
 call init_random()
 !n = 1024 * 1024
 n = 32
 allocate(x_real(n), x(n), xdft(n))
-allocate(C(2*n))
+allocate(WA(2*n), C(2*n), CH(2*n), ifac(20))
 call random_number(x_real)
 
 x = x_real
+C(::2) = real(x, dp)
+C(1::2) = imag(x)
 call cpu_time(t1)
-call precalculate_coeffs(C)
+call precalculate_coeffs(WA)
 call cpu_time(t2)
+ifac(1) = n
+ifac(2) = 5
+ifac(3:) = 2
+call cfftf1(n, C, CH, WA, ifac)
 call cpu_time(t3)
+print *, C(:10)
 print *, "Total time:", (t3-t1)*1000, "ms"
 print *, "zffti:", (t2-t1)*1000, "ms"
 print *, "zfftf:", (t3-t2)*1000, "ms"
