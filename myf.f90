@@ -82,10 +82,10 @@ integer :: n, k, i, idx
 n = size(wa) / 2
 k = n / 2
 wa = -1
-wa(1) = 1
-wa(2) = 0
 idx = 2
 do while (k > 0)
+    wa(idx-1) = 1
+    wa(idx) = 0
     do i = 1, k
         idx = idx + 2
         wa(idx-1) = cos(i*pi/k)
