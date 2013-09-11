@@ -70,6 +70,7 @@ end module
 module fourier
 use types, only: dp
 use constants, only: pi
+use utils, only: assert
 implicit none
 
 contains
@@ -117,6 +118,40 @@ else
             CH(I,K,2) = WA1(I-1)*TI2-WA1(I)*TR2
             CH(I-1,K,2) = WA1(I-1)*TR2+WA1(I)*TI2
         end do
+    end do
+end if
+end subroutine
+
+subroutine cfftf1 (N,C,CH,WA,IFAC)
+integer, intent(in) :: n
+real(dp), intent(inout) :: C(:), CH(:)
+real(dp), intent(in) :: WA(:)
+integer, intent(in) :: IFAC(:)
+integer :: I, IDL1, IDOT, IDO, IP, IW, K1, L1, L2, N2, NA, NF
+NF = IFAC(2)
+NA = 0
+L1 = 1
+IW = 1
+do K1 = 1, NF
+    IP = IFAC(K1+2)
+    L2 = IP*L1
+    IDO = N/L2
+    IDOT = IDO+IDO
+    IDL1 = IDOT*L1
+    call assert(IP == 2)
+    if (NA == 0) then
+        CALL passf2(IDOT,L1,C,CH,WA(IW:))
+    else
+        CALL passf2(IDOT,L1,CH,C,WA(IW:))
+    end if
+    NA = 1-NA
+    L1 = L2
+    IW = IW+(IP-1)*IDOT
+end do
+if (NA /= 0) then
+    N2 = N+N
+    do I = 1, N2
+     C(I) = CH(I)
     end do
 end if
 end subroutine
