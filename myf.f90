@@ -90,7 +90,6 @@ do while (k > 0)
         idx = idx + 2
         wa(idx-1) = cos(i*pi/k)
         wa(idx) = sin(i*pi/k)
-        !print *, idx, i*pi/k, wa(idx-1), wa(idx)
     end do
     k = k/2
 end do
