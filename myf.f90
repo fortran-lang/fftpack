@@ -9,6 +9,7 @@ module constants
 use types, only: dp
 implicit none
 real(dp), parameter :: pi    = 3.1415926535897932384626433832795_dp
+complex(dp), parameter :: i_ = (0, 1)
 end module
 
 !--------------------------------------------------------------------------
@@ -163,6 +164,7 @@ end module
 
 program myf
 use types, only: dp
+use constants, only: i_
 use utils, only: init_random
 use fourier, only: precalculate_coeffs, cfftf1
 implicit none
@@ -194,7 +196,8 @@ call precalculate_coeffs(WA)
 call cpu_time(t2)
 call cfftf1(n, C, CH, WA, ifac)
 call cpu_time(t3)
-print *, C(:10)
+xdft = C(::2) + i_ * C(2::2)
+print *, xdft(:10)
 print *, "Total time:", (t3-t1)*1000, "ms"
 print *, "zffti:", (t2-t1)*1000, "ms"
 print *, "zfftf:", (t3-t2)*1000, "ms"
