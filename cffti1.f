@@ -25,7 +25,7 @@
       IFAC(3) = 2
   107 IF (NL .NE. 1) GO TO 104
       IFAC(1) = N
-      NF = 5
+      NF = 20
       IFAC(2) = NF
       IFAC(3:3+NF) = 2
       TPI =  6.28318530717958647692D0

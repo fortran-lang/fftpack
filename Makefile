@@ -16,8 +16,8 @@ LIB=dfftpack
 
 # Use these lines for Linux/g77
 FC=gfortran
-#FFLAGS=-std=legacy -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops
-FFLAGS = -std=legacy -Wall -Wextra -Wimplicit-interface -fPIC -g -fcheck=all -fbacktrace
+FFLAGS=-std=legacy -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops
+#FFLAGS = -std=legacy -Wall -Wextra -Wimplicit-interface -fPIC -g -fcheck=all -fbacktrace
 
 # Use these lines for Solaris
 #FC=f77

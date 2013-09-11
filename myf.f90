@@ -173,11 +173,11 @@ real(dp), allocatable :: x_real(:), WA(:), C(:), CH(:)
 complex(dp), allocatable :: x(:), xdft(:)
 integer, allocatable :: ifac(:)
 integer :: n
-call init_random()
-!n = 1024 * 1024
-n = 32
+!call init_random()
+n = 1024 * 1024
+!n = 32
 allocate(x_real(n), x(n), xdft(n))
-allocate(WA(2*n), C(2*n), CH(2*n), ifac(20))
+allocate(WA(2*n), C(2*n), CH(2*n), ifac(25))
 call random_number(x_real)
 
 x = x_real
@@ -188,7 +188,7 @@ C(2::2) = imag(x)
 
 ! Initialize the factors:
 ifac(1) = n
-ifac(2) = 5
+ifac(2) = 20
 ifac(3:) = 2
 
 call cpu_time(t1)

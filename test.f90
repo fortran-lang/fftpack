@@ -5,11 +5,11 @@ real(dp) :: t1, t2, t3
 real(dp), allocatable :: x_real(:), wsave(:), C(:), D(:)
 integer, allocatable :: ifac(:)
 complex(dp), allocatable :: x(:), xdft(:), B(:)
-call init_random()
-!n = 1024 * 1024
-n = 32
+!call init_random()
+n = 1024 * 1024
+!n = 32
 allocate(x_real(n), x(n), xdft(n), wsave(4*n+15), B(n*2))
-allocate(C(2*n), D(2*n), ifac(20))
+allocate(C(2*n), D(2*n), ifac(25))
 call random_number(x_real)
 
 print *, "FFTPACK"
@@ -30,7 +30,7 @@ call cpu_time(t1)
 call precalculate_coeffs(C)
 C = wsave(2*n+1:4*n)
 ifac(1) = n
-ifac(2) = 5
+ifac(2) = 20
 ifac(3:3+ifac(2)) = 2
 call cpu_time(t2)
 call cfftf1(n, x, D, C, ifac)
@@ -45,7 +45,7 @@ x = x_real
 call cpu_time(t1)
 call dfour1(x, size(x), -1)
 call cpu_time(t2)
-!print *, x(:10)
+print *, x(:10)
 print *, "Total time:", (t2-t1)*1000, "ms"
 
 print *, "FFTE"
