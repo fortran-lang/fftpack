@@ -94,6 +94,33 @@ do while (k > 0)
 end do
 end subroutine
 
+subroutine passf2(IDO, L1, CC, CH, WA1)
+integer, intent(in) :: IDO, L1
+real(dp), intent(in) :: CC(IDO, 2, L1), WA1(:)
+real(dp), intent(out) :: CH(IDO, L1, 2)
+integer :: I, K
+real(dp) :: TR2, TI2
+if (IDO <= 2) then
+    do K = 1, L1
+        CH(1,K,1) = CC(1,1,K)+CC(1,2,K)
+        CH(1,K,2) = CC(1,1,K)-CC(1,2,K)
+        CH(2,K,1) = CC(2,1,K)+CC(2,2,K)
+        CH(2,K,2) = CC(2,1,K)-CC(2,2,K)
+    end do
+else
+    do K = 1, L1
+        do I = 2, IDO, 2
+            CH(I-1,K,1) = CC(I-1,1,K)+CC(I-1,2,K)
+            TR2 = CC(I-1,1,K)-CC(I-1,2,K)
+            CH(I,K,1) = CC(I,1,K)+CC(I,2,K)
+            TI2 = CC(I,1,K)-CC(I,2,K)
+            CH(I,K,2) = WA1(I-1)*TI2-WA1(I)*TR2
+            CH(I-1,K,2) = WA1(I-1)*TR2+WA1(I)*TI2
+        end do
+    end do
+end if
+end subroutine
+
 end module
 
 !--------------------------------------------------------------------------
