@@ -108,6 +108,10 @@ test: test.f90
 	$(FC) $(FFLAGS) test.f90 -L./ -l$(LIB)
 	time ./a.out
 
+fftw: fftw_test.c
+	gcc -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops fftw_test.c -lfftw3
+	time ./a.out
+
 myf: myf.f90
 	$(FC) $(FFLAGS) myf.f90
 	time ./a.out
