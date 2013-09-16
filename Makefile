@@ -109,7 +109,7 @@ test: test.f90
 	time ./a.out
 
 fftw: fftw_test.c
-	gcc -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops fftw_test.c -lfftw3
+	gcc -I$(PYTHONHPC)/include -Wall -Wextra -fPIC -O3 -march=native -ffast-math -funroll-loops fftw_test.c -L$(PYTHONHPC)/lib -lfftw3 -lm
 	time ./a.out
 
 myf: myf.f90
