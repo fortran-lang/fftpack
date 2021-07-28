@@ -1,0 +1,7 @@
+build*
+
+# Compiled objects
+*.o
+*.a
+*.so
+*.x
