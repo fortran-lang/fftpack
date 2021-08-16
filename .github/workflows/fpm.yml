@@ -54,4 +54,4 @@ jobs:
     - name: Run tests
       run: |
         gfortran --version
-        fpm test --flag "-O2" tstfft
+        fpm test --flag "-O2"

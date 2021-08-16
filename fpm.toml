@@ -19,3 +19,8 @@ auto-examples = false
 name = "tstfft"
 source-dir = "test"
 main = "tstfft.f"
+
+[[test]]
+name = "fftpack_zfft"
+source-dir = "test"
+main = "test_fftpack_zfft.f90"
