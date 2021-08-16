@@ -24,3 +24,13 @@ main = "tstfft.f"
 name = "fftpack_zfft"
 source-dir = "test"
 main = "test_fftpack_zfft.f90"
+
+[[test]]
+name = "fftpack_fft"
+source-dir = "test"
+main = "test_fftpack_fft.f90"
+
+[[test]]
+name = "fftpack_ifft"
+source-dir = "test"
+main = "test_fftpack_ifft.f90"

@@ -196,3 +196,98 @@ program demo_zfftb
     call zfftb(4,x,w)   !! `x` returns [(4.0,0.0), (8.0,0.0), (12.0,0.0), (16.0,0.0)].
 end program demo_zfftb
 ```
+
+## `fft`
+
+### Description
+
+Computes the forward complex discrete fourier
+transform (the fourier analysis).   
+
+### Status
+
+Experimental.
+
+### Class
+
+Pure function.
+
+### Snytax
+
+`call [[fftpack(module):fft(interface)]](x [, n])`
+
+### Argument
+
+`x`: Shall be a `complex` array.
+This argument is `intent(in)`. 
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+The needed length of the `complex` sequence `c`.
+
+#### Warning
+
+if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
+
+if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+
+### Example
+
+```fortran
+program demo_fft
+    use fftpack, only: fft
+    complex(kind=8) :: x(4)
+    x = [real(kind=8) :: 1.0, 2.0, 3.0, 4.0]
+    print *, fft(x)     !! [(10.0,0.0), (-2.0,2.0), (-2.0,0.0), (-2.0,-2.0)].
+    print *, fft(x,3)   !! [(6.0,0.0), (-1.5,0.86), (-1.5,0.86)].
+    print *, fft(x,5)   !! [(10.0,0.0), (-4.0,1.3), (1.5,-2.1), (1.5,2.1), (-4.0,1.3)].
+end program demo_fft
+```
+
+## `ifft`
+
+### Description
+
+Unnormalized inverse of `fft`.
+
+### Status
+
+Experimental.
+
+### Class
+
+Pure function.
+
+### Snytax
+
+`call [[fftpack(module):ifft(interface)]](x [, n])`
+
+### Argument
+
+`x`: Shall be a `complex` array.
+This argument is `intent(in)`. 
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+The needed length of the `complex` sequence `c`.
+
+#### Warning
+
+if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
+
+if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+
+### Example
+
+```fortran
+program demo_ifft
+    use fftpack, only: fft, ifft
+    complex(kind=8) :: x(4)
+    x = [real(kind=8) :: 1.0, 2.0, 3.0, 4.0]
+    print *, fft(x)             !! [(10.0,0.0), (-2.0,2.0), (-2.0,0.0), (-2.0,-2.0)].
+    print *, fft(x,3)           !! [(6.0,0.0), (-1.5,0.86), (-1.5,0.86)].
+    print *, fft(x,5)           !! [(10.0,0.0), (-4.0,1.3), (1.5,-2.1), (1.5,2.1), (-4.0,1.3)].
+    print *, ifft(fft(x))/4.0   !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0)]
+    print *, ifft(fft(x), 3)    !! [(6.0,2.0), (10.3,-1.0), (13.73,-1.0)]
+end program demo_ifft
+```

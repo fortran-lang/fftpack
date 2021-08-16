@@ -5,6 +5,7 @@ module fftpack
     private
 
     public :: zffti, zfftf, zfftb
+    public :: fft, ifft
 
     interface
 
@@ -41,5 +42,29 @@ module fftpack
         end subroutine zfftb
 
     end interface
+
+    !> Version: experimental
+    !>
+    !> Forward transform of a double complex periodic sequence.
+    !> ([Specifiction](../page/specs/fftpack.html#fft))
+    interface fft
+        pure module function fft_cdp(x, n) result(result)
+            complex(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            complex(kind=dp), allocatable :: result(:)
+        end function fft_cdp
+    end interface fft
+
+    !> Version: experimental
+    !>
+    !> Backward transform of a double complex periodic sequence.
+    !> ([Specifiction](../page/specs/fftpack.html#ifft))
+    interface ifft
+        pure module function ifft_cdp(x, n) result(result)
+            complex(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            complex(kind=dp), allocatable :: result(:)
+        end function ifft_cdp
+    end interface ifft
 
 end module fftpack
