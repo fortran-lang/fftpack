@@ -1,7 +1,7 @@
 program tester
 
     call test_fftpack_ifft()
-    print *, "All tests in `test_fftpack_fft` passed."
+    print *, "All tests in `test_fftpack_ifft` passed."
 
 contains
 
