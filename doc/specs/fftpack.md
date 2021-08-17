@@ -32,7 +32,7 @@ Pure function.
 This argument is `intent(in)`.  
 The length of the sequence to be transformed.
 
-`wsave`: Shall be a `real` array.
+`wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `4*n+15`.
 The same work array can be used for both `zfftf` and `zfftb`
@@ -88,7 +88,7 @@ Pure function.
 This argument is `intent(in)`.  
 The length of the `complex` sequence `c`. The method is more efficient when `n` is the product of small primes.
 
-`c`: Shall be a `complex` array.
+`c`: Shall be a `complex` and rank-1 array.
 This argument is `intent(inout)`.  
 A `complex` array of length `n` which contains the sequence.
 ```
@@ -101,7 +101,7 @@ for j=1,...,n
                        where i=sqrt(-1)
 ```
 
-`wsave`: Shall be a `real` array.
+`wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(inout)`.  
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. 
 The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
@@ -162,7 +162,7 @@ Pure function.
 This argument is `intent(in)`.  
 The length of the `complex` sequence `c`. The method is more efficient when `n` is the product of small primes.
 
-`c`: Shall be a `complex` array.
+`c`: Shall be a `complex` and rank-1 array.
 This argument is `intent(inout)`.  
 A `complex` array of length `n` which contains the sequence.
 ```
@@ -175,7 +175,7 @@ for j=1,...,n
                        where i=sqrt(-1)
 ```
 
-`wsave`: Shall be a `real` array.
+`wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(inout)`.  
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The `wsave` array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
@@ -218,7 +218,7 @@ Pure function.
 
 ### Argument
 
-`x`: Shall be a `complex` array.
+`x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`. 
 
 `n`: Shall be an `integer` scalar.
@@ -270,7 +270,7 @@ Pure function.
 
 ### Argument
 
-`x`: Shall be a `complex` array.
+`x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`. 
 
 `n`: Shall be an `integer` scalar.
@@ -302,4 +302,86 @@ program demo_ifft
     print *, ifft(fft(x))/4.0   !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0)]
     print *, ifft(fft(x), 3)    !! [(6.0,2.0), (10.3,-1.0), (13.73,-1.0)]
 end program demo_ifft
+```
+
+## `fftshift`
+
+### Description
+
+Rearranges the Fourier transform by moving the zero-frequency component to the center of the array.  
+
+### Status
+
+Experimental.
+
+### Class
+
+Pure function.
+
+### Snytax
+
+`result = [[fftpack(module):fftshift(interface)]](x)`
+
+### Argument
+
+`x`: Shall be a `complex/real` and rank-1 array.
+This argument is `intent(in)`. 
+
+### Return value
+
+Returns the `complex/real` and rank-1 Fourier transform by moving the zero-frequency component to the center of the array.
+
+### Example
+
+```fortran
+program demo_fftshift
+    use fftpack, only: fftshift
+    complex(kind=8) :: c(5) = [1, 2, 3, 4, 5]
+    real(kind=8) :: x(5) = [1, 2, 3, 4, 5]
+    print *, fftshift(c(1:4))   !! [(3.0,0.0), (4.0,0.0), (1.0,0.0), (2.0,0.0)]
+    print *, fftshift(c)        !! [(4.0,0.0), (5.0,0.0), (1.0,0.0), (2.0,0.0), (3.0,0.0)]
+    print *, fftshift(x(1:4))   !! [3.0, 4.0, 1.0, 2.0]
+    print *, fftshift(x)        !! [4.0, 5.0, 1.0, 2.0, 3.0]
+end program demo_fftshift
+```
+
+## `ifftshift`
+
+### Description
+
+Rearranges the Fourier transform with zero frequency shifting back to the original transform output. In other words, `ifftshift` is the result of undoing `fftshift`.
+
+### Status
+
+Experimental.
+
+### Class
+
+Pure function.
+
+### Snytax
+
+`result = [[fftpack(module):ifftshift(interface)]](x)`
+
+### Argument
+
+`x`: Shall be a `complex/real` and rank-1 array.
+This argument is `intent(in)`. 
+
+### Return value
+
+Returns the `complex/real` and rank-1 Fourier transform with zero frequency shifting back to the original transform output.
+
+### Example
+
+```fortran
+program demo_ifftshift
+    use fftpack, only: fftshift, ifftshift
+    complex(kind=8) :: c(5) = [1, 2, 3, 4, 5]
+    real(kind=8) :: x(5) = [1, 2, 3, 4, 5]
+    print *, ifftshift(fftshift(c(1:4)))   !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0)]
+    print *, ifftshift(fftshift(c) )       !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0), (5.0,0.0)]
+    print *, ifftshift(fftshift(x(1:4)))   !! [1.0, 2.0, 3.0, 4.0]
+    print *, ifftshift(fftshift(x))        !! [1.0, 2.0, 3.0, 4.0, 5.0]
+end program demo_ifftshift
 ```
