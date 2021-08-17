@@ -5,3 +5,6 @@ build*
 *.a
 *.so
 *.x
+
+# API-doc
+API-doc/
