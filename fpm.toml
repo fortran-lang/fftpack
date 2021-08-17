@@ -34,3 +34,18 @@ main = "test_fftpack_fft.f90"
 name = "fftpack_ifft"
 source-dir = "test"
 main = "test_fftpack_ifft.f90"
+
+[[test]]
+name = "fftpack_dfft"
+source-dir = "test"
+main = "test_fftpack_dfft.f90"
+
+[[test]]
+name = "fftpack_rfft"
+source-dir = "test"
+main = "test_fftpack_rfft.f90"
+
+[[test]]
+name = "fftpack_irfft"
+source-dir = "test"
+main = "test_fftpack_irfft.f90"

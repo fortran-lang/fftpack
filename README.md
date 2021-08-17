@@ -13,7 +13,8 @@ Fortran Package Manager (fpm) is a great package manager and build system for Fo
 You can build using provided `fpm.toml`:
 ```bash
 fpm build --flag "-O2"
-fpm test --flag "-O2" tstfft
+fpm test --flag "-O2" --list
+fpm test --flag "-O2" <test_name, see `fpm.toml` or list>
 ```
 To use `fftpack` within your `fpm` project, add the following to your `fpm.toml` file:
 ```toml
@@ -28,4 +29,6 @@ make
 ```
 
 ## Links
-[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
+[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)  
+[Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)
+[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
