@@ -59,14 +59,12 @@ end program demo_zffti
 
 ### Description
 
-Computes the forward complex discrete fourier
-transform (the fourier analysis).   
-Equivalently, `zfftf` computes
-the fourier coefficients of a complex periodic sequence.
-the transform is defined below at output parameter `c`.
+Computes the forward complex discrete fourier transform (the fourier analysis).   
+Equivalently, `zfftf` computes the fourier coefficients of a complex periodic sequence.
+The transform is defined below at output parameter `c`.
 
-The transform is not normalized. to obtain a normalized transform
-the output must be divided by `n`. otherwise a call of `zfftf`
+The transform is not normalized. To obtain a normalized transform
+the output must be divided by `n`. Otherwise a call of `zfftf`
 followed by a call of `zfftb` will multiply the sequence by `n`.
 
 The array `wsave` which is used by subroutine `zfftf` must be
@@ -105,7 +103,10 @@ for j=1,...,n
 
 `wsave`: Shall be a `real` array.
 This argument is `intent(inout)`.  
-A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different wsave array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same wsave array can be used by `zfftf` and `zfftb`.  
+A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. 
+The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
 #### Warning
@@ -176,7 +177,7 @@ for j=1,...,n
 
 `wsave`: Shall be a `real` array.
 This argument is `intent(inout)`.  
-A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different wsave array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same wsave array can be used by `zfftf` and `zfftb`.  
+A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The `wsave` array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
 #### Warning
@@ -201,8 +202,7 @@ end program demo_zfftb
 
 ### Description
 
-Computes the forward complex discrete fourier
-transform (the fourier analysis).   
+Computes the forward complex discrete fourier transform (the fourier analysis).   
 
 ### Status
 
@@ -214,7 +214,7 @@ Pure function.
 
 ### Snytax
 
-`call [[fftpack(module):fft(interface)]](x [, n])`
+`result = [[fftpack(module):fft(interface)]](x [, n])`
 
 ### Argument
 
@@ -230,6 +230,12 @@ The needed length of the `complex` sequence `c`.
 if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
 
 if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+
+### Return value
+
+`fft(x)` returns the Discrete Fourier Transform (DFT) of `x` using the Fast Fourier Transform (FFT) algorithm. 
+
+`fft(x, n)` returns `n` point DFT of `x` using the FFT algorithm.
 
 ### Example
 
@@ -260,7 +266,7 @@ Pure function.
 
 ### Snytax
 
-`call [[fftpack(module):ifft(interface)]](x [, n])`
+`result = [[fftpack(module):ifft(interface)]](x [, n])`
 
 ### Argument
 
@@ -276,6 +282,12 @@ The needed length of the `complex` sequence `c`.
 if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
 
 if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+
+### Return value
+
+`ifft(x)` returns the inverse Discrete Fourier transform of `x` using the Fast Fourier Transform algorithm.. 
+
+`ifft(x, n)` returns `n` point inverse DFT of `x` using the FFT algorithm.
 
 ### Example
 

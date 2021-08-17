@@ -8,7 +8,7 @@ contains
         integer, intent(in), optional :: n
         complex(kind=dp), allocatable :: result(:)
 
-        integer :: lenseq, lensav, lenwrk
+        integer :: lenseq, lensav, i
         real(kind=dp), allocatable :: wsave(:)
 
         if (present(n)) then
