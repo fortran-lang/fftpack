@@ -3,7 +3,7 @@ submodule(fftpack) fftpack_ifft
 contains
 
     !> Backward transform of a double complex periodic sequence.
-    pure module function ifft_cdp(x, n) result(result)
+    pure module function ifft_dp(x, n) result(result)
         complex(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n
         complex(kind=dp), allocatable :: result(:)
@@ -31,6 +31,6 @@ contains
         !> Backward transformation
         call zfftb(lenseq, result, wsave)
 
-    end function ifft_cdp
+    end function ifft_dp
 
 end submodule fftpack_ifft

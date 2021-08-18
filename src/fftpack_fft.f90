@@ -3,7 +3,7 @@ submodule(fftpack) fftpack_fft
 contains
 
     !> Forward transform of a double complex periodic sequence.
-    pure module function fft_cdp(x, n) result(result)
+    pure module function fft_dp(x, n) result(result)
         complex(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n
         complex(kind=dp), allocatable :: result(:)
@@ -31,6 +31,6 @@ contains
         !> Forward transformation
         call zfftf(lenseq, result, wsave)
 
-    end function fft_cdp
+    end function fft_dp
 
 end submodule fftpack_fft

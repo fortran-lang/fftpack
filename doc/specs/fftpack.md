@@ -49,9 +49,8 @@ The contents of `wsave` must not be changed between calls of `zfftf` or `zfftb`.
 ```fortran
 program demo_zffti
     use fftpack, only: zffti
-    complex(kind=8) :: x(4)
+    complex(kind=8) :: x(4) = [1.0, 2.0, 3.0, 4.0]
     real(kind=8) :: w(31)
-    x = [real(kind=8) :: 1.0, 2.0, 3.0, 4.0]
     call zffti(4,w)
 end program demo_zffti
 ```
@@ -64,12 +63,9 @@ Computes the forward complex discrete fourier transform (the fourier analysis).
 Equivalently, `zfftf` computes the fourier coefficients of a complex periodic sequence.
 The transform is defined below at output parameter `c`.
 
-The transform is not normalized. To obtain a normalized transform
-the output must be divided by `n`. Otherwise a call of `zfftf`
-followed by a call of `zfftb` will multiply the sequence by `n`.
+The transform is not normalized. To obtain a normalized transform the output must be divided by `n`. Otherwise a call of `zfftf` followed by a call of `zfftb` will multiply the sequence by `n`.
 
-The array `wsave` which is used by subroutine `zfftf` must be
-initialized by calling subroutine `zffti(n,wsave)`.
+The array `wsave` which is used by subroutine `zfftf` must be initialized by calling subroutine `zffti(n,wsave)`.
 
 #### Status
 
@@ -89,7 +85,7 @@ Pure function.
 This argument is `intent(in)`.  
 The length of the `complex` sequence `c`. The method is more efficient when `n` is the product of small primes.
 
-`c`: Shall be a `complex` array.
+`c`: Shall be a `complex` and rank-1 array.
 This argument is `intent(inout)`.  
 A `complex` array of length `n` which contains the sequence.
 ```
@@ -133,17 +129,13 @@ end program demo_zfftf
 
 Unnormalized inverse of `zfftf`.
 
-Computes the backward `complex` discrete fourier
-transform (the fourier synthesis). Equivalently, `zfftb` computes
-a `complex` periodic sequence from its fourier coefficients.
+Computes the backward `complex` discrete fourier transform (the fourier synthesis). 
+Equivalently, `zfftb` computes a `complex` periodic sequence from its fourier coefficients. 
 The transform is defined below at output parameter `c`.
 
-The transform is not normalized. to obtain a normalized transform
-the output must be divided by `n`. otherwise a call of `zfftf`
-followed by a call of `zfftb` will multiply the sequence by `n`.
+The transform is not normalized. to obtain a normalized transform the output must be divided by `n`. Otherwise a call of `zfftf` followed by a call of `zfftb` will multiply the sequence by `n`.
 
-The array `wsave` which is used by subroutine `zfftf` must be
-initialized by calling subroutine `zffti(n,wsave)`.
+The array `wsave` which is used by subroutine `zfftf` must be initialized by calling subroutine `zffti(n,wsave)`.
 
 #### Status
 
@@ -219,24 +211,20 @@ Pure function.
 
 #### Argument
 
-`x`: Shall be a `complex` array.
+`x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`. 
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)` and `optional`.  
-The needed length of the `complex` sequence `c`.
-
-##### Warning
-
-if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
-
-if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
 #### Return value
 
-`fft(x)` returns the Discrete Fourier Transform (DFT) of `x` using the Fast Fourier Transform (FFT) algorithm. 
+Returns a `complex` and rank-1 array, the Discrete Fourier Transform (DFT) of `x`.
 
-`fft(x, n)` returns `n` point DFT of `x` using the FFT algorithm.
+#### Notes
+
+Within numerical accuracy, `x == ifft(fft(x))/size(x)`.
 
 #### Example
 
@@ -271,35 +259,23 @@ Pure function.
 
 #### Argument
 
-`x`: Shall be a `complex` array.
+`x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`. 
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)` and `optional`.  
-The needed length of the `complex` sequence `c`.
-
-##### Warning
-
-if `n <= size(x)`, the first `n` elements of `x` will be included in the calculation.
-
-if `n > size(x)`, the all elements of `x` and `n-size(x)` elements filled with zeros will be included in the calculation.
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
 #### Return value
 
-`ifft(x)` returns the inverse Discrete Fourier transform of `x` using the Fast Fourier Transform algorithm.. 
-
-`ifft(x, n)` returns `n` point inverse DFT of `x` using the FFT algorithm.
+Returns a `complex` and rank-1 array, the unnormalized inverse Discrete Fourier Transform (DFT) of `x`.
 
 #### Example
 
 ```fortran
 program demo_ifft
     use fftpack, only: fft, ifft
-    complex(kind=8) :: x(4)
-    x = [real(kind=8) :: 1.0, 2.0, 3.0, 4.0]
-    print *, fft(x)             !! [(10.0,0.0), (-2.0,2.0), (-2.0,0.0), (-2.0,-2.0)].
-    print *, fft(x,3)           !! [(6.0,0.0), (-1.5,0.86), (-1.5,0.86)].
-    print *, fft(x,5)           !! [(10.0,0.0), (-4.0,1.3), (1.5,-2.1), (1.5,2.1), (-4.0,1.3)].
+    complex(kind=8) :: x(4) = [1.0, 2.0, 3.0, 4.0]
     print *, ifft(fft(x))/4.0   !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0)]
     print *, ifft(fft(x), 3)    !! [(6.0,2.0), (10.3,-1.0), (13.73,-1.0)]
 end program demo_ifft
@@ -335,9 +311,8 @@ The length of the sequence to be transformed.
 `wsave`: Shall be a `real` array.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `2*n+15`.
-The same work array can be used for both `dfftf` and `dfftb`
-as long as `n` remains unchanged. Different `wsave` arrays
-are required for different values of `n`.   
+The same work array can be used for both `dfftf` and `dfftb` as long as `n` remains unchanged. 
+Different `wsave` arrays are required for different values of `n`.   
 
 ##### Warning
 
@@ -358,16 +333,12 @@ end program demo_dffti
 
 #### Description
 
-Computes the fourier coefficients of a real
-perodic sequence (fourier analysis). The transform is defined
-below at output parameter `r`.
+Computes the fourier coefficients of a real perodic sequence (fourier analysis). 
+The transform is defined below at output parameter `r`.
 
-The transform is not normalized. To obtain a normalized transform
-the output must be divided by `n`. Otherwise a call of `dfftf`
-followed by a call of `dfftb` will multiply the sequence by `n`.
+The transform is not normalized. To obtain a normalized transform the output must be divided by `n`. Otherwise a call of `dfftf` followed by a call of `dfftb` will multiply the sequence by `n`.
 
-The array `wsave` which is used by subroutine `dfftf` must be
-initialized by calling subroutine `dffti(n,wsave)`.
+The array `wsave` which is used by subroutine `dfftf` must be initialized by calling subroutine `dffti(n,wsave)`.
 
 #### Status
 
@@ -430,7 +401,7 @@ The contents of `wsave` must not be changed between calls of `dfftf` or `dfftb`.
 ```fortran
 program demo_dfftf
     use fftpack, only: dffti, dfftf
-    real(kind=8) :: x(4) = [1,2,3,4]
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
     real(kind=8) :: w(23)
     call dffti(4,w)
     call dfftf(4,x,w)   !! `x` returns [10.0, -2.0, 2.0, -2.0].
@@ -443,17 +414,13 @@ end program demo_dfftf
 
 Unnormalized inverse of `dfftf`.
 
-Computes the backward `real` discrete fourier
-transform (the fourier synthesis). Equivalently, `dfftb` computes
-a `real` periodic sequence from its fourier coefficients.
+Computes the backward `real` discrete fourier transform (the fourier synthesis). 
+Equivalently, `dfftb` computes a `real` periodic sequence from its fourier coefficients.
 The transform is defined below at output parameter `c`.
 
-The transform is not normalized. to obtain a normalized transform
-the output must be divided by `n`. otherwise a call of `dfftf`
-followed by a call of `dfftb` will multiply the sequence by `n`.
+The transform is not normalized. To obtain a normalized transform the output must be divided by `n`. Otherwise a call of `dfftf` followed by a call of `dfftb` will multiply the sequence by `n`.
 
-The array `wsave` which is used by subroutine `dfftf` must be
-initialized by calling subroutine `dffti(n,wsave)`.
+The array `wsave` which is used by subroutine `dfftf` must be initialized by calling subroutine `dffti(n,wsave)`.
 
 #### Status
 
@@ -548,16 +515,8 @@ Defines the length of the Fourier transform. If `n` is not specified (the defaul
 
 #### Return value
 
-The returned real array contains:
-```
-[y(1),Re(y(2)),Im(y(2)),...,Re(y(n/2+1))]                if n is even
-[y(1),Re(y(2)),Im(y(2)),...,Re(y(n/2+1)),Im(y(n/2+1))]   if n is odd
-```
-where,
-```
-y(j) = sum[k=1..n] x[k] * exp(-sqrt(-1)*j*k*2*pi/n)
-j = 1..n
-```
+Returns a `real` and rank-1 array, the Discrete Fourier Transform (DFT) of `x`.
+
 #### Notes
 
 Within numerical accuracy, `y == rfft(irfft(y))/size(y)`.
@@ -604,7 +563,7 @@ Defines the length of the Fourier transform. If `n` is not specified (the defaul
 
 #### Return value
 
-The unnormalized inverse discrete Fourier transform.
+Returns a `real` and rank-1 array, the unnormalized inverse discrete Fourier transform.
 
 #### Example
 
@@ -615,4 +574,88 @@ program demo_irfft
     print *, irfft(rfft(x))/4.0   !! [1.0, 2.0, 3.0, 4.0]
     print *, irfft(rfft(x), 3)    !! [6.0, 8.53, 15.46]
 end program demo_irfft
+```
+
+## Utility functions
+
+### `fftshift`
+
+#### Description
+
+Rearranges the Fourier transform by moving the zero-frequency component to the center of the array.  
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Snytax
+
+`result = [[fftpack(module):fftshift(interface)]](x)`
+
+#### Argument
+
+`x`: Shall be a `complex/real` and rank-1 array.
+This argument is `intent(in)`. 
+
+#### Return value
+
+Returns the `complex/real` and rank-1 Fourier transform by moving the zero-frequency component to the center of the array.
+
+#### Example
+
+```fortran
+program demo_fftshift
+    use fftpack, only: fftshift
+    complex(kind=8) :: c(5) = [1, 2, 3, 4, 5]
+    real(kind=8) :: x(5) = [1, 2, 3, 4, 5]
+    print *, fftshift(c(1:4))   !! [(3.0,0.0), (4.0,0.0), (1.0,0.0), (2.0,0.0)]
+    print *, fftshift(c)        !! [(4.0,0.0), (5.0,0.0), (1.0,0.0), (2.0,0.0), (3.0,0.0)]
+    print *, fftshift(x(1:4))   !! [3.0, 4.0, 1.0, 2.0]
+    print *, fftshift(x)        !! [4.0, 5.0, 1.0, 2.0, 3.0]
+end program demo_fftshift
+```
+
+### `ifftshift`
+
+#### Description
+
+Rearranges the Fourier transform with zero frequency shifting back to the original transform output. In other words, `ifftshift` is the result of undoing `fftshift`.
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Snytax
+
+`result = [[fftpack(module):ifftshift(interface)]](x)`
+
+#### Argument
+
+`x`: Shall be a `complex/real` and rank-1 array.
+This argument is `intent(in)`. 
+
+#### Return value
+
+Returns the `complex/real` and rank-1 Fourier transform with zero frequency shifting back to the original transform output.
+
+#### Example
+
+```fortran
+program demo_ifftshift
+    use fftpack, only: fftshift, ifftshift
+    complex(kind=8) :: c(5) = [1, 2, 3, 4, 5]
+    real(kind=8) :: x(5) = [1, 2, 3, 4, 5]
+    print *, ifftshift(fftshift(c(1:4)))   !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0)]
+    print *, ifftshift(fftshift(c) )       !! [(1.0,0.0), (2.0,0.0), (3.0,0.0), (4.0,0.0), (5.0,0.0)]
+    print *, ifftshift(fftshift(x(1:4)))   !! [1.0, 2.0, 3.0, 4.0]
+    print *, ifftshift(fftshift(x))        !! [1.0, 2.0, 3.0, 4.0, 5.0]
+end program demo_ifftshift
 ```

@@ -1,11 +1,12 @@
 module fftpack
 
-    use iso_fortran_env, only: dp => real64
+    use, intrinsic :: iso_fortran_env, only: dp => real64
     implicit none
     private
 
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
+    public :: fftshift, ifftshift
 
     public :: dffti, dfftf, dfftb
     public :: rfft, irfft
@@ -83,11 +84,11 @@ module fftpack
     !> Forward transform of a double complex periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#fft))
     interface fft
-        pure module function fft_cdp(x, n) result(result)
+        pure module function fft_dp(x, n) result(result)
             complex(kind=dp), intent(in) :: x(:)
             integer, intent(in), optional :: n
             complex(kind=dp), allocatable :: result(:)
-        end function fft_cdp
+        end function fft_dp
     end interface fft
 
     !> Version: experimental
@@ -95,11 +96,11 @@ module fftpack
     !> Backward transform of a double complex periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#ifft))
     interface ifft
-        pure module function ifft_cdp(x, n) result(result)
+        pure module function ifft_dp(x, n) result(result)
             complex(kind=dp), intent(in) :: x(:)
             integer, intent(in), optional :: n
             complex(kind=dp), allocatable :: result(:)
-        end function ifft_cdp
+        end function ifft_dp
     end interface ifft
 
     !> Version: experimental
@@ -125,5 +126,35 @@ module fftpack
             real(kind=dp), allocatable :: result(:)
         end function irfft_dp
     end interface irfft
+
+    !> Version: experimental
+    !>
+    !> Shifts zero-frequency component to center of spectrum.
+    !> ([Specifiction](../page/specs/fftpack.html#fftshift))
+    interface fftshift
+        pure module function fftshift_cdp(x) result(result)
+            complex(kind=dp), intent(in) :: x(:)
+            complex(kind=dp), allocatable :: result(:)
+        end function fftshift_cdp
+        pure module function fftshift_rdp(x) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            real(kind=dp), allocatable :: result(:)
+        end function fftshift_rdp
+    end interface fftshift
+
+    !> Version: experimental
+    !>
+    !> Shifts zero-frequency component to beginning of spectrum.
+    !> ([Specifiction](../page/specs/fftpack.html#ifftshift))
+    interface ifftshift
+        pure module function ifftshift_cdp(x) result(result)
+            complex(kind=dp), intent(in) :: x(:)
+            complex(kind=dp), allocatable :: result(:)
+        end function ifftshift_cdp
+        pure module function ifftshift_rdp(x) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            real(kind=dp), allocatable :: result(:)
+        end function ifftshift_rdp
+    end interface ifftshift
 
 end module fftpack

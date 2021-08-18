@@ -15,11 +15,13 @@ auto-executables = false
 auto-tests = false
 auto-examples = false
 
+# Original test
 [[test]]
 name = "tstfft"
 source-dir = "test"
 main = "tstfft.f"
 
+# `fftpack` fft routines
 [[test]]
 name = "fftpack_zfft"
 source-dir = "test"
@@ -49,3 +51,14 @@ main = "test_fftpack_rfft.f90"
 name = "fftpack_irfft"
 source-dir = "test"
 main = "test_fftpack_irfft.f90"
+
+# `fftpack` utility routines
+[[test]]
+name = "fftpack_fftshift"
+source-dir = "test"
+main = "test_fftpack_fftshift.f90"
+
+[[test]]
+name = "fftpack_ifftshift"
+source-dir = "test"
+main = "test_fftpack_ifftshift.f90"
