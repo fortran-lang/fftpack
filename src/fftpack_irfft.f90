@@ -1,12 +1,12 @@
-submodule(fftpack) fftpack_ifft
+submodule(fftpack) fftpack_irfft
 
 contains
 
-    !> Backward transform of a double complex periodic sequence.
-    pure module function ifft_dp(x, n) result(result)
-        complex(kind=dp), intent(in) :: x(:)
+    !> Backward transform of a double real periodic sequence.
+    pure module function irfft_dp(x, n) result(result)
+        real(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n
-        complex(kind=dp), allocatable :: result(:)
+        real(kind=dp), allocatable :: result(:)
 
         integer :: lenseq, lensav, i
         real(kind=dp), allocatable :: wsave(:)
@@ -16,7 +16,7 @@ contains
             if (lenseq <= size(x)) then
                 result = x(:lenseq)
             else if (lenseq > size(x)) then
-                result = [x, ((0.0_dp, 0.0_dp), i=1, lenseq - size(x))]
+                result = [x, (0.0_dp, i=1, lenseq - size(x))]
             end if
         else
             lenseq = size(x)
@@ -24,13 +24,13 @@ contains
         end if
 
         !> Initialize FFT
-        lensav = 4*lenseq + 15
+        lensav = 2*lenseq + 15
         allocate (wsave(lensav))
-        call zffti(lenseq, wsave)
+        call dffti(lenseq, wsave)
 
         !> Backward transformation
-        call zfftb(lenseq, result, wsave)
+        call dfftb(lenseq, result, wsave)
 
-    end function ifft_dp
+    end function irfft_dp
 
-end submodule fftpack_ifft
+end submodule fftpack_irfft

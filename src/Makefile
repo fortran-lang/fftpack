@@ -1,59 +1,81 @@
-OBJ = \
-zfftb.o\
-cfftb1.o\
-zfftf.o\
-cfftf1.o\
-zffti.o\
-cffti1.o\
-dcosqb.o\
-cosqb1.o\
-dcosqf.o\
-cosqf1.o\
-dcosqi.o\
-dcost.o\
-dcosti.o\
-ezfft1.o\
-dzfftb.o\
-dzfftf.o\
-dzffti.o\
-passb.o\
-passb2.o\
-passb3.o\
-passb4.o\
-passb5.o\
-passf.o\
-passf2.o\
-passf3.o\
-passf4.o\
-passf5.o\
-radb2.o\
-radb3.o\
-radb4.o\
-radb5.o\
-radbg.o\
-radf2.o\
-radf3.o\
-radf4.o\
-radf5.o\
-radfg.o\
-dfftb.o\
-rfftb1.o\
-dfftf.o\
-rfftf1.o\
-dffti.o\
-rffti1.o\
-dsinqb.o\
-dsinqf.o\
-dsinqi.o\
-dsint.o\
-sint1.o\
-dsinti.o
+SRCF = \
+	zfftb.f\
+	cfftb1.f\
+	zfftf.f\
+	cfftf1.f\
+	zffti.f\
+	cffti1.f\
+	dcosqb.f\
+	cosqb1.f\
+	dcosqf.f\
+	cosqf1.f\
+	dcosqi.f\
+	dcost.f\
+	dcosti.f\
+	ezfft1.f\
+	dzfftb.f\
+	dzfftf.f\
+	dzffti.f\
+	passb.f\
+	passb2.f\
+	passb3.f\
+	passb4.f\
+	passb5.f\
+	passf.f\
+	passf2.f\
+	passf3.f\
+	passf4.f\
+	passf5.f\
+	radb2.f\
+	radb3.f\
+	radb4.f\
+	radb5.f\
+	radbg.f\
+	radf2.f\
+	radf3.f\
+	radf4.f\
+	radf5.f\
+	radfg.f\
+	dfftb.f\
+	rfftb1.f\
+	dfftf.f\
+	rfftf1.f\
+	dffti.f\
+	rffti1.f\
+	dsinqb.f\
+	dsinqf.f\
+	dsinqi.f\
+	dsint.f\
+	sint1.f\
+	dsinti.f
 
-lib$(LIB).a: $(OBJ)
-	ar -rcs lib$(LIB).a $(OBJ)
+SRCF90 = \
+	fftpack.f90\
+	fftpack_fft.f90\
+	fftpack_ifft.f90\
+	fftpack_rfft.f90\
+	fftpack_irfft.f90\
+	fftpack_fftshift.f90\
+	fftpack_ifftshift.f90
+
+OBJF := $(SRCF:.f=.o)
+OBJF90 := $(SRCF90:.f90=.o)
+
+lib$(LIB).a: $(OBJF) $(OBJF90)
+	ar -rcs lib$(LIB).a $(OBJF) $(OBJF90)
 
 shared: $(OBJ)
 	$(FC) -shared -o lib$(LIB).so $(OBJ)
 
 clean:
-	rm -f -r *.o *.a *.so
+	rm -f -r *.o *.a *.so *.mod *.smod
+
+%.o: %.f90
+	$(FC) $(FFLAGS) -c $<
+
+fftpack_fft.o: fftpack.o
+fftpack_ifft.o: fftpack.o
+fftpack_rfft.o: fftpack.o
+fftpack_irfft.o: fftpack.o
+fftpack_fftshift.o: fftpack.o
+fftpack_ifftshift.o: fftpack.o

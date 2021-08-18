@@ -1,12 +1,12 @@
-submodule(fftpack) fftpack_fft
+submodule(fftpack) fftpack_rfft
 
 contains
 
-    !> Forward transform of a double complex periodic sequence.
-    pure module function fft_dp(x, n) result(result)
-        complex(kind=dp), intent(in) :: x(:)
+    !> Forward transform of a double real periodic sequence.
+    pure module function rfft_dp(x, n) result(result)
+        real(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n
-        complex(kind=dp), allocatable :: result(:)
+        real(kind=dp), allocatable :: result(:)
 
         integer :: lenseq, lensav, i
         real(kind=dp), allocatable :: wsave(:)
@@ -16,7 +16,7 @@ contains
             if (lenseq <= size(x)) then
                 result = x(:lenseq)
             else if (lenseq > size(x)) then
-                result = [x, ((0.0_dp, 0.0_dp), i=1, lenseq - size(x))]
+                result = [x, (0.0_dp, i=1, lenseq - size(x))]
             end if
         else
             lenseq = size(x)
@@ -24,13 +24,13 @@ contains
         end if
 
         !> Initialize FFT
-        lensav = 4*lenseq + 15
+        lensav = 2*lenseq + 15
         allocate (wsave(lensav))
-        call zffti(lenseq, wsave)
+        call dffti(lenseq, wsave)
 
         !> Forward transformation
-        call zfftf(lenseq, result, wsave)
+        call dfftf(lenseq, result, wsave)
 
-    end function fft_dp
+    end function rfft_dp
 
-end submodule fftpack_fft
+end submodule fftpack_rfft
