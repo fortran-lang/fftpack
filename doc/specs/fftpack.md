@@ -99,7 +99,7 @@ for j=1,...,n
 ```
 
 `wsave`: Shall be a `real` array.
-This argument is `intent(inout)`.  
+This argument is `intent(in)`.  
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. 
 The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
@@ -169,7 +169,7 @@ for j=1,...,n
 ```
 
 `wsave`: Shall be a `real` array.
-This argument is `intent(inout)`.  
+This argument is `intent(in)`.  
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The `wsave` array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
@@ -385,7 +385,7 @@ if n is even
 ```
 
 `wsave`: Shall be a `real` array.
-This argument is `intent(inout)`.  
+This argument is `intent(in)`.  
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `dfftf`. 
 The wsave array must be initialized by calling subroutine `dffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
@@ -464,7 +464,7 @@ for n odd and for i = 1,...,n
 ```
 
 `wsave`: Shall be a `real` array.
-This argument is `intent(inout)`.  
+This argument is `intent(in)`.  
 A `real` work array which must be dimensioned at least `2n+15` in the program that calls `dfftf`. The `wsave` array must be initialized by calling subroutine `dffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `dfftf` and `dfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `dfftf` or `dfftb`.
 

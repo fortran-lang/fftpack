@@ -31,7 +31,7 @@ module fftpack
             import dp
             integer, intent(in) :: n
             complex(kind=dp), intent(inout) :: c(*)
-            real(kind=dp), intent(inout) :: wsave(*)
+            real(kind=dp), intent(in) :: wsave(*)
         end subroutine zfftf
 
         !> Version: experimental
@@ -42,7 +42,7 @@ module fftpack
             import dp
             integer, intent(in) :: n
             complex(kind=dp), intent(inout) :: c(*)
-            real(kind=dp), intent(inout) :: wsave(*)
+            real(kind=dp), intent(in) :: wsave(*)
         end subroutine zfftb
 
         !> Version: experimental
@@ -63,7 +63,7 @@ module fftpack
             import dp
             integer, intent(in) :: n
             real(kind=dp), intent(inout) :: r(*)
-            real(kind=dp), intent(inout) :: wsave(*)
+            real(kind=dp), intent(in) :: wsave(*)
         end subroutine dfftf
 
         !> Version: experimental
@@ -74,7 +74,7 @@ module fftpack
             import dp
             integer, intent(in) :: n
             real(kind=dp), intent(inout) :: r(*)
-            real(kind=dp), intent(inout) :: wsave(*)
+            real(kind=dp), intent(in) :: wsave(*)
         end subroutine dfftb
 
     end interface
