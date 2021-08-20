@@ -11,6 +11,8 @@ module fftpack
     public :: dffti, dfftf, dfftb
     public :: rfft, irfft
 
+    public :: dzffti, dzfftf, dzfftb
+
     interface
 
         !> Version: experimental
@@ -76,6 +78,42 @@ module fftpack
             real(kind=dp), intent(inout) :: r(*)
             real(kind=dp), intent(in) :: wsave(*)
         end subroutine dfftb
+
+        !> Version: experimental
+        !>
+        !> Initialize `dzfftf` and `dzfftb`.
+        !> ([Specification](../page/specs/fftpack.html#dzffti))
+        pure subroutine dzffti(n, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: wsave(*)
+        end subroutine dzffti
+
+        !> Version: experimental
+        !>
+        !> Simplified forward transform of a double real periodic sequence.
+        !> ([Specification](../page/specs/fftpack.html#dzfftf))
+        pure subroutine dzfftf(n, r, azero, a, b, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(in) :: r(*)
+            real(kind=dp), intent(out) :: azero
+            real(kind=dp), intent(out) :: a(*), b(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dzfftf
+
+        !> Version: experimental
+        !>
+        !> Unnormalized inverse of `dzfftf`.
+        !> ([Specification](../page/specs/fftpack.html#dzfftb))
+        pure subroutine dzfftb(n, r, azero, a, b, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: r(*)
+            real(kind=dp), intent(in) :: azero
+            real(kind=dp), intent(in) :: a(*), b(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dzfftb
 
     end interface
 

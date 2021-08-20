@@ -52,6 +52,11 @@ name = "fftpack_irfft"
 source-dir = "test"
 main = "test_fftpack_irfft.f90"
 
+[[test]]
+name = "fftpack_dzfft"
+source-dir = "test"
+main = "test_fftpack_dzfft.f90"
+
 # `fftpack` utility routines
 [[test]]
 name = "fftpack_fftshift"

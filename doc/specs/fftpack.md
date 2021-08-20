@@ -23,7 +23,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):zffti(interface)]](n, wsave)`
 
@@ -75,7 +75,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):zfftf(interface)]](n, c, wsave)`
 
@@ -145,7 +145,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):zfftb(interface)]](n, c, wsave)`
 
@@ -205,7 +205,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):fft(interface)]](x [, n])`
 
@@ -253,7 +253,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):ifft(interface)]](x [, n])`
 
@@ -298,7 +298,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):dffti(interface)]](n, wsave)`
 
@@ -348,7 +348,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):dfftf(interface)]](n, r, wsave)`
 
@@ -430,7 +430,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `call [[fftpack(module):dfftb(interface)]](n, r, wsave)`
 
@@ -499,7 +499,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):rfft(interface)]](x [, n])`
 
@@ -547,7 +547,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):irfft(interface)]](x [, n])`
 
@@ -576,6 +576,237 @@ program demo_irfft
 end program demo_irfft
 ```
 
+## Simplified fourier transform of double real periodic sequences
+
+### `dzffti`
+
+#### Description
+
+Initializes the array `wsave` which is used in both `dzfftf` and `dzfftb`. 
+The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Prue function.
+
+#### Syntax
+
+`call [[fftpack(module):dzffti(interface)]](n, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the sequence to be transformed.
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+A work array which must be dimensioned at least `3*n+15`.
+The same work array can be used for both `dzfftf` and `dzfftb` as long as n remains unchanged. 
+Different `wsave` arrays are required for different values of `n`.
+
+##### Warning
+
+The contents of `wsave` must not be changed between calls of `dzfftf` or `dzfftb`.
+
+#### Example
+
+```fortran
+program demo_dzffti
+    use fftpack, only: dzffti
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    real(kind=8) :: w(3*4 + 15)
+    call dzffti(4, w)   !! Initializes the array `w` which is used in both `dzfftf` and `dzfftb`. 
+end program demo_dzffti
+```
+
+### `dzfftf`
+
+#### Description
+
+Computes the fourier coefficients of a `real` perodic sequence (fourier analysis). 
+The transform is defined below at output parameters `azero`, `a` and `b`. 
+`dzfftf` is a simplified but **slower version** of `dfftf`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`call [[fftpack(module):dzfftf(interface)]](n, r, azero, a, b, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the array `r` to be transformed.  
+The method is most efficient when `n` is the product of small primes.
+
+`r`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+A `real` array of length `n` which contains the sequence to be transformed. `r` is not destroyed.
+
+`azero`: Shall be a `real` scalar.
+This argument is `intent(out)`.  
+The sum from `i=1` to `i=n` of `r(i)/n`.
+
+`a`, `b`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+```
+for n even b(n/2)=0. and a(n/2) is the sum from i=1 to i=n of (-1)**(i-1)*r(i)/n
+
+for n even define kmax=n/2-1
+for n odd  define kmax=(n-1)/2
+
+then for  k=1,...,kmax
+
+        a(k) equals the sum from i=1 to i=n of
+
+            2./n*r(i)*cos(k*(i-1)*2*pi/n)
+
+        b(k) equals the sum from i=1 to i=n of
+
+            2./n*r(i)*sin(k*(i-1)*2*pi/n)
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.
+A work array which must be dimensioned at least `3*n+15`. 
+In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+The same `wsave` array can be used by `dzfftf` and `dzfftb`.
+
+#### Example
+
+```fortran
+program demo_dzfftf
+    use fftpack, only: dzffti, dzfftf
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    real(kind=8) :: w(3*4 + 15)
+    real(kind=8) :: azero, a(4/2), b(4/2)
+    call dzffti(4, w)
+    call dzfftf(4, x, azero, a, b, w)   !! `azero`: 2.5; `a`: [-1.0, -0.5]; `b`: [-1.0, -0.0]
+end program demo_dzfftf
+```
+
+### `dzfftb`
+
+#### Description
+
+Computes a `real` perodic sequence from its fourier coefficients (fourier synthesis). 
+The transform is defined below at output parameter `r`. 
+`dzfftb` is a simplified but **slower version** of `dfftb`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`call [[fftpack(module):dzfftb(interface)]](n, r, azero, a, b, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the output array `r`.  
+The method is most efficient when `n` is the product of small primes.
+
+`r`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+```
+if n is even define kmax=n/2
+if n is odd  define kmax=(n-1)/2
+
+then for i=1,...,n
+
+        r(i)=azero plus the sum from k=1 to k=kmax of
+
+        a(k)*cos(k*(i-1)*2*pi/n)+b(k)*sin(k*(i-1)*2*pi/n)
+```
+Complex notation:
+```
+for j=1,...,n
+
+r(j) equals the sum from k=-kmax to k=kmax of
+
+        c(k)*exp(i*k*(j-1)*2*pi/n)
+
+where
+
+        c(k) = .5*cmplx(a(k),-b(k))   for k=1,...,kmax
+
+        c(-k) = conjg(c(k))
+
+        c(0) = azero
+
+            and i=sqrt(-1)
+```
+Amplitude - phase notation:
+```
+for i=1,...,n
+
+r(i) equals azero plus the sum from k=1 to k=kmax of
+
+        alpha(k)*cos(k*(i-1)*2*pi/n+beta(k))
+
+where
+
+        alpha(k) = sqrt(a(k)*a(k)+b(k)*b(k))
+
+        cos(beta(k))=a(k)/alpha(k)
+
+        sin(beta(k))=-b(k)/alpha(k)
+```
+
+`azero`: Shall be a `real` scalar.
+This argument is `intent(in)`.  
+The constant fourier coefficient.
+
+`a`, `b`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+Arrays which contain the remaining fourier coefficients these arrays are not destroyed.
+The length of these arrays depends on whether `n` is even or odd.
+```
+if n is even n/2    locations are required
+if n is odd (n-1)/2 locations are required
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.
+A work array which must be dimensioned at least `3*n+15`. 
+In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+The same `wsave` array can be used by `dzfftf` and `dzfftb`.
+
+#### Example
+
+```fortran
+program demo_dzfftb
+    use fftpack, only: dzffti, dzfftf, dzfftb
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    real(kind=8) :: w(3*4 + 15)
+    real(kind=8) :: azero, a(4/2), b(4/2)
+    call dzffti(4, w)
+    call dzfftf(4, x, azero, a, b, w)   !! `azero`: 2.5; `a`: [-1.0, -0.5]; `b`: [-1.0, -0.0]
+    x = 0.0
+    call dzfftb(4, x, azero, a, b, w)   !! `x`: [1.0, 2.0, 3.0, 4.0]
+end program demo_dzfftb
+```
+
 ## Utility functions
 
 ### `fftshift`
@@ -592,7 +823,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):fftshift(interface)]](x)`
 
@@ -633,7 +864,7 @@ Experimental.
 
 Pure function.
 
-#### Snytax
+#### Syntax
 
 `result = [[fftpack(module):ifftshift(interface)]](x)`
 
