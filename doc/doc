@@ -230,7 +230,7 @@ but slower version of dfftf.
 input parameters
 
 n       the length of the array r to be transformed.  the method
-        is must efficient when n is the product of small primes.
+        is most efficient when n is the product of small primes.
 
 r       a real array of length n which contains the sequence
         to be transformed. r is not destroyed.
