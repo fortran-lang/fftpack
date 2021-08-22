@@ -23,11 +23,11 @@ contains
         call dffti(4, w)
         call dfftf(4, x, w)
         call check(all(x == [real(kind=dp) :: 10, -2, 2, -2]), &
-                   msg="all(x == [real(kind=dp) :: 10, -2, 2, -2]) failed.")
+                   msg="`dfftf` failed.")
 
         call dfftb(4, x, w)
         call check(all(x/4.0_dp == [real(kind=dp) :: 1, 2, 3, 4]), &
-                   msg="all(x/4.0_dp == [real(kind=dp) :: 1, 2, 3, 4]) failed.")
+                   msg="`dfftb` failed.")
 
     end subroutine test_fftpack_dfft
 

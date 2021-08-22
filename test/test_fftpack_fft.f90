@@ -14,18 +14,16 @@ contains
     subroutine test_fftpack_fft
         use fftpack, only: fft
         use iso_fortran_env, only: dp => real64
-        real(kind=dp) :: eps = 1.0e-10
+        real(kind=dp) :: eps = 1.0e-10_dp
 
-        complex(kind=dp) :: x(3)
+        complex(kind=dp) :: x(3) = [1.0_dp, 2.0_dp, 3.0_dp]
 
-        x = [real(kind=dp) :: 1.0, 2.0, 3.0]
-
-        call check(sum(abs(fft(x, 2) - [complex(kind=dp) ::(3.0, 0.0), (-1.0, 0.0)])) < eps, &
-                   msg="sum(abs(fft(x,2) - [complex(kind=dp) ::(3.0, 0.0), (-1.0, 0.0)])) < eps failed.")
+        call check(sum(abs(fft(x, 2) - [(3.0_dp, 0.0_dp), (-1.0_dp, 0.0_dp)])) < eps, &
+                   msg="`fft(x, 2)` failed.")
         call check(sum(abs(fft(x, 3) - fft(x))) < eps, &
-                   msg="sum(abs(fft(x,3) - fft(3))) < eps failed.")
-        call check(sum(abs(fft(x, 4) - [complex(kind=dp) ::(6.0, 0.0), (-2.0, -2.0), (2.0, 0.0), (-2.0, 2.0)])) < eps, &
-                   msg="sum(abs(fft(x,4) - [complex(kind=dp) ::(6.0, 0.0), (-2.0, -2.0), (2.0,0.0), (-2.0,2.0)])) < eps failed.")
+                   msg="`fft(x, 3)` failed.")
+        call check(sum(abs(fft(x, 4) - [(6.0_dp, 0.0_dp), (-2.0_dp, -2.0_dp), (2.0_dp, 0.0_dp), (-2.0_dp, 2.0_dp)])) < eps, &
+                   msg="`fft(x, 4)` failed.")
 
     end subroutine test_fftpack_fft
 

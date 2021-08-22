@@ -14,16 +14,16 @@ contains
     subroutine test_fftpack_rfft
         use fftpack, only: rfft
         use iso_fortran_env, only: dp => real64
-        real(kind=dp) :: eps = 1.0e-10
+        real(kind=dp) :: eps = 1.0e-10_dp
 
         real(kind=dp) :: x(3) = [9, -9, 3]
 
         call check(sum(abs(rfft(x, 2) - [real(kind=dp) :: 0, 18])) < eps, &
-                   msg="sum(abs(rfft(x,2) - [real(kind=dp) :: 0, 18])) < eps failed.")
+                   msg="`rfft(x, 2)` failed.")
         call check(sum(abs(rfft(x, 3) - rfft(x))) < eps, &
-                   msg="sum(abs(rfft(x,3) - rfft(3))) < eps failed.")
+                   msg="`rfft(x, 3)` failed.")
         call check(sum(abs(rfft(x, 4) - [real(kind=dp) :: 3, 6, 9, 21])) < eps, &
-                   msg="sum(abs(rfft(x,4) - [real(kind=dp) ::3, 6, 9, 21])) < eps failed.")
+                   msg="`rfft(x, 4)` failed.")
 
     end subroutine test_fftpack_rfft
 

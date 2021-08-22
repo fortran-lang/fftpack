@@ -14,7 +14,7 @@ contains
     subroutine test_fftpack_iqct
         use fftpack, only: qct, iqct
         use iso_fortran_env, only: dp => real64
-        real(kind=dp) :: eps = 1.0e-10
+        real(kind=dp) :: eps = 1.0e-10_dp
 
         real(kind=dp) :: x(4) = [1, 2, 3, 4]
 
