@@ -1,10 +1,14 @@
-all: tstfft\
-fftpack_fft\
-fftpack_ifft\
-fftpack_rfft\
-fftpack_irfft\
-fftpack_fftshift\
-fftpack_ifftshift
+all: tstfft \
+	fftpack_fft \
+	fftpack_ifft \
+	fftpack_rfft \
+	fftpack_irfft \
+	fftpack_fftshift \
+	fftpack_ifftshift \
+	fftpack_dzfft \
+	fftpack_dcosq \
+	fftpack_qct \
+	fftpack_iqct
 
 # Orginal test
 tstfft: tstfft.o
@@ -27,6 +31,22 @@ fftpack_rfft: test_fftpack_rfft.f90
 fftpack_irfft: test_fftpack_irfft.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	./fftpack_irfft.x
+
+fftpack_dzfft: test_fftpack_dzfft.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dzfft.x
+
+fftpack_dcosq: test_fftpack_dcosq.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dcosq.x
+
+fftpack_qct: test_fftpack_qct.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_qct.x
+
+fftpack_iqct: test_fftpack_iqct.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_iqct.x
 
 # `fftpack` utility routines
 fftpack_fftshift: test_fftpack_fftshift.f90

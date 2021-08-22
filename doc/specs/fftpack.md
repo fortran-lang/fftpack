@@ -524,13 +524,13 @@ Within numerical accuracy, `y == rfft(irfft(y))/size(y)`.
 #### Example
 
 ```fortran
-program demo_fft
+program demo_rfft
     use fftpack, only: rfft
     real(kind=8) :: x(4) = [1, 2, 3, 4]
     print *, rfft(x,3)      !! [6.0, -1.5, 0.87].
     print *, rfft(x)        !! [10.0, -2.0, 2.0, -2.0].
     print *, rfft(x,5)      !! [10.0, -4.0, -1.3, 1.5, -2.1].
-end program demo_fft
+end program demo_rfft
 ```
 
 ### `irfft`
@@ -805,6 +805,286 @@ program demo_dzfftb
     x = 0.0
     call dzfftb(4, x, azero, a, b, w)   !! `x`: [1.0, 2.0, 3.0, 4.0]
 end program demo_dzfftb
+```
+
+## Cosine transform with odd wave numbers
+
+### `dcosqi`
+
+#### Description
+
+Initializes the array `wsave` which is used in both `dcosqf` and `dcosqb`. 
+The prime factorization of `n` together with
+a tabulation of the trigonometric functions are computed and
+stored in `wsave`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`call [[fftpack(module):dcosqi(interface)]](n, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the array to be transformed. 
+The method is most efficient when `n` is a product of small primes.
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+A work array which must be dimensioned at least `3*n+15`.
+The same work array can be used for both `dcosqf` and `dcosqb`
+as long as `n` remains unchanged. 
+Different `wsave` arrays are required for different values of `n`.
+The contents of `wsave` must not be changed between calls of `dcosqf` or `dcosqb`.
+
+#### Example
+
+```fortran
+program demo_dcosqi
+    use fftpack, only: dcosqi
+    real(kind=8) :: w(3*4 + 15)
+    call dcosqi(4, w)   !! Initializes the array `w` which is used in both `dcosqf` and `dcosqb`. 
+end program demo_dcosqi
+```
+
+### `dcosqf`
+
+#### Decsription
+
+Computes the fast fourier transform of quarter wave data. 
+That is, `dcosqf` computes the coefficients in a cosine series representation with only odd wave numbers. 
+The transform is defined below at output parameter `x`.
+
+`dcosqf` is the unnormalized inverse of `dcosqb` since a call of `dcosqf` followed by a call of `dcosqb` will multiply the input sequence `x` by `4*n`.
+
+The array `wsave` which is used by subroutine `dcosqf` must be initialized by calling subroutine `dcosqi(n,wsave)`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`call [[fftpack(module):dcosqf(interface)]](n, x, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the array `x` to be transformed. 
+The method is most efficient when `n` is a product of small primes.
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(inout)`.  
+An array which contains the sequence to be transformed.
+```
+for i=1,...,n
+
+        x(i) = x(1) plus the sum from k=2 to k=n of
+
+        2*x(k)*cos((2*i-1)*(k-1)*pi/(2*n))
+
+        a call of dcosqf followed by a call of
+        cosqb will multiply the sequence x by 4*n.
+        therefore dcosqb is the unnormalized inverse
+        of dcosqf.
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+A work array which must be dimensioned at least `3*n+15`
+in the program that calls `dcosqf`. 
+The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
+
+##### Warning
+
+`wsave` contains initialization calculations which must not be destroyed between calls of `dcosqf` or `dcosqb`.
+
+#### Example
+
+```fortran
+program demo_dcosqf
+    use fftpack, only: dcosqi, dcosqf
+    real(kind=8) :: w(3*4 + 15)
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    call dcosqi(4, w) 
+    call dcosqf(4, x, w)    !! `x`: [12.0, -9.10, 2.62, -1.51]
+end program demo_dcosqf
+```
+
+### `dcosqb`
+
+#### Decsription
+
+Computes the fast fourier transform of quarter wave data.
+That is, `dcosqb` computes a sequence from its representation in terms of a cosine series with odd wave numbers. 
+The transform is defined below at output parameter `x`.
+
+`dcosqb` is the unnormalized inverse of `dcosqf` since a call of `dcosqb` followed by a call of `dcosqf` will multiply the input sequence `x` by `4*n`.
+
+The array `wsave` which is used by subroutine `dcosqb` must be initialized by calling subroutine `dcosqi(n,wsave)`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`call [[fftpack(module):dcosqf(interface)]](n, x, wsave)`
+
+#### Arguments
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)`.  
+The length of the array `x` to be transformed. 
+The method is most efficient when `n` is a product of small primes.
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(inout)`.  
+An array which contains the sequence to be transformed.
+```
+for i=1,...,n
+
+        x(i)= the sum from k=1 to k=n of
+
+        4*x(k)*cos((2*k-1)*(i-1)*pi/(2*n))
+
+        a call of dcosqb followed by a call of
+        dcosqf will multiply the sequence x by 4*n.
+        therefore dcosqf is the unnormalized inverse
+        of dcosqb.
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+A work array which must be dimensioned at least `3*n+15`
+in the program that calls `dcosqb`. 
+The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
+
+##### Warning
+
+`wsave` contains initialization calculations which must not be destroyed between calls of `dcosqf` or `dcosqb`.
+
+#### Example
+
+```fortran
+program demo_dcosqb
+    use fftpack, only: dcosqi, dcosqf, dcosqb
+    real(kind=8) :: w(3*4 + 15)
+    real(kind=8) :: x(4) = [4, 3, 5, 10]
+    call dcosqi(4, w) 
+    call dcosqf(4, x, w) 
+    call dcosqb(4, x, w)    !! `x`: [1.0, 2.0, 3.0, 4.0] * 4 * n, n = 4, which is unnormalized.
+end program demo_dcosqb
+```
+
+### `qct`
+
+#### Description
+
+Forward transform of quarter wave data.
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):qct(interface)]](x [, n])`
+
+#### Argument
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+The data to transform.
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+#### Return value
+
+Returns a `real` and rank-1 array, the Quarter-Cosine Transform (QCT) of `x`.
+
+#### Notes
+
+Within numerical accuracy, `x == iqct(qct(x))/(4*size(x))`.
+
+#### Example
+
+```fortran
+program demo_qct
+    use fftpack, only: qct
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    print *, qct(x,3)      !! [7.4, -5.0, 0.53].
+    print *, qct(x)        !! [12.0, -9.10, 2.62, -1.51].
+    print *, qct(x,5)      !! [14.4, -6.11, -5.0, 4.4, -2.65].
+end program demo_qct
+```
+
+### `iqct`
+
+#### Description
+
+Unnormalized inverse of `qct`.
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):iqct(interface)]](x [, n])`
+
+#### Argument
+
+`x`: Shall be a `real` array.
+This argument is `intent(in)`. 
+Transformed data to invert.
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+#### Return value
+
+Returns a `real` and rank-1 array, the unnormalized inverse Quarter-Cosine Transform.
+
+#### Example
+
+```fortran
+program demo_iqct
+    use fftpack, only: qct, iqct
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    print *, iqct(qct(x))/(4.0*4.0)         !! [1.0, 2.0, 3.0, 4.0]
+    print *, iqct(qct(x), 3)/(4.0*3.0)      !! [1.84, 2.71, 5.47]
+end program demo_iqct
 ```
 
 ## Utility functions

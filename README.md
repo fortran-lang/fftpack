@@ -4,7 +4,7 @@ A package of fortran subprograms for the fast fourier transform of periodic and 
 ## Getting started
 ### Get the code
 ```bash
-git clone https://github.com/certik/fftpack.git
+git clone https://github.com/fortran-lang/fftpack.git
 cd fftpack
 ```
 
@@ -19,7 +19,7 @@ fpm test --flag "-O2" <test_name, see `fpm.toml` or list>
 To use `fftpack` within your `fpm` project, add the following to your `fpm.toml` file:
 ```toml
 [dependencies]
-fftpack = { git="https://github.com/certik/fftpack.git" }
+fftpack = { git="https://github.com/fortran-lang/fftpack.git" }
 ```
 
 ## Build with Make
@@ -31,4 +31,5 @@ make
 ## Links
 [netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)  
 [Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)  
-[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
+[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)  
+[NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)  

@@ -22,9 +22,9 @@ contains
         call dzffti(4, w)
         call dzfftf(4, x, azero, a, b, w)
         call check(azero == 2.5_dp, msg="azero == 2.5_dp failed.")
-        call check(all(a == [real(kind=dp) :: -1.0, -0.5]), msg="all(a == [real(kind=dp) :: -1.0, -0.5]) failed.")
-        call check(all(b == [real(kind=dp) :: -1.0, 0.0]), msg="all(b == [real(kind=dp) :: -1.0, 0.0]) failed.")
-        
+        call check(all(a == [-1.0_dp, -0.5_dp]), msg="all(a == [-1.0, -0.5]) failed.")
+        call check(all(b == [-1.0_dp, 0.0_dp]), msg="all(b == [-1.0, 0.0]) failed.")
+
         x = 0
         call dzfftb(4, x, azero, a, b, w)
         call check(all(x == [real(kind=dp) :: 1, 2, 3, 4]), msg="all(x = [real(kind=dp) :: 1, 2, 3, 4]) failed.")

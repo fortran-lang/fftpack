@@ -19,17 +19,17 @@ extra_mods: iso_fortran_env:https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORT
             iso_c_binding:https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fC_005fBINDING.html#ISO_005fC_005fBINDING
 print_creation_date: true
 creation_date: %Y-%m-%d %H:%M %z
-project_github: https://github.com/certik/fftpack
+project_github: https://github.com/fortran-lang/fftpack
 license: by-sa
 author: Paul N. Swarztrauber & fftpack contributors
-github: https://github.com/certik/fftpack
+github: https://github.com/fortran-lang/fftpack
 dbg: true
 parallel: 4
 ---
 
 [TOC]
 
-@warning This API documentation for the certik/fftpack v4.0.0 is a work in progress.
+@warning This API documentation for the fortran-lang/fftpack v4.0.0 is a work in progress.
 
 Fortran FFTPACK API Documentation
 =================================
@@ -39,14 +39,14 @@ The documentation for comment markup in source code, running [FORD] and the [FOR
 
 [FORD]: https://github.com/Fortran-FOSS-Programmers/ford#readme
 [FORD wiki]: https://github.com/Fortran-FOSS-Programmers/ford/wiki
-[FORD project file]: https://github.com/certik/fftpack/blob/master/API-doc-FORD-file.md
+[FORD project file]: https://github.com/fortran-lang/fftpack/blob/master/API-doc-FORD-file.md
 
 A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.
 
 ## Getting started
 ### Get the code
 ```bash
-git clone https://github.com/certik/fftpack.git
+git clone https://github.com/fortran-lang/fftpack.git
 cd fftpack
 ```
 
@@ -55,12 +55,13 @@ Fortran Package Manager (fpm) is a great package manager and build system for Fo
 You can build using provided `fpm.toml`:
 ```bash
 fpm build --flag "-O2"
-fpm test --flag "-O2" tstfft
+fpm test --flag "-O2" --list
+fpm test --flag "-O2" <test_name, see `fpm.toml` or list>
 ```
 To use `fftpack` within your `fpm` project, add the following to your `fpm.toml` file:
 ```toml
 [dependencies]
-fftpack = { git="https://github.com/certik/fftpack.git" }
+fftpack = { git="https://github.com/fortran-lang/fftpack.git" }
 ```
 
 ## Build with Make
@@ -70,5 +71,7 @@ make
 ```
 
 ## Links
-[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
-
+[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)  
+[Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)  
+[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
+[NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)

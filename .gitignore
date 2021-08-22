@@ -5,6 +5,8 @@ build*
 *.a
 *.so
 *.x
+*.mod
+*.smod
 
 # API-doc
 API-doc/
