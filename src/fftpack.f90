@@ -13,6 +13,9 @@ module fftpack
 
     public :: dzffti, dzfftf, dzfftb
 
+    public :: dcosqi, dcosqf, dcosqb
+    public :: qct, iqct
+
     interface
 
         !> Version: experimental
@@ -115,6 +118,38 @@ module fftpack
             real(kind=dp), intent(in) :: wsave(*)
         end subroutine dzfftb
 
+        !> Version: experimental
+        !>
+        !> Initialize `dcosqf` and `dcosqb`.
+        !> ([Specification](../page/specs/fftpack.html#dcosqi))
+        pure subroutine dcosqi(n, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: wsave(*)
+        end subroutine dcosqi
+
+        !> Version: experimental
+        !>
+        !> Forward transform of quarter wave data.
+        !> ([Specification](../page/specs/fftpack.html#dcosqf))
+        pure subroutine dcosqf(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dcosqf
+
+        !> Version: experimental
+        !>
+        !> Unnormalized inverse of `dcosqf`.
+        !> ([Specification](../page/specs/fftpack.html#dcosqb))
+        pure subroutine dcosqb(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dcosqb
+
     end interface
 
     !> Version: experimental
@@ -164,6 +199,30 @@ module fftpack
             real(kind=dp), allocatable :: result(:)
         end function irfft_dp
     end interface irfft
+
+    !> Version: experimental
+    !>
+    !> Forward transform of quarter wave data.
+    !> ([Specifiction](../page/specs/fftpack.html#qct))
+    interface qct
+        pure module function qct_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function qct_dp
+    end interface qct
+
+    !> Version: experimental
+    !>
+    !> Backward transform of quarter wave data.
+    !> ([Specifiction](../page/specs/fftpack.html#iqct))
+    interface iqct
+        pure module function iqct_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function iqct_dp
+    end interface iqct
 
     !> Version: experimental
     !>
