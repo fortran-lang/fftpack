@@ -22,7 +22,7 @@ contains
         call dcosqf(4, x, w)
         call check(sum(abs(x - [11.999626276085150_dp, -9.1029432177492193_dp, &
                                 2.6176618435106480_dp, -1.5143449018465791_dp])) < eps, msg="`dcosqf` failed.")
-        call dcosqb(4, x, w)    !!
+        call dcosqb(4, x, w)
         call check(sum(abs(x/(4.0_dp*4.0_dp) - [real(kind=dp) :: 1, 2, 3, 4])) < eps, msg="`dcosqb` failed.")
 
     end subroutine test_fftpack_dcosq_real
