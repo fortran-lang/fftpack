@@ -61,7 +61,8 @@ SRCF90 = \
 	fftpack_iqct.f90\
 	fftpack_qst.f90\
 	fftpack_iqst.f90\
-	fftpack_dct.f90
+	fftpack_dct.f90\
+	fftpack_dst.f90
 
 OBJF := $(SRCF:.f=.o)
 OBJF90 := $(SRCF90:.f90=.o)
@@ -87,5 +88,6 @@ fftpack_iqct.o: fftpack.o
 fftpack_qst.o: fftpack.o
 fftpack_iqst.o: fftpack.o
 fftpack_dct.o: fftpack.o
+fftpack_dst.o: fftpack.o
 fftpack_fftshift.o: fftpack.o
 fftpack_ifftshift.o: fftpack.o

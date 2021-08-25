@@ -13,7 +13,9 @@ all: tstfft \
 	fftpack_qst \
 	fftpack_iqst \
 	fftpack_dcost \
-	fftpack_dct
+	fftpack_dct \
+	fftpack_dsint \
+	fftpack_dst
 
 # Orginal test
 tstfft: tstfft.o
@@ -72,6 +74,14 @@ fftpack_dcost: test_fftpack_dcost.f90
 fftpack_dct: test_fftpack_dct.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	./fftpack_dct.x
+
+fftpack_dsint: test_fftpack_dsint.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dsint.x
+
+fftpack_dst: test_fftpack_dst.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dst.x
 
 # `fftpack` utility routines
 fftpack_fftshift: test_fftpack_fftshift.f90

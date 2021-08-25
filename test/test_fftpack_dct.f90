@@ -27,7 +27,6 @@ contains
     subroutine test_fftpack_idct
         use fftpack, only: dct, idct
         use iso_fortran_env, only: dp => real64
-        real(kind=dp) :: eps = 1.0e-10_dp
         real(kind=dp) :: x(4) = [1, 2, 3, 4]
 
         call check(all(idct(dct(x))/(2.0_dp*(4.0_dp - 1.0_dp)) == [real(kind=dp) :: 1, 2, 3, 4]), &

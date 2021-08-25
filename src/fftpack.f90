@@ -22,6 +22,9 @@ module fftpack
     public :: dcosti, dcost
     public :: dct, idct
 
+    public :: dsinti, dsint
+    public :: dst, idst
+
     interface
 
         !> Version: experimental
@@ -208,6 +211,26 @@ module fftpack
             real(kind=dp), intent(in) :: wsave(*)
         end subroutine dcost
 
+        !> Version: experimental
+        !>
+        !> Initialize `dsint`. ([Specification](../page/specs/fftpack.html#dsinti))
+        pure subroutine dsinti(n, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: wsave(*)
+        end subroutine dsinti
+
+        !> Version: experimental
+        !>
+        !> Discrete fourier sine transform of an odd sequence.
+        !> ([Specification](../page/specs/fftpack.html#dsint))
+        pure subroutine dsint(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dsint
+
     end interface
 
     !> Version: experimental
@@ -325,6 +348,26 @@ module fftpack
     interface idct
         module procedure :: dct_dp
     end interface idct
+
+    !> Version: experimental
+    !>
+    !> Discrete fourier sine (forward) transform of an odd sequence.
+    !> ([Specification](../page/specs/fftpack.html#dst))
+    interface dst
+        pure module function dst_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function dst_dp
+    end interface dst
+
+    !> Version: experimental
+    !>
+    !> Discrete fourier sine (backward) transform of an even sequence.
+    !> ([Specification](../page/specs/fftpack.html#idst))
+    interface idst
+        module procedure :: dst_dp
+    end interface idst
 
     !> Version: experimental
     !>

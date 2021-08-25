@@ -97,6 +97,16 @@ name = "fftpack_dct"
 source-dir = "test"
 main = "test_fftpack_dct.f90"
 
+[[test]]
+name = "fftpack_dsint"
+source-dir = "test"
+main = "test_fftpack_dsint.f90"
+
+[[test]]
+name = "fftpack_dst"
+source-dir = "test"
+main = "test_fftpack_dst.f90"
+
 # `fftpack` utility routines
 [[test]]
 name = "fftpack_fftshift"

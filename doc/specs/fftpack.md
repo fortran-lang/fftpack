@@ -1393,7 +1393,7 @@ Pure subroutine.
 `n`: Shall be a `integer` scalar.
 This argument is `intent(in)`.  
 The length of the sequence to be transformed.  
-The method is most efficient when n-1 is a product of small primes.
+The method is most efficient when `n-1` is a product of small primes.
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(out)`.  
@@ -1419,7 +1419,6 @@ Computes the discrete fourier cosine transform of an even sequence `x(i)`.
 The transform is defined below at output parameter `x`.
 
 `dcost` is the unnormalized inverse of itself since a call of `dcost` followed by another call of `dcost` will multiply the input sequence `x` by `2*(n-1)`. 
-The transform is defined below at output parameter `x`.
 
 The array `wsave` which is used by subroutine `dcost` must be initialized by calling subroutine `dcosti(n,wsave)`.
 
@@ -1575,7 +1574,209 @@ program demo_idct
     print *, idct(dct(x), 3)          !! (unnormalized): [7.0, 15.0, 23.0]
 end program demo_idct
 ```
+## Sine transform of a real odd sequence
 
+### `dsinti`
+
+#### Description
+
+Initializes the array `wsave` which is used in subroutine `dsint`. 
+The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure subroutine.
+
+#### Syntax
+
+`call [[fftpack(module):dsinti(interface)]](n , wsave)`
+
+#### Arguments
+
+`n`: Shall be a `integer` scalar.
+This argument is `intent(in)`.  
+The length of the sequence to be transformed.  
+The method is most efficient when `n+1` is a product of small primes.
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+A work array which must be dimensioned at least `int(2.5*n+15)`. 
+Different `wsave` arrays are required for different values of `n`. 
+The contents of `wsave` must not be changed between calls of `dsint`.
+
+#### Example
+
+```fortran
+program demo_dsinti
+    use fftpack, only: dsinti
+    real(kind=8) :: w(int(2.5*4 + 15))
+    call dsinti(4, w)   !! Initializes the array `w` which is used in subroutine `dsint`. 
+end program demo_dsinti
+```
+
+### `dsint`
+
+#### Description
+
+Computes the discrete fourier sinine transform of an odd sequence `x(i)`. 
+The transform is defined below at output parameter `x`.
+
+`dsint` is the unnormalized inverse of itself since a call of `dsint` followed by another call of `dsint` will multiply the input sequence `x` by `2*(n+1)`.
+
+The array `wsave` which is used by subroutine `dsint` must be initialized by calling subroutine `dsinti(n,wsave)`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure subroutine.
+
+#### Syntax
+
+`call [[fftpack(module):dsint(interface)]](n, x, wsave)`
+
+#### Arguments
+
+`n`: Shall be a `integer` scalar.
+This argument is `intent(in)`.  
+The length of the sequence `x`. 
+The method is most efficient when `n+1` is a product of small primes.
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(inout)`.
+An array which contains the sequence to be transformed.
+```
+for i=1,...,n
+
+    x(i)= the sum from k=1 to k=n
+
+        2*x(k)*sin(k*i*pi/(n+1))
+
+    a call of dsint followed by another call of
+    dsint will multiply the sequence x by 2*(n+1).
+    hence dsint is the unnormalized inverse
+    of itself.
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+A work array which must be dimensioned at least `int(2.5*n+15)` in the program that calls `dsint`. 
+The `wsave` array must be initialized by calling subroutine `dsinti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
+Contains initialization calculations which must not be destroyed between calls of `dsint`.
+
+#### Example
+
+```fortran
+program demo_dsint
+    use fftpack, only: dsinti, dsint
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    real(kind=8) :: w(int(2.5*4 + 15))
+    call dsinti(4, w)
+    call dsint(4, x, w)     !! Computes the discrete fourier sinine (forward) transform of an even sequence, `x`(unnormalized): [15.4, -6.9, 3.6, -1.6]
+    call dsint(4, x, w)     !! Computes the discrete fourier sinine (backward) transform of an even sequence, `x`(unnormalized): [10.0, 20.0, 30.0, 40.0]
+end program demo_dsint
+```
+
+### `dst`
+
+#### Description
+
+Discrete fourier sine (forward) transform of an odd sequence. 
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):dst(interface)]](x [, n])`
+
+#### Argument
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+The data to transform.
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+#### Return value
+
+Returns a `real` and rank-1 array, the Discrete-Sine Transform (DST) of `x`.
+
+#### Notes
+
+Within numerical accuracy, `y == dst(idst(y))/2*(size(y) + 1)`.
+
+#### Example
+
+```fortran
+program demo_dst
+    use fftpack, only: dst
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    print *, dst(x,3)      !! [9.7, -4.0, 1.7].
+    print *, dst(x)        !! [15.4, -6.9, 3.6, -1.6].
+    print *, dst(x,5)      !! [17.4, -1.7, -4.0, 5.2, -3.4].
+    print *, dst(dst(x))/(2*(4 + 1))   !! (normalized): [1.0, 2.0, 3.0, 4.0]
+end program demo_dst
+```
+
+### `idst`
+
+#### Description
+
+Unnormalized inverse of `dst`.
+In fact, `idst` and `dst` have the same effect, `idst` = `dst`.
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):idst(interface)]](x [, n])`
+
+#### Argument
+
+`x`: Shall be a `real` array.
+This argument is `intent(in)`. 
+Transformed data to invert.
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+#### Return value
+
+Returns a `real` and rank-1 array, the inverse Discrete-Cosine Transform (iDST) of `x`.
+
+#### Example
+
+```fortran
+program demo_idst
+    use fftpack, only: dst, idst
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    print *, idst(dst(x))/(2*(4+1))   !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idst(idst(x))/(2*(4+1))  !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idst(dst(x), 3)          !! (unnormalized): [13.1, 23.5, 40.7]
+end program demo_idst
+```
 
 ## Utility functions
 
