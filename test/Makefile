@@ -9,6 +9,9 @@ all: tstfft \
 	fftpack_dcosq \
 	fftpack_qct \
 	fftpack_iqct \
+	fftpack_dsinq \
+	fftpack_qst \
+	fftpack_iqst \
 	fftpack_dcost \
 	fftpack_dct
 
@@ -49,6 +52,18 @@ fftpack_qct: test_fftpack_qct.f90
 fftpack_iqct: test_fftpack_iqct.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	./fftpack_iqct.x
+
+fftpack_dsinq: test_fftpack_dsinq.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dsinq.x
+
+fftpack_qst: test_fftpack_qst.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_qst.x
+
+fftpack_iqst: test_fftpack_iqst.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_iqst.x
 
 fftpack_dcost: test_fftpack_dcost.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x

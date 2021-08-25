@@ -73,6 +73,21 @@ source-dir = "test"
 main = "test_fftpack_iqct.f90"
 
 [[test]]
+name = "fftpack_dsinq"
+source-dir = "test"
+main = "test_fftpack_dsinq.f90"
+
+[[test]]
+name = "fftpack_qst"
+source-dir = "test"
+main = "test_fftpack_qst.f90"
+
+[[test]]
+name = "fftpack_iqst"
+source-dir = "test"
+main = "test_fftpack_iqst.f90"
+
+[[test]]
 name = "fftpack_dcost"
 source-dir = "test"
 main = "test_fftpack_dcost.f90"

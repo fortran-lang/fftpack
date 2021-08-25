@@ -2,7 +2,7 @@ submodule(fftpack) fftpack_qct
 
 contains
 
-    !> Forward transform of quarter wave data.
+    !> Forward cosine-transform of quarter wave data.
     pure module function qct_dp(x, n) result(result)
         real(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n

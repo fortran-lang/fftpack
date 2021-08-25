@@ -16,6 +16,9 @@ module fftpack
     public :: dcosqi, dcosqf, dcosqb
     public :: qct, iqct
 
+    public :: dsinqi, dsinqf, dsinqb
+    public :: qst, iqst
+
     public :: dcosti, dcost
     public :: dct, idct
 
@@ -155,6 +158,38 @@ module fftpack
 
         !> Version: experimental
         !>
+        !> Initialize `dsinqf` and `dsinqb`.
+        !> ([Specification](../page/specs/fftpack.html#dsinqi))
+        pure subroutine dsinqi(n, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: wsave(*)
+        end subroutine dsinqi
+
+        !> Version: experimental
+        !>
+        !> Forward transform of quarter wave data.
+        !> ([Specification](../page/specs/fftpack.html#dsinqf))
+        pure subroutine dsinqf(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dsinqf
+
+        !> Version: experimental
+        !>
+        !> Unnormalized inverse of `dsinqf`.
+        !> ([Specification](../page/specs/fftpack.html#dsinqb))
+        pure subroutine dsinqb(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dsinqb
+
+        !> Version: experimental
+        !>
         !> Initialize `dcost`. ([Specification](../page/specs/fftpack.html#dcosti))
         pure subroutine dcosti(n, wsave)
             import dp
@@ -225,7 +260,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Forward transform of quarter wave data.
+    !> Forward cosine-transform of quarter wave data.
     !> ([Specifiction](../page/specs/fftpack.html#qct))
     interface qct
         pure module function qct_dp(x, n) result(result)
@@ -237,7 +272,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Backward transform of quarter wave data.
+    !> Backward cosine-transform of quarter wave data.
     !> ([Specifiction](../page/specs/fftpack.html#iqct))
     interface iqct
         pure module function iqct_dp(x, n) result(result)
@@ -246,6 +281,30 @@ module fftpack
             real(kind=dp), allocatable :: result(:)
         end function iqct_dp
     end interface iqct
+
+    !> Version: experimental
+    !>
+    !> Forward sine-transform of quarter wave data.
+    !> ([Specifiction](../page/specs/fftpack.html#qst))
+    interface qst
+        pure module function qst_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function qst_dp
+    end interface qst
+
+    !> Version: experimental
+    !>
+    !> Backward sine-transform of quarter wave data.
+    !> ([Specifiction](../page/specs/fftpack.html#iqst))
+    interface iqst
+        pure module function iqst_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function iqst_dp
+    end interface iqst
 
     !> Version: experimental
     !>
