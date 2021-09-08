@@ -13,7 +13,7 @@ contains
 
     subroutine test_fftpack_dcosq_real
         use fftpack, only: dcosqi, dcosqf, dcosqb
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
         real(kind=dp) :: w(3*4 + 15)
         real(kind=dp) :: x(4) = [1, 2, 3, 4]
         real(kind=dp) :: eps = 1.0e-10_dp

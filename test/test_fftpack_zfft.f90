@@ -13,7 +13,7 @@ contains
 
     subroutine test_fftpack_zfft()
         use fftpack, only: zffti, zfftf, zfftb
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
 
         complex(kind=dp) :: x(4) = [1, 2, 3, 4]
         real(kind=dp) :: w(31)

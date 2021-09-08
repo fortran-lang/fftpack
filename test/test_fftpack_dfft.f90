@@ -13,7 +13,7 @@ contains
 
     subroutine test_fftpack_dfft()
         use fftpack, only: dffti, dfftf, dfftb
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
 
         real(kind=dp) :: x(4)
         real(kind=dp) :: w(31)

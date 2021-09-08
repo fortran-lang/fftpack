@@ -14,7 +14,7 @@ contains
 
     subroutine test_fftpack_ifftshift_complex
         use fftpack, only: ifftshift
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
         integer :: i
 
         complex(kind=dp) :: xeven(4) = [3, 4, 1, 2]
@@ -29,7 +29,7 @@ contains
 
     subroutine test_fftpack_ifftshift_real
         use fftpack, only: ifftshift
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
         integer :: i
 
         real(kind=dp) :: xeven(4) = [3, 4, 1, 2]

@@ -14,7 +14,7 @@ contains
 
     subroutine test_fftpack_fftshift_complex
         use fftpack, only: fftshift
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
 
         complex(kind=dp) :: xeven(4) = [1, 2, 3, 4]
         complex(kind=dp) :: xodd(5) = [1, 2, 3, 4, 5]
@@ -28,7 +28,7 @@ contains
 
     subroutine test_fftpack_fftshift_real
         use fftpack, only: fftshift
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
 
         real(kind=dp) :: xeven(4) = [1, 2, 3, 4]
         real(kind=dp) :: xodd(5) = [1, 2, 3, 4, 5]

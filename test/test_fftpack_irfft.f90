@@ -13,7 +13,7 @@ contains
 
     subroutine test_fftpack_irfft
         use fftpack, only: rfft, irfft
-        use iso_fortran_env, only: dp => real64
+        integer,parameter :: dp = kind(1.0d0)
         real(kind=dp) :: eps = 1.0e-10_dp
 
         real(kind=dp) :: x(4) = [1, 2, 3, 4]

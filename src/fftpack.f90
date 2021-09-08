@@ -1,8 +1,8 @@
 module fftpack
 
-    use, intrinsic :: iso_fortran_env, only: dp => real64
     implicit none
     private
+    integer, parameter :: dp = kind(1.0d0)
 
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
