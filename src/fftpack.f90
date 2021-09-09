@@ -4,6 +4,7 @@ module fftpack
     private
     integer, parameter :: dp = kind(1.0d0)
 
+    public :: dp
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
     public :: fftshift, ifftshift

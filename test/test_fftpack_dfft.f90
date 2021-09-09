@@ -12,8 +12,7 @@ contains
     end subroutine check
 
     subroutine test_fftpack_dfft()
-        use fftpack, only: dffti, dfftf, dfftb
-        integer,parameter :: dp = kind(1.0d0)
+        use fftpack, only: dffti, dfftf, dfftb, dp
 
         real(kind=dp) :: x(4)
         real(kind=dp) :: w(31)

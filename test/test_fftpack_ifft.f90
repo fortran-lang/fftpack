@@ -12,8 +12,7 @@ contains
     end subroutine check
 
     subroutine test_fftpack_ifft
-        use fftpack, only: fft, ifft
-        integer,parameter :: dp = kind(1.0d0)
+        use fftpack, only: fft, ifft, dp
         real(kind=dp) :: eps = 1.0e-10_dp
 
         complex(kind=dp) :: x(4) = [1, 2, 3, 4]
