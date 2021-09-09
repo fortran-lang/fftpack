@@ -13,8 +13,7 @@ contains
     end subroutine check
 
     subroutine test_fftpack_ifftshift_complex
-        use fftpack, only: ifftshift
-        use iso_fortran_env, only: dp => real64
+        use fftpack, only: ifftshift, dp
         integer :: i
 
         complex(kind=dp) :: xeven(4) = [3, 4, 1, 2]
@@ -28,8 +27,7 @@ contains
     end subroutine test_fftpack_ifftshift_complex
 
     subroutine test_fftpack_ifftshift_real
-        use fftpack, only: ifftshift
-        use iso_fortran_env, only: dp => real64
+        use fftpack, only: ifftshift, dp
         integer :: i
 
         real(kind=dp) :: xeven(4) = [3, 4, 1, 2]

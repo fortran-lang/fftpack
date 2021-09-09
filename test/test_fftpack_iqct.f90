@@ -12,8 +12,7 @@ contains
     end subroutine check
 
     subroutine test_fftpack_iqct
-        use fftpack, only: qct, iqct
-        use iso_fortran_env, only: dp => real64
+        use fftpack, only: qct, iqct, dp
         real(kind=dp) :: eps = 1.0e-10_dp
 
         real(kind=dp) :: x(4) = [1, 2, 3, 4]
