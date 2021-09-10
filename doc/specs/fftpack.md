@@ -1170,3 +1170,47 @@ program demo_ifftshift
     print *, ifftshift(fftshift(x))        !! [1.0, 2.0, 3.0, 4.0, 5.0]
 end program demo_ifftshift
 ```
+
+### `hilbert`
+
+#### Description
+
+Computes the discrete-time analytic signal using Hilbert.
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):hilbert(interface)]](x [, n])`
+
+#### Arguments
+
+`x`: Shall be a `complex` and rank-1 array.
+This argument is `intent(in)`. 
+
+`n`: Shall be an `integer` scalar.
+This argument is `intent(in)` and `optional`.  
+Defines the length of the Hilbert transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+#### Return value
+
+Returns the `complex` and rank-1 Hilbert transform.
+
+#### Example
+
+```fortran
+program demo_fftpack_hilbert
+
+    use fftpack, only: hilbert, dp
+    complex(kind=dp) :: x(4) = [1, 2, 3, 4]
+
+    print *, hilbert(x)     !! [(1.000,1.000), (2.000,-1.000), (3.000,-1.000), (4.000,1.000)]
+
+end program demo_fftpack_hilbert
+```
