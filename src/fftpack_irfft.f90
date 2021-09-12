@@ -2,7 +2,7 @@ submodule(fftpack) fftpack_irfft
 
 contains
 
-    !> Backward transform of a double real periodic sequence.
+    !> Backward transform of a real periodic sequence.
     pure module function irfft_rk(x, n) result(result)
         real(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n

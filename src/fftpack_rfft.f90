@@ -2,7 +2,7 @@ submodule(fftpack) fftpack_rfft
 
 contains
 
-    !> Forward transform of a double real periodic sequence.
+    !> Forward transform of a real periodic sequence.
     pure module function rfft_rk(x, n) result(result)
         real(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n
