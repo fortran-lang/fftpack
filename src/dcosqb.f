@@ -1,5 +1,6 @@
       SUBROUTINE DCOSQB (N,X,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       X(*)       ,WSAVE(*)
       DATA TSQRT2 /2.82842712474619009760D0/
       IF (N-2) 101,102,103

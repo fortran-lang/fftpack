@@ -1,5 +1,6 @@
       SUBROUTINE DSINQI (N,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       WSAVE(1)
       CALL DCOSQI (N,WSAVE)
       RETURN

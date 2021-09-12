@@ -1,5 +1,6 @@
       SUBROUTINE DZFFTB (N,R,AZERO,A,B,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       R(*)       ,A(*)       ,B(*)       ,WSAVE(*)
       IF (N-2) 101,102,103
   101 R(1) = AZERO

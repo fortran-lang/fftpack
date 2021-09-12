@@ -12,16 +12,17 @@ contains
     end subroutine check
 
     subroutine test_fftpack_ifft
-        use fftpack, only: fft, ifft, dp
-        real(kind=dp) :: eps = 1.0e-10_dp
+        use fftpack, only: fft, ifft
+    use fftpack_kind
+        real(kind=rk) :: eps = 1.0e-10_rk
 
-        complex(kind=dp) :: x(4) = [1, 2, 3, 4]
+        complex(kind=rk) :: x(4) = [1, 2, 3, 4]
 
-        call check(sum(abs(ifft(fft(x))/4.0_dp - [complex(kind=dp) :: 1, 2, 3, 4])) < eps, &
-                   msg="`ifft(fft(x))/4.0_dp` failed.")
-        call check(sum(abs(ifft(fft(x), 2) - [complex(kind=dp) ::(8, 2), (12, -2)])) < eps, &
+        call check(sum(abs(ifft(fft(x))/4.0_rk - [complex(kind=rk) :: 1, 2, 3, 4])) < eps, &
+                   msg="`ifft(fft(x))/4.0_rk` failed.")
+        call check(sum(abs(ifft(fft(x), 2) - [complex(kind=rk) ::(8, 2), (12, -2)])) < eps, &
                    msg="`ifft(fft(x), 2)` failed.")
-        call check(sum(abs(ifft(fft(x, 2), 4) - [complex(kind=dp) ::(2, 0), (3, -1), (4, 0), (3, 1)])) < eps, &
+        call check(sum(abs(ifft(fft(x, 2), 4) - [complex(kind=rk) ::(2, 0), (3, -1), (4, 0), (3, 1)])) < eps, &
                    msg="`ifft(fft(x, 2), 4)` failed.")
 
     end subroutine test_fftpack_ifft

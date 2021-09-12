@@ -1,5 +1,6 @@
       SUBROUTINE RADB2 (IDO,L1,CC,CH,WA1)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       CC(IDO,2,L1)           ,CH(IDO,L1,2)           ,
      1                WA1(1)
       DO 101 K=1,L1

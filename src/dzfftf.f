@@ -1,8 +1,9 @@
       SUBROUTINE DZFFTF (N,R,AZERO,A,B,WSAVE)
+      USE fftpack_kind
 C
 C                       VERSION 3  JUNE 1979
 C
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       R(*)       ,A(*)       ,B(*)       ,WSAVE(*)
       IF (N-2) 101,102,103
   101 AZERO = R(1)

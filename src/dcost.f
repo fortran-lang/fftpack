@@ -1,5 +1,6 @@
       SUBROUTINE DCOST (N,X,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       X(*)       ,WSAVE(*)
       NM1 = N-1
       NP1 = N+1

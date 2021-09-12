@@ -1,5 +1,6 @@
       SUBROUTINE ZFFTI (N,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       WSAVE(1)
       IF (N .EQ. 1) RETURN
       IW1 = N+N+1

@@ -1,5 +1,6 @@
       SUBROUTINE RADF3 (IDO,L1,CC,CH,WA1,WA2)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       CH(IDO,3,L1)           ,CC(IDO,L1,3)           ,
      1                WA1(1)     ,WA2(1)
 C     *** TAUI IS -SQRT(3)/2 ***

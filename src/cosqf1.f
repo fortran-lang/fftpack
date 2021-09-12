@@ -1,5 +1,6 @@
       SUBROUTINE COSQF1 (N,X,W,XH)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       X(1)       ,W(1)       ,XH(1)
       NS2 = (N+1)/2
       NP2 = N+2

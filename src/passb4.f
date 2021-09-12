@@ -1,5 +1,6 @@
       SUBROUTINE PASSB4 (IDO,L1,CC,CH,WA1,WA2,WA3)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z) 
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z) 
       DIMENSION       CC(IDO,4,L1)           ,CH(IDO,L1,4)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
       IF (IDO .NE. 2) GO TO 102
