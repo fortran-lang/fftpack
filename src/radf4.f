@@ -1,5 +1,6 @@
       SUBROUTINE RADF4 (IDO,L1,CC,CH,WA1,WA2,WA3)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       CC(IDO,L1,4)           ,CH(IDO,4,L1)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
       DATA HSQT2 /0.70710678118654752440D0/

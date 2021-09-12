@@ -1,5 +1,6 @@
       SUBROUTINE DSINT (N,X,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       X(1)       ,WSAVE(1)      
       NP1 = N+1
       IW1 = N/2+1

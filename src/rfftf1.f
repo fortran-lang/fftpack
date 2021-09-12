@@ -1,5 +1,6 @@
       SUBROUTINE RFFTF1 (N,C,CH,WA,IFAC)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       CH(*)      ,C(*)       ,WA(*)      ,IFAC(*)
       NF = IFAC(2)
       NA = 1

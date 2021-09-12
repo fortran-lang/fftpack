@@ -1,5 +1,6 @@
       SUBROUTINE RFFTI1 (N,WA,IFAC)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       WA(*)      ,IFAC(*)    ,NTRYH(4)
       DATA NTRYH(1),NTRYH(2),NTRYH(3),NTRYH(4)/4,2,3,5/
       NL = N

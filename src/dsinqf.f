@@ -1,5 +1,6 @@
       SUBROUTINE DSINQF (N,X,WSAVE)
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       X(1)       ,WSAVE(1)
       IF (N .EQ. 1) RETURN
       NS2 = N/2
