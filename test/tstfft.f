@@ -53,11 +53,12 @@ C     *** HACKED BY HCP FOR THE DOUBLE PREC. VERSION NOVEMEMBER 1999
 
 
 C
-      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      USE fftpack_kind
+      IMPLICIT REAL(RK) (A-H,O-Z)
       DIMENSION       ND(10)     ,X(200)     ,Y(200)     ,W(2000)    ,
      1                A(100)     ,B(100)     ,AH(100)    ,BH(100)    ,
      2                XH(200)    ,CX(200)    ,CY(200)
-      DOUBLE COMPLEX         CX         ,CY
+      COMPLEX(RK)         CX         ,CY
       DATA ND(1),ND(2),ND(3),ND(4),ND(5),ND(6),ND(7)/120,54,49,32,4,3,2/
       SQRT2 = SQRT(2.0D0)
       NNS = 7

@@ -2,7 +2,7 @@ submodule(fftpack) fftpack_ifft
 
 contains
 
-    !> Backward transform of a double complex periodic sequence.
+    !> Backward transform of a complex periodic sequence.
     pure module function ifft_rk(x, n) result(result)
         complex(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n

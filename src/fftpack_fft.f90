@@ -2,7 +2,7 @@ submodule(fftpack) fftpack_fft
 
 contains
 
-    !> Forward transform of a double complex periodic sequence.
+    !> Forward transform of a complex periodic sequence.
     pure module function fft_rk(x, n) result(result)
         complex(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n

@@ -30,7 +30,7 @@ module fftpack
 
         !> Version: experimental
         !>
-        !> Forward transform of a double complex periodic sequence.
+        !> Forward transform of a complex periodic sequence.
         !> ([Specification](../page/specs/fftpack.html#zfftf))
         pure subroutine zfftf(n, c, wsave)
             import rk
@@ -62,7 +62,7 @@ module fftpack
 
         !> Version: experimental
         !>
-        !> Forward transform of a double real periodic sequence.
+        !> Forward transform of a real periodic sequence.
         !> ([Specification](../page/specs/fftpack.html#dfftf))
         pure subroutine dfftf(n, r, wsave)
             import rk
@@ -94,7 +94,7 @@ module fftpack
 
         !> Version: experimental
         !>
-        !> Simplified forward transform of a double real periodic sequence.
+        !> Simplified forward transform of a real periodic sequence.
         !> ([Specification](../page/specs/fftpack.html#dzfftf))
         pure subroutine dzfftf(n, r, azero, a, b, wsave)
             import rk
@@ -154,7 +154,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Forward transform of a double complex periodic sequence.
+    !> Forward transform of a complex periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#fft))
     interface fft
         pure module function fft_rk(x, n) result(result)
@@ -166,7 +166,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Backward transform of a double complex periodic sequence.
+    !> Backward transform of a complex periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#ifft))
     interface ifft
         pure module function ifft_rk(x, n) result(result)
@@ -178,7 +178,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Forward transform of a double real periodic sequence.
+    !> Forward transform of a real periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#rfft))
     interface rfft
         pure module function rfft_rk(x, n) result(result)
@@ -190,7 +190,7 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Backward transform of a double real periodic sequence.
+    !> Backward transform of a real periodic sequence.
     !> ([Specifiction](../page/specs/fftpack.html#irfft))
     interface irfft
         pure module function irfft_rk(x, n) result(result)
