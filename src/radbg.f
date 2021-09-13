@@ -5,7 +5,7 @@
      1                C1(IDO,L1,IP)          ,C2(IDL1,IP),
      2                CH2(IDL1,IP)           ,WA(1)
       DATA TPI/6.28318530717958647692D0/
-      ARG = TPI/FLOAT(IP)
+      ARG = TPI/REAL(IP,RK)
       DCP = COS(ARG)
       DSP = SIN(ARG)
       IDP2 = IDO+2

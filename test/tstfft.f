@@ -65,12 +65,12 @@ C
       DO 157 NZ=1,NNS
          N = ND(NZ)
          MODN = MOD(N,2)
-         FN = FLOAT(N)
+         FN = REAL(N,RK)
          TFN = FN+FN
          NP1 = N+1
          NM1 = N-1
          DO 101 J=1,NP1
-            X(J) = SIN(FLOAT(J)*SQRT2)
+            X(J) = SIN(REAL(J,RK)*SQRT2)
             Y(J) = X(J)
             XH(J) = X(J)
   101    CONTINUE
@@ -85,9 +85,9 @@ C
          DO 103 K=2,NS2
             SUM1 = 0.0D0
             SUM2 = 0.0D0
-            ARG = FLOAT(K-1)*DT
+            ARG = REAL(K-1,RK)*DT
             DO 102 I=1,N
-               ARG1 = FLOAT(I-1)*ARG
+               ARG1 = REAL(I-1,RK)*ARG
                SUM1 = SUM1+X(I)*COS(ARG1)
                SUM2 = SUM2+X(I)*SIN(ARG1)
   102       CONTINUE
@@ -112,13 +112,13 @@ C
          RFTF = RFTF/FN
          DO 109 I=1,N
             SUM = 0.5D0*X(1)
-            ARG = FLOAT(I-1)*DT
+            ARG = REAL(I-1,RK)*DT
             IF (NS2 .LT. 2) GO TO 108
             DO 107 K=2,NS2
-               ARG1 = FLOAT(K-1)*ARG
+               ARG1 = REAL(K-1,RK)*ARG
                SUM = SUM+X(2*K-2)*COS(ARG1)-X(2*K-1)*SIN(ARG1)
   107       CONTINUE
-  108       IF (MODN .EQ. 0) SUM = SUM+.5*FLOAT((-1)**(I-1))*X(N)
+  108       IF (MODN .EQ. 0) SUM = SUM+.5*REAL((-1)**(I-1),RK)*X(N)
             Y(I) = SUM+SUM
   109    CONTINUE
          CALL DFFTB (N,X,W)
@@ -144,9 +144,9 @@ C
   112    CONTINUE
          DO 114 I=1,NM1
             Y(I) = 0.0D0
-            ARG1 = FLOAT(I)*DT
+            ARG1 = REAL(I,RK)*DT
             DO 113 K=1,NM1
-               Y(I) = Y(I)+X(K)*SIN(FLOAT(K)*ARG1)
+               Y(I) = Y(I)+X(K)*SIN(REAL(K,RK)*ARG1)
   113       CONTINUE
             Y(I) = Y(I)+Y(I)
   114    CONTINUE
@@ -173,10 +173,10 @@ C
             X(I) = XH(I)
   117    CONTINUE
          DO 119 I=1,NP1
-            Y(I) = 0.5D0*(X(1)+FLOAT((-1)**(I+1))*X(N+1))
-            ARG = FLOAT(I-1)*DT
+            Y(I) = 0.5D0*(X(1)+REAL((-1)**(I+1),RK)*X(N+1))
+            ARG = REAL(I-1,RK)*DT
             DO 118 K=2,N
-               Y(I) = Y(I)+X(K)*COS(FLOAT(K-1)*ARG)
+               Y(I) = Y(I)+X(K)*COS(REAL(K-1,RK)*ARG)
   118       CONTINUE
             Y(I) = Y(I)+Y(I)
   119    CONTINUE
@@ -205,9 +205,9 @@ C
          DT = PI/(FN+FN)
          DO 124 I=1,N
             X(I) = 0.0D0
-            ARG = DT*FLOAT(I)
+            ARG = DT*REAL(I,RK)
             DO 123 K=1,N
-               X(I) = X(I)+Y(K)*SIN(FLOAT(K+K-1)*ARG)
+               X(I) = X(I)+Y(K)*SIN(REAL(K+K-1,RK)*ARG)
   123       CONTINUE
             X(I) = 4.0D0*X(I)
   124    CONTINUE
@@ -220,10 +220,10 @@ C
   125    CONTINUE
          SINQBT = CF*SINQBT
          DO 127 I=1,N
-            ARG = FLOAT(I+I-1)*DT
-            Y(I) = 0.5D0*FLOAT((-1)**(I+1))*X(N)
+            ARG = REAL(I+I-1,RK)*DT
+            Y(I) = 0.5D0*REAL((-1)**(I+1),RK)*X(N)
             DO 126 K=1,NM1
-               Y(I) = Y(I)+X(K)*SIN(FLOAT(K)*ARG)
+               Y(I) = Y(I)+X(K)*SIN(REAL(K,RK)*ARG)
   126       CONTINUE
             Y(I) = Y(I)+Y(I)
   127    CONTINUE
@@ -248,9 +248,9 @@ C
   130    CONTINUE
          DO 132 I=1,N
             X(I) = 0.0D0
-            ARG = FLOAT(I-1)*DT
+            ARG = REAL(I-1,RK)*DT
             DO 131 K=1,N
-               X(I) = X(I)+Y(K)*COS(FLOAT(K+K-1)*ARG)
+               X(I) = X(I)+Y(K)*COS(REAL(K+K-1,RK)*ARG)
   131       CONTINUE
             X(I) = 4.0D0*X(I)
   132    CONTINUE
@@ -264,9 +264,9 @@ C
          COSQBT = CF*COSQBT
          DO 135 I=1,N
             Y(I) = 0.5D0*X(1)
-            ARG = FLOAT(I+I-1)*DT
+            ARG = REAL(I+I-1,RK)*DT
             DO 134 K=2,N
-               Y(I) = Y(I)+X(K)*COS(FLOAT(K-1)*ARG)
+               Y(I) = Y(I)+X(K)*COS(REAL(K-1,RK)*ARG)
   134       CONTINUE
             Y(I) = Y(I)+Y(I)
   135    CONTINUE
@@ -292,17 +292,17 @@ C
             X(I) = XH(I)
   138    CONTINUE
          TPI = 8.0D0*ATAN(1.0D0)
-         DT = TPI/FLOAT(N)
+         DT = TPI/REAL(N,RK)
          NS2 = (N+1)/2
-         CF = 2.0D0/FLOAT(N)
+         CF = 2.0D0/REAL(N,RK)
          NS2M = NS2-1
          IF (NS2M .LE. 0) GO TO 141
          DO 140 K=1,NS2M
             SUM1 = 0.0D0
             SUM2 = 0.0D0
-            ARG = FLOAT(K)*DT
+            ARG = REAL(K,RK)*DT
             DO 139 I=1,N
-               ARG1 = FLOAT(I-1)*ARG
+               ARG1 = REAL(I-1,RK)*ARG
                SUM1 = SUM1+X(I)*COS(ARG1)
                SUM2 = SUM2+X(I)*SIN(ARG1)
   139       CONTINUE
@@ -330,9 +330,9 @@ C
          IF (MODN .EQ. 0) B(NS2) = 0.0D0
          DO 146 I=1,N
             SUM = AZERO
-            ARG1 = FLOAT(I-1)*DT
+            ARG1 = REAL(I-1,RK)*DT
             DO 145 K=1,NS2
-               ARG2 = FLOAT(K)*ARG1
+               ARG2 = REAL(K,RK)*ARG1
                SUM = SUM+A(K)*COS(ARG2)+B(K)*SIN(ARG2)
   145       CONTINUE
             X(I) = SUM
@@ -353,14 +353,14 @@ C
 C     TEST  CFFTI,CFFTF,CFFTB
 C
          DO 149 I=1,N
-            CX(I) = DCMPLX(COS(SQRT2*FLOAT(I)),SIN(SQRT2*FLOAT(I*I)))
+            CX(I) =DCMPLX(COS(SQRT2*REAL(I,RK)),SIN(SQRT2*REAL(I*I,RK)))
   149    CONTINUE
          DT = (PI+PI)/FN
          DO 151 I=1,N
-            ARG1 = -FLOAT(I-1)*DT
+            ARG1 = -REAL(I-1,RK)*DT
             CY(I) = (0.0D0,0.0D0)
             DO 150 K=1,N
-               ARG2 = FLOAT(K-1)*ARG1
+               ARG2 = REAL(K-1,RK)*ARG1
                CY(I) = CY(I)+DCMPLX(COS(ARG2),SIN(ARG2))*CX(K)
   150       CONTINUE
   151    CONTINUE
@@ -373,10 +373,10 @@ C
   152    CONTINUE
          DCFFTF = DCFFTF/FN
          DO 154 I=1,N
-            ARG1 = FLOAT(I-1)*DT
+            ARG1 = REAL(I-1,RK)*DT
             CY(I) = (0.0D0,0.0D0)
             DO 153 K=1,N
-               ARG2 = FLOAT(K-1)*ARG1
+               ARG2 = REAL(K-1,RK)*ARG1
                CY(I) = CY(I)+DCMPLX(COS(ARG2),SIN(ARG2))*CX(K)
   153       CONTINUE
   154    CONTINUE

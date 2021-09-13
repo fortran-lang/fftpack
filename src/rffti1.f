@@ -28,7 +28,7 @@
       IFAC(1) = N
       IFAC(2) = NF
       TPI = 6.28318530717958647692D0
-      ARGH = TPI/FLOAT(N)
+      ARGH = TPI/REAL(N,RK)
       IS = 0
       NFM1 = NF-1
       L1 = 1
@@ -42,7 +42,7 @@
          DO 109 J=1,IPM
             LD = LD+L1
             I = IS
-            ARGLD = FLOAT(LD)*ARGH
+            ARGLD = REAL(LD,RK)*ARGH
             FI = 0.0D0
             DO 108 II=3,IDO,2
                I = I+2

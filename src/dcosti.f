@@ -7,7 +7,7 @@
       NM1 = N-1
       NP1 = N+1
       NS2 = N/2
-      DT = PI/FLOAT(NM1)
+      DT = PI/REAL(NM1,RK)
       FK = 0.0D0
       DO 101 K=2,NS2
          KC = NP1-K
