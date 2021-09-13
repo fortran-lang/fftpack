@@ -6,7 +6,7 @@
       IF (N .LE. 1) RETURN
       NS2 = N/2
       NP1 = N+1
-      DT = PI/FLOAT(NP1)
+      DT = PI/REAL(NP1,RK)
       DO 101 K=1,NS2
          WSAVE(K) = 2.0D0*SIN(K*DT)
   101 CONTINUE

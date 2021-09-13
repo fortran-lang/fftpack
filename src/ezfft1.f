@@ -28,7 +28,7 @@
   107 IF (NL .NE. 1) GO TO 104
       IFAC(1) = N
       IFAC(2) = NF
-      ARGH = TPI/FLOAT(N)
+      ARGH = TPI/REAL(N,RK)
       IS = 0
       NFM1 = NF-1
       L1 = 1
@@ -38,7 +38,7 @@
          L2 = L1*IP
          IDO = N/L2
          IPM = IP-1
-         ARG1 = FLOAT(L1)*ARGH
+         ARG1 = REAL(L1,RK)*ARGH
          CH1 = 1.0D0
          SH1 = 0.0D0
          DCH1 = COS(ARG1)

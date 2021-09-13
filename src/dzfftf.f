@@ -15,7 +15,7 @@ C
          WSAVE(I) = R(I)
   104 CONTINUE
       CALL DFFTF (N,WSAVE,WSAVE(N+1))
-      CF = 2.0D0/FLOAT(N)
+      CF = 2.0D0/REAL(N,RK)
       CFM = -CF
       AZERO = 0.5D0*CF*WSAVE(1)
       NS2 = (N+1)/2
