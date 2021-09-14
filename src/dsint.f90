@@ -1,13 +1,9 @@
-!*==DSINT.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine dsint(n,x,Wsave)
       use fftpack_kind
       implicit none
-!*--DSINT531
-!*** Start of declarations inserted by SPAG
-      real fftpack_kind , rk , Wsave , x
-      integer iw1 , iw2 , iw3 , n , np1
-!*** End of declarations inserted by SPAG
-      dimension x(1) , Wsave(1)
+      integer :: iw1 , iw2 , iw3 , n , np1
+      real(rk) :: Wsave , x
+      dimension x(*) , Wsave(*)
       np1 = n + 1
       iw1 = n/2 + 1
       iw2 = iw1 + np1

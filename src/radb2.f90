@@ -1,18 +1,14 @@
-!*==RADB2.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine radb2(Ido,l1,Cc,Ch,Wa1)
       use fftpack_kind
       implicit none
-!*--RADB21452
-!*** Start of declarations inserted by SPAG
-      real Cc , Ch , fftpack_kind , rk , ti2 , tr2 , Wa1
-      integer i , ic , Ido , idp2 , k , l1
-!*** End of declarations inserted by SPAG
-      dimension Cc(Ido,2,l1) , Ch(Ido,l1,2) , Wa1(1)
+      real(rk) :: Cc , Ch , ti2 , tr2 , Wa1
+      integer :: i , ic , Ido , idp2 , k , l1
+      dimension Cc(Ido,2,l1) , Ch(Ido,l1,2) , Wa1(*)
       do k = 1 , l1
          Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)
          Ch(1,k,2) = Cc(1,1,k) - Cc(Ido,2,k)
       enddo
-      if ( Ido<2 ) goto 99999
+      if ( Ido<2 ) return
       if ( Ido/=2 ) then
          idp2 = Ido + 2
          do k = 1 , l1
@@ -32,4 +28,4 @@
          Ch(Ido,k,1) = Cc(Ido,1,k) + Cc(Ido,1,k)
          Ch(Ido,k,2) = -(Cc(1,2,k)+Cc(1,2,k))
       enddo
-99999 end subroutine radb2
+      end subroutine radb2

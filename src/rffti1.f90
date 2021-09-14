@@ -1,16 +1,12 @@
-!*==RFFTI1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine rffti1(n,Wa,Ifac)
       use fftpack_kind
       implicit none
-!*--RFFTI12391
-!*** Start of declarations inserted by SPAG
-      real arg , argh , argld , fftpack_kind , fi , rk , tpi , Wa
-      integer i , ib , ido , Ifac , ii , ip , ipm , is , j , k1 , l1 ,  &
-            & l2 , ld , n , nf , nfm1 , nl , nq , nr , ntry
-      integer ntryh
-!*** End of declarations inserted by SPAG
-      dimension Wa(*) , Ifac(*) , ntryh(4)
-      data ntryh(1) , ntryh(2) , ntryh(3) , ntryh(4)/4 , 2 , 3 , 5/
+      real(rk) :: arg , argh , argld , fi , Wa
+      integer :: i , ib , ido , Ifac , ii , ip , ipm , is , j , k1 , l1 , &
+                 l2 , ld , n , nf , nfm1 , nl , nq , nr , ntry
+      dimension Wa(*) , Ifac(*)  
+      integer,dimension(4),parameter :: ntryh = [4 , 2 , 3 , 5]
+      real(rk),parameter :: tpi = 2.0_rk * acos(-1.0_rk) ! 2 * pi
       nl = n
       nf = 0
       j = 0
@@ -38,8 +34,7 @@
       if ( nl/=1 ) goto 200
       Ifac(1) = n
       Ifac(2) = nf
-      tpi = 6.28318530717958647692d0
-      argh = tpi/real(n,rk)
+      argh = tpi/real(n, rk)
       is = 0
       nfm1 = nf - 1
       l1 = 1
@@ -53,11 +48,11 @@
          do j = 1 , ipm
             ld = ld + l1
             i = is
-            argld = real(ld,rk)*argh
-            fi = 0.0d0
+            argld = real(ld, rk)*argh
+            fi = 0.0_rk
             do ii = 3 , ido , 2
                i = i + 2
-               fi = fi + 1.0d0
+               fi = fi + 1.0_rk
                arg = fi*argld
                Wa(i-1) = cos(arg)
                Wa(i) = sin(arg)

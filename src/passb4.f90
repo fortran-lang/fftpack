@@ -1,16 +1,11 @@
-!*==PASSB4.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine passb4(Ido,l1,Cc,Ch,Wa1,Wa2,Wa3)
       use fftpack_kind
       implicit none
-!*--PASSB4934
-!*** Start of declarations inserted by SPAG
-      real Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , fftpack_kind , &
-         & rk , ti1 , ti2 , ti3 , ti4 , tr1 , tr2 , tr3 , tr4 , Wa1 ,   &
-         & Wa2
-      real Wa3
-      integer i , Ido , k , l1
-!*** End of declarations inserted by SPAG
-      dimension Cc(Ido,4,l1) , Ch(Ido,l1,4) , Wa1(1) , Wa2(1) , Wa3(1)
+      real(rk) :: Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , &
+                     & ti1 , ti2 , ti3 , ti4 , tr1 , tr2 , tr3 , tr4 , &
+                     & Wa1 , Wa2 , Wa3
+      integer :: i , Ido , k , l1
+      dimension Cc(Ido,4,l1) , Ch(Ido,l1,4) , Wa1(*) , Wa2(*) , Wa3(*)
       if ( Ido/=2 ) then
          do k = 1 , l1
             do i = 2 , Ido , 2
@@ -38,25 +33,24 @@
                Ch(i,k,4) = Wa3(i-1)*ci4 + Wa3(i)*cr4
             enddo
          enddo
-         goto 99999
-      endif
-      do k = 1 , l1
-         ti1 = Cc(2,1,k) - Cc(2,3,k)
-         ti2 = Cc(2,1,k) + Cc(2,3,k)
-         tr4 = Cc(2,4,k) - Cc(2,2,k)
-         ti3 = Cc(2,2,k) + Cc(2,4,k)
-         tr1 = Cc(1,1,k) - Cc(1,3,k)
-         tr2 = Cc(1,1,k) + Cc(1,3,k)
-         ti4 = Cc(1,2,k) - Cc(1,4,k)
-         tr3 = Cc(1,2,k) + Cc(1,4,k)
-         Ch(1,k,1) = tr2 + tr3
-         Ch(1,k,3) = tr2 - tr3
-         Ch(2,k,1) = ti2 + ti3
-         Ch(2,k,3) = ti2 - ti3
-         Ch(1,k,2) = tr1 + tr4
-         Ch(1,k,4) = tr1 - tr4
-         Ch(2,k,2) = ti1 + ti4
-         Ch(2,k,4) = ti1 - ti4
-      enddo
-      return
-99999 end subroutine passb4
+      else
+         do k = 1 , l1
+            ti1 = Cc(2,1,k) - Cc(2,3,k)
+            ti2 = Cc(2,1,k) + Cc(2,3,k)
+            tr4 = Cc(2,4,k) - Cc(2,2,k)
+            ti3 = Cc(2,2,k) + Cc(2,4,k)
+            tr1 = Cc(1,1,k) - Cc(1,3,k)
+            tr2 = Cc(1,1,k) + Cc(1,3,k)
+            ti4 = Cc(1,2,k) - Cc(1,4,k)
+            tr3 = Cc(1,2,k) + Cc(1,4,k)
+            Ch(1,k,1) = tr2 + tr3
+            Ch(1,k,3) = tr2 - tr3
+            Ch(2,k,1) = ti2 + ti3
+            Ch(2,k,3) = ti2 - ti3
+            Ch(1,k,2) = tr1 + tr4
+            Ch(1,k,4) = tr1 - tr4
+            Ch(2,k,2) = ti1 + ti4
+            Ch(2,k,4) = ti1 - ti4
+         enddo
+      end if 
+      end subroutine passb4

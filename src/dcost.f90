@@ -1,18 +1,14 @@
-!*==DCOST.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine dcost(n,x,Wsave)
       use fftpack_kind
       implicit none
-!*--DCOST352
-!*** Start of declarations inserted by SPAG
-      real c1 , fftpack_kind , rk , t1 , t2 , tx2 , Wsave , x , x1h ,   &
-         & x1p3 , xi , xim2
-      integer i , k , kc , modn , n , nm1 , np1 , ns2
-!*** End of declarations inserted by SPAG
+      real(rk) :: c1 , t1 , t2 , tx2 , Wsave , x , x1h , x1p3 , &
+                  xi , xim2
+      integer :: i , k , kc , modn , n , nm1 , np1 , ns2
       dimension x(*) , Wsave(*)
       nm1 = n - 1
       np1 = n + 1
       ns2 = n/2
-      if ( n<2 ) goto 99999
+      if ( n<2 ) return
       if ( n==2 ) then
          x1h = x(1) + x(2)
          x(2) = x(1) - x(2)
@@ -42,12 +38,11 @@
             xim2 = xi
          enddo
          if ( modn/=0 ) x(n) = xim2
-         goto 99999
+         return
       endif
       x1p3 = x(1) + x(3)
       tx2 = x(2) + x(2)
       x(2) = x(1) - x(3)
       x(1) = x1p3 + tx2
       x(3) = x1p3 - tx2
-      return
-99999 end subroutine dcost
+      end subroutine dcost

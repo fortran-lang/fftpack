@@ -1,14 +1,10 @@
-!*==SINT1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine sint1(n,War,Was,Xh,x,Ifac)
       use fftpack_kind
       implicit none
-!*--SINT12466
-!*** Start of declarations inserted by SPAG
-      integer i , Ifac , k , kc , modn , n , np1 , ns2
-      real sqrt3 , t1 , t2 , War , Was , x , Xh , xhold
-!*** End of declarations inserted by SPAG
+      integer :: i , Ifac , k , kc , modn , n , np1 , ns2
+      real(rk) :: t1 , t2 , War , Was , x , Xh , xhold
       dimension War(*) , Was(*) , x(*) , Xh(*) , Ifac(*)
-      data sqrt3/1.73205080756887729352d0/
+      real(rk),parameter :: sqrt3 = sqrt(3.0_rk)
       do i = 1 , n
          Xh(i) = War(i)
          War(i) = x(i)
@@ -22,7 +18,7 @@
       else
          np1 = n + 1
          ns2 = n/2
-         x(1) = 0.0d0
+         x(1) = 0.0_rk
          do k = 1 , ns2
             kc = np1 - k
             t1 = Xh(k) - Xh(kc)
@@ -31,9 +27,9 @@
             x(kc+1) = t2 - t1
          enddo
          modn = mod(n,2)
-         if ( modn/=0 ) x(ns2+2) = 4.0d0*Xh(ns2+1)
+         if ( modn/=0 ) x(ns2+2) = 4.0_rk*Xh(ns2+1)
          call rfftf1(np1,x,Xh,War,Ifac)
-         Xh(1) = 0.5d0*x(1)
+         Xh(1) = 0.5_rk*x(1)
          do i = 3 , n , 2
             Xh(i-1) = -x(i)
             Xh(i) = Xh(i-2) + x(i-1)

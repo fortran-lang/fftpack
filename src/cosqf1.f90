@@ -1,13 +1,9 @@
-!*==COSQF1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine cosqf1(n,x,w,Xh)
       use fftpack_kind
       implicit none
-!*--COSQF1256
-!*** Start of declarations inserted by SPAG
-      real fftpack_kind , rk , w , x , Xh , xim1
-      integer i , k , kc , modn , n , np2 , ns2
-!*** End of declarations inserted by SPAG
-      dimension x(1) , w(1) , Xh(1)
+      integer :: i , k , kc , modn , n , np2 , ns2
+      real(rk) :: w , x , Xh , xim1
+      dimension x(*) , w(*) , Xh(*)
       ns2 = (n+1)/2
       np2 = n + 2
       do k = 2 , ns2

@@ -1,13 +1,9 @@
-!*==DSINQF.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine dsinqf(n,x,Wsave)
       use fftpack_kind
       implicit none
-!*--DSINQF496
-!*** Start of declarations inserted by SPAG
-      real fftpack_kind , rk , Wsave , x , xhold
-      integer k , kc , n , ns2
-!*** End of declarations inserted by SPAG
-      dimension x(1) , Wsave(1)
+      integer :: k , kc , n , ns2
+      real(rk) :: Wsave , x , xhold
+      dimension x(*) , Wsave(*)
       if ( n==1 ) return
       ns2 = n/2
       do k = 1 , ns2

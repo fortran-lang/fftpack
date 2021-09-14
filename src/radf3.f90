@@ -1,16 +1,13 @@
-!*==RADF3.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine radf3(Ido,l1,Cc,Ch,Wa1,Wa2)
       use fftpack_kind
       implicit none
-!*--RADF31889
-!*** Start of declarations inserted by SPAG
-      real Cc , Ch , ci2 , cr2 , di2 , di3 , dr2 , dr3 , fftpack_kind , &
-         & rk , taui , taur , ti2 , ti3 , tr2 , tr3 , Wa1 , Wa2
-      integer i , ic , Ido , idp2 , k , l1
-!*** End of declarations inserted by SPAG
-      dimension Ch(Ido,3,l1) , Cc(Ido,l1,3) , Wa1(1) , Wa2(1)
-!     *** TAUI IS -SQRT(3)/2 ***
-      data taur , taui/ - 0.5d0 , 0.86602540378443864676d0/
+      real(rk) :: Cc , Ch , ci2 , cr2 , di2 , di3 , dr2 , dr3 , &
+                  ti2 , ti3 , tr2 , tr3 , Wa1 , Wa2
+      integer :: i , ic , Ido , idp2 , k , l1
+      dimension Ch(Ido,3,l1) , Cc(Ido,l1,3) , Wa1(*) , Wa2(*)
+      real(rk),parameter :: taur = -0.5_rk
+      ! note: original comment said this was -SQRT(3)/2 but value was 0.86602540378443864676d0
+      real(rk),parameter :: taui = sqrt(3.0_rk) / 2.0_rk  
       do k = 1 , l1
          cr2 = Cc(1,k,2) + Cc(1,k,3)
          Ch(1,1,k) = Cc(1,k,1) + cr2

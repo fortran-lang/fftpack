@@ -1,19 +1,15 @@
-!*==RADFG.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine radfg(Ido,Ip,l1,Idl1,Cc,c1,c2,Ch,Ch2,Wa)
       use fftpack_kind
       implicit none
-!*--RADFG2066
-!*** Start of declarations inserted by SPAG
-      real ai1 , ai2 , ar1 , ar1h , ar2 , ar2h , arg , c1 , c2 , Cc ,   &
-         & Ch , Ch2 , dc2 , dcp , ds2 , dsp , fftpack_kind , rk , tpi , &
-         & Wa
-      integer i , ic , idij , Idl1 , Ido , idp2 , ik , Ip , ipp2 ,      &
-            & ipph , is , j , j2 , jc , k , l , l1 , lc , nbd
-!*** End of declarations inserted by SPAG
-      dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) ,         &
-              & c2(Idl1,Ip) , Ch2(Idl1,Ip) , Wa(1)
-      data tpi/6.28318530717958647692d0/
-      arg = tpi/real(Ip,rk)
+      real(rk) :: ai1 , ai2 , ar1 , ar1h , ar2 , ar2h , arg , c1 , &
+                  c2 , Cc , Ch , Ch2 , dc2 , dcp , ds2 , dsp , &
+                  Wa
+      integer :: i , ic , idij , Idl1 , Ido , idp2 , ik , Ip , ipp2 , &
+                 ipph , is , j , j2 , jc , k , l , l1 , lc , nbd
+      dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) , &
+                c2(Idl1,Ip) , Ch2(Idl1,Ip) , Wa(*)
+      real(rk),parameter :: tpi = 2.0_rk * acos(-1.0_rk) ! 2 * pi
+      arg = tpi/real(Ip, rk)
       dcp = cos(arg)
       dsp = sin(arg)
       ipph = (Ip+1)/2
@@ -41,10 +37,10 @@
                   idij = is
                   do i = 3 , Ido , 2
                      idij = idij + 2
-                     Ch(i-1,k,j) = Wa(idij-1)*c1(i-1,k,j) + Wa(idij)    &
-                                 & *c1(i,k,j)
-                     Ch(i,k,j) = Wa(idij-1)*c1(i,k,j) - Wa(idij)        &
-                               & *c1(i-1,k,j)
+                     Ch(i-1,k,j) = Wa(idij-1)*c1(i-1,k,j) + Wa(idij) &
+                                   *c1(i,k,j)
+                     Ch(i,k,j) = Wa(idij-1)*c1(i,k,j) - Wa(idij) &
+                                 *c1(i-1,k,j)
                   enddo
                enddo
             enddo
@@ -56,10 +52,10 @@
                do i = 3 , Ido , 2
                   idij = idij + 2
                   do k = 1 , l1
-                     Ch(i-1,k,j) = Wa(idij-1)*c1(i-1,k,j) + Wa(idij)    &
-                                 & *c1(i,k,j)
-                     Ch(i,k,j) = Wa(idij-1)*c1(i,k,j) - Wa(idij)        &
-                               & *c1(i-1,k,j)
+                     Ch(i-1,k,j) = Wa(idij-1)*c1(i-1,k,j) + Wa(idij) &
+                                   *c1(i,k,j)
+                     Ch(i,k,j) = Wa(idij-1)*c1(i,k,j) - Wa(idij) &
+                                 *c1(i-1,k,j)
                   enddo
                enddo
             enddo
@@ -98,8 +94,8 @@
          enddo
       enddo
 !
-      ar1 = 1.0d0
-      ai1 = 0.0d0
+      ar1 = 1.0_rk
+      ai1 = 0.0_rk
       do l = 2 , ipph
          lc = ipp2 - l
          ar1h = dcp*ar1 - dsp*ai1
@@ -166,20 +162,19 @@
                enddo
             enddo
          enddo
-         goto 99999
-      endif
-      do j = 2 , ipph
-         jc = ipp2 - j
-         j2 = j + j
-         do k = 1 , l1
-            do i = 3 , Ido , 2
-               ic = idp2 - i
-               Cc(i-1,j2-1,k) = Ch(i-1,k,j) + Ch(i-1,k,jc)
-               Cc(ic-1,j2-2,k) = Ch(i-1,k,j) - Ch(i-1,k,jc)
-               Cc(i,j2-1,k) = Ch(i,k,j) + Ch(i,k,jc)
-               Cc(ic,j2-2,k) = Ch(i,k,jc) - Ch(i,k,j)
+      else
+         do j = 2 , ipph
+            jc = ipp2 - j
+            j2 = j + j
+            do k = 1 , l1
+               do i = 3 , Ido , 2
+                  ic = idp2 - i
+                  Cc(i-1,j2-1,k) = Ch(i-1,k,j) + Ch(i-1,k,jc)
+                  Cc(ic-1,j2-2,k) = Ch(i-1,k,j) - Ch(i-1,k,jc)
+                  Cc(i,j2-1,k) = Ch(i,k,j) + Ch(i,k,jc)
+                  Cc(ic,j2-2,k) = Ch(i,k,jc) - Ch(i,k,j)
+               enddo
             enddo
          enddo
-      enddo
-      return
-99999 end subroutine radfg
+      end if
+      end subroutine radfg

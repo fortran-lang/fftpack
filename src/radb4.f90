@@ -1,17 +1,12 @@
-!*==RADB4.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine radb4(Ido,l1,Cc,Ch,Wa1,Wa2,Wa3)
       use fftpack_kind
       implicit none
-!*--RADB41532
-!*** Start of declarations inserted by SPAG
-      real Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , fftpack_kind , &
-         & rk , sqrt2 , ti1 , ti2 , ti3 , ti4 , tr1 , tr2 , tr3 , tr4 , &
-         & Wa1
-      real Wa2 , Wa3
-      integer i , ic , Ido , idp2 , k , l1
-!*** End of declarations inserted by SPAG
-      dimension Cc(Ido,4,l1) , Ch(Ido,l1,4) , Wa1(1) , Wa2(1) , Wa3(1)
-      data sqrt2/1.41421356237309504880d0/
+      real(rk) :: Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , &
+                  ti1 , ti2 , ti3 , ti4 , tr1 , tr2 , tr3, &
+                  tr4 , Wa1 , Wa2 , Wa3
+      integer :: i , ic , Ido , idp2 , k , l1
+      dimension Cc(Ido,4,l1) , Ch(Ido,l1,4) , Wa1(*) , Wa2(*) , Wa3(*)
+      real(rk),parameter :: sqrt2 = sqrt(2.0_rk)
       do k = 1 , l1
          tr1 = Cc(1,1,k) - Cc(Ido,4,k)
          tr2 = Cc(1,1,k) + Cc(Ido,4,k)
@@ -22,7 +17,7 @@
          Ch(1,k,3) = tr2 - tr3
          Ch(1,k,4) = tr1 + tr4
       enddo
-      if ( Ido<2 ) goto 99999
+      if ( Ido<2 ) return
       if ( Ido/=2 ) then
          idp2 = Ido + 2
          do k = 1 , l1
@@ -64,4 +59,4 @@
          Ch(Ido,k,3) = ti2 + ti2
          Ch(Ido,k,4) = -sqrt2*(tr1+ti1)
       enddo
-99999 end subroutine radb4
+      end subroutine radb4

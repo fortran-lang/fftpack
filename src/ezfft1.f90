@@ -1,17 +1,13 @@
-!*==EZFFT1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine ezfft1(n,Wa,Ifac)
       use fftpack_kind
       implicit none
-!*--EZFFT1647
-!*** Start of declarations inserted by SPAG
-      real arg1 , argh , ch1 , ch1h , dch1 , dsh1 , fftpack_kind , rk , &
-         & sh1 , tpi , Wa
-      integer i , ib , ido , Ifac , ii , ip , ipm , is , j , k1 , l1 ,  &
-            & l2 , n , nf , nfm1 , nl , nq , nr , ntry , ntryh
-!*** End of declarations inserted by SPAG
-      dimension Wa(*) , Ifac(*) , ntryh(4)
-      data ntryh(1) , ntryh(2) , ntryh(3) , ntryh(4)/4 , 2 , 3 , 5/ ,   &
-         & tpi/6.28318530717958647692d0/
+      real(rk) :: arg1 , argh , ch1 , ch1h , dch1 , dsh1 , sh1 , &
+                  Wa
+      integer :: i , ib , ido , Ifac , ii , ip , ipm , is , j , k1 , l1 , &
+                 l2 , n , nf , nfm1 , nl , nq , nr , ntry
+      dimension Wa(*) , Ifac(*)  
+      integer,dimension(4),parameter :: ntryh = [4 , 2 , 3 , 5]
+      real(rk),parameter :: tpi = 2.0_rk * acos(-1.0_rk) ! 2 * pi
       nl = n
       nf = 0
       j = 0
@@ -39,7 +35,7 @@
       if ( nl/=1 ) goto 200
       Ifac(1) = n
       Ifac(2) = nf
-      argh = tpi/real(n,rk)
+      argh = tpi/real(n, rk)
       is = 0
       nfm1 = nf - 1
       l1 = 1
@@ -49,9 +45,9 @@
          l2 = l1*ip
          ido = n/l2
          ipm = ip - 1
-         arg1 = real(l1,rk)*argh
-         ch1 = 1.0d0
-         sh1 = 0.0d0
+         arg1 = real(l1, rk)*argh
+         ch1 = 1.0_rk
+         sh1 = 0.0_rk
          dch1 = cos(arg1)
          dsh1 = sin(arg1)
          do j = 1 , ipm

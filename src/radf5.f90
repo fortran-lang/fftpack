@@ -1,21 +1,19 @@
-!*==RADF5.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine radf5(Ido,l1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
       use fftpack_kind
       implicit none
-!*--RADF51995
-!*** Start of declarations inserted by SPAG
-      real Cc , Ch , ci2 , ci3 , ci4 , ci5 , cr2 , cr3 , cr4 , cr5 ,    &
-         & di2 , di3 , di4 , di5 , dr2 , dr3 , dr4 , dr5 ,              &
-         & fftpack_kind , rk
-      real ti11 , ti12 , ti2 , ti3 , ti4 , ti5 , tr11 , tr12 , tr2 ,    &
-         & tr3 , tr4 , tr5 , Wa1 , Wa2 , Wa3 , Wa4
-      integer i , ic , Ido , idp2 , k , l1
-!*** End of declarations inserted by SPAG
-      dimension Cc(Ido,l1,5) , Ch(Ido,5,l1) , Wa1(1) , Wa2(1) , Wa3(1) ,&
-              & Wa4(1)
-      data tr11 , ti11 , tr12 , ti12/0.3090169943749474241d0 ,          &
-         & 0.95105651629515357212d0 , -0.8090169943749474241d0 ,        &
-         & 0.58778525229247312917d0/
+      real(rk) :: Cc , Ch , ci2 , ci3 , ci4 , ci5 , cr2 , cr3 , &
+                  cr4 , cr5 , di2 , di3 , di4 , di5 , dr2 , dr3 , &
+                  dr4 , dr5
+      real(rk) :: ti2 , ti3 , ti4 , ti5 , tr2 , tr3, &
+                  tr4 , tr5 , Wa1 , Wa2 , Wa3 , Wa4
+      integer :: i , ic , Ido , idp2 , k , l1
+      dimension Cc(Ido,l1,5) , Ch(Ido,5,l1) , Wa1(*) , Wa2(*) , Wa3(*), &
+                Wa4(1)
+      real(rk),parameter :: pi = acos(-1.0_rk)
+      real(rk),parameter :: tr11 = cos(2.0_rk * pi / 5.0_rk)
+      real(rk),parameter :: ti11 = sin(2.0_rk * pi / 5.0_rk)
+      real(rk),parameter :: tr12 = cos(4.0_rk * pi / 5.0_rk)
+      real(rk),parameter :: ti12 = sin(4.0_rk * pi / 5.0_rk)
       do k = 1 , l1
          cr2 = Cc(1,k,5) + Cc(1,k,2)
          ci5 = Cc(1,k,5) - Cc(1,k,2)

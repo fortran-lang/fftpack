@@ -1,15 +1,11 @@
-!*==PASSF.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine passf(Nac,Ido,Ip,l1,Idl1,Cc,c1,c2,Ch,Ch2,Wa)
       use fftpack_kind
       implicit none
-!*--PASSF1087
-!*** Start of declarations inserted by SPAG
-      real c1 , c2 , Cc , Ch , Ch2 , fftpack_kind , rk , Wa , wai , war
-      integer i , idij , idj , idl , Idl1 , idlj , Ido , idot , idp ,   &
-            & ik , inc , Ip , ipp2 , ipph , j , jc , k , l , l1 , lc
-      integer Nac , nt
-!*** End of declarations inserted by SPAG
-      dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) , Wa(1) , &
+      real(rk) :: c1 , c2 , Cc , Ch , Ch2 , Wa , wai , war
+      integer :: i , idij , idj , idl , Idl1 , idlj , Ido , idot , idp , &
+              ik , inc , Ip , ipp2 , ipph , j , jc , k , l , l1 , lc
+      integer :: Nac , nt
+      dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) , Wa(*) , &
               & c2(Idl1,Ip) , Ch2(Idl1,Ip)
       idot = Ido/2
       nt = Ip*Idl1
@@ -105,25 +101,24 @@
                idij = idj
                do i = 4 , Ido , 2
                   idij = idij + 2
-                  c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) + Wa(idij)       &
-                              & *Ch(i,k,j)
-                  c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) - Wa(idij)           &
-                            & *Ch(i-1,k,j)
+                  c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) + Wa(idij) &
+                                *Ch(i,k,j)
+                  c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) - Wa(idij) &
+                              *Ch(i-1,k,j)
                enddo
             enddo
          enddo
-         goto 99999
-      endif
-      idij = 0
-      do j = 2 , Ip
-         idij = idij + 2
-         do i = 4 , Ido , 2
+      else
+         idij = 0
+         do j = 2 , Ip
             idij = idij + 2
-            do k = 1 , l1
-               c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) + Wa(idij)*Ch(i,k,j)
-               c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) - Wa(idij)*Ch(i-1,k,j)
+            do i = 4 , Ido , 2
+               idij = idij + 2
+               do k = 1 , l1
+                  c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) + Wa(idij)*Ch(i,k,j)
+                  c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) - Wa(idij)*Ch(i-1,k,j)
+               enddo
             enddo
          enddo
-      enddo
-      return
-99999 end subroutine passf
+      end if
+      end subroutine passf

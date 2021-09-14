@@ -1,13 +1,9 @@
-!*==CFFTF1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
       subroutine cfftf1(n,c,Ch,Wa,Ifac)
       use fftpack_kind
       implicit none
-!*--CFFTF177
-!*** Start of declarations inserted by SPAG
-      real c , Ch , fftpack_kind , rk , Wa
-      integer i , idl1 , ido , idot , Ifac , ip , iw , ix2 , ix3 , ix4 ,&
-            & k1 , l1 , l2 , n , n2 , na , nac , nf
-!*** End of declarations inserted by SPAG
+      real(rk) :: c , Ch , Wa
+      integer :: i , idl1 , ido , idot , Ifac , ip , iw , ix2 , ix3 , ix4, &
+                 k1 , l1 , l2 , n , n2 , na , nac , nf
       dimension Ch(*) , c(*) , Wa(*) , Ifac(*)
       nf = Ifac(2)
       na = 0
