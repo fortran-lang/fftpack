@@ -58,7 +58,8 @@ SRCF90 = \
 	fftpack_fftshift.f90\
 	fftpack_ifftshift.f90\
 	fftpack_qct.f90\
-	fftpack_iqct.f90
+	fftpack_iqct.f90\
+	fftpack_hilbert.f90
 
 OBJF := $(SRCF:.f=.o)
 OBJF90 := $(SRCF90:.f90=.o)

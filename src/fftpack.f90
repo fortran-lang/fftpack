@@ -5,6 +5,7 @@ module fftpack
     integer, parameter :: dp = kind(1.0d0)
 
     public :: dp
+
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
     public :: fftshift, ifftshift
@@ -16,6 +17,8 @@ module fftpack
 
     public :: dcosqi, dcosqf, dcosqb
     public :: qct, iqct
+
+    public :: hilbert
 
     interface
 
@@ -254,5 +257,17 @@ module fftpack
             real(kind=dp), allocatable :: result(:)
         end function ifftshift_rdp
     end interface ifftshift
+
+    !> Version: experimental
+    !> 
+    !> Computes the discrete-time analytic signal using Hilbert.
+    !> ([Specification](../page/specs/fftpack.html#hilbert))
+    interface hilbert
+        pure module function hilbert_dp(x, n) result(result)
+            complex(kind=dp), intent(in)  :: x(:)
+            integer, intent(in), optional :: n
+            complex(kind=dp), allocatable :: result(:)
+        end function hilbert_dp
+    end interface hilbert
 
 end module fftpack

@@ -15,6 +15,12 @@ auto-executables = false
 auto-tests = false
 auto-examples = true
 
+# Examples
+[[example]]
+name       = "fftpack_hilbert"
+source-dir = "example"
+main       = "demo_fftpack_hilbert.f90"
+
 # Original test
 [[test]]
 name = "tstfft"
@@ -82,3 +88,8 @@ main = "test_fftpack_fftshift.f90"
 name = "fftpack_ifftshift"
 source-dir = "test"
 main = "test_fftpack_ifftshift.f90"
+
+[[test]]
+name       = "fftpack_hilbert"
+source-dir = "test"
+main       = "test_fftpack_hilbert.f90"

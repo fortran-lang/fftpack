@@ -8,7 +8,8 @@ all: tstfft \
 	fftpack_dzfft \
 	fftpack_dcosq \
 	fftpack_qct \
-	fftpack_iqct
+	fftpack_iqct \
+	fftpack_hilbert
 
 # Orginal test
 tstfft: tstfft.o
@@ -56,6 +57,10 @@ fftpack_fftshift: test_fftpack_fftshift.f90
 fftpack_ifftshift: test_fftpack_ifftshift.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	./fftpack_ifftshift.x
+
+fftpack_hilbert: test_fftpack_hilbert.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_hilbert.x
 
 clean:
 	rm -f -r *.o *.x
