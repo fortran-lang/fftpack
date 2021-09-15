@@ -8,7 +8,7 @@
                  ipph , is , j , j2 , jc , k , l , l1 , lc , nbd
       dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) , &
                 c2(Idl1,Ip) , Ch2(Idl1,Ip) , Wa(*)
-      real(rk),parameter :: tpi = acos(-1.0_rk) / 2.0_rk ! 2 * pi
+      real(rk),parameter :: tpi = 2*acos(-1.0_rk) ! 2 * pi
       arg = tpi/real(Ip, rk)
       dcp = cos(arg)
       dsp = sin(arg)
