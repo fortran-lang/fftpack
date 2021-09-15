@@ -13,7 +13,7 @@ keywords    = ["netlib", "fftpack", "fft"]
 [build]
 auto-executables = false
 auto-tests = false
-auto-examples = false
+auto-examples = true
 
 # Original test
 [[test]]
