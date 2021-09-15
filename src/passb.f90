@@ -1,129 +1,129 @@
 !*==PASSB.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine passb(Nac,Ido,Ip,l1,Idl1,Cc,c1,c2,Ch,Ch2,Wa)
+      use fftpack_kind
+      implicit none
 !*--PASSB722
 !*** Start of declarations inserted by SPAG
-      REAL C1 , C2 , Cc , Ch , Ch2 , FFTPACK_KIND , rk , Wa , wai , war
-      INTEGER i , idij , idj , idl , Idl1 , idlj , Ido , idot , idp ,   &
-            & ik , inc , Ip , ipp2 , ipph , j , jc , k , l , L1 , lc
-      INTEGER Nac , nt
+      real c1 , c2 , Cc , Ch , Ch2 , fftpack_kind , rk , Wa , wai , war
+      integer i , idij , idj , idl , Idl1 , idlj , Ido , idot , idp ,   &
+            & ik , inc , Ip , ipp2 , ipph , j , jc , k , l , l1 , lc
+      integer Nac , nt
 !*** End of declarations inserted by SPAG
-      DIMENSION Ch(Ido,L1,Ip) , Cc(Ido,Ip,L1) , C1(Ido,L1,Ip) , Wa(1) , &
-              & C2(Idl1,Ip) , Ch2(Idl1,Ip)
+      dimension Ch(Ido,l1,Ip) , Cc(Ido,Ip,l1) , c1(Ido,l1,Ip) , Wa(1) , &
+              & c2(Idl1,Ip) , Ch2(Idl1,Ip)
       idot = Ido/2
       nt = Ip*Idl1
       ipp2 = Ip + 2
       ipph = (Ip+1)/2
       idp = Ip*Ido
 !
-      IF ( Ido<L1 ) THEN
-         DO j = 2 , ipph
+      if ( Ido<l1 ) then
+         do j = 2 , ipph
             jc = ipp2 - j
-            DO i = 1 , Ido
-               DO k = 1 , L1
+            do i = 1 , Ido
+               do k = 1 , l1
                   Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
                   Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
-               ENDDO
-            ENDDO
-         ENDDO
-         DO i = 1 , Ido
-            DO k = 1 , L1
+               enddo
+            enddo
+         enddo
+         do i = 1 , Ido
+            do k = 1 , l1
                Ch(i,k,1) = Cc(i,1,k)
-            ENDDO
-         ENDDO
-      ELSE
-         DO j = 2 , ipph
+            enddo
+         enddo
+      else
+         do j = 2 , ipph
             jc = ipp2 - j
-            DO k = 1 , L1
-               DO i = 1 , Ido
+            do k = 1 , l1
+               do i = 1 , Ido
                   Ch(i,k,j) = Cc(i,j,k) + Cc(i,jc,k)
                   Ch(i,k,jc) = Cc(i,j,k) - Cc(i,jc,k)
-               ENDDO
-            ENDDO
-         ENDDO
-         DO k = 1 , L1
-            DO i = 1 , Ido
+               enddo
+            enddo
+         enddo
+         do k = 1 , l1
+            do i = 1 , Ido
                Ch(i,k,1) = Cc(i,1,k)
-            ENDDO
-         ENDDO
-      ENDIF
+            enddo
+         enddo
+      endif
       idl = 2 - Ido
       inc = 0
-      DO l = 2 , ipph
+      do l = 2 , ipph
          lc = ipp2 - l
          idl = idl + Ido
-         DO ik = 1 , Idl1
-            C2(ik,l) = Ch2(ik,1) + Wa(idl-1)*Ch2(ik,2)
-            C2(ik,lc) = Wa(idl)*Ch2(ik,Ip)
-         ENDDO
+         do ik = 1 , Idl1
+            c2(ik,l) = Ch2(ik,1) + Wa(idl-1)*Ch2(ik,2)
+            c2(ik,lc) = Wa(idl)*Ch2(ik,Ip)
+         enddo
          idlj = idl
          inc = inc + Ido
-         DO j = 3 , ipph
+         do j = 3 , ipph
             jc = ipp2 - j
             idlj = idlj + inc
-            IF ( idlj>idp ) idlj = idlj - idp
+            if ( idlj>idp ) idlj = idlj - idp
             war = Wa(idlj-1)
             wai = Wa(idlj)
-            DO ik = 1 , Idl1
-               C2(ik,l) = C2(ik,l) + war*Ch2(ik,j)
-               C2(ik,lc) = C2(ik,lc) + wai*Ch2(ik,jc)
-            ENDDO
-         ENDDO
-      ENDDO
-      DO j = 2 , ipph
-         DO ik = 1 , Idl1
+            do ik = 1 , Idl1
+               c2(ik,l) = c2(ik,l) + war*Ch2(ik,j)
+               c2(ik,lc) = c2(ik,lc) + wai*Ch2(ik,jc)
+            enddo
+         enddo
+      enddo
+      do j = 2 , ipph
+         do ik = 1 , Idl1
             Ch2(ik,1) = Ch2(ik,1) + Ch2(ik,j)
-         ENDDO
-      ENDDO
-      DO j = 2 , ipph
+         enddo
+      enddo
+      do j = 2 , ipph
          jc = ipp2 - j
-         DO ik = 2 , Idl1 , 2
-            Ch2(ik-1,j) = C2(ik-1,j) - C2(ik,jc)
-            Ch2(ik-1,jc) = C2(ik-1,j) + C2(ik,jc)
-            Ch2(ik,j) = C2(ik,j) + C2(ik-1,jc)
-            Ch2(ik,jc) = C2(ik,j) - C2(ik-1,jc)
-         ENDDO
-      ENDDO
+         do ik = 2 , Idl1 , 2
+            Ch2(ik-1,j) = c2(ik-1,j) - c2(ik,jc)
+            Ch2(ik-1,jc) = c2(ik-1,j) + c2(ik,jc)
+            Ch2(ik,j) = c2(ik,j) + c2(ik-1,jc)
+            Ch2(ik,jc) = c2(ik,j) - c2(ik-1,jc)
+         enddo
+      enddo
       Nac = 1
-      IF ( Ido==2 ) RETURN
+      if ( Ido==2 ) return
       Nac = 0
-      DO ik = 1 , Idl1
-         C2(ik,1) = Ch2(ik,1)
-      ENDDO
-      DO j = 2 , Ip
-         DO k = 1 , L1
-            C1(1,k,j) = Ch(1,k,j)
-            C1(2,k,j) = Ch(2,k,j)
-         ENDDO
-      ENDDO
-      IF ( idot>L1 ) THEN
+      do ik = 1 , Idl1
+         c2(ik,1) = Ch2(ik,1)
+      enddo
+      do j = 2 , Ip
+         do k = 1 , l1
+            c1(1,k,j) = Ch(1,k,j)
+            c1(2,k,j) = Ch(2,k,j)
+         enddo
+      enddo
+      if ( idot>l1 ) then
          idj = 2 - Ido
-         DO j = 2 , Ip
+         do j = 2 , Ip
             idj = idj + Ido
-            DO k = 1 , L1
+            do k = 1 , l1
                idij = idj
-               DO i = 4 , Ido , 2
+               do i = 4 , Ido , 2
                   idij = idij + 2
-                  C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)       &
+                  c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)       &
                               & *Ch(i,k,j)
-                  C1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)           &
+                  c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)           &
                             & *Ch(i-1,k,j)
-               ENDDO
-            ENDDO
-         ENDDO
-         GOTO 99999
-      ENDIF
+               enddo
+            enddo
+         enddo
+         goto 99999
+      endif
       idij = 0
-      DO j = 2 , Ip
+      do j = 2 , Ip
          idij = idij + 2
-         DO i = 4 , Ido , 2
+         do i = 4 , Ido , 2
             idij = idij + 2
-            DO k = 1 , L1
-               C1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
-               C1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)*Ch(i-1,k,j)
-            ENDDO
-         ENDDO
-      ENDDO
-      RETURN
-99999 END subroutine passb
+            do k = 1 , l1
+               c1(i-1,k,j) = Wa(idij-1)*Ch(i-1,k,j) - Wa(idij)*Ch(i,k,j)
+               c1(i,k,j) = Wa(idij-1)*Ch(i,k,j) + Wa(idij)*Ch(i-1,k,j)
+            enddo
+         enddo
+      enddo
+      return
+99999 end subroutine passb

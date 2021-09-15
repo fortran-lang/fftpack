@@ -1,19 +1,19 @@
 !*==PASSF4.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine passf4(Ido,l1,Cc,Ch,Wa1,Wa2,Wa3)
+      use fftpack_kind
+      implicit none
 !*--PASSF41299
 !*** Start of declarations inserted by SPAG
-      REAL Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , FFTPACK_KIND , &
+      real Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , fftpack_kind , &
          & rk , ti1 , ti2 , ti3 , ti4 , tr1 , tr2 , tr3 , tr4 , Wa1 ,   &
          & Wa2
-      REAL Wa3
-      INTEGER i , Ido , k , L1
+      real Wa3
+      integer i , Ido , k , l1
 !*** End of declarations inserted by SPAG
-      DIMENSION Cc(Ido,4,L1) , Ch(Ido,L1,4) , Wa1(1) , Wa2(1) , Wa3(1)
-      IF ( Ido/=2 ) THEN
-         DO k = 1 , L1
-            DO i = 2 , Ido , 2
+      dimension Cc(Ido,4,l1) , Ch(Ido,l1,4) , Wa1(1) , Wa2(1) , Wa3(1)
+      if ( Ido/=2 ) then
+         do k = 1 , l1
+            do i = 2 , Ido , 2
                ti1 = Cc(i,1,k) - Cc(i,3,k)
                ti2 = Cc(i,1,k) + Cc(i,3,k)
                ti3 = Cc(i,2,k) + Cc(i,4,k)
@@ -36,11 +36,11 @@
                Ch(i,k,3) = Wa2(i-1)*ci3 - Wa2(i)*cr3
                Ch(i-1,k,4) = Wa3(i-1)*cr4 + Wa3(i)*ci4
                Ch(i,k,4) = Wa3(i-1)*ci4 - Wa3(i)*cr4
-            ENDDO
-         ENDDO
-         GOTO 99999
-      ENDIF
-      DO k = 1 , L1
+            enddo
+         enddo
+         goto 99999
+      endif
+      do k = 1 , l1
          ti1 = Cc(2,1,k) - Cc(2,3,k)
          ti2 = Cc(2,1,k) + Cc(2,3,k)
          tr4 = Cc(2,2,k) - Cc(2,4,k)
@@ -57,6 +57,6 @@
          Ch(1,k,4) = tr1 - tr4
          Ch(2,k,2) = ti1 + ti4
          Ch(2,k,4) = ti1 - ti4
-      ENDDO
-      RETURN
-99999 END subroutine passf4
+      enddo
+      return
+99999 end subroutine passf4

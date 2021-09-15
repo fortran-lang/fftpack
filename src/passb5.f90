@@ -1,26 +1,26 @@
 !*==PASSB5.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE PASSB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine passb5(Ido,l1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
+      use fftpack_kind
+      implicit none
 !*--PASSB5996
 !*** Start of declarations inserted by SPAG
-      REAL Cc , Ch , ci2 , ci3 , ci4 , ci5 , cr2 , cr3 , cr4 , cr5 ,    &
+      real Cc , Ch , ci2 , ci3 , ci4 , ci5 , cr2 , cr3 , cr4 , cr5 ,    &
          & di2 , di3 , di4 , di5 , dr2 , dr3 , dr4 , dr5 ,              &
-         & FFTPACK_KIND , rk
-      REAL ti11 , ti12 , ti2 , ti3 , ti4 , ti5 , tr11 , tr12 , tr2 ,    &
+         & fftpack_kind , rk
+      real ti11 , ti12 , ti2 , ti3 , ti4 , ti5 , tr11 , tr12 , tr2 ,    &
          & tr3 , tr4 , tr5 , Wa1 , Wa2 , Wa3 , Wa4
-      INTEGER i , Ido , k , L1
+      integer i , Ido , k , l1
 !*** End of declarations inserted by SPAG
-      DIMENSION Cc(Ido,5,L1) , Ch(Ido,L1,5) , Wa1(1) , Wa2(1) , Wa3(1) ,&
+      dimension Cc(Ido,5,l1) , Ch(Ido,l1,5) , Wa1(1) , Wa2(1) , Wa3(1) ,&
               & Wa4(1)
 !     *** TR11=COS(2*PI/5), TI11=SIN(2*PI/5)
 !     *** TR12=COS(4*PI/5), TI12=SIN(4*PI/5)
-      DATA tr11 , ti11 , tr12 , ti12/0.3090169943749474241D0 ,          &
-         & 0.95105651629515357212D0 , -0.8090169943749474241D0 ,        &
-         & 0.58778525229247312917D0/
-      IF ( Ido/=2 ) THEN
-         DO k = 1 , L1
-            DO i = 2 , Ido , 2
+      data tr11 , ti11 , tr12 , ti12/0.3090169943749474241d0 ,          &
+         & 0.95105651629515357212d0 , -0.8090169943749474241d0 ,        &
+         & 0.58778525229247312917d0/
+      if ( Ido/=2 ) then
+         do k = 1 , l1
+            do i = 2 , Ido , 2
                ti5 = Cc(i,2,k) - Cc(i,5,k)
                ti2 = Cc(i,2,k) + Cc(i,5,k)
                ti4 = Cc(i,3,k) - Cc(i,4,k)
@@ -55,11 +55,11 @@
                Ch(i,k,4) = Wa3(i-1)*di4 + Wa3(i)*dr4
                Ch(i-1,k,5) = Wa4(i-1)*dr5 - Wa4(i)*di5
                Ch(i,k,5) = Wa4(i-1)*di5 + Wa4(i)*dr5
-            ENDDO
-         ENDDO
-         GOTO 99999
-      ENDIF
-      DO k = 1 , L1
+            enddo
+         enddo
+         goto 99999
+      endif
+      do k = 1 , l1
          ti5 = Cc(2,2,k) - Cc(2,5,k)
          ti2 = Cc(2,2,k) + Cc(2,5,k)
          ti4 = Cc(2,3,k) - Cc(2,4,k)
@@ -86,6 +86,6 @@
          Ch(1,k,4) = cr3 + ci4
          Ch(2,k,4) = ci3 - cr4
          Ch(2,k,5) = ci2 - cr5
-      ENDDO
-      RETURN
-99999 END subroutine passb5
+      enddo
+      return
+99999 end subroutine passb5

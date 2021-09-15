@@ -1,16 +1,16 @@
 !*==DSINT.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DSINT(N,X,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dsint(n,x,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DSINT531
 !*** Start of declarations inserted by SPAG
-      REAL FFTPACK_KIND , rk , Wsave , X
-      INTEGER iw1 , iw2 , iw3 , N , np1
+      real fftpack_kind , rk , Wsave , x
+      integer iw1 , iw2 , iw3 , n , np1
 !*** End of declarations inserted by SPAG
-      DIMENSION X(1) , Wsave(1)
-      np1 = N + 1
-      iw1 = N/2 + 1
+      dimension x(1) , Wsave(1)
+      np1 = n + 1
+      iw1 = n/2 + 1
       iw2 = iw1 + np1
       iw3 = iw2 + np1
-      CALL SINT1(N,X,Wsave,Wsave(iw1),Wsave(iw2),Wsave(iw3))
-      END subroutine dsint
+      call sint1(n,x,Wsave,Wsave(iw1),Wsave(iw2),Wsave(iw3))
+      end subroutine dsint

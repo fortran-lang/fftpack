@@ -1,23 +1,23 @@
 !*==DSINQF.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DSINQF(N,X,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dsinqf(n,x,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DSINQF496
 !*** Start of declarations inserted by SPAG
-      REAL FFTPACK_KIND , rk , Wsave , X , xhold
-      INTEGER k , kc , N , ns2
+      real fftpack_kind , rk , Wsave , x , xhold
+      integer k , kc , n , ns2
 !*** End of declarations inserted by SPAG
-      DIMENSION X(1) , Wsave(1)
-      IF ( N==1 ) RETURN
-      ns2 = N/2
-      DO k = 1 , ns2
-         kc = N - k
-         xhold = X(k)
-         X(k) = X(kc+1)
-         X(kc+1) = xhold
-      ENDDO
-      CALL DCOSQF(N,X,Wsave)
-      DO k = 2 , N , 2
-         X(k) = -X(k)
-      ENDDO
-      END subroutine dsinqf
+      dimension x(1) , Wsave(1)
+      if ( n==1 ) return
+      ns2 = n/2
+      do k = 1 , ns2
+         kc = n - k
+         xhold = x(k)
+         x(k) = x(kc+1)
+         x(kc+1) = xhold
+      enddo
+      call dcosqf(n,x,Wsave)
+      do k = 2 , n , 2
+         x(k) = -x(k)
+      enddo
+      end subroutine dsinqf

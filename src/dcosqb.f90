@@ -1,23 +1,23 @@
 !*==DCOSQB.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DCOSQB(N,X,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dcosqb(n,x,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DCOSQB288
 !*** Start of declarations inserted by SPAG
-      REAL FFTPACK_KIND , rk , tsqrt2 , Wsave , X , x1
-      INTEGER N
+      real fftpack_kind , rk , tsqrt2 , Wsave , x , x1
+      integer n
 !*** End of declarations inserted by SPAG
-      DIMENSION X(*) , Wsave(*)
-      DATA tsqrt2/2.82842712474619009760D0/
-      IF ( N<2 ) THEN
-         X(1) = 4.0D0*X(1)
-         RETURN
-      ELSEIF ( N==2 ) THEN
-         x1 = 4.0D0*(X(1)+X(2))
-         X(2) = tsqrt2*(X(1)-X(2))
-         X(1) = x1
-         RETURN
-      ELSE
-         CALL COSQB1(N,X,Wsave,Wsave(N+1))
-      ENDIF
-      END subroutine dcosqb
+      dimension x(*) , Wsave(*)
+      data tsqrt2/2.82842712474619009760d0/
+      if ( n<2 ) then
+         x(1) = 4.0d0*x(1)
+         return
+      elseif ( n==2 ) then
+         x1 = 4.0d0*(x(1)+x(2))
+         x(2) = tsqrt2*(x(1)-x(2))
+         x(1) = x1
+         return
+      else
+         call cosqb1(n,x,Wsave,Wsave(n+1))
+      endif
+      end subroutine dcosqb

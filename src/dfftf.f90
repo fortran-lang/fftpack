@@ -1,13 +1,13 @@
 !*==DFFTF.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DFFTF(N,R,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dfftf(n,r,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DFFTF443
 !*** Start of declarations inserted by SPAG
-      REAL FFTPACK_KIND , R , rk , Wsave
-      INTEGER N
+      real fftpack_kind , r , rk , Wsave
+      integer n
 !*** End of declarations inserted by SPAG
-      DIMENSION R(1) , Wsave(1)
-      IF ( N==1 ) RETURN
-      CALL RFFTF1(N,R,Wsave,Wsave(N+1),Wsave(2*N+1))
-      END subroutine dfftf
+      dimension r(1) , Wsave(1)
+      if ( n==1 ) return
+      call rfftf1(n,r,Wsave,Wsave(n+1),Wsave(2*n+1))
+      end subroutine dfftf

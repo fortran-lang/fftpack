@@ -1,53 +1,53 @@
 !*==DCOST.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DCOST(N,X,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dcost(n,x,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DCOST352
 !*** Start of declarations inserted by SPAG
-      REAL c1 , FFTPACK_KIND , rk , t1 , t2 , tx2 , Wsave , X , x1h ,   &
+      real c1 , fftpack_kind , rk , t1 , t2 , tx2 , Wsave , x , x1h ,   &
          & x1p3 , xi , xim2
-      INTEGER i , k , kc , modn , N , nm1 , np1 , ns2
+      integer i , k , kc , modn , n , nm1 , np1 , ns2
 !*** End of declarations inserted by SPAG
-      DIMENSION X(*) , Wsave(*)
-      nm1 = N - 1
-      np1 = N + 1
-      ns2 = N/2
-      IF ( N<2 ) GOTO 99999
-      IF ( N==2 ) THEN
-         x1h = X(1) + X(2)
-         X(2) = X(1) - X(2)
-         X(1) = x1h
-         RETURN
-      ELSEIF ( N>3 ) THEN
-         c1 = X(1) - X(N)
-         X(1) = X(1) + X(N)
-         DO k = 2 , ns2
+      dimension x(*) , Wsave(*)
+      nm1 = n - 1
+      np1 = n + 1
+      ns2 = n/2
+      if ( n<2 ) goto 99999
+      if ( n==2 ) then
+         x1h = x(1) + x(2)
+         x(2) = x(1) - x(2)
+         x(1) = x1h
+         return
+      elseif ( n>3 ) then
+         c1 = x(1) - x(n)
+         x(1) = x(1) + x(n)
+         do k = 2 , ns2
             kc = np1 - k
-            t1 = X(k) + X(kc)
-            t2 = X(k) - X(kc)
+            t1 = x(k) + x(kc)
+            t2 = x(k) - x(kc)
             c1 = c1 + Wsave(kc)*t2
             t2 = Wsave(k)*t2
-            X(k) = t1 - t2
-            X(kc) = t1 + t2
-         ENDDO
-         modn = MOD(N,2)
-         IF ( modn/=0 ) X(ns2+1) = X(ns2+1) + X(ns2+1)
-         CALL DFFTF(nm1,X,Wsave(N+1))
-         xim2 = X(2)
-         X(2) = c1
-         DO i = 4 , N , 2
-            xi = X(i)
-            X(i) = X(i-2) - X(i-1)
-            X(i-1) = xim2
+            x(k) = t1 - t2
+            x(kc) = t1 + t2
+         enddo
+         modn = mod(n,2)
+         if ( modn/=0 ) x(ns2+1) = x(ns2+1) + x(ns2+1)
+         call dfftf(nm1,x,Wsave(n+1))
+         xim2 = x(2)
+         x(2) = c1
+         do i = 4 , n , 2
+            xi = x(i)
+            x(i) = x(i-2) - x(i-1)
+            x(i-1) = xim2
             xim2 = xi
-         ENDDO
-         IF ( modn/=0 ) X(N) = xim2
-         GOTO 99999
-      ENDIF
-      x1p3 = X(1) + X(3)
-      tx2 = X(2) + X(2)
-      X(2) = X(1) - X(3)
-      X(1) = x1p3 + tx2
-      X(3) = x1p3 - tx2
-      RETURN
-99999 END subroutine dcost
+         enddo
+         if ( modn/=0 ) x(n) = xim2
+         goto 99999
+      endif
+      x1p3 = x(1) + x(3)
+      tx2 = x(2) + x(2)
+      x(2) = x(1) - x(3)
+      x(1) = x1p3 + tx2
+      x(3) = x1p3 - tx2
+      return
+99999 end subroutine dcost

@@ -1,19 +1,19 @@
 !*==DCOSQI.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DCOSQI(N,Wsave)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine dcosqi(n,Wsave)
+      use fftpack_kind
+      implicit none
 !*--DCOSQI333
 !*** Start of declarations inserted by SPAG
-      REAL dt , FFTPACK_KIND , fk , pih , rk , Wsave
-      INTEGER k , N
+      real dt , fftpack_kind , fk , pih , rk , Wsave
+      integer k , n
 !*** End of declarations inserted by SPAG
-      DIMENSION Wsave(1)
-      DATA pih/1.57079632679489661923D0/
-      dt = pih/REAL(N,rk)
-      fk = 0.0D0
-      DO k = 1 , N
-         fk = fk + 1.0D0
-         Wsave(k) = COS(fk*dt)
-      ENDDO
-      CALL DFFTI(N,Wsave(N+1))
-      END subroutine dcosqi
+      dimension Wsave(1)
+      data pih/1.57079632679489661923d0/
+      dt = pih/real(n,rk)
+      fk = 0.0d0
+      do k = 1 , n
+         fk = fk + 1.0d0
+         Wsave(k) = cos(fk*dt)
+      enddo
+      call dffti(n,Wsave(n+1))
+      end subroutine dcosqi

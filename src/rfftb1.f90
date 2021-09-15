@@ -1,70 +1,70 @@
 !*==RFFTB1.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      subroutine rfftb1(n,c,Ch,Wa,Ifac)
+      use fftpack_kind
+      implicit none
 !*--RFFTB12251
 !*** Start of declarations inserted by SPAG
-      REAL C , Ch , FFTPACK_KIND , rk , Wa
-      INTEGER i , idl1 , ido , Ifac , ip , iw , ix2 , ix3 , ix4 , k1 ,  &
-            & l1 , l2 , N , na , nf
+      real c , Ch , fftpack_kind , rk , Wa
+      integer i , idl1 , ido , Ifac , ip , iw , ix2 , ix3 , ix4 , k1 ,  &
+            & l1 , l2 , n , na , nf
 !*** End of declarations inserted by SPAG
-      DIMENSION Ch(*) , C(*) , Wa(*) , Ifac(*)
+      dimension Ch(*) , c(*) , Wa(*) , Ifac(*)
       nf = Ifac(2)
       na = 0
       l1 = 1
       iw = 1
-      DO k1 = 1 , nf
+      do k1 = 1 , nf
          ip = Ifac(k1+2)
          l2 = ip*l1
-         ido = N/l2
+         ido = n/l2
          idl1 = ido*l1
-         IF ( ip==4 ) THEN
+         if ( ip==4 ) then
             ix2 = iw + ido
             ix3 = ix2 + ido
-            IF ( na/=0 ) THEN
-               CALL RADB4(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3))
-            ELSE
-               CALL RADB4(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3))
-            ENDIF
+            if ( na/=0 ) then
+               call radb4(ido,l1,Ch,c,Wa(iw),Wa(ix2),Wa(ix3))
+            else
+               call radb4(ido,l1,c,Ch,Wa(iw),Wa(ix2),Wa(ix3))
+            endif
             na = 1 - na
-         ELSEIF ( ip==2 ) THEN
-            IF ( na/=0 ) THEN
-               CALL RADB2(ido,l1,Ch,C,Wa(iw))
-            ELSE
-               CALL RADB2(ido,l1,C,Ch,Wa(iw))
-            ENDIF
+         elseif ( ip==2 ) then
+            if ( na/=0 ) then
+               call radb2(ido,l1,Ch,c,Wa(iw))
+            else
+               call radb2(ido,l1,c,Ch,Wa(iw))
+            endif
             na = 1 - na
-         ELSEIF ( ip==3 ) THEN
+         elseif ( ip==3 ) then
             ix2 = iw + ido
-            IF ( na/=0 ) THEN
-               CALL RADB3(ido,l1,Ch,C,Wa(iw),Wa(ix2))
-            ELSE
-               CALL RADB3(ido,l1,C,Ch,Wa(iw),Wa(ix2))
-            ENDIF
+            if ( na/=0 ) then
+               call radb3(ido,l1,Ch,c,Wa(iw),Wa(ix2))
+            else
+               call radb3(ido,l1,c,Ch,Wa(iw),Wa(ix2))
+            endif
             na = 1 - na
-         ELSEIF ( ip/=5 ) THEN
-            IF ( na/=0 ) THEN
-               CALL RADBG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw))
-            ELSE
-               CALL RADBG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw))
-            ENDIF
-            IF ( ido==1 ) na = 1 - na
-         ELSE
+         elseif ( ip/=5 ) then
+            if ( na/=0 ) then
+               call radbg(ido,ip,l1,idl1,Ch,Ch,Ch,c,c,Wa(iw))
+            else
+               call radbg(ido,ip,l1,idl1,c,c,c,Ch,Ch,Wa(iw))
+            endif
+            if ( ido==1 ) na = 1 - na
+         else
             ix2 = iw + ido
             ix3 = ix2 + ido
             ix4 = ix3 + ido
-            IF ( na/=0 ) THEN
-               CALL RADB5(ido,l1,Ch,C,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
-            ELSE
-               CALL RADB5(ido,l1,C,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
-            ENDIF
+            if ( na/=0 ) then
+               call radb5(ido,l1,Ch,c,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
+            else
+               call radb5(ido,l1,c,Ch,Wa(iw),Wa(ix2),Wa(ix3),Wa(ix4))
+            endif
             na = 1 - na
-         ENDIF
+         endif
          l1 = l2
          iw = iw + (ip-1)*ido
-      ENDDO
-      IF ( na==0 ) RETURN
-      DO i = 1 , N
-         C(i) = Ch(i)
-      ENDDO
-      END subroutine rfftb1
+      enddo
+      if ( na==0 ) return
+      do i = 1 , n
+         c(i) = Ch(i)
+      enddo
+      end subroutine rfftb1

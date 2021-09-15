@@ -1,39 +1,39 @@
 !*==DZFFTF.spg  processed by SPAG 6.72Dc at 19:17 on 14 Sep 2021
-      SUBROUTINE DZFFTF(N,R,Azero,A,B,Wsave)
+      subroutine dzfftf(n,r,Azero,a,b,Wsave)
 !
 !                       VERSION 3  JUNE 1979
 !
-      USE FFTPACK_KIND
-      IMPLICIT NONE
+      use fftpack_kind
+      implicit none
 !*--DZFFTF598
 !*** Start of declarations inserted by SPAG
-      REAL A , Azero , B , cf , cfm , FFTPACK_KIND , R , rk , Wsave
-      INTEGER i , N , ns2 , ns2m
+      real a , Azero , b , cf , cfm , fftpack_kind , r , rk , Wsave
+      integer i , n , ns2 , ns2m
 !*** End of declarations inserted by SPAG
-      DIMENSION R(*) , A(*) , B(*) , Wsave(*)
-      IF ( N<2 ) THEN
-         Azero = R(1)
-         RETURN
-      ELSEIF ( N==2 ) THEN
-         Azero = 0.5D0*(R(1)+R(2))
-         A(1) = 0.5D0*(R(1)-R(2))
-         RETURN
-      ELSE
-         DO i = 1 , N
-            Wsave(i) = R(i)
-         ENDDO
-         CALL DFFTF(N,Wsave,Wsave(N+1))
-         cf = 2.0D0/REAL(N,rk)
+      dimension r(*) , a(*) , b(*) , Wsave(*)
+      if ( n<2 ) then
+         Azero = r(1)
+         return
+      elseif ( n==2 ) then
+         Azero = 0.5d0*(r(1)+r(2))
+         a(1) = 0.5d0*(r(1)-r(2))
+         return
+      else
+         do i = 1 , n
+            Wsave(i) = r(i)
+         enddo
+         call dfftf(n,Wsave,Wsave(n+1))
+         cf = 2.0d0/real(n,rk)
          cfm = -cf
-         Azero = 0.5D0*cf*Wsave(1)
-         ns2 = (N+1)/2
+         Azero = 0.5d0*cf*Wsave(1)
+         ns2 = (n+1)/2
          ns2m = ns2 - 1
-         DO i = 1 , ns2m
-            A(i) = cf*Wsave(2*i)
-            B(i) = cfm*Wsave(2*i+1)
-         ENDDO
-         IF ( MOD(N,2)==1 ) RETURN
-         A(ns2) = 0.5D0*cf*Wsave(N)
-         B(ns2) = 0.0D0
-      ENDIF
-      END subroutine dzfftf
+         do i = 1 , ns2m
+            a(i) = cf*Wsave(2*i)
+            b(i) = cfm*Wsave(2*i+1)
+         enddo
+         if ( mod(n,2)==1 ) return
+         a(ns2) = 0.5d0*cf*Wsave(n)
+         b(ns2) = 0.0d0
+      endif
+      end subroutine dzfftf
