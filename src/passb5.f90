@@ -8,7 +8,7 @@
                   tr4 , tr5 , Wa1 , Wa2 , Wa3 , Wa4
       integer :: i , Ido , k , l1
       dimension Cc(Ido,5,l1) , Ch(Ido,l1,5) , Wa1(*) , Wa2(*) , Wa3(*), &
-                Wa4(1)
+                Wa4(*)
       real(rk),parameter :: pi = acos(-1.0_rk)
       real(rk),parameter :: tr11 = cos(2.0_rk * pi / 5.0_rk)
       real(rk),parameter :: ti11 = sin(2.0_rk * pi / 5.0_rk)

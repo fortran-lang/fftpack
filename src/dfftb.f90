@@ -3,7 +3,7 @@
       implicit none
       integer :: n
       real(rk) :: r , Wsave
-      dimension r(1) , Wsave(*)
+      dimension r(*) , Wsave(*)
       if ( n==1 ) return
       call rfftb1(n,r,Wsave,Wsave(n+1),Wsave(2*n+1))
       end subroutine dfftb
