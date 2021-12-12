@@ -39,7 +39,7 @@ The documentation for comment markup in source code, running [FORD] and the [FOR
 
 [FORD]: https://github.com/Fortran-FOSS-Programmers/ford#readme
 [FORD wiki]: https://github.com/Fortran-FOSS-Programmers/ford/wiki
-[FORD project file]: https://github.com/fortran-lang/fftpack/blob/master/API-doc-FORD-file.md
+[FORD project file]: https://github.com/fortran-lang/fftpack/blob/HEAD/API-doc-FORD-file.md
 
 A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.
 
