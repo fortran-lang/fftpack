@@ -12,7 +12,7 @@
       real(rk),parameter :: pi = acos(-1.0_rk)
       real(rk),parameter :: tr11 =  cos(2.0_rk * pi / 5.0_rk)
       real(rk),parameter :: ti11 = -sin(2.0_rk * pi / 5.0_rk)
-      real(rk),parameter :: tr12 = -cos(4.0_rk * pi / 5.0_rk)
+      real(rk),parameter :: tr12 =  cos(4.0_rk * pi / 5.0_rk)
       real(rk),parameter :: ti12 = -sin(4.0_rk * pi / 5.0_rk)
       if ( Ido/=2 ) then
          do k = 1 , l1
