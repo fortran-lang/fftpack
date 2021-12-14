@@ -1,9 +1,9 @@
-submodule(fftpack) fftpack_iqct
+submodule(fftpack) fftpack_dst
 
 contains
 
-    !> Backward cosine-transform of quarter wave data.
-    pure module function iqct_dp(x, n) result(result)
+    !> Discrete fourier sine transform of an odd sequence.
+    pure module function dst_dp(x, n) result(result)
         real(kind=dp), intent(in) :: x(:)
         integer, intent(in), optional :: n
         real(kind=dp), allocatable :: result(:)
@@ -24,13 +24,13 @@ contains
         end if
 
         !> Initialize FFT
-        lensav = 3*lenseq + 15
+        lensav = int(2.5_dp*lenseq + 15)
         allocate (wsave(lensav))
-        call dcosqi(lenseq, wsave)
+        call dsinti(lenseq, wsave)
 
-        !> Backward transformation
-        call dcosqb(lenseq, result, wsave)
+        !> Discrete fourier sine transformation
+        call dsint(lenseq, result, wsave)
 
-    end function iqct_dp
+    end function dst_dp
 
-end submodule fftpack_iqct
+end submodule fftpack_dst
