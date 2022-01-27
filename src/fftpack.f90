@@ -16,6 +16,9 @@ module fftpack
     public :: dcosqi, dcosqf, dcosqb
     public :: qct, iqct
 
+    public :: dcosti, dcost
+    public :: dct, idct
+
     interface
 
         !> Version: experimental
@@ -150,6 +153,26 @@ module fftpack
             real(kind=rk), intent(in) :: wsave(*)
         end subroutine dcosqb
 
+        !> Version: experimental
+        !>
+        !> Initialize `dcost`. ([Specification](../page/specs/fftpack.html#dcosti))
+        pure subroutine dcosti(n, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(out) :: wsave(*)
+        end subroutine dcosti
+
+        !> Version: experimental
+        !>
+        !> Discrete fourier cosine transform of an even sequence.
+        !> ([Specification](../page/specs/fftpack.html#dcost))
+        pure subroutine dcost(n, x, wsave)
+            import dp
+            integer, intent(in) :: n
+            real(kind=dp), intent(inout) :: x(*)
+            real(kind=dp), intent(in) :: wsave(*)
+        end subroutine dcost
+
     end interface
 
     !> Version: experimental
@@ -223,6 +246,26 @@ module fftpack
             real(kind=rk), allocatable :: result(:)
         end function iqct_rk
     end interface iqct
+
+    !> Version: experimental
+    !>
+    !> Discrete fourier cosine (forward) transform of an even sequence.
+    !> ([Specification](../page/specs/fftpack.html#dct))
+    interface dct
+        pure module function dct_dp(x, n) result(result)
+            real(kind=dp), intent(in) :: x(:)
+            integer, intent(in), optional :: n
+            real(kind=dp), allocatable :: result(:)
+        end function dct_dp
+    end interface dct
+
+    !> Version: experimental
+    !>
+    !> Discrete fourier cosine (backward) transform of an even sequence.
+    !> ([Specification](../page/specs/fftpack.html#idct))
+    interface idct
+        module procedure :: dct_dp
+    end interface idct
 
     !> Version: experimental
     !>

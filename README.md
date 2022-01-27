@@ -1,4 +1,7 @@
 # FFTPACK
+
+[![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
+
 A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.
 
 ## Getting started

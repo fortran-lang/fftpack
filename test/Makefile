@@ -8,7 +8,9 @@ all: tstfft \
 	fftpack_dzfft \
 	fftpack_dcosq \
 	fftpack_qct \
-	fftpack_iqct
+	fftpack_iqct \
+	fftpack_dcost \
+	fftpack_dct
 
 # Orginal test
 tstfft: tstfft.o
@@ -47,6 +49,14 @@ fftpack_qct: test_fftpack_qct.f90
 fftpack_iqct: test_fftpack_iqct.f90
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	./fftpack_iqct.x
+
+fftpack_dcost: test_fftpack_dcost.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dcost.x
+
+fftpack_dct: test_fftpack_dct.f90
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
+	./fftpack_dct.x
 
 # `fftpack` utility routines
 fftpack_fftshift: test_fftpack_fftshift.f90
