@@ -1,53 +1,53 @@
 SRCF = \
-	zfftb.f\
-	cfftb1.f\
-	zfftf.f\
-	cfftf1.f\
-	zffti.f\
-	cffti1.f\
-	dcosqb.f\
-	cosqb1.f\
-	dcosqf.f\
-	cosqf1.f\
-	dcosqi.f\
-	dcost.f\
-	dcosti.f\
-	ezfft1.f\
-	dzfftb.f\
-	dzfftf.f\
-	dzffti.f\
-	passb.f\
-	passb2.f\
-	passb3.f\
-	passb4.f\
-	passb5.f\
-	passf.f\
-	passf2.f\
-	passf3.f\
-	passf4.f\
-	passf5.f\
-	radb2.f\
-	radb3.f\
-	radb4.f\
-	radb5.f\
-	radbg.f\
-	radf2.f\
-	radf3.f\
-	radf4.f\
-	radf5.f\
-	radfg.f\
-	dfftb.f\
-	rfftb1.f\
-	dfftf.f\
-	rfftf1.f\
-	dffti.f\
-	rffti1.f\
-	dsinqb.f\
-	dsinqf.f\
-	dsinqi.f\
-	dsint.f\
-	sint1.f\
-	dsinti.f
+	zfftb.f90\
+	cfftb1.f90\
+	zfftf.f90\
+	cfftf1.f90\
+	zffti.f90\
+	cffti1.f90\
+	dcosqb.f90\
+	cosqb1.f90\
+	dcosqf.f90\
+	cosqf1.f90\
+	dcosqi.f90\
+	dcost.f90\
+	dcosti.f90\
+	ezfft1.f90\
+	dzfftb.f90\
+	dzfftf.f90\
+	dzffti.f90\
+	passb.f90\
+	passb2.f90\
+	passb3.f90\
+	passb4.f90\
+	passb5.f90\
+	passf.f90\
+	passf2.f90\
+	passf3.f90\
+	passf4.f90\
+	passf5.f90\
+	radb2.f90\
+	radb3.f90\
+	radb4.f90\
+	radb5.f90\
+	radbg.f90\
+	radf2.f90\
+	radf3.f90\
+	radf4.f90\
+	radf5.f90\
+	radfg.f90\
+	dfftb.f90\
+	rfftb1.f90\
+	dfftf.f90\
+	rfftf1.f90\
+	dffti.f90\
+	rffti1.f90\
+	dsinqb.f90\
+	dsinqf.f90\
+	dsinqi.f90\
+	dsint.f90\
+	sint1.f90\
+	dsinti.f90
 
 SRCF90 = \
 	fftpack.f90\
@@ -59,9 +59,10 @@ SRCF90 = \
 	fftpack_ifftshift.f90\
 	fftpack_qct.f90\
 	fftpack_iqct.f90\
-	fftpack_dct.f90
+	fftpack_dct.f90\
+	rk.f90
 
-OBJF := $(SRCF:.f=.o)
+OBJF := $(SRCF:.f90=.o)
 OBJF90 := $(SRCF90:.f90=.o)
 
 lib$(LIB).a: $(OBJF) $(OBJF90)
@@ -76,12 +77,62 @@ clean:
 %.o: %.f90
 	$(FC) $(FFLAGS) -c $<
 
-fftpack_fft.o: fftpack.o
-fftpack_ifft.o: fftpack.o
-fftpack_rfft.o: fftpack.o
-fftpack_irfft.o: fftpack.o
-fftpack_qct.o: fftpack.o
-fftpack_iqct.o: fftpack.o
-fftpack_dct.o: fftpack.o
-fftpack_fftshift.o: fftpack.o
-fftpack_ifftshift.o: fftpack.o
+fftpack_fft.o: fftpack.o rk.o
+fftpack_ifft.o: fftpack.o rk.o
+fftpack_rfft.o: fftpack.o rk.o
+fftpack_irfft.o: fftpack.o rk.o
+fftpack_qct.o: fftpack.o rk.o
+fftpack_iqct.o: fftpack.o rk.o
+fftpack_dct.o: fftpack.o rk.o
+fftpack_fftshift.o: fftpack.o rk.o
+fftpack_ifftshift.o: fftpack.o rk.o
+
+zfftb.f90: rk.o
+cfftb1.f90: rk.o
+zfftf.f90: rk.o
+cfftf1.f90: rk.o
+zffti.f90: rk.o
+cffti1.f90: rk.o
+dcosqb.f90: rk.o
+cosqb1.f90: rk.o
+dcosqf.f90: rk.o
+cosqf1.f90: rk.o
+dcosqi.f90: rk.o
+dcost.f90: rk.o
+dcosti.f90: rk.o
+ezfft1.f90: rk.o
+dzfftb.f90: rk.o
+dzfftf.f90: rk.o
+dzffti.f90: rk.o
+passb.f90: rk.o
+passb2.f90: rk.o
+passb3.f90: rk.o
+passb4.f90: rk.o
+passb5.f90: rk.o
+passf.f90: rk.o
+passf2.f90: rk.o
+passf3.f90: rk.o
+passf4.f90: rk.o
+passf5.f90: rk.o
+radb2.f90: rk.o
+radb3.f90: rk.o
+radb4.f90: rk.o
+radb5.f90: rk.o
+radbg.f90: rk.o
+radf2.f90: rk.o
+radf3.f90: rk.o
+radf4.f90: rk.o
+radf5.f90: rk.o
+radfg.f90: rk.o
+dfftb.f90: rk.o
+rfftb1.f90: rk.o
+dfftf.f90: rk.o
+rfftf1.f90: rk.o
+dffti.f90: rk.o
+rffti1.f90: rk.o
+dsinqb.f90: rk.o
+dsinqf.f90: rk.o
+dsinqi.f90: rk.o
+dsint.f90: rk.o
+sint1.f90: rk.o
+dsinti.f90: rk.o

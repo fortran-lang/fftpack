@@ -1,10 +1,10 @@
 program bench1
 use fftpack, only: zffti, zfftf, zfftb
+use fftpack_kind, only: rk
 implicit none
-integer, parameter :: dp = kind(0.d0)
-complex(dp), allocatable :: z(:)
-real(dp), allocatable :: w(:), x(:)
-real(dp) :: err, time_init, time_forward, time_backward, t1, t2
+complex(rk), allocatable :: z(:)
+real(rk), allocatable :: w(:), x(:)
+real(rk) :: err, time_init, time_forward, time_backward, t1, t2
 integer :: N
 
 N = 1024*1014*16
@@ -32,7 +32,7 @@ call cpu_time(t2)
 time_backward = t2-t1
 print *, "Done"
 
-err = maxval(abs(x-real(z/N,dp)))
+err = maxval(abs(x-real(z/N,rk)))
 print *
 print *, "Error: ", err
 print *, "Init time: ", time_init

@@ -18,6 +18,8 @@ module fftpack
 
     public :: dcosti, dcost
     public :: dct, idct
+    
+    public :: rk
 
     interface
 
@@ -157,9 +159,9 @@ module fftpack
         !>
         !> Initialize `dcost`. ([Specification](../page/specs/fftpack.html#dcosti))
         pure subroutine dcosti(n, wsave)
-            import dp
+            import rk
             integer, intent(in) :: n
-            real(kind=dp), intent(out) :: wsave(*)
+            real(kind=rk), intent(out) :: wsave(*)
         end subroutine dcosti
 
         !> Version: experimental
@@ -167,10 +169,10 @@ module fftpack
         !> Discrete fourier cosine transform of an even sequence.
         !> ([Specification](../page/specs/fftpack.html#dcost))
         pure subroutine dcost(n, x, wsave)
-            import dp
+            import rk
             integer, intent(in) :: n
-            real(kind=dp), intent(inout) :: x(*)
-            real(kind=dp), intent(in) :: wsave(*)
+            real(kind=rk), intent(inout) :: x(*)
+            real(kind=rk), intent(in) :: wsave(*)
         end subroutine dcost
 
     end interface
@@ -252,11 +254,11 @@ module fftpack
     !> Discrete fourier cosine (forward) transform of an even sequence.
     !> ([Specification](../page/specs/fftpack.html#dct))
     interface dct
-        pure module function dct_dp(x, n) result(result)
-            real(kind=dp), intent(in) :: x(:)
+        pure module function dct_rk(x, n) result(result)
+            real(kind=rk), intent(in) :: x(:)
             integer, intent(in), optional :: n
-            real(kind=dp), allocatable :: result(:)
-        end function dct_dp
+            real(kind=rk), allocatable :: result(:)
+        end function dct_rk
     end interface dct
 
     !> Version: experimental
@@ -264,7 +266,7 @@ module fftpack
     !> Discrete fourier cosine (backward) transform of an even sequence.
     !> ([Specification](../page/specs/fftpack.html#idct))
     interface idct
-        module procedure :: dct_dp
+        module procedure :: dct_rk
     end interface idct
 
     !> Version: experimental

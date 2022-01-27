@@ -13,7 +13,7 @@ contains
 
     subroutine test_fftpack_dcosq_real
         use fftpack, only: dcosqi, dcosqf, dcosqb
-    use fftpack_kind
+        use fftpack_kind
         real(kind=rk) :: w(3*4 + 15)
         real(kind=rk) :: x(4) = [1, 2, 3, 4]
         real(kind=rk) :: eps = 1.0e-10_rk
