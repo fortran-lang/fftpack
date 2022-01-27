@@ -13,30 +13,32 @@ contains
     end subroutine check
 
     subroutine test_fftpack_ifftshift_complex
-        use fftpack, only: ifftshift, dp
+        use fftpack, only: ifftshift
+    use fftpack_kind
         integer :: i
 
-        complex(kind=dp) :: xeven(4) = [3, 4, 1, 2]
-        complex(kind=dp) :: xodd(5) = [4, 5, 1, 2, 3]
+        complex(kind=rk) :: xeven(4) = [3, 4, 1, 2]
+        complex(kind=rk) :: xodd(5) = [4, 5, 1, 2, 3]
 
-        call check(all(ifftshift(xeven) == [complex(kind=dp) ::(i, i=1, 4)]), &
-                   msg="all(ifftshift(xeven) == [complex(kind=dp) ::(i, i=1, 4)]) failed.")
-        call check(all(ifftshift(xodd) == [complex(kind=dp) ::(i, i=1, 5)]), &
-                   msg="all(ifftshift(xodd) == [complex(kind=dp) ::(i, i=1, 5)]) failed.")
+        call check(all(ifftshift(xeven) == [complex(kind=rk) ::(i, i=1, 4)]), &
+                   msg="all(ifftshift(xeven) == [complex(kind=rk) ::(i, i=1, 4)]) failed.")
+        call check(all(ifftshift(xodd) == [complex(kind=rk) ::(i, i=1, 5)]), &
+                   msg="all(ifftshift(xodd) == [complex(kind=rk) ::(i, i=1, 5)]) failed.")
 
     end subroutine test_fftpack_ifftshift_complex
 
     subroutine test_fftpack_ifftshift_real
-        use fftpack, only: ifftshift, dp
+        use fftpack, only: ifftshift
+    use fftpack_kind
         integer :: i
 
-        real(kind=dp) :: xeven(4) = [3, 4, 1, 2]
-        real(kind=dp) :: xodd(5) = [4, 5, 1, 2, 3]
+        real(kind=rk) :: xeven(4) = [3, 4, 1, 2]
+        real(kind=rk) :: xodd(5) = [4, 5, 1, 2, 3]
 
-        call check(all(ifftshift(xeven) == [real(kind=dp) ::(i, i=1, 4)]), &
-                   msg="all(ifftshift(xeven) == [real(kind=dp) ::(i, i=1, 4)]) failed.")
-        call check(all(ifftshift(xodd) == [real(kind=dp) ::(i, i=1, 5)]), &
-                   msg="all(ifftshift(xodd) == [real(kind=dp) ::(i, i=1, 5)]) failed.")
+        call check(all(ifftshift(xeven) == [real(kind=rk) ::(i, i=1, 4)]), &
+                   msg="all(ifftshift(xeven) == [real(kind=rk) ::(i, i=1, 4)]) failed.")
+        call check(all(ifftshift(xodd) == [real(kind=rk) ::(i, i=1, 5)]), &
+                   msg="all(ifftshift(xodd) == [real(kind=rk) ::(i, i=1, 5)]) failed.")
 
     end subroutine test_fftpack_ifftshift_real
 

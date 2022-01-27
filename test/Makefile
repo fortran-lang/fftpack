@@ -13,7 +13,7 @@ all: tstfft \
 	fftpack_dct
 
 # Orginal test
-tstfft: tstfft.o
+tstfft: tstfft.f
 	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
 	time ./tstfft.x
 

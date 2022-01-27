@@ -12,12 +12,12 @@ cd fftpack
 ```
 
 ### Build with [fortran-lang/fpm](https://github.com/fortran-lang/fpm)
-Fortran Package Manager (fpm) is a great package manager and build system for Fortran.   
+Fortran Package Manager (fpm) is a package manager and build system for Fortran.   
 You can build using provided `fpm.toml`:
 ```bash
-fpm build --flag "-O2"
-fpm test --flag "-O2" --list
-fpm test --flag "-O2" <test_name, see `fpm.toml` or list>
+fpm build
+fpm test --list
+fpm test <test_name, see `fpm.toml` or list>
 ```
 To use `fftpack` within your `fpm` project, add the following to your `fpm.toml` file:
 ```toml
