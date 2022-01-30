@@ -1,3 +1,5 @@
+![FFTPACK](media/fftpack.png)
+
 # FFTPACK
 
 [![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
