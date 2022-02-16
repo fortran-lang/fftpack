@@ -1,6 +1,6 @@
 ---
-project: fftpack
-summary: A opensource package fftpack v4.0.0 for (modern) Fortran
+project: Fortran-lang/fftpack
+summary: A modernized, opensource package fftpack for (modern) Fortran
 src_dir: src/
 output_dir: API-doc
 page_dir: doc/
@@ -16,20 +16,26 @@ graph_maxdepth: 5
 coloured_edges: true
 sort: permission-alpha
 extra_mods: iso_fortran_env:https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html
-            iso_c_binding:https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fC_005fBINDING.html#ISO_005fC_005fBINDING
 print_creation_date: true
 creation_date: %Y-%m-%d %H:%M %z
 project_github: https://github.com/fortran-lang/fftpack
+project_download: https://github.com/fortran-lang/fftpack/archive/HEAD.zip
+project_website: https://fortran-lang.github.io/fftpack/
+favicon: doc/media/favicon.ico
 license: by-sa
-author: Paul N. Swarztrauber & fftpack contributors
-github: https://github.com/fortran-lang/fftpack
+author: Paul N. Swarztrauber & fortran-lang/fftpack contributors
+author_pic: https://fortran-lang.org/assets/img/fortran_logo_512x512.png
+author_email: fortran-lang@groups.io
+github: https://github.com/fortran-lang
+twitter: https://twitter.com/fortranlang
+website: https://fortran-lang.org
 dbg: true
 parallel: 4
 ---
 
 [TOC]
 
-@warning This API documentation for the fortran-lang/fftpack v4.0.0 is a work in progress.
+@warning This API documentation for the Fortran-lang/fftpackis a work in progress.
 
 Fortran FFTPACK API Documentation
 =================================
@@ -51,12 +57,12 @@ cd fftpack
 ```
 
 ### Build with [fortran-lang/fpm](https://github.com/fortran-lang/fpm)
-Fortran Package Manager (fpm) is a great package manager and build system for Fortran.   
+Fortran Package Manager (fpm) is a package manager and build system for Fortran.   
 You can build using provided `fpm.toml`:
 ```bash
-fpm build --flag "-O2"
-fpm test --flag "-O2" --list
-fpm test --flag "-O2" <test_name, see `fpm.toml` or list>
+fpm build
+fpm test --list
+fpm test <test_name, see `fpm.toml` or list>
 ```
 To use `fftpack` within your `fpm` project, add the following to your `fpm.toml` file:
 ```toml
@@ -71,7 +77,7 @@ make
 ```
 
 ## Links
-[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)  
-[Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)  
-[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
-[NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)
+- [netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
+- [Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)
+- [Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
+- [NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)

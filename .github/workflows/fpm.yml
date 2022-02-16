@@ -50,8 +50,10 @@ jobs:
     - name: Build fftpack
       run: |
         gfortran --version
-        fpm build --flag "-O2"
+        fpm build
+
     - name: Run tests
       run: |
         gfortran --version
-        fpm test --flag "-O2"
+        fpm test
+
