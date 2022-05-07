@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <meta name="description" content="A modernized, opensource package fftpack for (modern) Fortran">
+    
+    <meta name="author" content="Paul N. Swarztrauber &
+fortran-lang/fftpack contributors" >
+    <link rel="icon" href="./favicon.png">
+
+    <title> Fortran-lang/fftpack </title>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/pygments.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/local.css" rel="stylesheet">
+    
+    <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="./js/jquery-2.1.3.min.js"></script>
+    <script src="./js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">Fortran-lang/fftpack </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+        
+            <li><a href='./page/index.html'>Contributing and specs</a></li>
+      
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+              
+            <li><a href="./lists/files.html">Source Files</a></li>
+        
+        
+        
+            <li><a href="./lists/modules.html">Modules</a></li>
+        
+            
+                                
+            <li><a href="./lists/procedures.html">Procedures</a></li>
+        
+               
+               
+        
+        
+            </ul>
+        
+            </li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/files.html">Source Files</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="./lists/procedures.html">Procedures</a></li>
+
+                             
+
+
+
+          </ul>
+        
+        <form action="./search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <p>A modernized, opensource package fftpack for (modern) Fortran</p>
+        	 
+	<p> Find us on&hellip;</p>
+        <p>
+			 
+          <a class="btn btn-lg btn-primary" href="https://github.com/fortran-lang/fftpack" role="button">GitHub</a>
+			 
+			 
+			 
+			 
+			 
+          <a class="btn btn-lg btn-primary" href="https://fortran-lang.github.io/fftpack/" role="button">The Web</a>
+			 
+	         
+			 
+          <a class="btn btn-lg btn-danger" style="float:right" href="https://github.com/fortran-lang/fftpack/archive/HEAD.zip" role="button">Download the Source</a>
+			 
+        </p>
+      </div>
+
+      <div class="row" id='text'>
+		  
+        <div class="col-md-8">
+		  
+          <h1>Fortran-lang/fftpack</h1>
+          <div class="toc">
+<ul>
+<li><a href="#fortran-fftpack-api-documentation">Fortran FFTPACK API Documentation</a></li>
+<li><a href="#fftpack">FFTPACK</a><ul>
+<li><a href="#getting-started">Getting started</a><ul>
+<li><a href="#get-the-code">Get the code</a></li>
+<li><a href="#build-with-fortran-langfpm">Build with fortran-lang/fpm</a></li>
+</ul>
+</li>
+<li><a href="#build-with-make">Build with Make</a></li>
+<li><a href="#links">Links</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p></p><div class="alert alert-warning" role="alert"><h4>Warning</h4><p>This API documentation for the Fortran-lang/fftpack is a work in progress.</p></div>
+<h1 id="fortran-fftpack-api-documentation">Fortran FFTPACK API Documentation</h1>
+<p>This is the main API documentation landing page generated by <a href="https://github.com/Fortran-FOSS-Programmers/ford#readme">FORD</a>.
+The documentation for comment markup in source code, running <a href="https://github.com/Fortran-FOSS-Programmers/ford#readme">FORD</a> and the <a href="https://github.com/fortran-lang/fftpack/blob/HEAD/API-doc-FORD-file.md">FORD project file</a> are all maintained on the <a href="https://github.com/Fortran-FOSS-Programmers/ford/wiki">FORD wiki</a>.</p>
+<h1 id="fftpack">FFTPACK</h1>
+<p>A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.</p>
+<p><a href="https://github.com/fortran-lang/fftpack/actions"><img alt="Actions Status" src="https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg"></a>
+<a href="https://github.com/fortran-lang/fftpack/actions"><img alt="Actions Status" src="https://github.com/fortran-lang/fftpack/workflows/doc-deployment/badge.svg"></a></p>
+<h2 id="getting-started">Getting started</h2>
+<h3 id="get-the-code">Get the code</h3>
+<div class="codehilite"><pre><span></span><code>git clone https://github.com/fortran-lang/fftpack.git
+<span class="nb">cd</span> fftpack
+</code></pre></div>
+
+<h3 id="build-with-fortran-langfpm">Build with <a href="https://github.com/fortran-lang/fpm">fortran-lang/fpm</a></h3>
+<p>Fortran Package Manager (fpm) is a package manager and build system for Fortran. <br>
+You can build using provided <code>fpm.toml</code>:</p>
+<div class="codehilite"><pre><span></span><code>fpm build
+fpm <span class="nb">test</span> --list
+fpm <span class="nb">test</span> &lt;test_name, see <span class="sb">`</span>fpm.toml<span class="sb">`</span> or list&gt;
+</code></pre></div>
+
+<p>To use <code>fftpack</code> within your <code>fpm</code> project, add the following to your <code>fpm.toml</code> file:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[dependencies]</span><span class="w"></span>
+<span class="n">fftpack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="o">=</span><span class="s">&quot;https://github.com/fortran-lang/fftpack.git&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<h2 id="build-with-make">Build with Make</h2>
+<p>Alternatively, you can build using provided <code>Makefile</code>:</p>
+<div class="codehilite"><pre><span></span><code>make
+</code></pre></div>
+
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="http://www.netlib.org/fftpack/">netlib/dfftpack1.0(fftpack4.0)</a></li>
+<li><a href="https://www.gnu.org/software/gsl/doc/html/fft.html#">Documents of fft routines in GNU/gsl based on <code>netlib/fftpack</code></a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/fftpack.html">Documents of scipy.fftpack</a></li>
+<li><a href="https://www2.cisl.ucar.edu/resources/legacy/fft5">NACR/FFTPACK 5.1</a></li>
+</ul>
+        </div>
+		  
+        <div class="col-md-4">
+	  <div class="well">
+          <h2>Developer Info</h2>
+          <h4>Paul N. Swarztrauber &
+fortran-lang/fftpack contributors</h4>
+          
+     		 <img src="https://fortran-lang.org/assets/img/fortran_logo_512x512.png" alt="Developer picture" class="img-thumbnail">
+    		 
+          
+			   
+            <div class="text-center"><div class="btn-group" role="group">
+              
+              
+             <a class="btn btn-lg btn-primary" href="https://fortran-lang.org"><i class="fa fa-globe fa-lg"></i></a>
+              
+              
+              <a class="btn btn-lg btn-primary" href="https://github.com/fortran-lang"><i class="fa fa-github fa-lg"></i></a>
+              
+              
+				  
+              
+              
+              
+              
+              <a class="btn btn-lg btn-primary" href="https://twitter.com/fortranlang"><i class="fa fa-twitter fa-lg"></i></a>
+				  
+            </div></div>
+            
+       </div>
+       </div>
+       
+      </div>
+      
+      
+      
+      
+      
+      
+		
+        
+      <div class="row">
+        
+        <div class="col-xs-6 col-sm-4">
+              <h3>Source Files</h3>
+              <ul>
+                    <li><a href='./sourcefile/cfftb1.f90.html'>cfftb1.f90</a></li>
+                  
+                    <li><a href='./sourcefile/cfftf1.f90.html'>cfftf1.f90</a></li>
+                  
+                    <li><a href='./sourcefile/cffti1.f90.html'>cffti1.f90</a></li>
+                  
+                    <li><a href='./sourcefile/cosqb1.f90.html'>cosqb1.f90</a></li>
+                  
+                    <li><a href='./sourcefile/cosqf1.f90.html'>cosqf1.f90</a></li>
+                  
+                    <li><a href='./sourcefile/dcosqb.f90.html'>dcosqb.f90</a></li>
+                  
+                    <li><a href='./sourcefile/dcosqf.f90.html'>dcosqf.f90</a></li>
+                  
+                    <li><a href='./sourcefile/dcosqi.f90.html'>dcosqi.f90</a></li>
+                  
+                    <li><a href='./sourcefile/dcost.f90.html'>dcost.f90</a></li>
+                  
+                    <li><a href='./sourcefile/dcosti.f90.html'>dcosti.f90</a></li>
+                  </ul>
+          </div>
+        
+          
+		  <div class="col-xs-6 col-sm-4">
+              <h3>Modules</h3>
+              <ul>
+                    <li><a href='./module/fftpack.html'>fftpack</a></li>
+                  
+                    <li><a href='./module/fftpack_kind.html'>fftpack_kind</a></li>
+                  </ul>
+          </div>
+          
+          
+		  <div class="col-xs-6 col-sm-4">
+              <h3>Procedures</h3>
+              <ul>
+                    <li><a href='./proc/cfftb1.html'>cfftb1</a></li>
+                  
+                    <li><a href='./proc/cfftf1.html'>cfftf1</a></li>
+                  
+                    <li><a href='./proc/cffti1.html'>cffti1</a></li>
+                  
+                    <li><a href='./proc/cosqb1.html'>cosqb1</a></li>
+                  
+                    <li><a href='./proc/cosqf1.html'>cosqf1</a></li>
+                  
+                    <li><a href='./proc/dcosqb.html'>dcosqb</a></li>
+                  
+                    <li><a href='./interface/dcosqb.html'>dcosqb</a></li>
+                  
+                    <li><a href='./proc/dcosqf.html'>dcosqf</a></li>
+                  
+                    <li><a href='./interface/dcosqf.html'>dcosqf</a></li>
+                  
+                    <li><a href='./proc/dcosqi.html'>dcosqi</a></li>
+                  </ul>
+          </div>
+          
+          
+      </div>
+      
+
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-6"><p>Fortran-lang/fftpack was developed by Paul N. Swarztrauber &
+fortran-lang/fftpack contributors<br>&copy; 2022 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+                                          </p>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+             on 2022-05-07 15:56  
+            
+          </p>
+        </div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+    <script src="./tipuesearch/tipuesearch_content.js"></script>
+    <script src="./tipuesearch/tipuesearch_set.js"></script>
+    <script src="./tipuesearch/tipuesearch.js"></script>
+    
+    
+  </body>
+</html>
