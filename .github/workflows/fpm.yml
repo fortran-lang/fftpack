@@ -45,13 +45,15 @@ jobs:
     - name: Install fpm
       uses: fortran-lang/setup-fpm@v3
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        fpm-version: 'v0.5.0'
 
     - name: Build fftpack
       run: |
         gfortran --version
-        fpm build --flag "-O2"
+        fpm build
+
     - name: Run tests
       run: |
         gfortran --version
-        fpm test --flag "-O2"
+        fpm test
+

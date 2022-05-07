@@ -1,8 +1,10 @@
 # FFTPACK
 
-[![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
 
 A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.
+
+[![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
+[![Actions Status](https://github.com/fortran-lang/fftpack/workflows/doc-deployment/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
 
 ## Getting started
 ### Get the code
@@ -32,7 +34,7 @@ make
 ```
 
 ## Links
-[netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)  
-[Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)  
-[Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)  
-[NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)  
+- [netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
+- [Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)
+- [Documents of scipy.fftpack](https://docs.scipy.org/doc/scipy/reference/fftpack.html)
+- [NACR/FFTPACK 5.1](https://www2.cisl.ucar.edu/resources/legacy/fft5)
