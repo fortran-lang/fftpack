@@ -8,7 +8,8 @@ title: Specifications (specs)
 
 ## Experimental Features & Modules
 
- - [fftpack](./fftpack.html) - fftpack module.
+- [fftpack](./fftpack.html) - fftpack module.
+- [fftpack_kind](./fftpack_kind.html) - fftpack_kind module.
 
 ## Released/Stable Features & Modules
 

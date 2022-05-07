@@ -2,7 +2,7 @@
 title: FFTPACK
 ---
 
-# The `fftpack` module
+# The `fftpack` Module
 
 [TOC]
 
