@@ -7,6 +7,12 @@ module test_fftpack_qct
 
     public :: collect_qct
 
+#if defined(fftpack_sp)
+    real(kind=rk) :: eps = 1.0e-5_rk
+#else
+    real(kind=rk) :: eps = 1.0e-10_rk
+#endif
+
 contains
 
     !> Collect all exported unit tests
@@ -26,7 +32,6 @@ contains
         type(error_type), allocatable, intent(out) :: error
         real(kind=rk) :: w(3*4 + 15)
         real(kind=rk) :: x(4) = [1, 2, 3, 4]
-        real(kind=rk) :: eps = 1.0e-10_rk
 
         call dcosqi(4, w)
         call dcosqf(4, x, w)
@@ -42,7 +47,6 @@ contains
 
     subroutine test_modernized_qct(error)
         type(error_type), allocatable, intent(out) :: error
-        real(kind=rk) :: eps = 1.0e-10_rk
         real(kind=rk) :: x(3) = [9, -9, 3]
 
         call check(error, sum(abs(qct(x, 2) - [-3.7279220613578570_rk, 21.727922061357859_rk])) < eps, &
@@ -59,7 +63,6 @@ contains
 
     subroutine test_modernized_iqct(error)
         type(error_type), allocatable, intent(out) :: error
-        real(kind=rk) :: eps = 1.0e-10_rk
         real(kind=rk) :: x(4) = [1, 2, 3, 4]
 
         call check(error, sum(abs(iqct(qct(x))/(4.0_rk*4.0_rk) - [real(kind=rk) :: 1, 2, 3, 4])) < eps, &

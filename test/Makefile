@@ -29,7 +29,7 @@ testdrive.F90:
 	$(FETCH) https://github.com/fortran-lang/test-drive/raw/v0.4.0/src/testdrive.F90 > $@
 	
 %.o: %.F90
-	$(FC) $(FFLAGS) -c $<
+	$(FC) $(FFLAGS) -I../src -c $<
 
 %.o: %.f90
 	$(FC) $(FFLAGS) -I../src -c $<

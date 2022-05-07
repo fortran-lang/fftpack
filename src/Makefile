@@ -60,7 +60,7 @@ SRCF90 = \
 	fftpack_qct.f90\
 	fftpack_iqct.f90\
 	fftpack_dct.f90\
-	rk.f90
+	rk.F90
 
 OBJF := $(SRCF:.f90=.o)
 OBJF90 := $(SRCF90:.f90=.o)
@@ -73,6 +73,9 @@ shared: $(OBJ)
 
 clean:
 	rm -f -r *.o *.a *.so *.mod *.smod
+
+%.o: %.F90
+	$(FC) $(FFLAGS) -c $<
 
 %.o: %.f90
 	$(FC) $(FFLAGS) -c $<
