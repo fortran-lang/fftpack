@@ -13,7 +13,10 @@ keywords    = ["netlib", "fftpack", "fft"]
 [build]
 auto-executables = false
 auto-tests = false
-auto-examples = true
+auto-examples = false
+
+[dev-dependencies]
+test-drive = { git = "https://github.com/fortran-lang/test-drive", tag = "v0.4.0" }
 
 # Original test
 [[test]]
@@ -21,74 +24,7 @@ name = "tstfft"
 source-dir = "test"
 main = "tstfft.f"
 
-# `fftpack` fft routines
 [[test]]
-name = "fftpack_zfft"
+name = "test_fftpack"
 source-dir = "test"
-main = "test_fftpack_zfft.f90"
-
-[[test]]
-name = "fftpack_fft"
-source-dir = "test"
-main = "test_fftpack_fft.f90"
-
-[[test]]
-name = "fftpack_ifft"
-source-dir = "test"
-main = "test_fftpack_ifft.f90"
-
-[[test]]
-name = "fftpack_dfft"
-source-dir = "test"
-main = "test_fftpack_dfft.f90"
-
-[[test]]
-name = "fftpack_rfft"
-source-dir = "test"
-main = "test_fftpack_rfft.f90"
-
-[[test]]
-name = "fftpack_irfft"
-source-dir = "test"
-main = "test_fftpack_irfft.f90"
-
-[[test]]
-name = "fftpack_dzfft"
-source-dir = "test"
-main = "test_fftpack_dzfft.f90"
-
-[[test]]
-name = "fftpack_dcosq"
-source-dir = "test"
-main = "test_fftpack_dcosq.f90"
-
-[[test]]
-name = "fftpack_qct"
-source-dir = "test"
-main = "test_fftpack_qct.f90"
-
-[[test]]
-name = "fftpack_iqct"
-source-dir = "test"
-main = "test_fftpack_iqct.f90"
-
-[[test]]
-name = "fftpack_dcost"
-source-dir = "test"
-main = "test_fftpack_dcost.f90"
-
-[[test]]
-name = "fftpack_dct"
-source-dir = "test"
-main = "test_fftpack_dct.f90"
-
-# `fftpack` utility routines
-[[test]]
-name = "fftpack_fftshift"
-source-dir = "test"
-main = "test_fftpack_fftshift.f90"
-
-[[test]]
-name = "fftpack_ifftshift"
-source-dir = "test"
-main = "test_fftpack_ifftshift.f90"
+main = "test_fftpack.f90"
