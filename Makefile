@@ -3,21 +3,24 @@
 LIB = dfftpack
 
 FC = gfortran
-FFLAGS = -O2
+FFLAGS = -O2 -fPIC
 
 export LIB
 export FC
 export FFLAGS
 
-.PHONY: all clean test
+.PHONY: build clean test
 
-all:
-	$(MAKE) -f Makefile --directory=src
-	$(MAKE) -f Makefile --directory=test
+build:
+	$(MAKE) -f Makefile $@ --directory=src
 
-test:
-	$(MAKE) -f Makefile --directory=test
+test: build
+	$(MAKE) -f Makefile $@ --directory=test
+	
+bench: build
+	$(MAKE) -f Makefile $@ --directory=example
 
 clean:
-	$(MAKE) -f Makefile clean --directory=src
-	$(MAKE) -f Makefile clean --directory=test
+	$(MAKE) -f Makefile $@ --directory=src
+	$(MAKE) -f Makefile $@ --directory=test
+	$(MAKE) -f Makefile $@ --directory=example
