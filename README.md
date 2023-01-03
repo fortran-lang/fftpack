@@ -33,6 +33,9 @@ Alternatively, you can build using provided `Makefile`:
 make
 ```
 
+## Build with CMake
+This library can also be built using CMake.  For instructions see [Running CMake](https://cmake.org/runningcmake/).  CMake version 3.24 or higher is required.
+
 ## Links
 - [netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
 - [Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)
