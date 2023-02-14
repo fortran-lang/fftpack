@@ -5,7 +5,7 @@ contains
     !> Shifts zero-frequency component to beginning of spectrum for `complex` type.
     pure module function ifftshift_crk(x) result(result)
         complex(kind=rk), intent(in) :: x(:)
-        complex(kind=rk), allocatable :: result(:)
+        complex(kind=rk), dimension(size(x)) :: result
 
         result = cshift(x, shift=-ceiling(0.5_rk*size(x)))
 
@@ -14,7 +14,7 @@ contains
     !> Shifts zero-frequency component to beginning of spectrum for `real` type.
     pure module function ifftshift_rrk(x) result(result)
         real(kind=rk), intent(in) :: x(:)
-        real(kind=rk), allocatable :: result(:)
+        real(kind=rk), dimension(size(x)) :: result
 
         result = cshift(x, shift=-ceiling(0.5_rk*size(x)))
 
