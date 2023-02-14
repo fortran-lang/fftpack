@@ -18,7 +18,7 @@ module fftpack
 
     public :: dcosti, dcost
     public :: dct, idct
-    
+
     public :: rk
 
     interface
@@ -276,11 +276,11 @@ module fftpack
     interface fftshift
         pure module function fftshift_crk(x) result(result)
             complex(kind=rk), intent(in) :: x(:)
-            complex(kind=rk), allocatable :: result(:)
+            complex(kind=rk), dimension(size(x)) :: result
         end function fftshift_crk
         pure module function fftshift_rrk(x) result(result)
             real(kind=rk), intent(in) :: x(:)
-            real(kind=rk), allocatable :: result(:)
+            real(kind=rk), dimension(size(x)) :: result
         end function fftshift_rrk
     end interface fftshift
 
@@ -291,11 +291,11 @@ module fftpack
     interface ifftshift
         pure module function ifftshift_crk(x) result(result)
             complex(kind=rk), intent(in) :: x(:)
-            complex(kind=rk), allocatable :: result(:)
+            complex(kind=rk), dimension(size(x)) :: result
         end function ifftshift_crk
         pure module function ifftshift_rrk(x) result(result)
             real(kind=rk), intent(in) :: x(:)
-            real(kind=rk), allocatable :: result(:)
+            real(kind=rk), dimension(size(x)) :: result
         end function ifftshift_rrk
     end interface ifftshift
 
