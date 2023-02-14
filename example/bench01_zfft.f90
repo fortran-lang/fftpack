@@ -13,6 +13,7 @@ allocate(x(N), z(N), w(4*N+15))
 call random_number(x)
 z = x
 
+print *, "01: Benchmarking zfft"
 print *, "Initializing"
 call cpu_time(t1)
 call zffti(N, w)
@@ -38,4 +39,5 @@ print *, "Error: ", err
 print *, "Init time: ", time_init
 print *, "Forward time: ", time_forward
 print *, "Backward time: ", time_backward
+print *, ""
 end program
