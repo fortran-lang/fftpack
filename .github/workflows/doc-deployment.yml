@@ -12,7 +12,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: pip install -v ford==6.1.5
+      run: pip install -v ford==6.1.17
 
     - name: Build Documentation
       run: ford API-doc-FORD-file.md
