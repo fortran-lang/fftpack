@@ -7,7 +7,7 @@ module fftpack
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
     public :: fftshift, ifftshift
-    public :: fftfreq
+    public :: fftfreq, rfftfreq
 
     public :: dffti, dfftf, dfftb
     public :: rfft, irfft
@@ -180,6 +180,11 @@ module fftpack
             integer, intent(in) :: n
             integer, dimension(n) :: out
         end function fftfreq
+
+        pure module function rfftfreq(n) result(out)
+            integer, intent(in) :: n
+            integer, dimension(n) :: out
+        end function rfftfreq
 
     end interface
 
