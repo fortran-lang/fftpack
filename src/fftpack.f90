@@ -7,6 +7,7 @@ module fftpack
     public :: zffti, zfftf, zfftb
     public :: fft, ifft
     public :: fftshift, ifftshift
+    public :: fftfreq
 
     public :: dffti, dfftf, dfftb
     public :: rfft, irfft
@@ -174,6 +175,11 @@ module fftpack
             real(kind=rk), intent(inout) :: x(*)
             real(kind=rk), intent(in) :: wsave(*)
         end subroutine dcost
+
+        pure module function fftfreq(n) result(out)
+            integer, intent(in) :: n
+            integer, dimension(n) :: out
+        end function fftfreq
 
     end interface
 
