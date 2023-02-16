@@ -3,7 +3,7 @@ use fftpack, only: dffti, dfftf, dfftb, rfft, irfft
 use fftpack_kind, only: rk
 
 implicit none
-integer, parameter :: N = 1024*135*77  !> (2**10)*(3**3)*5*7*11
+integer, parameter :: N = 1024*135*77  ! (2**10)*(3**3)*5*7*11
 
 real(rk), dimension(N) :: x, y
 real(rk), dimension(2*N+15) :: w
