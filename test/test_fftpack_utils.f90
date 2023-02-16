@@ -100,8 +100,8 @@ contains
         type(error_type), allocatable, intent(out) :: error
 
         real(rk), parameter :: tol = 1.0e-12_rk
-        real(rk), parameter :: twopi = 8*atan(1.0_rk)  !> 2*pi
-        complex(rk), parameter :: imu = (0,1)  !> imaginary unit
+        real(rk), parameter :: twopi = 8*atan(1.0_rk)  ! 2*pi
+        complex(rk), parameter :: imu = (0,1)  ! imaginary unit
 
         integer, parameter :: n = 128
         integer :: i
@@ -110,11 +110,11 @@ contains
 
         do  i = 1, n
             xvec(i) = cos(twopi*(i-1)/n)
-            xtrue(i) = -sin(twopi*(i-1)/n)  !> derivative in physical space
+            xtrue(i) = -sin(twopi*(i-1)/n)  ! derivative in physical space
         end do
 
         xfou = fft(xvec)/n
-        xfou = imu*fftfreq(n)*xfou  !> derivative in Fourier space
+        xfou = imu*fftfreq(n)*xfou  ! derivative in Fourier space
         xvec = ifft(xfou)
         call check(error, maxval(abs(xvec-xtrue)) < tol, &
                     "maxval(abs(xvec-xtrue)) < tol failed.")
@@ -125,8 +125,8 @@ contains
         type(error_type), allocatable, intent(out) :: error
 
         real(rk), parameter :: tol = 1.0e-12_rk
-        real(rk), parameter :: twopi = 8*atan(1.0_rk)  !> 2*pi
-        complex(rk), parameter :: imu = (0,1)  !> imaginary unit
+        real(rk), parameter :: twopi = 8*atan(1.0_rk)  ! 2*pi
+        complex(rk), parameter :: imu = (0,1)  ! imaginary unit
 
         integer, parameter :: n = 135
         integer :: i
@@ -135,11 +135,11 @@ contains
 
         do  i = 1, n
             xvec(i) = cos(twopi*(i-1)/n)
-            xtrue(i) = -sin(twopi*(i-1)/n)  !> derivative in physical space
+            xtrue(i) = -sin(twopi*(i-1)/n)  ! derivative in physical space
         end do
 
         xfou = fft(xvec)/n
-        xfou = imu*fftfreq(n)*xfou  !> derivative in Fourier space
+        xfou = imu*fftfreq(n)*xfou  ! derivative in Fourier space
         xvec = ifft(xfou)
         call check(error, maxval(abs(xvec-xtrue)) < tol, &
                     "maxval(abs(xvec-xtrue)) < tol failed.")
