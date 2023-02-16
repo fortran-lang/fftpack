@@ -176,11 +176,19 @@ module fftpack
             real(kind=rk), intent(in) :: wsave(*)
         end subroutine dcost
 
+        !> Version: experimental
+        !>
+        !> Integer frequency values involved in complex FFT.
+        !> ([Specifiction](../page/specs/fftpack.html#fftfreq))
         pure module function fftfreq(n) result(out)
             integer, intent(in) :: n
             integer, dimension(n) :: out
         end function fftfreq
 
+        !> Version: experimental
+        !>
+        !> Integer frequency values involved in real FFT.
+        !> ([Specifiction](../page/specs/fftpack.html#rfftfreq))
         pure module function rfftfreq(n) result(out)
             integer, intent(in) :: n
             integer, dimension(n) :: out

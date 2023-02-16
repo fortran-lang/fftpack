@@ -100,9 +100,9 @@ for j=1,...,n
 
 `wsave`: Shall be a `real` array.
 This argument is `intent(in)`.  
-A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. 
+A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`.
 The wsave array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
-This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
@@ -129,8 +129,8 @@ end program demo_zfftf
 
 Unnormalized inverse of `zfftf`.
 
-Computes the backward `complex` discrete fourier transform (the fourier synthesis). 
-Equivalently, `zfftb` computes a `complex` periodic sequence from its fourier coefficients. 
+Computes the backward `complex` discrete fourier transform (the fourier synthesis).
+Equivalently, `zfftb` computes a `complex` periodic sequence from its fourier coefficients.
 The transform is defined below at output parameter `c`.
 
 The transform is not normalized. to obtain a normalized transform the output must be divided by `n`. Otherwise a call of `zfftf` followed by a call of `zfftb` will multiply the sequence by `n`.
@@ -212,7 +212,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `complex` and rank-1 array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)` and `optional`.  
@@ -260,7 +260,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `complex` and rank-1 array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)` and `optional`.  
@@ -311,7 +311,7 @@ The length of the sequence to be transformed.
 `wsave`: Shall be a `real` array.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `2*n+15`.
-The same work array can be used for both `dfftf` and `dfftb` as long as `n` remains unchanged. 
+The same work array can be used for both `dfftf` and `dfftb` as long as `n` remains unchanged.
 Different `wsave` arrays are required for different values of `n`.   
 
 ##### Warning
@@ -333,7 +333,7 @@ end program demo_dffti
 
 #### Description
 
-Computes the fourier coefficients of a real perodic sequence (fourier analysis). 
+Computes the fourier coefficients of a real perodic sequence (fourier analysis).
 The transform is defined below at output parameter `r`.
 
 The transform is not normalized. To obtain a normalized transform the output must be divided by `n`. Otherwise a call of `dfftf` followed by a call of `dfftb` will multiply the sequence by `n`.
@@ -386,9 +386,9 @@ if n is even
 
 `wsave`: Shall be a `real` array.
 This argument is `intent(in)`.  
-A `real` work array which must be dimensioned at least `4n+15` in the program that calls `dfftf`. 
+A `real` work array which must be dimensioned at least `4n+15` in the program that calls `dfftf`.
 The wsave array must be initialized by calling subroutine `dffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.  
-This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `dfftf` and `dfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `dfftf` or `dfftb`.
 
@@ -414,7 +414,7 @@ end program demo_dfftf
 
 Unnormalized inverse of `dfftf`.
 
-Computes the backward `real` discrete fourier transform (the fourier synthesis). 
+Computes the backward `real` discrete fourier transform (the fourier synthesis).
 Equivalently, `dfftb` computes a `real` periodic sequence from its fourier coefficients.
 The transform is defined below at output parameter `c`.
 
@@ -554,7 +554,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `real` array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 Transformed data to invert.
 
 `n`: Shall be an `integer` scalar.
@@ -582,7 +582,7 @@ end program demo_irfft
 
 #### Description
 
-Initializes the array `wsave` which is used in both `dzfftf` and `dzfftb`. 
+Initializes the array `wsave` which is used in both `dzfftf` and `dzfftb`.
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
 
 #### Status
@@ -606,7 +606,7 @@ The length of the sequence to be transformed.
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `3*n+15`.
-The same work array can be used for both `dzfftf` and `dzfftb` as long as n remains unchanged. 
+The same work array can be used for both `dzfftf` and `dzfftb` as long as n remains unchanged.
 Different `wsave` arrays are required for different values of `n`.
 
 ##### Warning
@@ -620,7 +620,7 @@ program demo_dzffti
     use fftpack, only: dzffti
     real(kind=8) :: x(4) = [1, 2, 3, 4]
     real(kind=8) :: w(3*4 + 15)
-    call dzffti(4, w)   !! Initializes the array `w` which is used in both `dzfftf` and `dzfftb`. 
+    call dzffti(4, w)   !! Initializes the array `w` which is used in both `dzfftf` and `dzfftb`.
 end program demo_dzffti
 ```
 
@@ -628,8 +628,8 @@ end program demo_dzffti
 
 #### Description
 
-Computes the fourier coefficients of a `real` perodic sequence (fourier analysis). 
-The transform is defined below at output parameters `azero`, `a` and `b`. 
+Computes the fourier coefficients of a `real` perodic sequence (fourier analysis).
+The transform is defined below at output parameters `azero`, `a` and `b`.
 `dzfftf` is a simplified but **slower version** of `dfftf`.
 
 #### Status
@@ -680,9 +680,9 @@ then for  k=1,...,kmax
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.
-A work array which must be dimensioned at least `3*n+15`. 
-In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
-This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+A work array which must be dimensioned at least `3*n+15`.
+In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `dzfftf` and `dzfftb`.
 
 #### Example
@@ -702,8 +702,8 @@ end program demo_dzfftf
 
 #### Description
 
-Computes a `real` perodic sequence from its fourier coefficients (fourier synthesis). 
-The transform is defined below at output parameter `r`. 
+Computes a `real` perodic sequence from its fourier coefficients (fourier synthesis).
+The transform is defined below at output parameter `r`.
 `dzfftb` is a simplified but **slower version** of `dfftb`.
 
 #### Status
@@ -787,9 +787,9 @@ if n is odd (n-1)/2 locations are required
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.
-A work array which must be dimensioned at least `3*n+15`. 
-In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
-This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. 
+A work array which must be dimensioned at least `3*n+15`.
+In the program that calls `dzfftf`. The `wsave` array must be initialized by calling subroutine `dzffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `dzfftf` and `dzfftb`.
 
 #### Example
@@ -813,7 +813,7 @@ end program demo_dzfftb
 
 #### Description
 
-Initializes the array `wsave` which is used in both `dcosqf` and `dcosqb`. 
+Initializes the array `wsave` which is used in both `dcosqf` and `dcosqb`.
 The prime factorization of `n` together with
 a tabulation of the trigonometric functions are computed and
 stored in `wsave`.
@@ -834,14 +834,14 @@ Pure subroutine.
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
-The length of the array to be transformed. 
+The length of the array to be transformed.
 The method is most efficient when `n` is a product of small primes.
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `3*n+15`.
 The same work array can be used for both `dcosqf` and `dcosqb`
-as long as `n` remains unchanged. 
+as long as `n` remains unchanged.
 Different `wsave` arrays are required for different values of `n`.
 The contents of `wsave` must not be changed between calls of `dcosqf` or `dcosqb`.
 
@@ -851,7 +851,7 @@ The contents of `wsave` must not be changed between calls of `dcosqf` or `dcosqb
 program demo_dcosqi
     use fftpack, only: dcosqi
     real(kind=8) :: w(3*4 + 15)
-    call dcosqi(4, w)   !! Initializes the array `w` which is used in both `dcosqf` and `dcosqb`. 
+    call dcosqi(4, w)   !! Initializes the array `w` which is used in both `dcosqf` and `dcosqb`.
 end program demo_dcosqi
 ```
 
@@ -859,8 +859,8 @@ end program demo_dcosqi
 
 #### Decsription
 
-Computes the fast fourier transform of quarter wave data. 
-That is, `dcosqf` computes the coefficients in a cosine series representation with only odd wave numbers. 
+Computes the fast fourier transform of quarter wave data.
+That is, `dcosqf` computes the coefficients in a cosine series representation with only odd wave numbers.
 The transform is defined below at output parameter `x`.
 
 `dcosqf` is the unnormalized inverse of `dcosqb` since a call of `dcosqf` followed by a call of `dcosqb` will multiply the input sequence `x` by `4*n`.
@@ -883,7 +883,7 @@ Pure subroutine.
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
-The length of the array `x` to be transformed. 
+The length of the array `x` to be transformed.
 The method is most efficient when `n` is a product of small primes.
 
 `x`: Shall be a `real` and rank-1 array.
@@ -905,8 +905,8 @@ for i=1,...,n
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.  
 A work array which must be dimensioned at least `3*n+15`
-in the program that calls `dcosqf`. 
-The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+in the program that calls `dcosqf`.
+The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 
 ##### Warning
@@ -920,7 +920,7 @@ program demo_dcosqf
     use fftpack, only: dcosqi, dcosqf
     real(kind=8) :: w(3*4 + 15)
     real(kind=8) :: x(4) = [1, 2, 3, 4]
-    call dcosqi(4, w) 
+    call dcosqi(4, w)
     call dcosqf(4, x, w)    !! `x`: [12.0, -9.10, 2.62, -1.51]
 end program demo_dcosqf
 ```
@@ -930,7 +930,7 @@ end program demo_dcosqf
 #### Decsription
 
 Computes the fast fourier transform of quarter wave data.
-That is, `dcosqb` computes a sequence from its representation in terms of a cosine series with odd wave numbers. 
+That is, `dcosqb` computes a sequence from its representation in terms of a cosine series with odd wave numbers.
 The transform is defined below at output parameter `x`.
 
 `dcosqb` is the unnormalized inverse of `dcosqf` since a call of `dcosqb` followed by a call of `dcosqf` will multiply the input sequence `x` by `4*n`.
@@ -953,7 +953,7 @@ Pure subroutine.
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
-The length of the array `x` to be transformed. 
+The length of the array `x` to be transformed.
 The method is most efficient when `n` is a product of small primes.
 
 `x`: Shall be a `real` and rank-1 array.
@@ -975,8 +975,8 @@ for i=1,...,n
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.  
 A work array which must be dimensioned at least `3*n+15`
-in the program that calls `dcosqb`. 
-The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+in the program that calls `dcosqb`.
+The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 
 ##### Warning
@@ -990,8 +990,8 @@ program demo_dcosqb
     use fftpack, only: dcosqi, dcosqf, dcosqb
     real(kind=8) :: w(3*4 + 15)
     real(kind=8) :: x(4) = [4, 3, 5, 10]
-    call dcosqi(4, w) 
-    call dcosqf(4, x, w) 
+    call dcosqi(4, w)
+    call dcosqf(4, x, w)
     call dcosqb(4, x, w)    !! `x`: [1.0, 2.0, 3.0, 4.0] * 4 * n, n = 4, which is unnormalized.
 end program demo_dcosqb
 ```
@@ -1065,7 +1065,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `real` array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 Transformed data to invert.
 
 `n`: Shall be an `integer` scalar.
@@ -1093,7 +1093,7 @@ end program demo_iqct
 
 #### Description
 
-Initializes the array `wsave` which is used in subroutine `dcost`. 
+Initializes the array `wsave` which is used in subroutine `dcost`.
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
 
 #### Status
@@ -1117,8 +1117,8 @@ The method is most efficient when n-1 is a product of small primes.
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(out)`.  
-A work array which must be dimensioned at least `3*n+15`. 
-Different `wsave` arrays are required for different values of `n`. 
+A work array which must be dimensioned at least `3*n+15`.
+Different `wsave` arrays are required for different values of `n`.
 The contents of `wsave` must not be changed between calls of `dcost`.
 
 #### Example
@@ -1127,7 +1127,7 @@ The contents of `wsave` must not be changed between calls of `dcost`.
 program demo_dcosti
     use fftpack, only: dcosti
     real(kind=8) :: w(3*4 + 15)
-    call dcosti(4, w)   !! Initializes the array `w` which is used in subroutine `dcost`. 
+    call dcosti(4, w)   !! Initializes the array `w` which is used in subroutine `dcost`.
 end program demo_dcosti
 ```
 
@@ -1135,10 +1135,10 @@ end program demo_dcosti
 
 #### Description
 
-Computes the discrete fourier cosine transform of an even sequence `x(i)`. 
+Computes the discrete fourier cosine transform of an even sequence `x(i)`.
 The transform is defined below at output parameter `x`.
 
-`dcost` is the unnormalized inverse of itself since a call of `dcost` followed by another call of `dcost` will multiply the input sequence `x` by `2*(n-1)`. 
+`dcost` is the unnormalized inverse of itself since a call of `dcost` followed by another call of `dcost` will multiply the input sequence `x` by `2*(n-1)`.
 The transform is defined below at output parameter `x`.
 
 The array `wsave` which is used by subroutine `dcost` must be initialized by calling subroutine `dcosti(n,wsave)`.
@@ -1159,7 +1159,7 @@ Pure subroutine.
 
 `n`: Shall be a `integer` scalar.
 This argument is `intent(in)`.  
-The length of the sequence `x`. 
+The length of the sequence `x`.
 `n` must be greater than `1`.
 The method is most efficient when `n-1` is a product of small primes.
 
@@ -1183,8 +1183,8 @@ for i=1,...,n
 
 `wsave`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.  
-A work array which must be dimensioned at least `3*n+15` in the program that calls `dcost`. 
-The `wsave` array must be initialized by calling subroutine `dcosti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. 
+A work array which must be dimensioned at least `3*n+15` in the program that calls `dcost`.
+The `wsave` array must be initialized by calling subroutine `dcosti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent
 transforms can be obtained faster than the first.
 Contains initialization calculations which must not be destroyed between calls of `dcost`.
@@ -1206,7 +1206,7 @@ end program demo_dcost
 
 #### Description
 
-Discrete fourier cosine (forward) transform of an even sequence. 
+Discrete fourier cosine (forward) transform of an even sequence.
 
 #### Status
 
@@ -1273,7 +1273,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `real` array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 Transformed data to invert.
 
 `n`: Shall be an `integer` scalar.
@@ -1320,7 +1320,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `complex/real` and rank-1 array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 
 #### Return value
 
@@ -1361,7 +1361,7 @@ Pure function.
 #### Argument
 
 `x`: Shall be a `complex/real` and rank-1 array.
-This argument is `intent(in)`. 
+This argument is `intent(in)`.
 
 #### Return value
 
@@ -1379,4 +1379,78 @@ program demo_ifftshift
     print *, ifftshift(fftshift(x(1:4)))   !! [1.0, 2.0, 3.0, 4.0]
     print *, ifftshift(fftshift(x))        !! [1.0, 2.0, 3.0, 4.0, 5.0]
 end program demo_ifftshift
+```
+
+### `fftfreq`
+
+#### Description
+
+Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the complex discrete Fourier transform, in the standard order (zero frequency first).
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):fftfreq(interface)]](n)`
+
+#### Argument
+
+`n`: Shall be an `integer`, equal to the length of the corresponding complex discrete Fourier transform.
+This argument is `intent(in)`.
+
+#### Return value
+
+Returns the `integer` and rank-1 array of the transform's frequency values in the standard order (zero frequency first).
+
+#### Example
+
+```fortran
+program demo_fftfreq
+    use fftpack, only: fftfreq
+    print *, fftfreq(4)  ! [0, 1, -2, -1]
+    print *, fftfreq(5)  ! [0, 1, 2, -2, -1]
+end program demo_fftfreq
+```
+
+### `rfftfreq`
+
+#### Description
+
+Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the real discrete Fourier transform, in the standard order (zero frequency first).
+
+#### Status
+
+Experimental.
+
+#### Class
+
+Pure function.
+
+#### Syntax
+
+`result = [[fftpack(module):rfftfreq(interface)]](n)`
+
+#### Argument
+
+`n`: Shall be an `integer`, equal to the length of the corresponding real discrete Fourier transform.
+This argument is `intent(in)`.
+
+#### Return value
+
+Returns the `integer` and rank-1 array of the transform's frequency values in the standard order (zero frequency first).
+
+#### Example
+
+```fortran
+program demo_rfftfreq
+    use fftpack, only: rfftfreq
+    print *, rfftfreq(4)  ! [0, 1, 1, -2]
+    print *, rfftfreq(5)  ! [0, 1, 1, 2, 2]
+end program demo_rfftfreq
 ```
