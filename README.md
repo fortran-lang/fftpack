@@ -31,6 +31,7 @@ fftpack = { git="https://github.com/fortran-lang/fftpack.git" }
 Alternatively, you can build using provided `Makefile`:
 ```bash
 make
+make test
 ```
 
 ## Build with CMake

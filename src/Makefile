@@ -1,4 +1,4 @@
-SRCF = \
+SRCF90 = \
 	zfftb.f90\
 	cfftb1.f90\
 	zfftf.f90\
@@ -47,9 +47,7 @@ SRCF = \
 	dsinqi.f90\
 	dsint.f90\
 	sint1.f90\
-	dsinti.f90
-
-SRCF90 = \
+	dsinti.f90\
 	fftpack.f90\
 	fftpack_fft.f90\
 	fftpack_ifft.f90\
@@ -59,20 +57,27 @@ SRCF90 = \
 	fftpack_ifftshift.f90\
 	fftpack_qct.f90\
 	fftpack_iqct.f90\
-	fftpack_dct.f90\
-	rk.f90
+	fftpack_dct.f90
 
-OBJF := $(SRCF:.f90=.o)
-OBJF90 := $(SRCF90:.f90=.o)
+SRCFPP = \
+	rk.F90
 
-lib$(LIB).a: $(OBJF) $(OBJF90)
-	ar -rcs lib$(LIB).a $(OBJF) $(OBJF90)
+OBJ = $(SRCF90:.f90=.o)
+OBJ += $(SRCFPP:.F90=.o)
 
-shared: $(OBJ)
+build: lib$(LIB).a lib$(LIB).so
+
+lib$(LIB).a: $(OBJ)
+	ar -rcs lib$(LIB).a $(OBJ)
+
+lib$(LIB).so: $(OBJ)
 	$(FC) -shared -o lib$(LIB).so $(OBJ)
 
 clean:
 	rm -f -r *.o *.a *.so *.mod *.smod
+
+%.o: %.F90
+	$(FC) $(FFLAGS) -c $<
 
 %.o: %.f90
 	$(FC) $(FFLAGS) -c $<

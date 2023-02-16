@@ -1,35 +1,39 @@
 FETCH = curl -L
 
-SRC = \
+SRCF90 = \
 	test_fftpack_fft.f90 \
 	test_fftpack_rfft.f90 \
-	test_fftpack_qct.f90 \
-	test_fftpack_dct.f90 \
 	test_fftpack_utils.f90 \
-	test_fftpack.f90 \
-	testdrive.F90
-	
-OBJ = $(SRC:.f90=.o)
-OBJ := $(OBJ:.F90=.o)
+	test_fftpack.f90
 
-all: tstfft \
-	test_fftpack
+SRCFPP = \
+	test_fftpack_qct.F90 \
+	test_fftpack_dct.F90 \
+	testdrive.F90
+
+OBJ = $(SRCF90:%.f90=%.o) 
+OBJ += $(SRCFPP:%.F90=%.o)
+
+build: tstfft.x \
+	test_fftpack.x
+	
+test: build
+	./tstfft.x
+	./test_fftpack.x
 
 # Orginal test
-tstfft: tstfft.f
-	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@.x
-	time ./tstfft.x
+tstfft.x: tstfft.f
+	$(FC) $(FFLAGS) $< -L../src -l$(LIB) -I../src -o $@
 
 # `fftpack` fft routines
-test_fftpack: $(OBJ)
-	$(FC) $(FFLAGS) $(OBJ) -L../src -l$(LIB) -I../src -o $@.x
-	./test_fftpack.x
+test_fftpack.x: $(OBJ)
+	$(FC) $(FFLAGS) $(OBJ) -L../src -l$(LIB) -I../src -o $@
 	
 testdrive.F90:
 	$(FETCH) https://github.com/fortran-lang/test-drive/raw/v0.4.0/src/testdrive.F90 > $@
 	
 %.o: %.F90
-	$(FC) $(FFLAGS) -c $<
+	$(FC) $(FFLAGS) -I../src -c $<
 
 %.o: %.f90
 	$(FC) $(FFLAGS) -I../src -c $<
