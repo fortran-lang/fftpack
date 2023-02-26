@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title="45.8% of total for modules and submodules.">173 statements</a>
+               title="42.0% of total for modules and submodules.">182 statements</a>
           </li>
 
             <li id="source-file">
@@ -145,6 +145,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftf">dzfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzffti">dzffti</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-fft">fft</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-fftfreq">fftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-fftshift">fftshift</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-idct">idct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifft">ifft</a>
@@ -153,6 +154,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-irfft">irfft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-qct">qct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfft">rfft</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-rfftfreq">rfftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftb">zfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftf">zfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zffti">zffti</a>
@@ -208,6 +210,7 @@ fortran-lang/fftpack contributors" >
                 <li><a href='../module/fftpack_irfft.html'>fftpack_irfft</a></li>
                 <li><a href='../module/fftpack_qct.html'>fftpack_qct</a></li>
                 <li><a href='../module/fftpack_rfft.html'>fftpack_rfft</a></li>
+                <li><a href='../module/fftpack_utils.html'>fftpack_utils</a></li>
             </ul>
           </li>
       </ul>
@@ -246,6 +249,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftf">dzfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzffti">dzffti</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-fft">fft</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-fftfreq">fftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-fftshift">fftshift</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-idct">idct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifft">ifft</a>
@@ -254,6 +258,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-irfft">irfft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-qct">qct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfft">rfft</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-rfftfreq">rfftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftb">zfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftf">zfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zffti">zffti</a>
@@ -1325,6 +1330,60 @@ fortran-lang/fftpack contributors" >
 
        <div class="panel panel-default">
     <div class="panel-heading codesum">
+      <span class="anchor" id="interface-fftfreq"></span>
+      <h3>        interface
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+              <h3>
+    public pure module function fftfreq(n) result(out)  
+
+    </h3>
+  <p>Integer frequency values involved in complex FFT.
+(<a href="../page/specs/fftpack.html#fftfreq">Specifiction</a>)</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>integer, dimension(n)</small>
+    </h4>
+    
+
+        </li>
+    </ul>
+  </div>
+
+       <div class="panel panel-default">
+    <div class="panel-heading codesum">
       <span class="anchor" id="interface-fftshift"></span>
       <h3>public        interface <a href='../interface/fftshift.html'>fftshift</a> 
       </h3>
@@ -1957,6 +2016,60 @@ fortran-lang/fftpack contributors" >
 
        <div class="panel panel-default">
     <div class="panel-heading codesum">
+      <span class="anchor" id="interface-rfftfreq"></span>
+      <h3>        interface
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+              <h3>
+    public pure module function rfftfreq(n) result(out)  
+
+    </h3>
+  <p>Integer frequency values involved in real FFT.
+(<a href="../page/specs/fftpack.html#rfftfreq">Specifiction</a>)</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>integer, dimension(n)</small>
+    </h4>
+    
+
+        </li>
+    </ul>
+  </div>
+
+       <div class="panel panel-default">
+    <div class="panel-heading codesum">
       <span class="anchor" id="interface-zfftb"></span>
       <h3>        interface
       </h3>
@@ -2202,7 +2315,7 @@ fortran-lang/fftpack contributors<br>&copy; 2023 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-02-24 03:15            </p>
+ on 2023-02-26 08:33            </p>
         </div>
       </div>
       <br>

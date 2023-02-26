@@ -373,6 +373,26 @@ fortran-lang/fftpack contributors" >
 <li><a href="#example_23">Example</a></li>
 </ul>
 </li>
+<li><a href="#fftfreq">fftfreq</a><ul>
+<li><a href="#description_22">Description</a></li>
+<li><a href="#status_24">Status</a></li>
+<li><a href="#class_24">Class</a></li>
+<li><a href="#syntax_24">Syntax</a></li>
+<li><a href="#argument_16">Argument</a></li>
+<li><a href="#return-value_10">Return value</a></li>
+<li><a href="#example_24">Example</a></li>
+</ul>
+</li>
+<li><a href="#rfftfreq">rfftfreq</a><ul>
+<li><a href="#description_23">Description</a></li>
+<li><a href="#status_25">Status</a></li>
+<li><a href="#class_25">Class</a></li>
+<li><a href="#syntax_25">Syntax</a></li>
+<li><a href="#argument_17">Argument</a></li>
+<li><a href="#return-value_11">Return value</a></li>
+<li><a href="#example_25">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -443,9 +463,9 @@ A <code>complex</code> array of length <code>n</code> which contains the sequenc
 
 <p><code>wsave</code>: Shall be a <code>real</code> array.
 This argument is <code>intent(in)</code>.<br>
-A <code>real</code> work array which must be dimensioned at least <code>4n+15</code> in the program that calls <code>zfftf</code>. 
+A <code>real</code> work array which must be dimensioned at least <code>4n+15</code> in the program that calls <code>zfftf</code>.
 The wsave array must be initialized by calling subroutine <code>zffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.<br>
-This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first. 
+This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same <code>wsave</code> array can be used by <code>zfftf</code> and <code>zfftb</code>.<br>
 Contains initialization calculations which must not be destroyed between calls of subroutine <code>zfftf</code> or <code>zfftb</code>.</p>
 <h5 id="warning_1">Warning</h5>
@@ -464,8 +484,8 @@ Contains initialization calculations which must not be destroyed between calls o
 <h3 id="zfftb"><code>zfftb</code></h3>
 <h4 id="description_2">Description</h4>
 <p>Unnormalized inverse of <code>zfftf</code>.</p>
-<p>Computes the backward <code>complex</code> discrete fourier transform (the fourier synthesis). 
-Equivalently, <code>zfftb</code> computes a <code>complex</code> periodic sequence from its fourier coefficients. 
+<p>Computes the backward <code>complex</code> discrete fourier transform (the fourier synthesis).
+Equivalently, <code>zfftb</code> computes a <code>complex</code> periodic sequence from its fourier coefficients.
 The transform is defined below at output parameter <code>c</code>.</p>
 <p>The transform is not normalized. to obtain a normalized transform the output must be divided by <code>n</code>. Otherwise a call of <code>zfftf</code> followed by a call of <code>zfftb</code> will multiply the sequence by <code>n</code>.</p>
 <p>The array <code>wsave</code> which is used by subroutine <code>zfftf</code> must be initialized by calling subroutine <code>zffti(n,wsave)</code>.</p>
@@ -520,7 +540,7 @@ Contains initialization calculations which must not be destroyed between calls o
 <p><code>result = <a href="../../module/fftpack.html#interface-fft">fft</a>(x [, n])</code></p>
 <h4 id="argument_3">Argument</h4>
 <p><code>x</code>: Shall be a <code>complex</code> and rank-1 array.
-This argument is <code>intent(in)</code>. </p>
+This argument is <code>intent(in)</code>.</p>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code> and <code>optional</code>.<br>
 Defines the length of the Fourier transform. If <code>n</code> is not specified (the default) then <code>n = size(x)</code>. If <code>n &lt;= size(x)</code>, <code>x</code> is truncated, if <code>n &gt; size(x)</code>, <code>x</code> is zero-padded.</p>
@@ -550,7 +570,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <p><code>result = <a href="../../module/fftpack.html#interface-ifft">ifft</a>(x [, n])</code></p>
 <h4 id="argument_4">Argument</h4>
 <p><code>x</code>: Shall be a <code>complex</code> and rank-1 array.
-This argument is <code>intent(in)</code>. </p>
+This argument is <code>intent(in)</code>.</p>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code> and <code>optional</code>.<br>
 Defines the length of the Fourier transform. If <code>n</code> is not specified (the default) then <code>n = size(x)</code>. If <code>n &lt;= size(x)</code>, <code>x</code> is truncated, if <code>n &gt; size(x)</code>, <code>x</code> is zero-padded.</p>
@@ -584,7 +604,7 @@ The length of the sequence to be transformed.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> array.
 This argument is <code>intent(out)</code>.<br>
 A work array which must be dimensioned at least <code>2*n+15</code>.
-The same work array can be used for both <code>dfftf</code> and <code>dfftb</code> as long as <code>n</code> remains unchanged. 
+The same work array can be used for both <code>dfftf</code> and <code>dfftb</code> as long as <code>n</code> remains unchanged.
 Different <code>wsave</code> arrays are required for different values of <code>n</code>.   </p>
 <h5 id="warning_3">Warning</h5>
 <p>The contents of <code>wsave</code> must not be changed between calls of <code>dfftf</code> or <code>dfftb</code>.</p>
@@ -599,7 +619,7 @@ Different <code>wsave</code> arrays are required for different values of <code>n
 
 <h3 id="dfftf"><code>dfftf</code></h3>
 <h4 id="description_6">Description</h4>
-<p>Computes the fourier coefficients of a real perodic sequence (fourier analysis). 
+<p>Computes the fourier coefficients of a real perodic sequence (fourier analysis).
 The transform is defined below at output parameter <code>r</code>.</p>
 <p>The transform is not normalized. To obtain a normalized transform the output must be divided by <code>n</code>. Otherwise a call of <code>dfftf</code> followed by a call of <code>dfftb</code> will multiply the sequence by <code>n</code>.</p>
 <p>The array <code>wsave</code> which is used by subroutine <code>dfftf</code> must be initialized by calling subroutine <code>dffti(n,wsave)</code>.</p>
@@ -640,9 +660,9 @@ A <code>real</code> array of length <code>n</code> which contains the sequence.<
 
 <p><code>wsave</code>: Shall be a <code>real</code> array.
 This argument is <code>intent(in)</code>.<br>
-A <code>real</code> work array which must be dimensioned at least <code>4n+15</code> in the program that calls <code>dfftf</code>. 
+A <code>real</code> work array which must be dimensioned at least <code>4n+15</code> in the program that calls <code>dfftf</code>.
 The wsave array must be initialized by calling subroutine <code>dffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.<br>
-This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first. 
+This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same <code>wsave</code> array can be used by <code>dfftf</code> and <code>dfftb</code>.<br>
 Contains initialization calculations which must not be destroyed between calls of subroutine <code>dfftf</code> or <code>dfftb</code>.</p>
 <h5 id="warning_4">Warning</h5>
@@ -660,7 +680,7 @@ Contains initialization calculations which must not be destroyed between calls o
 <h3 id="dfftb"><code>dfftb</code></h3>
 <h4 id="description_7">Description</h4>
 <p>Unnormalized inverse of <code>dfftf</code>.</p>
-<p>Computes the backward <code>real</code> discrete fourier transform (the fourier synthesis). 
+<p>Computes the backward <code>real</code> discrete fourier transform (the fourier synthesis).
 Equivalently, <code>dfftb</code> computes a <code>real</code> periodic sequence from its fourier coefficients.
 The transform is defined below at output parameter <code>c</code>.</p>
 <p>The transform is not normalized. To obtain a normalized transform the output must be divided by <code>n</code>. Otherwise a call of <code>dfftf</code> followed by a call of <code>dfftb</code> will multiply the sequence by <code>n</code>.</p>
@@ -755,7 +775,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <p><code>result = <a href="../../module/fftpack.html#interface-irfft">irfft</a>(x [, n])</code></p>
 <h4 id="argument_9">Argument</h4>
 <p><code>x</code>: Shall be a <code>real</code> array.
-This argument is <code>intent(in)</code>. 
+This argument is <code>intent(in)</code>.
 Transformed data to invert.</p>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code> and <code>optional</code>.<br>
@@ -774,7 +794,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <h2 id="simplified-fourier-transform-of-double-real-periodic-sequences">Simplified fourier transform of double real periodic sequences</h2>
 <h3 id="dzffti"><code>dzffti</code></h3>
 <h4 id="description_10">Description</h4>
-<p>Initializes the array <code>wsave</code> which is used in both <code>dzfftf</code> and <code>dzfftb</code>. 
+<p>Initializes the array <code>wsave</code> which is used in both <code>dzfftf</code> and <code>dzfftb</code>.
 The prime factorization of <code>n</code> together with a tabulation of the trigonometric functions are computed and stored in <code>wsave</code>.</p>
 <h4 id="status_10">Status</h4>
 <p>Experimental</p>
@@ -789,7 +809,7 @@ The length of the sequence to be transformed.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(out)</code>.<br>
 A work array which must be dimensioned at least <code>3*n+15</code>.
-The same work array can be used for both <code>dzfftf</code> and <code>dzfftb</code> as long as n remains unchanged. 
+The same work array can be used for both <code>dzfftf</code> and <code>dzfftb</code> as long as n remains unchanged.
 Different <code>wsave</code> arrays are required for different values of <code>n</code>.</p>
 <h5 id="warning_6">Warning</h5>
 <p>The contents of <code>wsave</code> must not be changed between calls of <code>dzfftf</code> or <code>dzfftb</code>.</p>
@@ -798,14 +818,14 @@ Different <code>wsave</code> arrays are required for different values of <code>n
 <span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dzffti</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">call </span><span class="n">dzffti</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in both `dzfftf` and `dzfftb`. </span>
+<span class="w">    </span><span class="k">call </span><span class="n">dzffti</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in both `dzfftf` and `dzfftb`.</span>
 <span class="k">end program </span><span class="n">demo_dzffti</span><span class="w"></span>
 </code></pre></div>
 
 <h3 id="dzfftf"><code>dzfftf</code></h3>
 <h4 id="description_11">Description</h4>
-<p>Computes the fourier coefficients of a <code>real</code> perodic sequence (fourier analysis). 
-The transform is defined below at output parameters <code>azero</code>, <code>a</code> and <code>b</code>. 
+<p>Computes the fourier coefficients of a <code>real</code> perodic sequence (fourier analysis).
+The transform is defined below at output parameters <code>azero</code>, <code>a</code> and <code>b</code>.
 <code>dzfftf</code> is a simplified but <strong>slower version</strong> of <code>dfftf</code>.</p>
 <h4 id="status_11">Status</h4>
 <p>Experimental</p>
@@ -844,9 +864,9 @@ This argument is <code>intent(out)</code>.  </p>
 
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(in)</code>.
-A work array which must be dimensioned at least <code>3*n+15</code>. 
-In the program that calls <code>dzfftf</code>. The <code>wsave</code> array must be initialized by calling subroutine <code>dzffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>. 
-This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first. 
+A work array which must be dimensioned at least <code>3*n+15</code>.
+In the program that calls <code>dzfftf</code>. The <code>wsave</code> array must be initialized by calling subroutine <code>dzffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.
+This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same <code>wsave</code> array can be used by <code>dzfftf</code> and <code>dzfftb</code>.</p>
 <h4 id="example_11">Example</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_dzfftf</span><span class="w"></span>
@@ -861,8 +881,8 @@ The same <code>wsave</code> array can be used by <code>dzfftf</code> and <code>d
 
 <h3 id="dzfftb"><code>dzfftb</code></h3>
 <h4 id="description_12">Description</h4>
-<p>Computes a <code>real</code> perodic sequence from its fourier coefficients (fourier synthesis). 
-The transform is defined below at output parameter <code>r</code>. 
+<p>Computes a <code>real</code> perodic sequence from its fourier coefficients (fourier synthesis).
+The transform is defined below at output parameter <code>r</code>.
 <code>dzfftb</code> is a simplified but <strong>slower version</strong> of <code>dfftb</code>.</p>
 <h4 id="status_12">Status</h4>
 <p>Experimental</p>
@@ -934,9 +954,9 @@ The length of these arrays depends on whether <code>n</code> is even or odd.</p>
 
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(in)</code>.
-A work array which must be dimensioned at least <code>3*n+15</code>. 
-In the program that calls <code>dzfftf</code>. The <code>wsave</code> array must be initialized by calling subroutine <code>dzffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>. 
-This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first. 
+A work array which must be dimensioned at least <code>3*n+15</code>.
+In the program that calls <code>dzfftf</code>. The <code>wsave</code> array must be initialized by calling subroutine <code>dzffti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.
+This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same <code>wsave</code> array can be used by <code>dzfftf</code> and <code>dzfftb</code>.</p>
 <h4 id="example_12">Example</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_dzfftb</span><span class="w"></span>
@@ -954,7 +974,7 @@ The same <code>wsave</code> array can be used by <code>dzfftf</code> and <code>d
 <h2 id="cosine-transform-with-odd-wave-numbers">Cosine transform with odd wave numbers</h2>
 <h3 id="dcosqi"><code>dcosqi</code></h3>
 <h4 id="description_13">Description</h4>
-<p>Initializes the array <code>wsave</code> which is used in both <code>dcosqf</code> and <code>dcosqb</code>. 
+<p>Initializes the array <code>wsave</code> which is used in both <code>dcosqf</code> and <code>dcosqb</code>.
 The prime factorization of <code>n</code> together with
 a tabulation of the trigonometric functions are computed and
 stored in <code>wsave</code>.</p>
@@ -967,27 +987,27 @@ stored in <code>wsave</code>.</p>
 <h4 id="arguments_3">Arguments</h4>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code>.<br>
-The length of the array to be transformed. 
+The length of the array to be transformed.
 The method is most efficient when <code>n</code> is a product of small primes.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(out)</code>.<br>
 A work array which must be dimensioned at least <code>3*n+15</code>.
 The same work array can be used for both <code>dcosqf</code> and <code>dcosqb</code>
-as long as <code>n</code> remains unchanged. 
+as long as <code>n</code> remains unchanged.
 Different <code>wsave</code> arrays are required for different values of <code>n</code>.
 The contents of <code>wsave</code> must not be changed between calls of <code>dcosqf</code> or <code>dcosqb</code>.</p>
 <h4 id="example_13">Example</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_dcosqi</span><span class="w"></span>
 <span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dcosqi</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in both `dcosqf` and `dcosqb`. </span>
+<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in both `dcosqf` and `dcosqb`.</span>
 <span class="k">end program </span><span class="n">demo_dcosqi</span><span class="w"></span>
 </code></pre></div>
 
 <h3 id="dcosqf"><code>dcosqf</code></h3>
 <h4 id="decsription">Decsription</h4>
-<p>Computes the fast fourier transform of quarter wave data. 
-That is, <code>dcosqf</code> computes the coefficients in a cosine series representation with only odd wave numbers. 
+<p>Computes the fast fourier transform of quarter wave data.
+That is, <code>dcosqf</code> computes the coefficients in a cosine series representation with only odd wave numbers.
 The transform is defined below at output parameter <code>x</code>.</p>
 <p><code>dcosqf</code> is the unnormalized inverse of <code>dcosqb</code> since a call of <code>dcosqf</code> followed by a call of <code>dcosqb</code> will multiply the input sequence <code>x</code> by <code>4*n</code>.</p>
 <p>The array <code>wsave</code> which is used by subroutine <code>dcosqf</code> must be initialized by calling subroutine <code>dcosqi(n,wsave)</code>.</p>
@@ -1000,7 +1020,7 @@ The transform is defined below at output parameter <code>x</code>.</p>
 <h4 id="arguments_4">Arguments</h4>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code>.<br>
-The length of the array <code>x</code> to be transformed. 
+The length of the array <code>x</code> to be transformed.
 The method is most efficient when <code>n</code> is a product of small primes.</p>
 <p><code>x</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(inout)</code>.<br>
@@ -1020,8 +1040,8 @@ An array which contains the sequence to be transformed.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(in)</code>.<br>
 A work array which must be dimensioned at least <code>3*n+15</code>
-in the program that calls <code>dcosqf</code>. 
-The <code>wsave</code> array must be initialized by calling subroutine <code>dcosqi(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>. 
+in the program that calls <code>dcosqf</code>.
+The <code>wsave</code> array must be initialized by calling subroutine <code>dcosqi(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.
 This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.</p>
 <h5 id="warning_7">Warning</h5>
 <p><code>wsave</code> contains initialization calculations which must not be destroyed between calls of <code>dcosqf</code> or <code>dcosqb</code>.</p>
@@ -1030,7 +1050,7 @@ This initialization does not have to be repeated so long as <code>n</code> remai
 <span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dcosqi</span><span class="p">,</span><span class="w"> </span><span class="n">dcosqf</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="k">call </span><span class="n">dcosqf</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">    </span><span class="c">!! `x`: [12.0, -9.10, 2.62, -1.51]</span>
 <span class="k">end program </span><span class="n">demo_dcosqf</span><span class="w"></span>
 </code></pre></div>
@@ -1038,7 +1058,7 @@ This initialization does not have to be repeated so long as <code>n</code> remai
 <h3 id="dcosqb"><code>dcosqb</code></h3>
 <h4 id="decsription_1">Decsription</h4>
 <p>Computes the fast fourier transform of quarter wave data.
-That is, <code>dcosqb</code> computes a sequence from its representation in terms of a cosine series with odd wave numbers. 
+That is, <code>dcosqb</code> computes a sequence from its representation in terms of a cosine series with odd wave numbers.
 The transform is defined below at output parameter <code>x</code>.</p>
 <p><code>dcosqb</code> is the unnormalized inverse of <code>dcosqf</code> since a call of <code>dcosqb</code> followed by a call of <code>dcosqf</code> will multiply the input sequence <code>x</code> by <code>4*n</code>.</p>
 <p>The array <code>wsave</code> which is used by subroutine <code>dcosqb</code> must be initialized by calling subroutine <code>dcosqi(n,wsave)</code>.</p>
@@ -1051,7 +1071,7 @@ The transform is defined below at output parameter <code>x</code>.</p>
 <h4 id="arguments_5">Arguments</h4>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code>.<br>
-The length of the array <code>x</code> to be transformed. 
+The length of the array <code>x</code> to be transformed.
 The method is most efficient when <code>n</code> is a product of small primes.</p>
 <p><code>x</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(inout)</code>.<br>
@@ -1071,8 +1091,8 @@ An array which contains the sequence to be transformed.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(in)</code>.<br>
 A work array which must be dimensioned at least <code>3*n+15</code>
-in the program that calls <code>dcosqb</code>. 
-The <code>wsave</code> array must be initialized by calling subroutine <code>dcosqi(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>. 
+in the program that calls <code>dcosqb</code>.
+The <code>wsave</code> array must be initialized by calling subroutine <code>dcosqi(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.
 This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent transforms can be obtained faster than the first.</p>
 <h5 id="warning_8">Warning</h5>
 <p><code>wsave</code> contains initialization calculations which must not be destroyed between calls of <code>dcosqf</code> or <code>dcosqb</code>.</p>
@@ -1081,8 +1101,8 @@ This initialization does not have to be repeated so long as <code>n</code> remai
 <span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dcosqi</span><span class="p">,</span><span class="w"> </span><span class="n">dcosqf</span><span class="p">,</span><span class="w"> </span><span class="n">dcosqb</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span>
-<span class="w">    </span><span class="k">call </span><span class="n">dcosqf</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">call </span><span class="n">dcosqi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">call </span><span class="n">dcosqf</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="k">call </span><span class="n">dcosqb</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">    </span><span class="c">!! `x`: [1.0, 2.0, 3.0, 4.0] * 4 * n, n = 4, which is unnormalized.</span>
 <span class="k">end program </span><span class="n">demo_dcosqb</span><span class="w"></span>
 </code></pre></div>
@@ -1128,7 +1148,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <p><code>result = <a href="../../module/fftpack.html#interface-iqct">iqct</a>(x [, n])</code></p>
 <h4 id="argument_11">Argument</h4>
 <p><code>x</code>: Shall be a <code>real</code> array.
-This argument is <code>intent(in)</code>. 
+This argument is <code>intent(in)</code>.
 Transformed data to invert.</p>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code> and <code>optional</code>.<br>
@@ -1147,7 +1167,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <h2 id="cosine-transform-of-a-real-even-sequence">Cosine transform of a real even sequence</h2>
 <h3 id="dcosti"><code>dcosti</code></h3>
 <h4 id="description_16">Description</h4>
-<p>Initializes the array <code>wsave</code> which is used in subroutine <code>dcost</code>. 
+<p>Initializes the array <code>wsave</code> which is used in subroutine <code>dcost</code>.
 The prime factorization of <code>n</code> together with a tabulation of the trigonometric functions are computed and stored in <code>wsave</code>.</p>
 <h4 id="status_18">Status</h4>
 <p>Experimental</p>
@@ -1162,22 +1182,22 @@ The length of the sequence to be transformed.<br>
 The method is most efficient when n-1 is a product of small primes.</p>
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(out)</code>.<br>
-A work array which must be dimensioned at least <code>3*n+15</code>. 
-Different <code>wsave</code> arrays are required for different values of <code>n</code>. 
+A work array which must be dimensioned at least <code>3*n+15</code>.
+Different <code>wsave</code> arrays are required for different values of <code>n</code>.
 The contents of <code>wsave</code> must not be changed between calls of <code>dcost</code>.</p>
 <h4 id="example_18">Example</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_dcosti</span><span class="w"></span>
 <span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dcosti</span><span class="w"></span>
 <span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">call </span><span class="n">dcosti</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in subroutine `dcost`. </span>
+<span class="w">    </span><span class="k">call </span><span class="n">dcosti</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w">   </span><span class="c">!! Initializes the array `w` which is used in subroutine `dcost`.</span>
 <span class="k">end program </span><span class="n">demo_dcosti</span><span class="w"></span>
 </code></pre></div>
 
 <h3 id="dcost"><code>dcost</code></h3>
 <h4 id="description_17">Description</h4>
-<p>Computes the discrete fourier cosine transform of an even sequence <code>x(i)</code>. 
+<p>Computes the discrete fourier cosine transform of an even sequence <code>x(i)</code>.
 The transform is defined below at output parameter <code>x</code>.</p>
-<p><code>dcost</code> is the unnormalized inverse of itself since a call of <code>dcost</code> followed by another call of <code>dcost</code> will multiply the input sequence <code>x</code> by <code>2*(n-1)</code>. 
+<p><code>dcost</code> is the unnormalized inverse of itself since a call of <code>dcost</code> followed by another call of <code>dcost</code> will multiply the input sequence <code>x</code> by <code>2*(n-1)</code>.
 The transform is defined below at output parameter <code>x</code>.</p>
 <p>The array <code>wsave</code> which is used by subroutine <code>dcost</code> must be initialized by calling subroutine <code>dcosti(n,wsave)</code>.</p>
 <h4 id="status_19">Status</h4>
@@ -1189,7 +1209,7 @@ The transform is defined below at output parameter <code>x</code>.</p>
 <h4 id="arguments_7">Arguments</h4>
 <p><code>n</code>: Shall be a <code>integer</code> scalar.
 This argument is <code>intent(in)</code>.<br>
-The length of the sequence <code>x</code>. 
+The length of the sequence <code>x</code>.
 <code>n</code> must be greater than <code>1</code>.
 The method is most efficient when <code>n-1</code> is a product of small primes.</p>
 <p><code>x</code>: Shall be a <code>real</code> and rank-1 array.
@@ -1211,8 +1231,8 @@ An array which contains the sequence to be transformed.</p>
 
 <p><code>wsave</code>: Shall be a <code>real</code> and rank-1 array.
 This argument is <code>intent(in)</code>.<br>
-A work array which must be dimensioned at least <code>3*n+15</code> in the program that calls <code>dcost</code>. 
-The <code>wsave</code> array must be initialized by calling subroutine <code>dcosti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>. 
+A work array which must be dimensioned at least <code>3*n+15</code> in the program that calls <code>dcost</code>.
+The <code>wsave</code> array must be initialized by calling subroutine <code>dcosti(n,wsave)</code> and a different <code>wsave</code> array must be used for each different value of <code>n</code>.
 This initialization does not have to be repeated so long as <code>n</code> remains unchanged thus subsequent
 transforms can be obtained faster than the first.
 Contains initialization calculations which must not be destroyed between calls of <code>dcost</code>.</p>
@@ -1229,7 +1249,7 @@ Contains initialization calculations which must not be destroyed between calls o
 
 <h3 id="dct"><code>dct</code></h3>
 <h4 id="description_18">Description</h4>
-<p>Discrete fourier cosine (forward) transform of an even sequence. </p>
+<p>Discrete fourier cosine (forward) transform of an even sequence.</p>
 <h4 id="status_20">Status</h4>
 <p>Experimental.</p>
 <h4 id="class_20">Class</h4>
@@ -1270,7 +1290,7 @@ In fact, <code>idct</code> and <code>dct</code> have the same effect, <code>idct
 <p><code>result = <a href="../../module/fftpack.html#interface-idct">idct</a>(x [, n])</code></p>
 <h4 id="argument_13">Argument</h4>
 <p><code>x</code>: Shall be a <code>real</code> array.
-This argument is <code>intent(in)</code>. 
+This argument is <code>intent(in)</code>.
 Transformed data to invert.</p>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code> and <code>optional</code>.<br>
@@ -1299,7 +1319,7 @@ Defines the length of the Fourier transform. If <code>n</code> is not specified 
 <p><code>result = <a href="../../module/fftpack.html#interface-fftshift">fftshift</a>(x)</code></p>
 <h4 id="argument_14">Argument</h4>
 <p><code>x</code>: Shall be a <code>complex/real</code> and rank-1 array.
-This argument is <code>intent(in)</code>. </p>
+This argument is <code>intent(in)</code>.</p>
 <h4 id="return-value_8">Return value</h4>
 <p>Returns the <code>complex/real</code> and rank-1 Fourier transform by moving the zero-frequency component to the center of the array.</p>
 <h4 id="example_22">Example</h4>
@@ -1325,7 +1345,7 @@ This argument is <code>intent(in)</code>. </p>
 <p><code>result = <a href="../../module/fftpack.html#interface-ifftshift">ifftshift</a>(x)</code></p>
 <h4 id="argument_15">Argument</h4>
 <p><code>x</code>: Shall be a <code>complex/real</code> and rank-1 array.
-This argument is <code>intent(in)</code>. </p>
+This argument is <code>intent(in)</code>.</p>
 <h4 id="return-value_9">Return value</h4>
 <p>Returns the <code>complex/real</code> and rank-1 Fourier transform with zero frequency shifting back to the original transform output.</p>
 <h4 id="example_23">Example</h4>
@@ -1338,6 +1358,50 @@ This argument is <code>intent(in)</code>. </p>
 <span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ifftshift</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)))</span><span class="w">   </span><span class="c">!! [1.0, 2.0, 3.0, 4.0]</span>
 <span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ifftshift</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">        </span><span class="c">!! [1.0, 2.0, 3.0, 4.0, 5.0]</span>
 <span class="k">end program </span><span class="n">demo_ifftshift</span><span class="w"></span>
+</code></pre></div>
+
+<h3 id="fftfreq"><code>fftfreq</code></h3>
+<h4 id="description_22">Description</h4>
+<p>Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the complex discrete Fourier transform, in the standard order (zero frequency first).</p>
+<h4 id="status_24">Status</h4>
+<p>Experimental.</p>
+<h4 id="class_24">Class</h4>
+<p>Pure function.</p>
+<h4 id="syntax_24">Syntax</h4>
+<p><code>result = <a href="../../module/fftpack.html#interface-fftfreq">fftfreq</a>(n)</code></p>
+<h4 id="argument_16">Argument</h4>
+<p><code>n</code>: Shall be an <code>integer</code>, equal to the length of the corresponding complex discrete Fourier transform.
+This argument is <code>intent(in)</code>.</p>
+<h4 id="return-value_10">Return value</h4>
+<p>Returns the <code>integer</code> and rank-1 array of the transform's frequency values in the standard order (zero frequency first).</p>
+<h4 id="example_24">Example</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_fftfreq</span><span class="w"></span>
+<span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">fftfreq</span><span class="w"></span>
+<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">fftfreq</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w">  </span><span class="c">! [0, 1, -2, -1]</span>
+<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">fftfreq</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w">  </span><span class="c">! [0, 1, 2, -2, -1]</span>
+<span class="k">end program </span><span class="n">demo_fftfreq</span><span class="w"></span>
+</code></pre></div>
+
+<h3 id="rfftfreq"><code>rfftfreq</code></h3>
+<h4 id="description_23">Description</h4>
+<p>Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the real discrete Fourier transform, in the standard order (zero frequency first).</p>
+<h4 id="status_25">Status</h4>
+<p>Experimental.</p>
+<h4 id="class_25">Class</h4>
+<p>Pure function.</p>
+<h4 id="syntax_25">Syntax</h4>
+<p><code>result = <a href="../../module/fftpack.html#interface-rfftfreq">rfftfreq</a>(n)</code></p>
+<h4 id="argument_17">Argument</h4>
+<p><code>n</code>: Shall be an <code>integer</code>, equal to the length of the corresponding real discrete Fourier transform.
+This argument is <code>intent(in)</code>.</p>
+<h4 id="return-value_11">Return value</h4>
+<p>Returns the <code>integer</code> and rank-1 array of the transform's frequency values in the standard order (zero frequency first).</p>
+<h4 id="example_25">Example</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">program </span><span class="n">demo_rfftfreq</span><span class="w"></span>
+<span class="w">    </span><span class="k">use </span><span class="n">fftpack</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">rfftfreq</span><span class="w"></span>
+<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">rfftfreq</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w">  </span><span class="c">! [0, 1, 1, -2]</span>
+<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">rfftfreq</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w">  </span><span class="c">! [0, 1, 1, 2, 2]</span>
+<span class="k">end program </span><span class="n">demo_rfftfreq</span><span class="w"></span>
 </code></pre></div>
     </div>
     <div class="col-md-3 col-md-pull-9">
@@ -1377,7 +1441,7 @@ fortran-lang/fftpack contributors<br>&copy; 2023 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-02-24 03:15            </p>
+ on 2023-02-26 08:33            </p>
         </div>
       </div>
       <br>
