@@ -31,9 +31,7 @@ set(FFTPACK_SOURCES
     ${dir}/fftpack_fftshift.f90
     ${dir}/fftpack_ifft.f90
     ${dir}/fftpack_ifftshift.f90
-    ${dir}/fftpack_iqct.f90
     ${dir}/fftpack_irfft.f90
-    ${dir}/fftpack_qct.f90
     ${dir}/fftpack_rfft.f90
     ${dir}/fftpack_utils.f90
     ${dir}/passb.f90
