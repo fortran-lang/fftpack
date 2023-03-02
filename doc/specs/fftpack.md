@@ -2,32 +2,30 @@
 title: FFTPACK
 ---
 
-# The `fftpack` Module
-
 [TOC]
 
-## Fourier transform of double complex periodic sequences
-### `zffti`
+# Discrete Fourier transform (DFT) of complex data
+## `zffti`
 
-#### Description
+### Description
 
 Initializes the array `wsave` which is used in both `zfftf` and `zfftb`.   
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and
 stored in `wsave`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):zffti(interface)]](n, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -40,11 +38,11 @@ The same work array can be used for both `zfftf` and `zfftb`
 as long as `n` remains unchanged. Different `wsave` arrays
 are required for different values of `n`.   
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `zfftf` or `zfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_zffti
@@ -55,9 +53,9 @@ program demo_zffti
 end program demo_zffti
 ```
 
-### `zfftf`
+## `zfftf`
 
-#### Description
+### Description
 
 Computes the forward complex discrete fourier transform (the fourier analysis).   
 Equivalently, `zfftf` computes the fourier coefficients of a complex periodic sequence.
@@ -67,19 +65,19 @@ The transform is not normalized. To obtain a normalized transform the output mus
 
 The array `wsave` which is used by subroutine `zfftf` must be initialized by calling subroutine `zffti(n,wsave)`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):zfftf(interface)]](n, c, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -106,11 +104,11 @@ This initialization does not have to be repeated so long as `n` remains unchange
 The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `zfftf` or `zfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_zfftf
@@ -123,9 +121,9 @@ program demo_zfftf
 end program demo_zfftf
 ```
 
-### `zfftb`
+## `zfftb`
 
-#### Description
+### Description
 
 Unnormalized inverse of `zfftf`.
 
@@ -137,19 +135,19 @@ The transform is not normalized. to obtain a normalized transform the output mus
 
 The array `wsave` which is used by subroutine `zfftf` must be initialized by calling subroutine `zffti(n,wsave)`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):zfftb(interface)]](n, c, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -173,11 +171,11 @@ This argument is `intent(in)`.
 A `real` work array which must be dimensioned at least `4n+15` in the program that calls `zfftf`. The `wsave` array must be initialized by calling subroutine `zffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `zfftf` and `zfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `zfftf` or `zfftb`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `zfftf` or `zfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_zfftb
@@ -191,25 +189,25 @@ program demo_zfftb
 end program demo_zfftb
 ```
 
-### `fft`
+## `fft`
 
-#### Description
+### Description
 
 Computes the forward complex discrete fourier transform (the fourier analysis).   
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):fft(interface)]](x [, n])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`.
@@ -218,15 +216,15 @@ This argument is `intent(in)`.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-#### Return value
+### Return value
 
 Returns a `complex` and rank-1 array, the Discrete Fourier Transform (DFT) of `x`.
 
-#### Notes
+### Notes
 
 Within numerical accuracy, `x == ifft(fft(x))/size(x)`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_fft
@@ -239,25 +237,25 @@ program demo_fft
 end program demo_fft
 ```
 
-### `ifft`
+## `ifft`
 
-#### Description
+### Description
 
 Unnormalized inverse of `fft`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):ifft(interface)]](x [, n])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `complex` and rank-1 array.
 This argument is `intent(in)`.
@@ -266,11 +264,11 @@ This argument is `intent(in)`.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-#### Return value
+### Return value
 
 Returns a `complex` and rank-1 array, the unnormalized inverse Discrete Fourier Transform (DFT) of `x`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_ifft
@@ -281,28 +279,28 @@ program demo_ifft
 end program demo_ifft
 ```
 
-## Fourier transform of double real periodic sequences
-### `dffti`
+# Discrete Fourier transform (DFT) of real data
+## `dffti`
 
-#### Description
+### Description
 
 Initializes the array `wsave` which is used in both `dfftf` and `dfftb`.   
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and
 stored in `wsave`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dffti(interface)]](n, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -312,13 +310,13 @@ The length of the sequence to be transformed.
 This argument is `intent(out)`.  
 A work array which must be dimensioned at least `2*n+15`.
 The same work array can be used for both `dfftf` and `dfftb` as long as `n` remains unchanged.
-Different `wsave` arrays are required for different values of `n`.   
+Different `wsave` arrays are required for different values of `n`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `dfftf` or `dfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dffti
@@ -329,9 +327,9 @@ program demo_dffti
 end program demo_dffti
 ```
 
-### `dfftf`
+## `dfftf`
 
-#### Description
+### Description
 
 Computes the fourier coefficients of a real perodic sequence (fourier analysis).
 The transform is defined below at output parameter `r`.
@@ -340,19 +338,19 @@ The transform is not normalized. To obtain a normalized transform the output mus
 
 The array `wsave` which is used by subroutine `dfftf` must be initialized by calling subroutine `dffti(n,wsave)`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dfftf(interface)]](n, r, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -392,11 +390,11 @@ This initialization does not have to be repeated so long as `n` remains unchange
 The same `wsave` array can be used by `dfftf` and `dfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `dfftf` or `dfftb`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `dfftf` or `dfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dfftf
@@ -408,9 +406,9 @@ program demo_dfftf
 end program demo_dfftf
 ```
 
-### `dfftb`
+## `dfftb`
 
-#### Description
+### Description
 
 Unnormalized inverse of `dfftf`.
 
@@ -422,19 +420,19 @@ The transform is not normalized. To obtain a normalized transform the output mus
 
 The array `wsave` which is used by subroutine `dfftf` must be initialized by calling subroutine `dffti(n,wsave)`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dfftb(interface)]](n, r, wsave)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -468,11 +466,11 @@ This argument is `intent(in)`.
 A `real` work array which must be dimensioned at least `2n+15` in the program that calls `dfftf`. The `wsave` array must be initialized by calling subroutine `dffti(n,wsave)` and a different `wsave` array must be used for each different value of `n`. This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first. The same `wsave` array can be used by `dfftf` and `dfftb`.  
 Contains initialization calculations which must not be destroyed between calls of subroutine `dfftf` or `dfftb`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `dfftf` or `dfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dfftb
@@ -485,25 +483,25 @@ program demo_dfftb
 end program demo_dfftb
 ```
 
-### `rfft`
+## `rfft`
 
-#### Description
+### Description
 
 Discrete Fourier transform of a real sequence.  
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):rfft(interface)]](x [, n])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `real` and rank-1 array.
 This argument is `intent(in)`.  
@@ -513,15 +511,15 @@ The data to transform.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-#### Return value
+### Return value
 
 Returns a `real` and rank-1 array, the Discrete Fourier Transform (DFT) of `x`.
 
-#### Notes
+### Notes
 
 Within numerical accuracy, `y == rfft(irfft(y))/size(y)`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_rfft
@@ -533,25 +531,25 @@ program demo_rfft
 end program demo_rfft
 ```
 
-### `irfft`
+## `irfft`
 
-#### Description
+### Description
 
 Unnormalized inverse of `rfft`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):irfft(interface)]](x [, n])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `real` array.
 This argument is `intent(in)`.
@@ -561,11 +559,11 @@ Transformed data to invert.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-#### Return value
+### Return value
 
 Returns a `real` and rank-1 array, the unnormalized inverse discrete Fourier transform.
 
-#### Example
+### Example
 
 ```fortran
 program demo_irfft
@@ -576,28 +574,28 @@ program demo_irfft
 end program demo_irfft
 ```
 
-## Simplified fourier transform of double real periodic sequences
+# Simplified discrete Fourier transform (DFT) of real data
 
-### `dzffti`
+## `dzffti`
 
-#### Description
+### Description
 
 Initializes the array `wsave` which is used in both `dzfftf` and `dzfftb`.
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
 
-#### Status
+### Status
 
 Experimental
 
-#### Class
+### Class
 
 Prue function.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dzffti(interface)]](n, wsave)`
 
-#### Arguments
+### Arguments
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -609,11 +607,11 @@ A work array which must be dimensioned at least `3*n+15`.
 The same work array can be used for both `dzfftf` and `dzfftb` as long as n remains unchanged.
 Different `wsave` arrays are required for different values of `n`.
 
-##### Warning
+#### Warning
 
 The contents of `wsave` must not be changed between calls of `dzfftf` or `dzfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dzffti
@@ -624,27 +622,27 @@ program demo_dzffti
 end program demo_dzffti
 ```
 
-### `dzfftf`
+## `dzfftf`
 
-#### Description
+### Description
 
 Computes the fourier coefficients of a `real` perodic sequence (fourier analysis).
 The transform is defined below at output parameters `azero`, `a` and `b`.
 `dzfftf` is a simplified but **slower version** of `dfftf`.
 
-#### Status
+### Status
 
 Experimental
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dzfftf(interface)]](n, r, azero, a, b, wsave)`
 
-#### Arguments
+### Arguments
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -685,7 +683,7 @@ In the program that calls `dzfftf`. The `wsave` array must be initialized by cal
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `dzfftf` and `dzfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dzfftf
@@ -698,27 +696,27 @@ program demo_dzfftf
 end program demo_dzfftf
 ```
 
-### `dzfftb`
+## `dzfftb`
 
-#### Description
+### Description
 
 Computes a `real` perodic sequence from its fourier coefficients (fourier synthesis).
 The transform is defined below at output parameter `r`.
 `dzfftb` is a simplified but **slower version** of `dfftb`.
 
-#### Status
+### Status
 
 Experimental
 
-#### Class
+### Class
 
 Pure subroutine.
 
-#### Syntax
+### Syntax
 
 `call [[fftpack(module):dzfftb(interface)]](n, r, azero, a, b, wsave)`
 
-#### Arguments
+### Arguments
 
 `n`: Shall be an `integer` scalar.
 This argument is `intent(in)`.  
@@ -792,7 +790,7 @@ In the program that calls `dzfftf`. The `wsave` array must be initialized by cal
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 The same `wsave` array can be used by `dzfftf` and `dzfftb`.
 
-#### Example
+### Example
 
 ```fortran
 program demo_dzfftb
@@ -807,9 +805,134 @@ program demo_dzfftb
 end program demo_dzfftb
 ```
 
-## Cosine transform with odd wave numbers
+# Discrete cosine transforms (DCT)
 
-### `dcosqi`
+## DCT type-1 (DCT-1)
+
+### Initialize DCT-1: `dcosti`
+
+#### Description
+
+Initializes the array `wsave` which is used in subroutine `dcost`.
+The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure subroutine.
+
+#### Syntax
+
+`call [[fftpack(module):dcosti(interface)]](n , wsave)`
+
+#### Arguments
+
+`n`: Shall be a `integer` scalar.
+This argument is `intent(in)`.  
+The length of the sequence to be transformed.  
+The method is most efficient when n-1 is a product of small primes.
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(out)`.  
+A work array which must be dimensioned at least `3*n+15`.
+Different `wsave` arrays are required for different values of `n`.
+The contents of `wsave` must not be changed between calls of `dcost`.
+
+#### Example
+
+```fortran
+program demo_dcosti
+    use fftpack, only: dcosti
+    real(kind=8) :: w(3*4 + 15)
+    call dcosti(4, w)   !! Initializes the array `w` which is used in subroutine `dcost`.
+end program demo_dcosti
+```
+
+### Compute DCT-1: `dcost`
+
+#### Description
+
+Computes the DCT-1 of the input real data.
+The transform is defined below at output parameter `x`.
+
+For real input data `x` of length `n`, the DCT-1 of `x` is equivalent, up to a
+scaling factor, to the DFT of the even extension of `x` with length `2*(n-1)`,
+where the first and last entries of the original data are not repeated in the
+extension. For example, the DCT-1 of input data *abcde* (size \[5\]) is
+equivalent to the DFT of data *abcdedcb* (size \[2*4=8\]).
+
+Also, `dcost` is the unnormalized inverse of itself. This means that a call of
+`dcost` followed by another call of `dcost` will multiply the input sequence `x`
+by `2*(n-1)`.
+
+The array `wsave` which is used by subroutine `dcost` must be initialized by calling subroutine `dcosti(n,wsave)`.
+
+#### Status
+
+Experimental
+
+#### Class
+
+Pure subroutine.
+
+#### Syntax
+
+`call [[fftpack(module):dcost(interface)]](n, x, wsave)`
+
+#### Arguments
+
+`n`: Shall be a `integer` scalar.
+This argument is `intent(in)`.  
+The length of the sequence `x`.
+`n` must be greater than `1`.
+The method is most efficient when `n-1` is a product of small primes.
+
+`x`: Shall be a `real` and rank-1 array.
+This argument is `intent(inout)`.
+An array which contains the sequence to be transformed, and is overwritten
+by the result.
+```
+for i=1,...,n
+
+    x(i) = x(1)+(-1)**(i-1)*x(n)
+
+        + the sum from k=2 to k=n-1
+
+            2*x(k)*cos((k-1)*(i-1)*pi/(n-1))
+
+        a call of dcost followed by another call of
+        dcost will multiply the sequence x by 2*(n-1)
+        hence dcost is the unnormalized inverse
+        of itself.
+```
+
+`wsave`: Shall be a `real` and rank-1 array.
+This argument is `intent(in)`.  
+A work array which must be of length at least `3*n+15` in the program that calls `dcost`.
+The `wsave` array must be initialized by calling subroutine `dcosti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
+This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent
+transforms can be obtained faster than the first.
+Contains initialization calculations which must not be destroyed between calls of `dcost`.
+
+#### Example
+
+```fortran
+program demo_dcost
+    use fftpack, only: dcosti, dcost
+    real(kind=8) :: x(4) = [1, 2, 3, 4]
+    real(kind=8) :: w(3*4 + 15)
+    call dcosti(4, w)
+    call dcost(4, x, w)     !! `x`: [15.0, -4.0, 0.0, -1.0]
+    call dcost(4, x, w)     !! `x`: [6.0, 12.0, 18.0, 24.0]
+end program demo_dcost
+```
+
+## DCT of types 2, 3 (DCT-2, 3), a.k.a "Quarter" cosine transforms
+
+### Initialize DCT-2, 3: `dcosqi`
 
 #### Description
 
@@ -855,15 +978,16 @@ program demo_dcosqi
 end program demo_dcosqi
 ```
 
-### `dcosqf`
+### Compute DCT-3: `dcosqf`
 
-#### Decsription
+#### Description
 
-Computes the fast fourier transform of quarter wave data.
-That is, `dcosqf` computes the coefficients in a cosine series representation with only odd wave numbers.
+Computes the DCT-3 of the input real data.
 The transform is defined below at output parameter `x`.
 
-`dcosqf` is the unnormalized inverse of `dcosqb` since a call of `dcosqf` followed by a call of `dcosqb` will multiply the input sequence `x` by `4*n`.
+Also, `dcosqf` (DCT-3) is the unnormalized inverse of `dcosqb` (DCT-2), since a
+call of `dcosqf` followed by a call of `dcosqb` will multiply the input sequence
+`x` by `4*n`.
 
 The array `wsave` which is used by subroutine `dcosqf` must be initialized by calling subroutine `dcosqi(n,wsave)`.
 
@@ -888,7 +1012,8 @@ The method is most efficient when `n` is a product of small primes.
 
 `x`: Shall be a `real` and rank-1 array.
 This argument is `intent(inout)`.  
-An array which contains the sequence to be transformed.
+An array which contains the sequence to be transformed, and is overwritten by
+the result.
 ```
 for i=1,...,n
 
@@ -909,9 +1034,8 @@ in the program that calls `dcosqf`.
 The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 
-##### Warning
-
-`wsave` contains initialization calculations which must not be destroyed between calls of `dcosqf` or `dcosqb`.
+**Warning**: `wsave` contains initialization calculations which must not be
+destroyed between calls of `dcosqf` or `dcosqb` of the same `n`.
 
 #### Example
 
@@ -925,15 +1049,20 @@ program demo_dcosqf
 end program demo_dcosqf
 ```
 
-### `dcosqb`
+### Compute DCT-2: `dcosqb`
 
-#### Decsription
+#### Description
 
-Computes the fast fourier transform of quarter wave data.
-That is, `dcosqb` computes a sequence from its representation in terms of a cosine series with odd wave numbers.
+Computes the DCT-2 of the input real data.
 The transform is defined below at output parameter `x`.
 
-`dcosqb` is the unnormalized inverse of `dcosqf` since a call of `dcosqb` followed by a call of `dcosqf` will multiply the input sequence `x` by `4*n`.
+For real input data `x` of length `n`, the DCT-2 of `x` is equivalent, up to a
+scaling factor, to the DFT of the even extension of `x` with length `4*n`,
+where all the even-frequency entries are zero.
+
+Also, `dcosqb` (DCT-2) is the unnormalized inverse of `dcosqf` (DCT-3), since a
+call of `dcosqb` followed by a call of `dcosqf` will multiply the input sequence
+`x` by `4*n`.
 
 The array `wsave` which is used by subroutine `dcosqb` must be initialized by calling subroutine `dcosqi(n,wsave)`.
 
@@ -958,7 +1087,8 @@ The method is most efficient when `n` is a product of small primes.
 
 `x`: Shall be a `real` and rank-1 array.
 This argument is `intent(inout)`.  
-An array which contains the sequence to be transformed.
+An array which contains the sequence to be transformed, and is overwritten by
+the result.
 ```
 for i=1,...,n
 
@@ -979,9 +1109,8 @@ in the program that calls `dcosqb`.
 The `wsave` array must be initialized by calling subroutine `dcosqi(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
 This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent transforms can be obtained faster than the first.
 
-##### Warning
-
-`wsave` contains initialization calculations which must not be destroyed between calls of `dcosqf` or `dcosqb`.
+**Warning**: `wsave` contains initialization calculations which must not be
+destroyed between calls of `dcosqf` or `dcosqb` of the same `n`.
 
 #### Example
 
@@ -992,285 +1121,89 @@ program demo_dcosqb
     real(kind=8) :: x(4) = [4, 3, 5, 10]
     call dcosqi(4, w)
     call dcosqf(4, x, w)
-    call dcosqb(4, x, w)    !! `x`: [1.0, 2.0, 3.0, 4.0] * 4 * n, n = 4, which is unnormalized.
+    call dcosqb(4, x, w)    !! [64.0, 48.0, 80.0, 160.0]
 end program demo_dcosqb
 ```
 
-### `qct`
+## Simplified DCT of types 1, 2, 3: `dct`
 
-#### Description
+### Description
 
-Forward transform of quarter wave data.
+Discrete cosine transforms (DCT) of types 1, 2, 3.
+This is a more flexible interface for the DCT of types 1, 2 and 3, albeit
+slightly slower than the in-place DCT procedures.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
-`result = [[fftpack(module):qct(interface)]](x [, n])`
+`result = [[fftpack(module):dct(interface)]](x [, n, t])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `real` and rank-1 array.
-This argument is `intent(in)`.  
-The data to transform.
-
-`n`: Shall be an `integer` scalar.
-This argument is `intent(in)` and `optional`.  
-Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
-
-#### Return value
-
-Returns a `real` and rank-1 array, the Quarter-Cosine Transform (QCT) of `x`.
-
-#### Notes
-
-Within numerical accuracy, `x == iqct(qct(x))/(4*size(x))`.
-
-#### Example
-
-```fortran
-program demo_qct
-    use fftpack, only: qct
-    real(kind=8) :: x(4) = [1, 2, 3, 4]
-    print *, qct(x,3)      !! [7.4, -5.0, 0.53].
-    print *, qct(x)        !! [12.0, -9.10, 2.62, -1.51].
-    print *, qct(x,5)      !! [14.4, -6.11, -5.0, 4.4, -2.65].
-end program demo_qct
-```
-
-### `iqct`
-
-#### Description
-
-Unnormalized inverse of `qct`.
-
-#### Status
-
-Experimental.
-
-#### Class
-
-Pure function.
-
-#### Syntax
-
-`result = [[fftpack(module):iqct(interface)]](x [, n])`
-
-#### Argument
-
-`x`: Shall be a `real` array.
 This argument is `intent(in)`.
-Transformed data to invert.
-
-`n`: Shall be an `integer` scalar.
-This argument is `intent(in)` and `optional`.  
-Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
-
-#### Return value
-
-Returns a `real` and rank-1 array, the unnormalized inverse Quarter-Cosine Transform.
-
-#### Example
-
-```fortran
-program demo_iqct
-    use fftpack, only: qct, iqct
-    real(kind=8) :: x(4) = [1, 2, 3, 4]
-    print *, iqct(qct(x))/(4.0*4.0)         !! [1.0, 2.0, 3.0, 4.0]
-    print *, iqct(qct(x), 3)/(4.0*3.0)      !! [1.84, 2.71, 5.47]
-end program demo_iqct
-```
-
-## Cosine transform of a real even sequence
-
-### `dcosti`
-
-#### Description
-
-Initializes the array `wsave` which is used in subroutine `dcost`.
-The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
-
-#### Status
-
-Experimental
-
-#### Class
-
-Pure subroutine.
-
-#### Syntax
-
-`call [[fftpack(module):dcosti(interface)]](n , wsave)`
-
-#### Arguments
-
-`n`: Shall be a `integer` scalar.
-This argument is `intent(in)`.  
-The length of the sequence to be transformed.  
-The method is most efficient when n-1 is a product of small primes.
-
-`wsave`: Shall be a `real` and rank-1 array.
-This argument is `intent(out)`.  
-A work array which must be dimensioned at least `3*n+15`.
-Different `wsave` arrays are required for different values of `n`.
-The contents of `wsave` must not be changed between calls of `dcost`.
-
-#### Example
-
-```fortran
-program demo_dcosti
-    use fftpack, only: dcosti
-    real(kind=8) :: w(3*4 + 15)
-    call dcosti(4, w)   !! Initializes the array `w` which is used in subroutine `dcost`.
-end program demo_dcosti
-```
-
-### `dcost`
-
-#### Description
-
-Computes the discrete fourier cosine transform of an even sequence `x(i)`.
-The transform is defined below at output parameter `x`.
-
-`dcost` is the unnormalized inverse of itself since a call of `dcost` followed by another call of `dcost` will multiply the input sequence `x` by `2*(n-1)`.
-The transform is defined below at output parameter `x`.
-
-The array `wsave` which is used by subroutine `dcost` must be initialized by calling subroutine `dcosti(n,wsave)`.
-
-#### Status
-
-Experimental
-
-#### Class
-
-Pure subroutine.
-
-#### Syntax
-
-`call [[fftpack(module):dcost(interface)]](n, x, wsave)`
-
-#### Arguments
-
-`n`: Shall be a `integer` scalar.
-This argument is `intent(in)`.  
-The length of the sequence `x`.
-`n` must be greater than `1`.
-The method is most efficient when `n-1` is a product of small primes.
-
-`x`: Shall be a `real` and rank-1 array.
-This argument is `intent(inout)`.
-An array which contains the sequence to be transformed.
-```
-for i=1,...,n
-
-    x(i) = x(1)+(-1)**(i-1)*x(n)
-
-        + the sum from k=2 to k=n-1
-
-            2*x(k)*cos((k-1)*(i-1)*pi/(n-1))
-
-        a call of dcost followed by another call of
-        dcost will multiply the sequence x by 2*(n-1)
-        hence dcost is the unnormalized inverse
-        of itself.
-```
-
-`wsave`: Shall be a `real` and rank-1 array.
-This argument is `intent(in)`.  
-A work array which must be dimensioned at least `3*n+15` in the program that calls `dcost`.
-The `wsave` array must be initialized by calling subroutine `dcosti(n,wsave)` and a different `wsave` array must be used for each different value of `n`.
-This initialization does not have to be repeated so long as `n` remains unchanged thus subsequent
-transforms can be obtained faster than the first.
-Contains initialization calculations which must not be destroyed between calls of `dcost`.
-
-#### Example
-
-```fortran
-program demo_dcost
-    use fftpack, only: dcosti, dcost
-    real(kind=8) :: x(4) = [1, 2, 3, 4]
-    real(kind=8) :: w(3*4 + 15)
-    call dcosti(4, w)
-    call dcost(4, x, w)     !! Computes the discrete fourier cosine (forward) transform of an even sequence, `x`(unnormalized): [15.0, -4.0, 0.0, -1.0]
-    call dcost(4, x, w)     !! Computes the discrete fourier cosine (backward) transform of an even sequence, `x`(unnormalized): [6.0, 12.0, 18.0, 24.0]
-end program demo_dcost
-```
-
-### `dct`
-
-#### Description
-
-Discrete fourier cosine (forward) transform of an even sequence.
-
-#### Status
-
-Experimental.
-
-#### Class
-
-Pure function.
-
-#### Syntax
-
-`result = [[fftpack(module):dct(interface)]](x [, n])`
-
-#### Argument
-
-`x`: Shall be a `real` and rank-1 array.
-This argument is `intent(in)`.  
 The data to transform.
 
 `n`: Shall be an `integer` scalar.
-This argument is `intent(in)` and `optional`.  
-Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+This argument is `intent(in)` and `optional`.
+Defines the length of the DCT. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
+
+`t`: Shall be an `integer` scalar, equal to `1`, `2` or `3`.
+This argument is `intent(in)` and `optional`.
+Defines the type of DCT to be performed. The default type is `2`.
 
 #### Return value
 
-Returns a `real` and rank-1 array, the Discrete-Cosine Transform (DCT) of `x`.
+Returns a `real` and rank-1 array, the DCT type-`t` of the input data `x`.
 
 #### Notes
 
-Within numerical accuracy, `y == dct(idct(y))/2*(size(y) - 1)`.
+Within numerical accuracy,
+- `x == idct(dct(x, t=1), t=1) / (2*(size(x) - 1))`
+- `x == idct(dct(x, t=2), t=2) / (4*size(x))`
+- `x == idct(dct(x, t=3), t=3) / (4*size(x))`
 
-#### Example
+### Example
 
 ```fortran
 program demo_dct
     use fftpack, only: dct
     real(kind=8) :: x(4) = [1, 2, 3, 4]
-    print *, dct(x,3)      !! [8.0, -2.0, 0.0].
-    print *, dct(x)        !! [15.0, -4.0, 0.0, -1.0].
-    print *, dct(x,5)      !! [19.0, -1.8, -5.0, 3.8, -5.0].
-    print *, dct(dct(x))/(2*(4 - 1))   !! (normalized): [1.0, 2.0, 3.0, 4.0]
+    print *, dct(x,3,1)      !! [8.0, -2.0, 0.0].
+    print *, dct(x,t=1)      !! [15.0, -4.0, 0.0, -1.0].
+    print *, dct(x,5,2)      !! [14.36, -6.11, -5.0, 4.40, -2.65].
+    print *, dct(dct(x,t=1),t=1)/(2*(4 - 1))   !! (normalized): [1.0, 2.0, 3.0, 4.0]
 end program demo_dct
 ```
 
-### `idct`
+## Simplified inverse DCT of types 1, 2, 3: `idct`
 
-#### Description
+### Description
 
-Unnormalized inverse of `dct`.
-In fact, `idct` and `dct` have the same effect, `idct` = `dct`.
+Unnormalized inverse discrete cosine transform (IDCT) of types 1, 2 and 3.
+This is a more flexible interface for the IDCT of types 1, 2 and 3,
+albeit slightly slower than the in-place DCT procedures.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
-`result = [[fftpack(module):idct(interface)]](x [, n])`
+`result = [[fftpack(module):idct(interface)]](x [, n, t])`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `real` array.
 This argument is `intent(in)`.
@@ -1280,53 +1213,63 @@ Transformed data to invert.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
+`t`: Shall be an `integer` scalar, equal to `1` or `2`.
+This argument is `intent(in)` and `optional`.
+Defines the type of the IDCT to be performed. The default type is `2`.
+
 #### Return value
 
-Returns a `real` and rank-1 array, the inverse Discrete-Cosine Transform (iDCT) of `x`.
+Returns a `real` and rank-1 array, the IDCT type-`t` of the input data `x`.
 
-#### Example
+#### Notes
+
+Within numerical accuracy,
+- `x == idct(dct(x, t=1), t=1) / (2*(size(x) - 1))`
+- `x == idct(dct(x, t=2), t=2) / (4*size(x))`
+- `x == idct(dct(x, t=3), t=3) / (4*size(x))`
+
+### Example
 
 ```fortran
 program demo_idct
     use fftpack, only: dct, idct
     real(kind=8) :: x(4) = [1, 2, 3, 4]
-    print *, idct(dct(x))/(2*(4-1))   !! (normalized):   [1.0, 2.0, 3.0, 4.0]
-    print *, idct(idct(x))/(2*(4-1))  !! (normalized):   [1.0, 2.0, 3.0, 4.0]
-    print *, idct(dct(x), 3)          !! (unnormalized): [7.0, 15.0, 23.0]
+    print *, idct(dct(x,t=1),t=1)/(2*(4-1))   !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idct(dct(x,t=2),t=2)/(4*4)       !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idct(dct(x), n=3)                !! (unnormalized): [22.06, 32.5, 65.65]
 end program demo_idct
 ```
 
+# Utility functions
 
-## Utility functions
+## `fftshift`
 
-### `fftshift`
-
-#### Description
+### Description
 
 Rearranges the Fourier transform by moving the zero-frequency component to the center of the array.  
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):fftshift(interface)]](x)`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `complex/real` and rank-1 array.
 This argument is `intent(in)`.
 
-#### Return value
+### Return value
 
 Returns the `complex/real` and rank-1 Fourier transform by moving the zero-frequency component to the center of the array.
 
-#### Example
+### Example
 
 ```fortran
 program demo_fftshift
@@ -1340,34 +1283,34 @@ program demo_fftshift
 end program demo_fftshift
 ```
 
-### `ifftshift`
+## `ifftshift`
 
-#### Description
+### Description
 
 Rearranges the Fourier transform with zero frequency shifting back to the original transform output. In other words, `ifftshift` is the result of undoing `fftshift`.
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):ifftshift(interface)]](x)`
 
-#### Argument
+### Argument
 
 `x`: Shall be a `complex/real` and rank-1 array.
 This argument is `intent(in)`.
 
-#### Return value
+### Return value
 
 Returns the `complex/real` and rank-1 Fourier transform with zero frequency shifting back to the original transform output.
 
-#### Example
+### Example
 
 ```fortran
 program demo_ifftshift
@@ -1381,34 +1324,34 @@ program demo_ifftshift
 end program demo_ifftshift
 ```
 
-### `fftfreq`
+## `fftfreq`
 
-#### Description
+### Description
 
 Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the complex discrete Fourier transform, in the standard order (zero frequency first).
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):fftfreq(interface)]](n)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer`, equal to the length of the corresponding complex discrete Fourier transform.
 This argument is `intent(in)`.
 
-#### Return value
+### Return value
 
 Returns the `integer` and rank-1 array of the transform's frequency values in the standard order (zero frequency first).
 
-#### Example
+### Example
 
 ```fortran
 program demo_fftfreq
@@ -1418,34 +1361,34 @@ program demo_fftfreq
 end program demo_fftfreq
 ```
 
-### `rfftfreq`
+## `rfftfreq`
 
-#### Description
+### Description
 
 Returns the integer frequency (or wavenumber) values that correspond to the coefficients calculated by the real discrete Fourier transform, in the standard order (zero frequency first).
 
-#### Status
+### Status
 
 Experimental.
 
-#### Class
+### Class
 
 Pure function.
 
-#### Syntax
+### Syntax
 
 `result = [[fftpack(module):rfftfreq(interface)]](n)`
 
-#### Argument
+### Argument
 
 `n`: Shall be an `integer`, equal to the length of the corresponding real discrete Fourier transform.
 This argument is `intent(in)`.
 
-#### Return value
+### Return value
 
 Returns the `integer` and rank-1 array of the transform's frequency values in the standard order (zero frequency first).
 
-#### Example
+### Example
 
 ```fortran
 program demo_rfftfreq
