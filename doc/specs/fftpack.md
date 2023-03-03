@@ -1159,11 +1159,11 @@ Defines the length of the DCT. If `n` is not specified (the default) then `n = s
 This argument is `intent(in)` and `optional`.
 Defines the type of DCT to be performed. The default type is `2`.
 
-#### Return value
+### Return value
 
 Returns a `real` and rank-1 array, the DCT type-`t` of the input data `x`.
 
-#### Notes
+### Notes
 
 Within numerical accuracy,
 - `x == idct(dct(x, type=1), type=1) / (2*(size(x) - 1))`
@@ -1217,11 +1217,11 @@ Defines the length of the Fourier transform. If `n` is not specified (the defaul
 This argument is `intent(in)` and `optional`.
 Defines the type of the IDCT to be performed. The default type is `2`.
 
-#### Return value
+### Return value
 
 Returns a `real` and rank-1 array, the IDCT type-`t` of the input data `x`.
 
-#### Notes
+### Notes
 
 Within numerical accuracy,
 - `x == idct(dct(x, type=1), type=1) / (2*(size(x) - 1))`
@@ -1239,6 +1239,10 @@ program demo_idct
     print *, idct(dct(x), n=3)                     !! (unnormalized): [22.06, 32.5, 65.65]
 end program demo_idct
 ```
+
+## References
+
+[1] Wikipedia, "Discrete cosine transform", [https://en.wikipedia.org/wiki/Discrete_cosine_transform](https://en.wikipedia.org/wiki/Discrete_cosine_transform)
 
 # Utility functions
 
