@@ -80,3 +80,48 @@ jobs:
       - name: fpm test
         run: |
           fpm test
+
+  intel-build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    env:
+      FPM_FC: ifort
+      FC: ifort
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Add Intel repository (Linux)
+      run: |
+        wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+        echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+        sudo apt-get update
+
+    - name: Install Intel oneAPI compiler (Linux)
+      run: |
+        sudo apt-get install intel-oneapi-compiler-fortran
+
+    - name: Setup Intel oneAPI environment
+      run: |
+        source /opt/intel/oneapi/setvars.sh
+        printenv >> $GITHUB_ENV
+
+    - name: Install fpm
+      uses: fortran-lang/setup-fpm@v3
+      with:
+        fpm-version: 'v0.7.0'
+
+    - name: fpm build
+      run: |
+        ifort --version
+        fpm --version
+        fpm build --profile debug --flag "-warn nointerfaces"
+
+    - name: fpm test
+      run: |
+        fpm test --profile debug --flag "-warn nointerfaces"
