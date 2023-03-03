@@ -1143,7 +1143,7 @@ Pure function.
 
 ### Syntax
 
-`result = [[fftpack(module):dct(interface)]](x [, n, t])`
+`result = [[fftpack(module):dct(interface)]](x [, n, type])`
 
 ### Argument
 
@@ -1155,7 +1155,7 @@ The data to transform.
 This argument is `intent(in)` and `optional`.
 Defines the length of the DCT. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-`t`: Shall be an `integer` scalar, equal to `1`, `2` or `3`.
+`type`: Shall be an `integer` scalar, equal to `1`, `2` or `3`.
 This argument is `intent(in)` and `optional`.
 Defines the type of DCT to be performed. The default type is `2`.
 
@@ -1166,9 +1166,9 @@ Returns a `real` and rank-1 array, the DCT type-`t` of the input data `x`.
 #### Notes
 
 Within numerical accuracy,
-- `x == idct(dct(x, t=1), t=1) / (2*(size(x) - 1))`
-- `x == idct(dct(x, t=2), t=2) / (4*size(x))`
-- `x == idct(dct(x, t=3), t=3) / (4*size(x))`
+- `x == idct(dct(x, type=1), type=1) / (2*(size(x) - 1))`
+- `x == idct(dct(x, type=2), type=2) / (4*size(x))`
+- `x == idct(dct(x, type=3), type=3) / (4*size(x))`
 
 ### Example
 
@@ -1177,9 +1177,9 @@ program demo_dct
     use fftpack, only: dct
     real(kind=8) :: x(4) = [1, 2, 3, 4]
     print *, dct(x,3,1)      !! [8.0, -2.0, 0.0].
-    print *, dct(x,t=1)      !! [15.0, -4.0, 0.0, -1.0].
+    print *, dct(x,type=1)   !! [15.0, -4.0, 0.0, -1.0].
     print *, dct(x,5,2)      !! [14.36, -6.11, -5.0, 4.40, -2.65].
-    print *, dct(dct(x,t=1),t=1)/(2*(4 - 1))   !! (normalized): [1.0, 2.0, 3.0, 4.0]
+    print *, dct(dct(x,type=1),type=1)/(2*(4 - 1))  !! (normalized): [1.0, 2.0, 3.0, 4.0]
 end program demo_dct
 ```
 
@@ -1201,7 +1201,7 @@ Pure function.
 
 ### Syntax
 
-`result = [[fftpack(module):idct(interface)]](x [, n, t])`
+`result = [[fftpack(module):idct(interface)]](x [, n, type])`
 
 ### Argument
 
@@ -1213,7 +1213,7 @@ Transformed data to invert.
 This argument is `intent(in)` and `optional`.  
 Defines the length of the Fourier transform. If `n` is not specified (the default) then `n = size(x)`. If `n <= size(x)`, `x` is truncated, if `n > size(x)`, `x` is zero-padded.
 
-`t`: Shall be an `integer` scalar, equal to `1` or `2`.
+`type`: Shall be an `integer` scalar, equal to `1` or `2`.
 This argument is `intent(in)` and `optional`.
 Defines the type of the IDCT to be performed. The default type is `2`.
 
@@ -1224,9 +1224,9 @@ Returns a `real` and rank-1 array, the IDCT type-`t` of the input data `x`.
 #### Notes
 
 Within numerical accuracy,
-- `x == idct(dct(x, t=1), t=1) / (2*(size(x) - 1))`
-- `x == idct(dct(x, t=2), t=2) / (4*size(x))`
-- `x == idct(dct(x, t=3), t=3) / (4*size(x))`
+- `x == idct(dct(x, type=1), type=1) / (2*(size(x) - 1))`
+- `x == idct(dct(x, type=2), type=2) / (4*size(x))`
+- `x == idct(dct(x, type=3), type=3) / (4*size(x))`
 
 ### Example
 
@@ -1234,9 +1234,9 @@ Within numerical accuracy,
 program demo_idct
     use fftpack, only: dct, idct
     real(kind=8) :: x(4) = [1, 2, 3, 4]
-    print *, idct(dct(x,t=1),t=1)/(2*(4-1))   !! (normalized):   [1.0, 2.0, 3.0, 4.0]
-    print *, idct(dct(x,t=2),t=2)/(4*4)       !! (normalized):   [1.0, 2.0, 3.0, 4.0]
-    print *, idct(dct(x), n=3)                !! (unnormalized): [22.06, 32.5, 65.65]
+    print *, idct(dct(x,type=1),type=1)/(2*(4-1))  !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idct(dct(x,type=2),type=2)/(4*4)      !! (normalized):   [1.0, 2.0, 3.0, 4.0]
+    print *, idct(dct(x), n=3)                     !! (unnormalized): [22.06, 32.5, 65.65]
 end program demo_idct
 ```
 

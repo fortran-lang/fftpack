@@ -3,10 +3,10 @@ submodule(fftpack) fftpack_dct
 contains
 
     !> Discrete cosine transforms of types 1, 2, 3.
-    pure module function dct_rk(x, n, t) result(result)
+    pure module function dct_rk(x, n, type) result(result)
         real(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n
-        integer, intent(in), optional :: t
+        integer, intent(in), optional :: type
         real(kind=rk), allocatable :: result(:)
 
         integer :: lenseq, lensav, i
@@ -25,7 +25,7 @@ contains
         end if
 
         ! Default to DCT-2
-        if (.not.present(t)) then
+        if (.not.present(type)) then
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
@@ -33,17 +33,17 @@ contains
             return
         end if
 
-        if (t == 1) then  ! DCT-1
+        if (type == 1) then  ! DCT-1
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosti(lenseq, wsave)
             call dcost(lenseq, result, wsave)
-        else if (t == 2) then  ! DCT-2
+        else if (type == 2) then  ! DCT-2
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
             call dcosqb(lenseq, result, wsave)
-        else if (t == 3) then  ! DCT-3
+        else if (type == 3) then  ! DCT-3
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
@@ -52,10 +52,10 @@ contains
     end function dct_rk
 
     !> Inverse discrete cosine transforms of types 1, 2, 3.
-    pure module function idct_rk(x, n, t) result(result)
+    pure module function idct_rk(x, n, type) result(result)
         real(kind=rk), intent(in) :: x(:)
         integer, intent(in), optional :: n
-        integer, intent(in), optional :: t
+        integer, intent(in), optional :: type
         real(kind=rk), allocatable :: result(:)
 
         integer :: lenseq, lensav, i
@@ -74,7 +74,7 @@ contains
         end if
 
         ! Default to t=2; inverse DCT-2 is DCT-3
-        if (.not.present(t)) then
+        if (.not.present(type)) then
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
@@ -82,17 +82,17 @@ contains
             return
         end if
 
-        if (t == 1) then  ! inverse DCT-1 is DCT-1
+        if (type == 1) then  ! inverse DCT-1 is DCT-1
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosti(lenseq, wsave)
             call dcost(lenseq, result, wsave)
-        else if (t == 2) then  ! inverse DCT-2 is DCT-3
+        else if (type == 2) then  ! inverse DCT-2 is DCT-3
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
             call dcosqf(lenseq, result, wsave)
-        else if (t == 3) then  ! inverse DCT-3 is DCT-2
+        else if (type == 3) then  ! inverse DCT-3 is DCT-2
             lensav = 3*lenseq + 15
             allocate (wsave(lensav))
             call dcosqi(lenseq, wsave)
