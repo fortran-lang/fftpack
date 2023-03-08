@@ -14,7 +14,6 @@ endmacro()
 set(FFTPACK_TEST_SOURCES
     test_fftpack_dct.f90
     test_fftpack_fft.f90
-    test_fftpack_qct.f90
     test_fftpack_rfft.f90
     test_fftpack_utils.f90
     test_fftpack.f90

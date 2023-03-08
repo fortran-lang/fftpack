@@ -15,8 +15,6 @@ module fftpack
     public :: dzffti, dzfftf, dzfftb
 
     public :: dcosqi, dcosqf, dcosqb
-    public :: qct, iqct
-
     public :: dcosti, dcost
     public :: dct, idct
 
@@ -246,46 +244,28 @@ module fftpack
 
     !> Version: experimental
     !>
-    !> Forward transform of quarter wave data.
-    !> ([Specifiction](../page/specs/fftpack.html#qct))
-    interface qct
-        pure module function qct_rk(x, n) result(result)
-            real(kind=rk), intent(in) :: x(:)
-            integer, intent(in), optional :: n
-            real(kind=rk), allocatable :: result(:)
-        end function qct_rk
-    end interface qct
-
-    !> Version: experimental
-    !>
-    !> Backward transform of quarter wave data.
-    !> ([Specifiction](../page/specs/fftpack.html#iqct))
-    interface iqct
-        pure module function iqct_rk(x, n) result(result)
-            real(kind=rk), intent(in) :: x(:)
-            integer, intent(in), optional :: n
-            real(kind=rk), allocatable :: result(:)
-        end function iqct_rk
-    end interface iqct
-
-    !> Version: experimental
-    !>
-    !> Discrete fourier cosine (forward) transform of an even sequence.
+    !> Dsicrete cosine transforms.
     !> ([Specification](../page/specs/fftpack.html#dct))
     interface dct
-        pure module function dct_rk(x, n) result(result)
+        pure module function dct_rk(x, n, type) result(result)
             real(kind=rk), intent(in) :: x(:)
             integer, intent(in), optional :: n
+            integer, intent(in), optional :: type
             real(kind=rk), allocatable :: result(:)
         end function dct_rk
     end interface dct
 
     !> Version: experimental
     !>
-    !> Discrete fourier cosine (backward) transform of an even sequence.
+    !> Inverse discrete cosine transforms.
     !> ([Specification](../page/specs/fftpack.html#idct))
     interface idct
-        module procedure :: dct_rk
+    pure module function idct_rk(x, n, type) result(result)
+        real(kind=rk), intent(in) :: x(:)
+        integer, intent(in), optional :: n
+        integer, intent(in), optional :: type
+        real(kind=rk), allocatable :: result(:)
+        end function idct_rk
     end interface idct
 
     !> Version: experimental

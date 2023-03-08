@@ -57,8 +57,6 @@ SRCF90 = \
 	fftpack_irfft.f90\
 	fftpack_fftshift.f90\
 	fftpack_ifftshift.f90\
-	fftpack_qct.f90\
-	fftpack_iqct.f90\
 	fftpack_dct.f90\
 	rk.f90\
 	fftpack_utils.f90
@@ -82,8 +80,6 @@ fftpack_fft.o: fftpack.o rk.o
 fftpack_ifft.o: fftpack.o rk.o
 fftpack_rfft.o: fftpack.o rk.o
 fftpack_irfft.o: fftpack.o rk.o
-fftpack_qct.o: fftpack.o rk.o
-fftpack_iqct.o: fftpack.o rk.o
 fftpack_dct.o: fftpack.o rk.o
 fftpack_fftshift.o: fftpack.o rk.o
 fftpack_ifftshift.o: fftpack.o rk.o

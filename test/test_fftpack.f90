@@ -3,7 +3,6 @@ program test_fftpack
     use testdrive, only: run_testsuite, new_testsuite, testsuite_type
     use test_fftpack_fft, only: collect_fft
     use test_fftpack_rfft, only: collect_rfft
-    use test_fftpack_qct, only: collect_qct
     use test_fftpack_dct, only: collect_dct
     use test_fftpack_utils, only: collect_utils
     implicit none
@@ -16,7 +15,6 @@ program test_fftpack
     testsuites = [ &
                  new_testsuite("fft", collect_fft), &
                  new_testsuite("rfft", collect_rfft), &
-                 new_testsuite("qct", collect_qct), &
                  new_testsuite("dct", collect_dct), &
                  new_testsuite("utils", collect_utils) &
                  ]
