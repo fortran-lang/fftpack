@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title="42.0% of total for modules and submodules.">182 statements</a>
+               title="39.7% of total for modules and submodules.">173 statements</a>
           </li>
 
             <li id="source-file">
@@ -150,9 +150,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-idct">idct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifft">ifft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifftshift">ifftshift</a>
-            <a class="list-group-item" href="../module/fftpack.html#interface-iqct">iqct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-irfft">irfft</a>
-            <a class="list-group-item" href="../module/fftpack.html#interface-qct">qct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfft">rfft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfftfreq">rfftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftb">zfftb</a>
@@ -206,9 +204,7 @@ fortran-lang/fftpack contributors" >
                 <li><a href='../module/fftpack_fftshift.html'>fftpack_fftshift</a></li>
                 <li><a href='../module/fftpack_ifft.html'>fftpack_ifft</a></li>
                 <li><a href='../module/fftpack_ifftshift.html'>fftpack_ifftshift</a></li>
-                <li><a href='../module/fftpack_iqct.html'>fftpack_iqct</a></li>
                 <li><a href='../module/fftpack_irfft.html'>fftpack_irfft</a></li>
-                <li><a href='../module/fftpack_qct.html'>fftpack_qct</a></li>
                 <li><a href='../module/fftpack_rfft.html'>fftpack_rfft</a></li>
                 <li><a href='../module/fftpack_utils.html'>fftpack_utils</a></li>
             </ul>
@@ -254,9 +250,7 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-idct">idct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifft">ifft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-ifftshift">ifftshift</a>
-            <a class="list-group-item" href="../module/fftpack.html#interface-iqct">iqct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-irfft">irfft</a>
-            <a class="list-group-item" href="../module/fftpack.html#interface-qct">qct</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfft">rfft</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-rfftfreq">rfftfreq</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-zfftb">zfftb</a>
@@ -657,13 +651,13 @@ fortran-lang/fftpack contributors" >
       </h3>
     </div>
       <div class="panel-body">
-        <p>Discrete fourier cosine (forward) transform of an even sequence.
+        <p>Dsicrete cosine transforms.
 (<a href="../page/specs/fftpack.html#dct">Specification</a>)</p>
       </div>
     <ul class="list-group">
           <li class="list-group-item">
                 <h3>
-    private pure module function dct_rk(x, n) result(result)  
+    private pure module function dct_rk(x, n, type) result(result)  
 
     </h3>
   
@@ -705,6 +699,21 @@ fortran-lang/fftpack contributors" >
             </td>
             <td>::</td>
             <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
             <td>
                 
             </td>
@@ -1489,13 +1498,13 @@ fortran-lang/fftpack contributors" >
       </h3>
     </div>
       <div class="panel-body">
-        <p>Discrete fourier cosine (backward) transform of an even sequence.
+        <p>Inverse discrete cosine transforms.
 (<a href="../page/specs/fftpack.html#idct">Specification</a>)</p>
       </div>
     <ul class="list-group">
           <li class="list-group-item">
                 <h3>
-    private pure module function dct_rk(x, n) result(result)  
+    private pure module function idct_rk(x, n, type) result(result)  
 
     </h3>
   
@@ -1537,6 +1546,21 @@ fortran-lang/fftpack contributors" >
             </td>
             <td>::</td>
             <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
             <td>
                 
             </td>
@@ -1728,78 +1752,6 @@ fortran-lang/fftpack contributors" >
 
        <div class="panel panel-default">
     <div class="panel-heading codesum">
-      <span class="anchor" id="interface-iqct"></span>
-      <h3>public        interface <a href='../interface/iqct.html'>iqct</a> 
-      </h3>
-    </div>
-      <div class="panel-body">
-        <p>Backward transform of quarter wave data.
-(<a href="../page/specs/fftpack.html#iqct">Specifiction</a>)</p>
-      </div>
-    <ul class="list-group">
-          <li class="list-group-item">
-                <h3>
-    private pure module function iqct_rk(x, n) result(result)  
-
-    </h3>
-  
-
-  <h4>Arguments</h4>
-      <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th>Type</th>
-<th>Intent</th><th>Optional</th>        <th>Attributes</th>
-        <th></th>
-        <th>Name</th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-              <span class="anchor" ></span>
-              real(kind=rk),
-            </td>
-<td>intent(in)</td>
-              <td></td>            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>x</strong>(:)</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" ></span>
-              integer,
-            </td>
-<td>intent(in),</td>
-              <td>optional</td>            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>n</strong></td>
-            <td>
-                
-            </td>
-        </tr>
-    </tbody>
-  </table>
-
-    <h4>
-    Return Value
-    <small>real(kind=rk), allocatable, (:)</small>
-    </h4>
-    
-
-          </li>
-    </ul>
-  </div>
-
-       <div class="panel panel-default">
-    <div class="panel-heading codesum">
       <span class="anchor" id="interface-irfft"></span>
       <h3>public        interface <a href='../interface/irfft.html'>irfft</a> 
       </h3>
@@ -1812,78 +1764,6 @@ fortran-lang/fftpack contributors" >
           <li class="list-group-item">
                 <h3>
     private pure module function irfft_rk(x, n) result(result)  
-
-    </h3>
-  
-
-  <h4>Arguments</h4>
-      <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th>Type</th>
-<th>Intent</th><th>Optional</th>        <th>Attributes</th>
-        <th></th>
-        <th>Name</th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-              <span class="anchor" ></span>
-              real(kind=rk),
-            </td>
-<td>intent(in)</td>
-              <td></td>            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>x</strong>(:)</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" ></span>
-              integer,
-            </td>
-<td>intent(in),</td>
-              <td>optional</td>            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>n</strong></td>
-            <td>
-                
-            </td>
-        </tr>
-    </tbody>
-  </table>
-
-    <h4>
-    Return Value
-    <small>real(kind=rk), allocatable, (:)</small>
-    </h4>
-    
-
-          </li>
-    </ul>
-  </div>
-
-       <div class="panel panel-default">
-    <div class="panel-heading codesum">
-      <span class="anchor" id="interface-qct"></span>
-      <h3>public        interface <a href='../interface/qct.html'>qct</a> 
-      </h3>
-    </div>
-      <div class="panel-body">
-        <p>Forward transform of quarter wave data.
-(<a href="../page/specs/fftpack.html#qct">Specifiction</a>)</p>
-      </div>
-    <ul class="list-group">
-          <li class="list-group-item">
-                <h3>
-    private pure module function qct_rk(x, n) result(result)  
 
     </h3>
   
@@ -2315,7 +2195,7 @@ fortran-lang/fftpack contributors<br>&copy; 2023 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-04 09:16            </p>
+ on 2023-03-08 04:26            </p>
         </div>
       </div>
       <br>
