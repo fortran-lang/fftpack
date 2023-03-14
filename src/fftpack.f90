@@ -17,6 +17,8 @@ module fftpack
     public :: dcosqi, dcosqf, dcosqb
     public :: dcosti, dcost
     public :: dct, idct
+    public :: dct_t1i, dct_t1
+    public :: dct_t23i, dct_t2, dct_t3
 
     public :: rk
 
@@ -267,6 +269,46 @@ module fftpack
         real(kind=rk), allocatable :: result(:)
         end function idct_rk
     end interface idct
+
+    !> Version: experimental
+    !>
+    !> Initialize DCT type-1
+    !> ([Specification](../page/specs/fftpack.html#dct_t1i))
+    interface dct_t1i
+        procedure :: dcosti
+    end interface dct_t1i
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-1
+    !> ([Specification](../page/specs/fftpack.html#dct_t1))
+    interface dct_t1
+        procedure :: dcost
+    end interface dct_t1
+
+    !> Version: experimental
+    !>
+    !> Initialize DCT types 2, 3
+    !> ([Specification](../page/specs/fftpack.html#dct_t23i))
+    interface dct_t23i
+        procedure :: dcosqi
+    end interface dct_t23i
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-2
+    !> ([Specification](../page/specs/fftpack.html#dct_t2))
+    interface dct_t2
+        procedure :: dcosqb
+    end interface dct_t2
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-3
+    !> ([Specification](../page/specs/fftpack.html#dct_t3))
+    interface dct_t3
+        procedure :: dcosqf
+    end interface dct_t3
 
     !> Version: experimental
     !>
