@@ -1,6 +1,6 @@
 module test_fftpack_dct
 
-    use fftpack, only: rk, dcosti, dcost, dct, idct, dcosqi, dcosqf, dcosqb
+    use fftpack
     use testdrive, only: new_unittest, unittest_type, error_type, check
     implicit none
     private
@@ -24,27 +24,53 @@ contains
 
     subroutine test_classic_dct(error)
         type(error_type), allocatable, intent(out) :: error
-        real(kind=rk) :: w(3*4 + 15)
+        real(kind=rk) :: w(3*4 + 15), w2(3*4 + 15)
         real(kind=rk) :: x(4) = [1, 2, 3, 4]
+        real(kind=rk) :: x2(4)
         real(kind=rk) :: eps = 1.0e-10_rk
-
+        
+        x2 = x
         call dcosti(4, w)
         call dcost(4, x, w)
-        call check(error, all(x == [real(kind=rk) :: 15, -4, 0, -1.0000000000000009_rk]), "`dcosti` failed.")
+        call check(error, sum(abs(x - [real(kind=rk) :: 15, -4, 0, -1.0000000000000009_rk])) < eps, &
+                   "`dcost` failed.")
         if (allocated(error)) return
+        
+        call dct_t1i(4, w2)
+        call dct_t1(4, x2, w2)
+        call check(error, maxval(abs(x2-x)) < eps, "dct_t1 failed")
+        if (allocated(error)) return
+
         call dcost(4, x, w)
-        call check(error, all(x/(2*3) == [real(kind=rk) :: 1, 2, 3, 4]), "`dcost` failed.")
+        call check(error, sum(abs(x/(2*3) - [real(kind=rk) :: 1, 2, 3, 4])) < eps, &
+                   "2nd `dcost` failed.")
+        if (allocated(error)) return
+
+        call dct_t1(4, x2, w2)
+        call check(error, maxval(abs(x2-x)) < eps, "2nd dct_t1 failed") 
+        if (allocated(error)) return
 
         x = [1, 2, 3, 4]
+        x2 = x
         call dcosqi(4, w)
         call dcosqf(4, x, w)
         call check(error, sum(abs(x - [11.999626276085150_rk, -9.1029432177492193_rk, &
                                        2.6176618435106480_rk, -1.5143449018465791_rk])) < eps, &
                    "`dcosqf` failed.")
         if (allocated(error)) return
+
+        call dct_t23i(4, w2)
+        call dct_t3(4, x2, w2)
+        call check(error, maxval(abs(x2-x)) < eps, "dct_t3 failed")
+        if (allocated(error)) return
+
         call dcosqb(4, x, w)
         call check(error, sum(abs(x/(4*4) - [real(kind=rk) :: 1, 2, 3, 4])) < eps, &
                    "`dcosqb` failed.")
+        if (allocated(error)) return
+
+        call dct_t2(4, x2, w2)
+        call check(error, maxval(abs(x2-x)) < eps, "dct_t2 failed")
 
     end subroutine test_classic_dct
 
