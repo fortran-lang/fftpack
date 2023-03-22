@@ -1091,7 +1091,7 @@ Pure subroutine.
 
 #### Syntax
 
-`call [[fftpack(module):dcosqf(interface)]](n, x, wsave)`
+`call [[fftpack(module):dcosqb(interface)]](n, x, wsave)`
 
 #### Arguments
 

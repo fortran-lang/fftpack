@@ -248,7 +248,7 @@ module fftpack
     !> Version: experimental
     !>
     !> Dsicrete cosine transforms.
-    !> ([Specification](../page/specs/fftpack.html#dct))
+    !> ([Specification](../page/specs/fftpack.html#simplified-dct-of-types-1-2-3-dct))
     interface dct
         pure module function dct_rk(x, n, type) result(result)
             real(kind=rk), intent(in) :: x(:)
@@ -261,7 +261,7 @@ module fftpack
     !> Version: experimental
     !>
     !> Inverse discrete cosine transforms.
-    !> ([Specification](../page/specs/fftpack.html#idct))
+    !> ([Specification](../page/specs/fftpack.html#simplified-inverse-dct-of-types-1-2-3-idct))
     interface idct
     pure module function idct_rk(x, n, type) result(result)
         real(kind=rk), intent(in) :: x(:)
