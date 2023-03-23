@@ -253,7 +253,7 @@ fortran-lang/fftpack contributors" >
 </li>
 <li><a href="#discrete-cosine-transforms-dct">Discrete cosine transforms (DCT)</a><ul>
 <li><a href="#dct-type-1-dct-1">DCT type-1 (DCT-1)</a><ul>
-<li><a href="#initialize-dct-1-dcosti">Initialize DCT-1: dcosti</a><ul>
+<li><a href="#initialize-dct-1-dcosti-or-dct_t1i">Initialize DCT-1: dcosti or dct_t1i</a><ul>
 <li><a href="#description_13">Description</a></li>
 <li><a href="#status_13">Status</a></li>
 <li><a href="#class_13">Class</a></li>
@@ -262,7 +262,7 @@ fortran-lang/fftpack contributors" >
 <li><a href="#example_13">Example</a></li>
 </ul>
 </li>
-<li><a href="#compute-dct-1-dcost">Compute DCT-1: dcost</a><ul>
+<li><a href="#compute-dct-1-dcost-or-dct_t1">Compute DCT-1: dcost or dct_t1</a><ul>
 <li><a href="#description_14">Description</a></li>
 <li><a href="#status_14">Status</a></li>
 <li><a href="#class_14">Class</a></li>
@@ -274,7 +274,7 @@ fortran-lang/fftpack contributors" >
 </ul>
 </li>
 <li><a href="#dct-of-types-2-3-dct-2-3-aka-quarter-cosine-transforms">DCT of types 2, 3 (DCT-2, 3), a.k.a "Quarter" cosine transforms</a><ul>
-<li><a href="#initialize-dct-2-3-dcosqi">Initialize DCT-2, 3: dcosqi</a><ul>
+<li><a href="#initialize-dct-2-3-dcosqi-or-dct_t23i">Initialize DCT-2, 3: dcosqi or dct_t23i</a><ul>
 <li><a href="#description_15">Description</a></li>
 <li><a href="#status_15">Status</a></li>
 <li><a href="#class_15">Class</a></li>
@@ -283,7 +283,7 @@ fortran-lang/fftpack contributors" >
 <li><a href="#example_15">Example</a></li>
 </ul>
 </li>
-<li><a href="#compute-dct-3-dcosqf">Compute DCT-3: dcosqf</a><ul>
+<li><a href="#compute-dct-3-dcosqf-or-dct_t3">Compute DCT-3: dcosqf or dct_t3</a><ul>
 <li><a href="#description_16">Description</a></li>
 <li><a href="#status_16">Status</a></li>
 <li><a href="#class_16">Class</a></li>
@@ -292,7 +292,7 @@ fortran-lang/fftpack contributors" >
 <li><a href="#example_16">Example</a></li>
 </ul>
 </li>
-<li><a href="#compute-dct-2-dcosqb">Compute DCT-2: dcosqb</a><ul>
+<li><a href="#compute-dct-2-dcosqb-or-dct_t2">Compute DCT-2: dcosqb or dct_t2</a><ul>
 <li><a href="#description_17">Description</a></li>
 <li><a href="#status_17">Status</a></li>
 <li><a href="#class_17">Class</a></li>
@@ -947,10 +947,12 @@ The same <code>wsave</code> array can be used by <code>dzfftf</code> and <code>d
 
 <h1 id="discrete-cosine-transforms-dct">Discrete cosine transforms (DCT)</h1>
 <h2 id="dct-type-1-dct-1">DCT type-1 (DCT-1)</h2>
-<h3 id="initialize-dct-1-dcosti">Initialize DCT-1: <code>dcosti</code></h3>
+<h3 id="initialize-dct-1-dcosti-or-dct_t1i">Initialize DCT-1: <code>dcosti</code> or <code>dct_t1i</code></h3>
 <h4 id="description_13">Description</h4>
 <p>Initializes the array <code>wsave</code> which is used in subroutine <code>dcost</code>.
 The prime factorization of <code>n</code> together with a tabulation of the trigonometric functions are computed and stored in <code>wsave</code>.</p>
+<p>The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. </p>
 <h4 id="status_13">Status</h4>
 <p>Experimental</p>
 <h4 id="class_13">Class</h4>
@@ -975,15 +977,17 @@ The contents of <code>wsave</code> must not be changed between calls of <code>dc
 <span class="k">end program </span><span class="n">demo_dcosti</span><span class="w"></span>
 </code></pre></div>
 
-<h3 id="compute-dct-1-dcost">Compute DCT-1: <code>dcost</code></h3>
+<h3 id="compute-dct-1-dcost-or-dct_t1">Compute DCT-1: <code>dcost</code> or <code>dct_t1</code></h3>
 <h4 id="description_14">Description</h4>
 <p>Computes the DCT-1 of the input real data.
 The transform is defined below at output parameter <code>x</code>.</p>
+<p>The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. </p>
 <p>For real input data <code>x</code> of length <code>n</code>, the DCT-1 of <code>x</code> is equivalent, up to a
 scaling factor, to the DFT of the even extension of <code>x</code> with length <code>2*(n-1)</code>,
 where the first and last entries of the original data are not repeated in the
-extension. For example, the DCT-1 of input data <em>abcde</em> (size <script type="math/tex; mode=display">5</script>) is
-equivalent to the DFT of data <em>abcdedcb</em> (size <script type="math/tex; mode=display">2*4=8</script>).</p>
+extension. For example, the DCT-1 of input data <em>abcde</em> (size <script type="math/tex">5</script>) is
+equivalent to the DFT of data <em>abcdedcb</em> (size <script type="math/tex">2*4=8</script>).</p>
 <p>Also, <code>dcost</code> is the unnormalized inverse of itself. This means that a call of
 <code>dcost</code> followed by another call of <code>dcost</code> will multiply the input sequence <code>x</code>
 by <code>2*(n-1)</code>.</p>
@@ -1037,12 +1041,14 @@ Contains initialization calculations which must not be destroyed between calls o
 </code></pre></div>
 
 <h2 id="dct-of-types-2-3-dct-2-3-aka-quarter-cosine-transforms">DCT of types 2, 3 (DCT-2, 3), a.k.a "Quarter" cosine transforms</h2>
-<h3 id="initialize-dct-2-3-dcosqi">Initialize DCT-2, 3: <code>dcosqi</code></h3>
+<h3 id="initialize-dct-2-3-dcosqi-or-dct_t23i">Initialize DCT-2, 3: <code>dcosqi</code> or <code>dct_t23i</code></h3>
 <h4 id="description_15">Description</h4>
 <p>Initializes the array <code>wsave</code> which is used in both <code>dcosqf</code> and <code>dcosqb</code>.
 The prime factorization of <code>n</code> together with
 a tabulation of the trigonometric functions are computed and
 stored in <code>wsave</code>.</p>
+<p>The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. </p>
 <h4 id="status_15">Status</h4>
 <p>Experimental</p>
 <h4 id="class_15">Class</h4>
@@ -1069,10 +1075,12 @@ The contents of <code>wsave</code> must not be changed between calls of <code>dc
 <span class="k">end program </span><span class="n">demo_dcosqi</span><span class="w"></span>
 </code></pre></div>
 
-<h3 id="compute-dct-3-dcosqf">Compute DCT-3: <code>dcosqf</code></h3>
+<h3 id="compute-dct-3-dcosqf-or-dct_t3">Compute DCT-3: <code>dcosqf</code> or <code>dct_t3</code></h3>
 <h4 id="description_16">Description</h4>
 <p>Computes the DCT-3 of the input real data.
 The transform is defined below at output parameter <code>x</code>.</p>
+<p>The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. </p>
 <p>Also, <code>dcosqf</code> (DCT-3) is the unnormalized inverse of <code>dcosqb</code> (DCT-2), since a
 call of <code>dcosqf</code> followed by a call of <code>dcosqb</code> will multiply the input sequence
 <code>x</code> by <code>4*n</code>.</p>
@@ -1122,10 +1130,12 @@ destroyed between calls of <code>dcosqf</code> or <code>dcosqb</code> of the sam
 <span class="k">end program </span><span class="n">demo_dcosqf</span><span class="w"></span>
 </code></pre></div>
 
-<h3 id="compute-dct-2-dcosqb">Compute DCT-2: <code>dcosqb</code></h3>
+<h3 id="compute-dct-2-dcosqb-or-dct_t2">Compute DCT-2: <code>dcosqb</code> or <code>dct_t2</code></h3>
 <h4 id="description_17">Description</h4>
 <p>Computes the DCT-2 of the input real data.
 The transform is defined below at output parameter <code>x</code>.</p>
+<p>The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. </p>
 <p>For real input data <code>x</code> of length <code>n</code>, the DCT-2 of <code>x</code> is equivalent, up to a
 scaling factor, to the DFT of the even extension of <code>x</code> with length <code>4*n</code>,
 where all the even-frequency entries are zero.</p>
@@ -1138,7 +1148,7 @@ call of <code>dcosqb</code> followed by a call of <code>dcosqf</code> will multi
 <h4 id="class_17">Class</h4>
 <p>Pure subroutine.</p>
 <h4 id="syntax_17">Syntax</h4>
-<p><code>call <a href="../../module/fftpack.html#interface-dcosqf">dcosqf</a>(n, x, wsave)</code></p>
+<p><code>call <a href="../../module/fftpack.html#interface-dcosqb">dcosqb</a>(n, x, wsave)</code></p>
 <h4 id="arguments_7">Arguments</h4>
 <p><code>n</code>: Shall be an <code>integer</code> scalar.
 This argument is <code>intent(in)</code>.<br>
@@ -1392,7 +1402,7 @@ fortran-lang/fftpack contributors<br>&copy; 2023 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-21 07:07            </p>
+ on 2023-03-23 03:08            </p>
         </div>
       </div>
       <br>

@@ -17,6 +17,8 @@ module fftpack
     public :: dcosqi, dcosqf, dcosqb
     public :: dcosti, dcost
     public :: dct, idct
+    public :: dct_t1i, dct_t1
+    public :: dct_t23i, dct_t2, dct_t3
 
     public :: rk
 
@@ -125,7 +127,7 @@ module fftpack
         !> Version: experimental
         !>
         !> Initialize `dcosqf` and `dcosqb`.
-        !> ([Specification](../page/specs/fftpack.html#dcosqi))
+        !> ([Specification](../page/specs/fftpack.html#initialize-dct-2-3-dcosqi-or-dct_t23i))
         pure subroutine dcosqi(n, wsave)
             import rk
             integer, intent(in) :: n
@@ -135,7 +137,7 @@ module fftpack
         !> Version: experimental
         !>
         !> Forward transform of quarter wave data.
-        !> ([Specification](../page/specs/fftpack.html#dcosqf))
+        !> ([Specification](../page/specs/fftpack.html#compute-dct-3-dcosqf-or-dct_t3))
         pure subroutine dcosqf(n, x, wsave)
             import rk
             integer, intent(in) :: n
@@ -146,7 +148,7 @@ module fftpack
         !> Version: experimental
         !>
         !> Unnormalized inverse of `dcosqf`.
-        !> ([Specification](../page/specs/fftpack.html#dcosqb))
+        !> ([Specification](../page/specs/fftpack.html#compute-dct-2-dcosqb-or-dct_t2))
         pure subroutine dcosqb(n, x, wsave)
             import rk
             integer, intent(in) :: n
@@ -156,7 +158,8 @@ module fftpack
 
         !> Version: experimental
         !>
-        !> Initialize `dcost`. ([Specification](../page/specs/fftpack.html#dcosti))
+        !> Initialize `dcost`.
+        !> ([Specification](../page/specs/fftpack.html#initialize-dct-1-dcosti-or-dct_t1i))
         pure subroutine dcosti(n, wsave)
             import rk
             integer, intent(in) :: n
@@ -166,7 +169,7 @@ module fftpack
         !> Version: experimental
         !>
         !> Discrete fourier cosine transform of an even sequence.
-        !> ([Specification](../page/specs/fftpack.html#dcost))
+        !> ([Specification](../page/specs/fftpack.html#compute-dct-1-dcost-or-dct_t1))
         pure subroutine dcost(n, x, wsave)
             import rk
             integer, intent(in) :: n
@@ -245,7 +248,7 @@ module fftpack
     !> Version: experimental
     !>
     !> Dsicrete cosine transforms.
-    !> ([Specification](../page/specs/fftpack.html#dct))
+    !> ([Specification](../page/specs/fftpack.html#simplified-dct-of-types-1-2-3-dct))
     interface dct
         pure module function dct_rk(x, n, type) result(result)
             real(kind=rk), intent(in) :: x(:)
@@ -258,7 +261,7 @@ module fftpack
     !> Version: experimental
     !>
     !> Inverse discrete cosine transforms.
-    !> ([Specification](../page/specs/fftpack.html#idct))
+    !> ([Specification](../page/specs/fftpack.html#simplified-inverse-dct-of-types-1-2-3-idct))
     interface idct
     pure module function idct_rk(x, n, type) result(result)
         real(kind=rk), intent(in) :: x(:)
@@ -267,6 +270,46 @@ module fftpack
         real(kind=rk), allocatable :: result(:)
         end function idct_rk
     end interface idct
+
+    !> Version: experimental
+    !>
+    !> Initialize DCT type-1
+    !> ([Specification](../page/specs/fftpack.html#initialize-dct-1-dcosti-or-dct_t1i))
+    interface dct_t1i
+        procedure :: dcosti
+    end interface dct_t1i
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-1
+    !> ([Specification](../page/specs/fftpack.html#compute-dct-1-dcost-or-dct_t1))
+    interface dct_t1
+        procedure :: dcost
+    end interface dct_t1
+
+    !> Version: experimental
+    !>
+    !> Initialize DCT types 2, 3
+    !> ([Specification](../page/specs/fftpack.html#initialize-dct-2-3-dcosqi-or-dct_t23i))
+    interface dct_t23i
+        procedure :: dcosqi
+    end interface dct_t23i
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-2
+    !> ([Specification](../page/specs/fftpack.html#compute-dct-2-dcosqb-or-dct_t2))
+    interface dct_t2
+        procedure :: dcosqb
+    end interface dct_t2
+
+    !> Version: experimental
+    !>
+    !> Perform DCT type-3
+    !> ([Specification](../page/specs/fftpack.html#compute-dct-3-dcosqf-or-dct_t3))
+    interface dct_t3
+        procedure :: dcosqf
+    end interface dct_t3
 
     !> Version: experimental
     !>
