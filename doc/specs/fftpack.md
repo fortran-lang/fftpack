@@ -809,12 +809,15 @@ end program demo_dzfftb
 
 ## DCT type-1 (DCT-1)
 
-### Initialize DCT-1: `dcosti`
+### Initialize DCT-1: `dcosti` or `dct_t1i`
 
 #### Description
 
 Initializes the array `wsave` which is used in subroutine `dcost`.
 The prime factorization of `n` together with a tabulation of the trigonometric functions are computed and stored in `wsave`.
+
+The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. 
 
 #### Status
 
@@ -851,18 +854,21 @@ program demo_dcosti
 end program demo_dcosti
 ```
 
-### Compute DCT-1: `dcost`
+### Compute DCT-1: `dcost` or `dct_t1`
 
 #### Description
 
 Computes the DCT-1 of the input real data.
 The transform is defined below at output parameter `x`.
 
+The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. 
+
 For real input data `x` of length `n`, the DCT-1 of `x` is equivalent, up to a
 scaling factor, to the DFT of the even extension of `x` with length `2*(n-1)`,
 where the first and last entries of the original data are not repeated in the
-extension. For example, the DCT-1 of input data *abcde* (size \[5\]) is
-equivalent to the DFT of data *abcdedcb* (size \[2*4=8\]).
+extension. For example, the DCT-1 of input data *abcde* (size \(5\)) is
+equivalent to the DFT of data *abcdedcb* (size \(2*4=8\)).
 
 Also, `dcost` is the unnormalized inverse of itself. This means that a call of
 `dcost` followed by another call of `dcost` will multiply the input sequence `x`
@@ -932,7 +938,7 @@ end program demo_dcost
 
 ## DCT of types 2, 3 (DCT-2, 3), a.k.a "Quarter" cosine transforms
 
-### Initialize DCT-2, 3: `dcosqi`
+### Initialize DCT-2, 3: `dcosqi` or `dct_t23i`
 
 #### Description
 
@@ -940,6 +946,9 @@ Initializes the array `wsave` which is used in both `dcosqf` and `dcosqb`.
 The prime factorization of `n` together with
 a tabulation of the trigonometric functions are computed and
 stored in `wsave`.
+
+The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. 
 
 #### Status
 
@@ -978,12 +987,15 @@ program demo_dcosqi
 end program demo_dcosqi
 ```
 
-### Compute DCT-3: `dcosqf`
+### Compute DCT-3: `dcosqf` or `dct_t3`
 
 #### Description
 
 Computes the DCT-3 of the input real data.
 The transform is defined below at output parameter `x`.
+
+The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. 
 
 Also, `dcosqf` (DCT-3) is the unnormalized inverse of `dcosqb` (DCT-2), since a
 call of `dcosqf` followed by a call of `dcosqb` will multiply the input sequence
@@ -1049,12 +1061,15 @@ program demo_dcosqf
 end program demo_dcosqf
 ```
 
-### Compute DCT-2: `dcosqb`
+### Compute DCT-2: `dcosqb` or `dct_t2`
 
 #### Description
 
 Computes the DCT-2 of the input real data.
 The transform is defined below at output parameter `x`.
+
+The two procedures are completely equivalent and expect the same arguments.
+It is a matter of personal preference which one you choose to use. 
 
 For real input data `x` of length `n`, the DCT-2 of `x` is equivalent, up to a
 scaling factor, to the DFT of the even extension of `x` with length `4*n`,
@@ -1076,7 +1091,7 @@ Pure subroutine.
 
 #### Syntax
 
-`call [[fftpack(module):dcosqf(interface)]](n, x, wsave)`
+`call [[fftpack(module):dcosqb(interface)]](n, x, wsave)`
 
 #### Arguments
 
