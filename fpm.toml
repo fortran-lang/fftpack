@@ -10,6 +10,11 @@ copyright   = "Copyright 1985 National Center for Atmospheric Research, Boulder,
 categories  = ["Fast Fourier Transform"]
 keywords    = ["netlib", "fftpack", "fft"]
 
+[fortran]
+implicit-typing=true
+implicit-external=true
+source-form="default"
+
 [build]
 auto-executables = false
 auto-tests = false
