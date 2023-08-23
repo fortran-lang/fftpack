@@ -1,7 +1,8 @@
+![FFTPACK](media/logo-text-background.png)
+
 # FFTPACK
 
-
-A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences.
+A package of Fortran subprograms for the fast Fourier transform of periodic and other symmetric sequences.
 
 [![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
 [![Actions Status](https://github.com/fortran-lang/fftpack/workflows/doc-deployment/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
