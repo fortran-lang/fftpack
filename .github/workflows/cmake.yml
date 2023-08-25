@@ -24,26 +24,30 @@ jobs:
             toolchain: {compiler: intel, version: '2023.2'}
 
     steps:
-      - uses: modflowpy/install-intelfortran-action@v1
-      - uses: awvwgk/setup-fortran@v1
-        id: setup-fortran
-        with:
-          compiler: ${{ matrix.toolchain.compiler }}
-          version: ${{ matrix.toolchain.version }}
+    - name: Setup IFORT
+      if: contains( matrix.fortran_compiler, 'ifort')
+      uses: modflowpy/install-intelfortran-action@v1
+    
+    - name: Setup GFORTRAN
+      if: contains(matrix.fortran_compiler, 'gfortran')
+      uses: awvwgk/setup-fortran@v1
+      id: setup-fortran
+      with:
+        compiler: ${{ matrix.toolchain.compiler }}
+        version: ${{ matrix.toolchain.version }}
 
-      - run: ${{ env.FC }} --version
-        env:
-          FC: ${{ steps.setup-fortran.outputs.fc }}
+      env:
+        FC: ${{ steps.setup-fortran.outputs.fc }}
 
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DBUILD_TESTING=TRUE
       
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DBUILD_TESTING=TRUE
-        
-      - name: Build with CMake
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+    - name: Build with CMake
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
-      - name: Test with CMake
-        working-directory: ${{github.workspace}}/build
-        run: ctest -C ${{env.BUILD_TYPE}}
+    - name: Test with CMake
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C ${{env.BUILD_TYPE}}
 
