@@ -22,11 +22,6 @@ jobs:
         include:
           - os: ubuntu-latest
             toolchain: {compiler: intel, version: '2023.2'}
-        exclude: # Only necessary as there seems to be an issue in awvwgk/setup-fortran
-          - os: macos-latest
-            toolchain: {compiler: intel-classic, version: '2021.10'}
-          - os: ubuntu-latest
-            toolchain: {compiler: intel-classic, version: '2021.10'}
 
     steps:
       - uses: modflowpy/install-intelfortran-action@v1
