@@ -18,7 +18,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         toolchain:
           - {compiler: gcc, version: 11}
-          - {compiler: intel-classic, version: '2021.10'}
+          - {compiler: intel-classic, version: '2021.1'}
         include:
           - os: ubuntu-latest
             toolchain: {compiler: intel, version: '2023.2'}
