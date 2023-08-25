@@ -23,7 +23,7 @@ jobs:
           - os: ubuntu-latest
             toolchain: {compiler: intel, version: '2023.2'}
           - os: windows-latest
-            toolchain: {compiler: intel, version: '2023.2'}
+            toolchain: {compiler: intel-classic, version: '2021.9.0'}
         exclude:
           - os: windows-latest
             toolchain: {compiler: intel-classic, version: '2021.9'}
