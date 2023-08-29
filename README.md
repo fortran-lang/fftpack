@@ -6,6 +6,7 @@ A package of Fortran subprograms for the fast Fourier transform of periodic and 
 
 [![Actions Status](https://github.com/fortran-lang/fftpack/workflows/fpm/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
 [![Actions Status](https://github.com/fortran-lang/fftpack/workflows/doc-deployment/badge.svg)](https://github.com/fortran-lang/fftpack/actions)
+[![CMake](https://github.com/fortran-lang/fftpack/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/fortran-lang/fftpack/actions/workflows/cmake.yml)
 
 ## Getting started
 ### Get the code
