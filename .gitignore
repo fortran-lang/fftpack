@@ -10,3 +10,6 @@ build*
 
 # API-doc
 API-doc/
+
+# Meson subprojects
+subprojects/test-drive

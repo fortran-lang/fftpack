@@ -38,6 +38,32 @@ make
 ## Build with CMake
 This library can also be built using CMake.  For instructions see [Running CMake](https://cmake.org/runningcmake/).  CMake version 3.24 or higher is required.
 
+## Build with Meson
+This library can also be built using Meson. The following dependencies are required:
+- a Fortran compiler
+- [meson](https://mesonbuild.com) version 0.57 or newer
+- a build-system backend, *i.e.* [ninja](https://ninja-build.org) version 1.7 or newer
+
+Setup a build with
+
+```sh
+meson setup build
+```
+
+You can select the Fortran compiler by the `FC` environment variable.
+To compile and run the projects testsuite use
+
+```sh
+meson test -C build --print-errorlogs
+```
+
+If the testsuite passes you can install with
+
+```sh
+meson configure build --prefix=/path/to/install
+meson install -C build
+```
+
 ## Links
 - [netlib/dfftpack1.0(fftpack4.0)](http://www.netlib.org/fftpack/)
 - [Documents of fft routines in GNU/gsl based on `netlib/fftpack`](https://www.gnu.org/software/gsl/doc/html/fft.html#)
