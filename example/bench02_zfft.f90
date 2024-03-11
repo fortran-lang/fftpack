@@ -1,4 +1,4 @@
-program main
+program bench2
 use fftpack, only: zffti, zfftf, zfftb, fft, ifft
 use fftpack_kind, only: rk
 
