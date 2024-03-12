@@ -15,11 +15,6 @@ implicit-typing=true
 implicit-external=true
 source-form="default"
 
-[build]
-auto-executables = false
-auto-tests = false
-auto-examples = false
-
 [dev-dependencies]
 test-drive = { git = "https://github.com/fortran-lang/test-drive", tag = "v0.4.0" }
 
