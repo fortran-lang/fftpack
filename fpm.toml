@@ -1,4 +1,3 @@
-  
 name        = "fftpack"
 description = "A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences"
 homepage    = "http://www.netlib.org/fftpack/"
