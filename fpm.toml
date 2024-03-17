@@ -1,4 +1,3 @@
-  
 name        = "fftpack"
 description = "A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences"
 homepage    = "http://www.netlib.org/fftpack/"
@@ -14,6 +13,11 @@ keywords    = ["netlib", "fftpack", "fft"]
 implicit-typing=true
 implicit-external=true
 source-form="default"
+
+[build]
+auto-executables = false
+auto-tests = true
+auto-examples = true
 
 [dev-dependencies]
 test-drive = { git = "https://github.com/fortran-lang/test-drive", tag = "v0.4.0" }
