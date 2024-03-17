@@ -38,7 +38,7 @@ program forward_transform_of_real_function
   print complex_format, "f_hat = ", f_hat
   print real_format, "f_round_trip = ",f_round_trip
 
-  call assert(any(abs(f_round_trip - f) < tolerance), "inverse of forward FFT must yield the original function")
+  call assert(all(abs(f_round_trip - f) < tolerance), "inverse of forward FFT must yield the original function")
 
 contains
 
