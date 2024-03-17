@@ -29,12 +29,6 @@ To use `fftpack` within your `fpm` project, add the following to your `fpm.toml`
 fftpack = { git="https://github.com/fortran-lang/fftpack.git" }
 ```
 
-## Build with Make
-Alternatively, you can build using provided `Makefile`:
-```bash
-make
-```
-
 ## Build with CMake
 This library can also be built using CMake.  For instructions see [Running CMake](https://cmake.org/runningcmake/).  CMake version 3.24 or higher is required.
 
