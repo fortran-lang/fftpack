@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         toolchain:
-          - {compiler: gcc, version: 11}
+          - {compiler: gcc, version: 14}
           - {compiler: intel-classic, version: '2021.9'}
         include:
           - os: ubuntu-latest
