@@ -9,3 +9,9 @@ target_link_libraries(bench3 fftpack)
 
 add_executable(rfft_example)
 target_link_libraries(rfft_example fftpack)
+
+add_executable(complex_transforms)
+target_link_libraries(complex_transforms fftpack)
+
+add_executable(real_transforms)
+target_link_libraries(real_transforms fftpack)
