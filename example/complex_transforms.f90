@@ -1,4 +1,4 @@
-program round_trip_transform_of_complex_function
+program complex_transforms
   !! This program invokes fftpack's fft function to compute the forward transform of a complex function
   !! and the inverse transform of the result.  An assertion verifies the expected result of the forward 
   !! transform according to the element layout described at [1].  A second assertion checks that the

@@ -1,4 +1,4 @@
-program round_trip_transform_of_real_function
+program real_transforms
   !! This program invokes fftpack's rrft function to compute the forward transform of a real function
   !! and constructs the resulting complex Fourier coefficients by (re)organizing and normalizing the
   !! rfft result according to array element layout described at [1].  The program also demonstrates
