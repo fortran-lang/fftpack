@@ -1,8 +1,8 @@
-program forward_transform_of_real_function
+program real_transforms
   !! This program invokes fftpack's rrft function to compute the forward transform of a real function
   !! and constructs the resulting complex Fourier coefficients by (re)organizing and normalizing the
   !! rfft result according to array element layout described at [1].  The program also demonstrates
-  !! the inverse transform of the raw rrft result to recover the original function.
+  !! the inverse transform of the normalized rrft result to recover the original function.
   !!
   !! [1] https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.rfft.html#scipy.fftpack.rfft
   use fftpack, only: rfft, irfft
