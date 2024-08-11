@@ -33,7 +33,7 @@ program complex_transforms
   print complex_format, "fft_f = ", fft_f
   print complex_format, "f_round_trip = ",f_round_trip
 
-  !call assert(all(abs(f_round_trip - f) < tolerance), "inverse of forward FFT must yield the original function")
+  call assert(all(abs(f_round_trip - f) < tolerance), "inverse of forward FFT must yield the original function")
 
 contains
 
