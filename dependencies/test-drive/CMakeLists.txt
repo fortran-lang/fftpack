@@ -1,4 +1,3 @@
-# Get the macros and functions we'll need
 include(FetchContent)
 
 # If found, use the installed version; else, import the library

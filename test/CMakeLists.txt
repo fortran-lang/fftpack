@@ -1,5 +1,3 @@
-include("${PROJECT_SOURCE_DIR}/cmake/helper.cmake")
-
 macro(build_tests testname)
     add_executable(${testname} ${ARGN})
     link_library(${testname} fftpack ${PROJECT_INCLUDE_DIR})
