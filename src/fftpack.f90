@@ -20,6 +20,8 @@ module fftpack
     public :: dct_t1i, dct_t1
     public :: dct_t23i, dct_t2, dct_t3
 
+    public :: dsinti, dsint
+
     public :: rk
 
     interface
@@ -176,6 +178,22 @@ module fftpack
             real(kind=rk), intent(inout) :: x(*)
             real(kind=rk), intent(in) :: wsave(*)
         end subroutine dcost
+
+
+        pure subroutine dsinti(n, wsave)
+            import rk
+            integer, intent(in) :: n
+            real(kind=rk), intent(out) :: wsave(*)
+        end subroutine dsinti
+
+
+        pure subroutine dsint(n, x, wsave)
+            import rk
+            integer, intent(in) :: n
+            real(kind=rk), intent(inout) :: x(*)
+            real(kind=rk), intent(in) :: wsave(*)
+        end subroutine dsint
+
 
         !> Version: experimental
         !>
