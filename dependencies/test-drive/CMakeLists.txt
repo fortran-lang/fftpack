@@ -1,5 +1,3 @@
-# Get the macros and functions we'll need
-include("${PROJECT_SOURCE_DIR}/cmake/helper.cmake")
 include(FetchContent)
 
 # If found, use the installed version; else, import the library
