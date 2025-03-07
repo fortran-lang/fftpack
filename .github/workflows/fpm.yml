@@ -8,13 +8,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-12]
-        gcc_v: [11] # Version of GFortran we want to use.
+        os: [ubuntu-latest, macos-13]
+        gcc_v: [13] # Version of GFortran we want to use.
         include:
         - os: ubuntu-latest
           os-arch: linux-x86_64
 
-        - os: macos-12
+        - os: macos-13
           os-arch: macos-x86_64
 
     env:
@@ -98,8 +98,8 @@ jobs:
       fail-fast: false
 
     env:
-      FPM_FC: ifort
-      FC: ifort
+      FPM_FC: ifx
+      FC: ifx
 
     steps:
     - name: Checkout code
@@ -129,7 +129,7 @@ jobs:
 
     - name: fpm build
       run: |
-        ifort --version
+        ifx --version
         fpm --version
         fpm build --profile debug --flag "-warn nointerfaces"
 
