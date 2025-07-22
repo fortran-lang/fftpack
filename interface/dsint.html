@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +10,7 @@
 fortran-lang/fftpack contributors" >
     <link rel="icon" href="../favicon.png">
 
-    <title>ifftshift &ndash; Fortran-lang/fftpack</title>
+    <title>dsint &ndash; Fortran-lang/fftpack</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -76,7 +77,7 @@ fortran-lang/fftpack contributors" >
 
     <div class="container">
   <div class="row">
-    <h1>ifftshift
+    <h1>dsint
       <small>Interface</small>
       
     </h1>
@@ -85,12 +86,11 @@ fortran-lang/fftpack contributors" >
       <div class="well well-sm">
         <ul class="list-inline" style="margin-bottom:0px;display:inline">
             <li id="meta-license"><i class="fa fa-legal"></i> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a></li>
-            <li id="meta-version"><i class="fa fa-barcode"></i> experimental</li>
 
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title="<p> 0.2% of total for procedures.</p>Including implementation: 10 statements,  0.2% of total for procedures.">10 statements</a>
+               title=" 2.5% of total for procedures.">104 statements</a>
           </li>
 
             <li id="source-file">
@@ -101,7 +101,7 @@ fortran-lang/fftpack contributors" >
         <ol class="breadcrumb in-well text-right">
               <li><a href='../sourcefile/fftpack.f90.html'>fftpack.f90</a></li>
               <li><a href='../module/fftpack.html'>fftpack</a></li>
-          <li class="active">ifftshift</li>
+          <li class="active">dsint</li>
         </ol>
       </div>
     </div>
@@ -116,7 +116,7 @@ fortran-lang/fftpack contributors" >
   
   <div class="row">
     <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
-        <div id="sidebar">
+      <div id="sidebar">
       <h3>Contents</h3>
   
   
@@ -129,20 +129,7 @@ fortran-lang/fftpack contributors" >
   
   
   
-      <div class="panel panel-primary">
-      <div class="panel-heading text-left">
-        <h3 class="panel-title">
-          <a data-toggle="collapse" href="#funcs-0">Functions</a>
-        </h3>
-      </div>
-      <div id="funcs-0" class="panel-collapse collapse">
-        <div class="list-group">
-            <a class="list-group-item" href="../interface/ifftshift.html#proc-ifftshift_crk">ifftshift_crk</a>
-            <a class="list-group-item" href="../interface/ifftshift.html#proc-ifftshift_rrk">ifftshift_rrk</a>
-        </div>
-      </div>
-    </div>
-
+  
   
   
   
@@ -151,64 +138,21 @@ fortran-lang/fftpack contributors" >
   
   
 
+    <em>None</em>
 
   </div>
 
     </div>
     
     <div class="col-md-9" id='text'>
-      <h2>public interface ifftshift</h2>
-   <p>Shifts zero-frequency component to beginning of spectrum.
-(<a href="../page/specs/fftpack.html#ifftshift">Specifiction</a>)</p>
-<br>
-     <section class="visible-xs visible-sm hidden-md">
-         <h3>Contents</h3>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-      <div class="panel panel-primary">
-      <div class="panel-heading text-left">
-        <h3 class="panel-title">
-          <a data-toggle="collapse" href="#funcs-1">Functions</a>
-        </h3>
-      </div>
-      <div id="funcs-1" class="panel-collapse collapse">
-        <div class="list-group">
-            <a class="list-group-item" href="../interface/ifftshift.html#proc-ifftshift_crk">ifftshift_crk</a>
-            <a class="list-group-item" href="../interface/ifftshift.html#proc-ifftshift_rrk">ifftshift_rrk</a>
-        </div>
-      </div>
-    </div>
+      <h2>interface <br>
+      public pure subroutine dsint(n, x, wsave)  
+</h2>    
 
-  
-  
-  
-  
-  
-  
-  
+    
 
-
-     </section>
-     <br class="visible-xs visible-sm hidden-md">
-     
-   <h2>Functions</h2>
-      <div class="panel panel-default">
-    <div class="panel-heading codesum"><span class="anchor" id="proc-ifftshift_crk"></span><h3>private pure module function ifftshift_crk(x) result(result)  
-</h3></div>
-    <div class="panel-body">
-        
-
-  <h4>Arguments</h4>
-      <table class="table table-striped varlist">
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
     <thead>
       <tr>
         <th>Type</th>
@@ -220,51 +164,37 @@ fortran-lang/fftpack contributors" >
     <tbody>
         <tr>
             <td>
-              <span class="anchor" ></span>
-              complex(kind=rk),
+              <span class="anchor" id="variable-n~38"></span>
+              integer,
             </td>
 <td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>x</strong>(:)</td>
+            <td><strong>n</strong></td>
             <td>
                 
             </td>
         </tr>
-    </tbody>
-  </table>
-
-    <h4>
-    Return Value
-    <small>complex(kind=rk), dimension(size(x))</small>
-    </h4>
-    
-
-    </div>
-  </div>
-
-      <div class="panel panel-default">
-    <div class="panel-heading codesum"><span class="anchor" id="proc-ifftshift_rrk"></span><h3>private pure module function ifftshift_rrk(x) result(result)  
-</h3></div>
-    <div class="panel-body">
-        
-
-  <h4>Arguments</h4>
-      <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th>Type</th>
-<th>Intent</th><th>Optional</th>        <th>Attributes</th>
-        <th></th>
-        <th>Name</th>
-        <th></th>
-    </thead>
-    <tbody>
         <tr>
             <td>
-              <span class="anchor" ></span>
+              <span class="anchor" id="variable-x~13"></span>
+              real(kind=rk),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(*)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wsave~9"></span>
               real(kind=rk),
             </td>
 <td>intent(in)</td>
@@ -272,7 +202,7 @@ fortran-lang/fftpack contributors" >
               
             </td>
             <td>::</td>
-            <td><strong>x</strong>(:)</td>
+            <td><strong>wsave</strong>(*)</td>
             <td>
                 
             </td>
@@ -280,17 +210,7 @@ fortran-lang/fftpack contributors" >
     </tbody>
   </table>
 
-    <h4>
-    Return Value
-    <small>real(kind=rk), dimension(size(x))</small>
-    </h4>
-    
-
-    </div>
-  </div>
-
-
-
+    <br>
 
  </div>
 </div>

@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title="41.9% of total for modules and submodules.">190 statements</a>
+               title="43.4% of total for modules and submodules.">202 statements</a>
           </li>
 
             <li id="source-file">
@@ -146,6 +146,8 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-dfftb">dfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dfftf">dfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dffti">dffti</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-dsint">dsint</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-dsinti">dsinti</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftb">dzfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftf">dzfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzffti">dzffti</a>
@@ -251,6 +253,8 @@ fortran-lang/fftpack contributors" >
             <a class="list-group-item" href="../module/fftpack.html#interface-dfftb">dfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dfftf">dfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dffti">dffti</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-dsint">dsint</a>
+            <a class="list-group-item" href="../module/fftpack.html#interface-dsinti">dsinti</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftb">dzfftb</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzfftf">dzfftf</a>
             <a class="list-group-item" href="../module/fftpack.html#interface-dzffti">dzffti</a>
@@ -1044,6 +1048,147 @@ fortran-lang/fftpack contributors" >
     </h3>
   <p>Initialize <code>dfftf</code> and <code>dfftb</code>.
 (<a href="../page/specs/fftpack.html#dffti">Specification</a>)</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=rk),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wsave</strong>(*)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+       <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-dsint"></span>
+      <h3>        interface
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+              <h3>
+    public pure subroutine dsint(n, x, wsave)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=rk),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(*)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=rk),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wsave</strong>(*)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+       <div class="panel panel-default">
+    <div class="panel-heading codesum">
+      <span class="anchor" id="interface-dsinti"></span>
+      <h3>        interface
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+              <h3>
+    public pure subroutine dsinti(n, wsave)  
+
+    </h3>
+  
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -2336,7 +2481,7 @@ fortran-lang/fftpack contributors<br>&copy; 2025 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2025-03-07 13:19            </p>
+ on 2025-07-22 20:33            </p>
         </div>
       </div>
       <br>
