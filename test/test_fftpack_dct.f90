@@ -166,7 +166,7 @@ program test_dct
    stat = 0
 
    testsuites = [ &
-                new_testsuite("linalg_norm", collect_dct) &
+                new_testsuite("dct", collect_dct) &
                 ]
 
    do is = 1, size(testsuites)
