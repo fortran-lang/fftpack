@@ -1,24 +1,32 @@
-macro(build_tests testname)
-    add_executable(${testname} ${ARGN})
-    link_library(${testname} fftpack ${PROJECT_INCLUDE_DIR})
-    link_library(${testname} test-drive ${test-drive_INCLUDE_DIR})
-    add_test(
-        NAME ${testname}
-        WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-        COMMAND $<TARGET_FILE:${testname}>
-    )
-endmacro()
+if (NOT TARGET "test-drive::test-drive")
+  find_package("test-drive" REQUIRED)
+endif()
 
-set(FFTPACK_TEST_SOURCES
-    test_fftpack_dct.f90
-    test_fftpack_fft.f90
-    test_fftpack_rfft.f90
-    test_fftpack_utils.f90
-    test_fftpack.f90
-)
+if(WIN32)
+  if(CMAKE_Fortran_COMPILER_ID MATCHES "^Intel")
+    add_link_options(/Qoption,link,/STACK:8388608)
+  elseif(CMAKE_Fortran_COMPILER_ID STREQUAL GNU)
+    add_link_options(-Wl,--stack,8388608)
+  endif()
+endif()
 
-# Run the original FFTPACK test
-build_tests(fftpack_original_tests tstfft.f)
+macro(ADDTEST name)
+    add_executable(test_${name} test_${name}.f90)
+    target_link_libraries(test_${name} "${PROJECT_NAME}" "test-drive::test-drive")
+    add_test(NAME ${name}
+             COMMAND $<TARGET_FILE:test_${name}> ${CMAKE_CURRENT_BINARY_DIR}
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endmacro(ADDTEST)
 
-# Run the additional FFTPACK tests
-build_tests(fftpack_tests ${FFTPACK_TEST_SOURCES})
+macro(ADDTESTPP name)
+    add_executable(test_${name} test_${name}.F90)
+    target_link_libraries(test_${name} "${PROJECT_NAME}" "test-drive::test-drive")
+    add_test(NAME ${name}
+             COMMAND $<TARGET_FILE:test_${name}> ${CMAKE_CURRENT_BINARY_DIR}
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endmacro(ADDTESTPP)
+
+ADDTEST(fftpack_fft)
+ADDTEST(fftpack_rfft)
+ADDTEST(fftpack_dct)
+ADDTEST(fftpack_utils)
