@@ -20,7 +20,7 @@ auto-tests = true
 auto-examples = true
 
 [dev-dependencies]
-test-drive = { git = "https://github.com/fortran-lang/test-drive", tag = "v0.4.0" }
+test-drive = { git = "https://github.com/fortran-lang/test-drive"}
 
 # Original test
 [[test]]
