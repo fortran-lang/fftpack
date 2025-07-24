@@ -1,67 +1,210 @@
-# Locate the source directories
-set(dir ${CMAKE_CURRENT_SOURCE_DIR})
-set(subdir "${dir}/fftpack")
+#### Pre-process: .fpp -> .f90 via Fypp
 
-# The source files
-set(FFTPACK_SOURCES
-    ${subdir}/cfftb1.f90
-    ${subdir}/cfftf1.f90
-    ${subdir}/cffti1.f90
-    ${subdir}/cosqb1.f90
-    ${subdir}/cosqf1.f90
-    ${subdir}/dcosqb.f90
-    ${subdir}/dcosqf.f90
-    ${subdir}/dcosqi.f90
-    ${subdir}/dcost.f90
-    ${subdir}/dcosti.f90
-    ${subdir}/dfftb.f90
-    ${subdir}/dfftf.f90
-    ${subdir}/dffti.f90
-    ${subdir}/dsinqb.f90
-    ${subdir}/dsinqf.f90
-    ${subdir}/dsinqi.f90
-    ${subdir}/dsint.f90
-    ${subdir}/dsinti.f90
-    ${subdir}/dzfftb.f90
-    ${subdir}/dzfftf.f90
-    ${subdir}/dzffti.f90
-    ${subdir}/ezfft1.f90
-    ${dir}/fftpack.f90
-    ${subdir}/fftpack_dct.f90
-    ${subdir}/fftpack_fft.f90
-    ${subdir}/fftpack_fftshift.f90
-    ${subdir}/fftpack_ifft.f90
-    ${subdir}/fftpack_ifftshift.f90
-    ${subdir}/fftpack_irfft.f90
-    ${subdir}/fftpack_rfft.f90
-    ${subdir}/fftpack_utils.f90
-    ${subdir}/passb.f90
-    ${subdir}/passb2.f90
-    ${subdir}/passb3.f90
-    ${subdir}/passb4.f90
-    ${subdir}/passb5.f90
-    ${subdir}/passf.f90
-    ${subdir}/passf2.f90
-    ${subdir}/passf3.f90
-    ${subdir}/passf4.f90
-    ${subdir}/passf5.f90
-    ${subdir}/radb2.f90
-    ${subdir}/radb3.f90
-    ${subdir}/radb4.f90
-    ${subdir}/radb5.f90
-    ${subdir}/radbg.f90
-    ${subdir}/radf2.f90
-    ${subdir}/radf3.f90
-    ${subdir}/radf4.f90
-    ${subdir}/radf5.f90
-    ${subdir}/radfg.f90
-    ${subdir}/rfftb1.f90
-    ${subdir}/rfftf1.f90
-    ${subdir}/rffti1.f90
-    ${subdir}/rk.f90
-    ${subdir}/sint1.f90
-    ${subdir}/zfftb.f90
-    ${subdir}/zfftf.f90
-    ${subdir}/zffti.f90
+# Create a list of the files to be preprocessed
+# set(fppFiles
+#     stdlib_ascii.fypp
+#     stdlib_bitsets.fypp
+#     stdlib_bitsets_64.fypp
+#     stdlib_bitsets_large.fypp
+#     stdlib_codata_type.fypp
+#     stdlib_constants.fypp
+#     stdlib_error.fypp
+#     stdlib_hash_32bit.fypp
+#     stdlib_hash_32bit_fnv.fypp
+#     stdlib_hash_32bit_nm.fypp
+#     stdlib_hash_32bit_water.fypp
+#     stdlib_hash_64bit.fypp
+#     stdlib_hash_64bit_fnv.fypp
+#     stdlib_hash_64bit_pengy.fypp
+#     stdlib_hash_64bit_spookyv2.fypp
+#     stdlib_intrinsics_dot_product.fypp
+#     stdlib_intrinsics_sum.fypp
+#     stdlib_intrinsics.fypp
+#     stdlib_io.fypp
+#     stdlib_io_npy.fypp
+#     stdlib_io_npy_load.fypp
+#     stdlib_io_npy_save.fypp
+#     stdlib_kinds.fypp
+#     stdlib_linalg.fypp
+#     stdlib_linalg_diag.fypp
+#     stdlib_linalg_least_squares.fypp
+#     stdlib_linalg_outer_product.fypp
+#     stdlib_linalg_kronecker.fypp
+#     stdlib_linalg_cross_product.fypp
+#     stdlib_linalg_eigenvalues.fypp
+#     stdlib_linalg_solve.fypp
+#     stdlib_linalg_determinant.fypp
+#     stdlib_linalg_qr.fypp
+#     stdlib_linalg_inverse.fypp
+#     stdlib_linalg_pinv.fypp
+#     stdlib_linalg_norms.fypp
+#     stdlib_linalg_state.fypp
+#     stdlib_linalg_svd.fypp
+#     stdlib_linalg_cholesky.fypp
+#     stdlib_linalg_schur.fypp
+#     stdlib_optval.fypp
+#     stdlib_selection.fypp
+#     stdlib_sorting.fypp
+#     stdlib_sorting_ord_sort.fypp
+#     stdlib_sorting_sort.fypp
+#     stdlib_sorting_sort_index.fypp
+#     stdlib_sparse_constants.fypp
+#     stdlib_sparse_conversion.fypp
+#     stdlib_sparse_kinds.fypp
+#     stdlib_sparse_spmv.fypp
+#     stdlib_specialfunctions_activations.fypp
+#     stdlib_specialfunctions_gamma.fypp
+#     stdlib_specialfunctions.fypp
+#     stdlib_specialmatrices.fypp
+#     stdlib_specialmatrices_tridiagonal.fypp
+#     stdlib_stats.fypp
+#     stdlib_stats_corr.fypp
+#     stdlib_stats_cov.fypp
+#     stdlib_stats_mean.fypp
+#     stdlib_stats_median.fypp
+#     stdlib_stats_moment.fypp
+#     stdlib_stats_moment_all.fypp
+#     stdlib_stats_moment_mask.fypp
+#     stdlib_stats_moment_scalar.fypp
+#     stdlib_stats_distribution_uniform.fypp
+#     stdlib_stats_distribution_normal.fypp
+#     stdlib_stats_distribution_exponential.fypp
+#     stdlib_stats_var.fypp
+#     stdlib_quadrature.fypp
+#     stdlib_quadrature_trapz.fypp
+#     stdlib_quadrature_simps.fypp
+#     stdlib_random.fypp
+#     stdlib_math.fypp
+#     stdlib_math_linspace.fypp
+#     stdlib_math_logspace.fypp
+#     stdlib_math_arange.fypp
+#     stdlib_math_is_close.fypp
+#     stdlib_math_all_close.fypp
+#     stdlib_math_diff.fypp
+#     stdlib_math_meshgrid.fypp
+#     stdlib_str2num.fypp
+#     stdlib_string_type.fypp
+#     stdlib_string_type_constructor.fypp
+#     stdlib_strings_to_string.fypp
+#     stdlib_strings.fypp
+#     stdlib_version.fypp
+# )
+
+# Preprocessed files to contain preprocessor directives -> .F90
+# set(cppFiles
+#     stdlib_linalg_constants.fypp
+#     stdlib_linalg_blas.fypp
+#     stdlib_linalg_lapack.fypp
+# )
+
+# fypp_f90("${fyppFlags}" "${fppFiles}" outFiles)
+# fypp_f90pp("${fyppFlags}" "${cppFiles}" outPreprocFiles)
+
+set(SRC
+    cfftb1.f90
+    cfftf1.f90
+    cffti1.f90
+    cosqb1.f90
+    cosqf1.f90
+    dcosqb.f90
+    dcosqf.f90
+    dcosqi.f90
+    dcost.f90
+    dcosti.f90
+    dfftb.f90
+    dfftf.f90
+    dffti.f90
+    dsinqb.f90
+    dsinqf.f90
+    dsinqi.f90
+    dsint.f90
+    dsinti.f90
+    dzfftb.f90
+    dzfftf.f90
+    dzffti.f90
+    ezfft1.f90
+    fftpack_dct.f90
+    fftpack.f90
+    fftpack_fft.f90
+    fftpack_fftshift.f90
+    fftpack_ifft.f90
+    fftpack_ifftshift.f90
+    fftpack_irfft.f90
+    fftpack_rfft.f90
+    fftpack_utils.f90
+    passb2.f90
+    passb3.f90
+    passb4.f90
+    passb5.f90
+    passb.f90
+    passf2.f90
+    passf3.f90
+    passf4.f90
+    passf5.f90
+    passf.f90
+    radb2.f90
+    radb3.f90
+    radb4.f90
+    radb5.f90
+    radbg.f90
+    radf2.f90
+    radf3.f90
+    radf4.f90
+    radf5.f90
+    radfg.f90
+    rfftb1.f90
+    rfftf1.f90
+    rffti1.f90
+    rk.f90
+    sint1.f90
+    zfftb.f90
+    zfftf.f90
+    zffti.f90
+    ${outFiles}
+    ${outPreprocFiles}
 )
-set(FFTPACK_SOURCES ${FFTPACK_SOURCES} PARENT_SCOPE)
+
+add_library(${PROJECT_NAME} ${SRC})
+
+# # Link to BLAS and LAPACK
+# if(BLAS_FOUND AND LAPACK_FOUND)
+#   target_link_libraries(${PROJECT_NAME} "BLAS::BLAS")
+#   target_link_libraries(${PROJECT_NAME} "LAPACK::LAPACK")
+# endif()
+
+set_target_properties(
+  ${PROJECT_NAME}
+  PROPERTIES
+  POSITION_INDEPENDENT_CODE ON
+  WINDOWS_EXPORT_ALL_SYMBOLS ON
+)
+
+if(CMAKE_Fortran_COMPILER_ID STREQUAL GNU AND CMAKE_Fortran_COMPILER_VERSION VERSION_LESS 10.0)
+  target_compile_options(
+     ${PROJECT_NAME}
+     PRIVATE
+     $<$<COMPILE_LANGUAGE:Fortran>:-fno-range-check>
+   )
+endif()
+
+set(LIB_MOD_DIR ${CMAKE_CURRENT_BINARY_DIR}/mod_files/)
+# We need the module directory before we finish the configure stage since the
+# build interface might resolve before the module directory is generated by CMake
+if(NOT EXISTS "${LIB_MOD_DIR}")
+  file(MAKE_DIRECTORY "${LIB_MOD_DIR}")
+endif()
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    Fortran_MODULE_DIRECTORY ${LIB_MOD_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${LIB_MOD_DIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_MODULEDIR}>
+)
+
+install(TARGETS ${PROJECT_NAME}
+        EXPORT ${PROJECT_NAME}-targets
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+)
+install(DIRECTORY ${LIB_MOD_DIR} DESTINATION "${CMAKE_INSTALL_MODULEDIR}")

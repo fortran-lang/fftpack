@@ -1,17 +1,13 @@
-add_executable(bench1 bench01_zfft.f90)
-target_link_libraries(bench1 fftpack)
+macro(ADD_EXAMPLE name)
+    add_executable(example_${name} example_${name}.f90)
+    target_link_libraries(example_${name} "${PROJECT_NAME}")
+    add_test(NAME ${name}
+             COMMAND $<TARGET_FILE:example_${name}> ${CMAKE_CURRENT_BINARY_DIR}
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endmacro(ADD_EXAMPLE)
 
-add_executable(bench2 bench02_zfft.f90)
-target_link_libraries(bench2 fftpack)
-
-add_executable(bench3 bench03_dfft.f90)
-target_link_libraries(bench3 fftpack)
-
-add_executable(rfft_example)
-target_link_libraries(rfft_example fftpack)
-
-add_executable(complex_transforms)
-target_link_libraries(complex_transforms fftpack)
-
-add_executable(real_transforms)
-target_link_libraries(real_transforms fftpack)
+ADD_EXAMPLE(bench01_zfft)
+ADD_EXAMPLE(bench02_zfft)
+ADD_EXAMPLE(bench03_dfft)
+ADD_EXAMPLE(complex_transforms)
+ADD_EXAMPLE(real_transforms)
