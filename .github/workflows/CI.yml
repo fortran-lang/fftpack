@@ -79,14 +79,14 @@ jobs:
       if: ${{ failure() && contains(matrix.build, 'cmake') }}
       run: cmake --build ${{ env.BUILD_DIR }} --verbose --parallel 1
 
-    # - name: test
-    #   if: ${{ contains(matrix.build, 'cmake') }}
-    #   run: >-
-    #     ctest
-    #     --test-dir ${{ env.BUILD_DIR }}
-    #     --parallel
-    #     --output-on-failure
-    #     --no-tests=error
+    - name: test
+      if: ${{ contains(matrix.build, 'cmake') }}
+      run: >-
+        ctest
+        --test-dir ${{ env.BUILD_DIR }}
+        --parallel
+        --output-on-failure
+        --no-tests=error
 
     - name: Install project
       if: ${{ contains(matrix.build, 'cmake') }}

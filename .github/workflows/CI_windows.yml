@@ -55,8 +55,8 @@ jobs:
       run: PATH=$PATH:/mingw64/bin/ cmake --build build --verbose --parallel 1
       if: failure()
 
-    # - name: CTest
-    #   run: PATH=$PATH:/mingw64/bin/ ctest --test-dir build --output-on-failure --parallel -V -LE quadruple_precision
+    - name: CTest
+      run: PATH=$PATH:/mingw64/bin/ ctest --test-dir build --output-on-failure --parallel -V -LE quadruple_precision
 
     - uses: actions/upload-artifact@v4
       if: failure()
