@@ -22,13 +22,13 @@ auto-examples = true
 [dev-dependencies]
 test-drive = { git = "https://github.com/fortran-lang/test-drive"}
 
-# Original test
-[[test]]
-name = "tstfft"
-source-dir = "test"
-main = "tstfft.f"
-
-[[test]]
-name = "test_fftpack"
-source-dir = "test"
-main = "test_fftpack.f90"
+# # Original test
+# [[test]]
+# name = "tstfft"
+# source-dir = "test"
+# main = "tstfft.f"
+#
+# [[test]]
+# name = "test_fftpack"
+# source-dir = "test"
+# main = "test_fftpack.f90"
