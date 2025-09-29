@@ -1,11 +1,12 @@
-      subroutine zfftf(n,c,Wsave)
-      use fftpack_kind
-      implicit none
-      real(rk) :: c , Wsave
-      integer :: iw1 , iw2 , n
-      dimension c(*) , Wsave(*)
-      if ( n==1 ) return
-      iw1 = n + n + 1
-      iw2 = iw1 + n + n
-      call cfftf1(n,c,Wsave,Wsave(iw1),Wsave(iw2))
+      subroutine zfftf(n, c, wsave)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: n
+         real(dp), intent(inout) :: c(*)
+         real(dp), intent(in) :: wsave(*)
+         integer :: iw1, iw2
+         if (n == 1) return
+         iw1 = n + n + 1
+         iw2 = iw1 + n + n
+         call cfftf1(n, c, wsave, wsave(iw1), wsave(iw2))
       end subroutine zfftf
