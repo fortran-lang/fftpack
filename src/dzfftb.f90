@@ -15,7 +15,7 @@
             return
          else
             ns2 = (n - 1)/2
-            do i = 1, ns2
+            do concurrent(i=1:ns2)
                r(2*i) = 0.5_dp*a(i)
                r(2*i + 1) = -0.5_dp*b(i)
             end do
