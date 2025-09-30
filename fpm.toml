@@ -1,0 +1,34 @@
+name        = "fftpack"
+description = "A package of fortran subprograms for the fast fourier transform of periodic and other symmetric sequences"
+homepage    = "http://www.netlib.org/fftpack/"
+version     = "4.0.0"
+license     = "Public Domain"
+author      = "Paul N. Swarztrauber"
+maintainer  = "@fortran-lang"
+copyright   = "Copyright 1985 National Center for Atmospheric Research, Boulder, CO"
+categories  = ["Fast Fourier Transform"]
+keywords    = ["netlib", "fftpack", "fft"]
+
+[fortran]
+implicit-typing=true
+implicit-external=true
+source-form="default"
+
+[build]
+auto-executables = false
+auto-tests = true
+auto-examples = true
+
+[dev-dependencies]
+test-drive = { git = "https://github.com/fortran-lang/test-drive"}
+
+# # Original test
+# [[test]]
+# name = "tstfft"
+# source-dir = "test"
+# main = "tstfft.f"
+#
+# [[test]]
+# name = "test_fftpack"
+# source-dir = "test"
+# main = "test_fftpack.f90"
