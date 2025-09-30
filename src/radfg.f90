@@ -4,7 +4,7 @@
          integer, intent(in) :: ido, ip, l1, idl1
          real(dp), intent(in) :: wa(*)
          real(dp), intent(inout) :: cc(ido, ip, l1)
-         real(dp), intent(inout) :: c1(ido, ip, l1)
+         real(dp), intent(inout) :: c1(ido, l1, ip)
          real(dp), intent(inout) :: c2(idl1, ip)
          real(dp), intent(out) :: ch(ido, l1, ip)
          real(dp), intent(inout) :: ch2(idl1, ip)
