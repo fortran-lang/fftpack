@@ -4,7 +4,7 @@
          integer, intent(in) :: n
          real(dp), intent(inout) :: c(*)
          real(dp), intent(in) :: wa(*)
-         real(dp), intent(out) :: ch(*)
+         real(dp), intent(inout) :: ch(*)
          integer, intent(in) :: ifac(*)
          integer :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, &
                     kh, l1, l2, na, nf

@@ -2,8 +2,8 @@
          use fftpack_kind, only: dp => rk
          implicit none
          integer, intent(in) :: n, ifac(*)
-         real(dp), intent(in) :: wa(*), ch(*)
-         real(dp), intent(inout) :: c(*)
+         real(dp), intent(in) :: wa(*)
+         real(dp), intent(inout) :: c(*), ch(*)
          integer :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, &
                     k1, l1, l2, n2, na, nac, nf
          nf = ifac(2)
