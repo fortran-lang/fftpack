@@ -7,18 +7,16 @@
          real(dp) :: ti2, tr2
          integer :: i, k
          if (ido > 2) then
-            do k = 1, l1
-               do i = 2, ido, 2
-                  ch(i - 1, k, 1) = cc(i - 1, 1, k) + cc(i - 1, 2, k)
-                  tr2 = cc(i - 1, 1, k) - cc(i - 1, 2, k)
-                  ch(i, k, 1) = cc(i, 1, k) + cc(i, 2, k)
-                  ti2 = cc(i, 1, k) - cc(i, 2, k)
-                  ch(i, k, 2) = wa1(i - 1)*ti2 - wa1(i)*tr2
-                  ch(i - 1, k, 2) = wa1(i - 1)*tr2 + wa1(i)*ti2
-               end do
+            do concurrent(i=2:ido:2, k=1:l1)
+               ch(i - 1, k, 1) = cc(i - 1, 1, k) + cc(i - 1, 2, k)
+               tr2 = cc(i - 1, 1, k) - cc(i - 1, 2, k)
+               ch(i, k, 1) = cc(i, 1, k) + cc(i, 2, k)
+               ti2 = cc(i, 1, k) - cc(i, 2, k)
+               ch(i, k, 2) = wa1(i - 1)*ti2 - wa1(i)*tr2
+               ch(i - 1, k, 2) = wa1(i - 1)*tr2 + wa1(i)*ti2
             end do
          else
-            do k = 1, l1
+            do concurrent(k=1:l1)
                ch(1, k, 1) = cc(1, 1, k) + cc(1, 2, k)
                ch(1, k, 2) = cc(1, 1, k) - cc(1, 2, k)
                ch(2, k, 1) = cc(2, 1, k) + cc(2, 2, k)
