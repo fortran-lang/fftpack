@@ -2,7 +2,7 @@
          use fftpack_kind, only: rk
          implicit none
          integer, intent(in) :: n
-         real(rk), intent(in) :: wsave(*)
+         real(rk), intent(inout) :: wsave(*)
          real(rk), intent(inout) :: x(*)
          real(rk) :: c1, t1, t2, tx2, x1h, x1p3, &
                      xi, xim2

@@ -3,7 +3,7 @@
          implicit none
          integer, intent(in) :: n
          real(dp), intent(inout) :: c(*)
-         real(dp), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: wsave(*)
          integer :: iw1, iw2
          if (n == 1) return
          iw1 = n + n + 1

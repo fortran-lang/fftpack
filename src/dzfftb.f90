@@ -3,7 +3,7 @@
          implicit none
          integer, intent(in) :: n
          real(dp), intent(out) :: r(*)
-         real(dp), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: wsave(*)
          real(dp), intent(in) :: azero, a(*), b(*)
          integer :: i, ns2
          if (n < 2) then
