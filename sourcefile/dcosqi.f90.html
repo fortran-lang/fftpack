@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 0.5% of total for source files.">15 statements</a>
+               title=" 0.6% of total for source files.">16 statements</a>
           </li>
 
             <li id="source-file">
@@ -206,21 +206,22 @@ fortran-lang/fftpack contributors" >
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a id="ln-1" name="ln-1" href="#ln-1"></a><span class="w">      </span><span class="k">subroutine </span><span class="n">dcosqi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Wsave</span><span class="p">)</span><span class="w"></span>
-<a id="ln-2" name="ln-2" href="#ln-2"></a><span class="w">      </span><span class="k">use </span><span class="n">fftpack_kind</span><span class="w"></span>
-<a id="ln-3" name="ln-3" href="#ln-3"></a><span class="w">      </span><span class="k">implicit none</span>
-<a id="ln-4" name="ln-4" href="#ln-4"></a><span class="k">      </span><span class="kt">real</span><span class="p">(</span><span class="n">rk</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">fk</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wsave</span><span class="w"></span>
-<a id="ln-5" name="ln-5" href="#ln-5"></a><span class="w">      </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
-<a id="ln-6" name="ln-6" href="#ln-6"></a><span class="w">      </span><span class="k">dimension </span><span class="n">Wsave</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<a id="ln-7" name="ln-7" href="#ln-7"></a><span class="w">      </span><span class="kt">real</span><span class="p">(</span><span class="n">rk</span><span class="p">),</span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pih</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0_rk</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0_rk</span><span class="w"> </span><span class="c">! pi / 2</span>
-<a id="ln-8" name="ln-8" href="#ln-8"></a><span class="w">      </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pih</span><span class="o">/</span><span class="kt">real</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">rk</span><span class="p">)</span><span class="w"></span>
-<a id="ln-9" name="ln-9" href="#ln-9"></a><span class="w">      </span><span class="n">fk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_rk</span><span class="w"></span>
-<a id="ln-10" name="ln-10" href="#ln-10"></a><span class="w">      </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
-<a id="ln-11" name="ln-11" href="#ln-11"></a><span class="w">         </span><span class="n">fk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0_rk</span><span class="w"></span>
-<a id="ln-12" name="ln-12" href="#ln-12"></a><span class="w">         </span><span class="n">Wsave</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">fk</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="w"></span>
-<a id="ln-13" name="ln-13" href="#ln-13"></a><span class="w">      </span><span class="k">enddo</span>
-<a id="ln-14" name="ln-14" href="#ln-14"></a><span class="k">      call </span><span class="n">dffti</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Wsave</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
-<a id="ln-15" name="ln-15" href="#ln-15"></a><span class="w">      </span><span class="k">end subroutine </span><span class="n">dcosqi</span><span class="w"></span>
+    <div class="hl"><pre><span></span><a id="ln-1" name="ln-1" href="#ln-1"></a><span class="w">      </span><span class="k">subroutine </span><span class="n">dcosqi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">wsave</span><span class="p">)</span><span class="w"></span>
+<a id="ln-2" name="ln-2" href="#ln-2"></a><span class="w">         </span><span class="k">use </span><span class="n">fftpack_kind</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rk</span><span class="w"></span>
+<a id="ln-3" name="ln-3" href="#ln-3"></a><span class="w">         </span><span class="k">implicit none</span>
+<a id="ln-4" name="ln-4" href="#ln-4"></a><span class="k">         </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<a id="ln-5" name="ln-5" href="#ln-5"></a><span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">wsave</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<a id="ln-6" name="ln-6" href="#ln-6"></a><span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">fk</span><span class="w"></span>
+<a id="ln-7" name="ln-7" href="#ln-7"></a><span class="w">         </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<a id="ln-8" name="ln-8" href="#ln-8"></a><span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pih</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0_dp</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0_dp</span><span class="w"> </span><span class="c">! pi / 2</span>
+<a id="ln-9" name="ln-9" href="#ln-9"></a><span class="w">         </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pih</span><span class="o">/</span><span class="kt">real</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span><span class="w"></span>
+<a id="ln-10" name="ln-10" href="#ln-10"></a><span class="w">         </span><span class="n">fk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_dp</span><span class="w"></span>
+<a id="ln-11" name="ln-11" href="#ln-11"></a><span class="w">         </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<a id="ln-12" name="ln-12" href="#ln-12"></a><span class="w">            </span><span class="n">fk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0_dp</span><span class="w"></span>
+<a id="ln-13" name="ln-13" href="#ln-13"></a><span class="w">            </span><span class="n">wsave</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">fk</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="w"></span>
+<a id="ln-14" name="ln-14" href="#ln-14"></a><span class="w">         </span><span class="k">end do</span>
+<a id="ln-15" name="ln-15" href="#ln-15"></a><span class="k">         call </span><span class="n">dffti</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">wsave</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
+<a id="ln-16" name="ln-16" href="#ln-16"></a><span class="w">      </span><span class="k">end subroutine </span><span class="n">dcosqi</span><span class="w"></span>
 </pre></div>
 
     </section>
@@ -240,7 +241,7 @@ fortran-lang/fftpack contributors<br>&copy; 2025 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2025-09-30 06:13            </p>
+ on 2025-10-14 05:28            </p>
         </div>
       </div>
       <br>

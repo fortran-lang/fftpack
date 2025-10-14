@@ -1,9 +1,8 @@
-      subroutine dffti(n,Wsave)
-      use fftpack_kind
-      implicit none
-      integer :: n
-      real(rk) :: Wsave
-      dimension Wsave(*)
-      if ( n==1 ) return
-      call rffti1(n,Wsave(n+1),Wsave(2*n+1))
+      subroutine dffti(n, wsave)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: n
+         real(dp), intent(out) :: wsave(*)
+         if (n == 1) return
+         call rffti1(n, wsave(n + 1), wsave(2*n + 1))
       end subroutine dffti

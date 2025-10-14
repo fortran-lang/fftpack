@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 1.3% of total for procedures.">56 statements</a>
+               title=" 1.3% of total for procedures.">58 statements</a>
           </li>
 
             <li id="source-file">
@@ -178,7 +178,7 @@ fortran-lang/fftpack contributors" >
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2> subroutine radf4(Ido, l1, Cc, Ch, Wa1, Wa2, Wa3)  
+    <h2> subroutine radf4(ido, l1, cc, ch, wa1, wa2, wa3)  
 </h2>
         <div class="panel panel-default">
       <div class="panel-heading">
@@ -209,14 +209,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-ido"></span>
-              integer
+              integer,
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Ido</strong></td>
+            <td><strong>ido</strong></td>
             <td>
                 
             </td>
@@ -224,9 +224,9 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-l1"></span>
-              integer
+              integer,
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
@@ -239,14 +239,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-cc"></span>
-              real(kind=rk)
+              real(kind=dp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Cc</strong></td>
+            <td><strong>cc</strong>(ido,l1,4)</td>
             <td>
                 
             </td>
@@ -254,14 +254,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-ch"></span>
-              real(kind=rk)
+              real(kind=dp),
             </td>
-<td></td>
+<td>intent(out)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Ch</strong></td>
+            <td><strong>ch</strong>(ido,4,l1)</td>
             <td>
                 
             </td>
@@ -269,14 +269,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-wa1"></span>
-              real(kind=rk)
+              real(kind=dp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Wa1</strong></td>
+            <td><strong>wa1</strong>(*)</td>
             <td>
                 
             </td>
@@ -284,14 +284,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-wa2"></span>
-              real(kind=rk)
+              real(kind=dp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Wa2</strong></td>
+            <td><strong>wa2</strong>(*)</td>
             <td>
                 
             </td>
@@ -299,14 +299,14 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-wa3"></span>
-              real(kind=rk)
+              real(kind=dp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>Wa3</strong></td>
+            <td><strong>wa3</strong>(*)</td>
             <td>
                 
             </td>
@@ -394,7 +394,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-ci2"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -411,7 +411,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-ci3"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -428,7 +428,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-ci4"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -445,7 +445,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-cr2"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -462,7 +462,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-cr3"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -479,7 +479,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-cr4"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -496,7 +496,7 @@ fortran-lang/fftpack contributors" >
         <tr>
             <td>
               <span class="anchor" id="variable-hsqt2"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public,</td>
             <td>
@@ -505,7 +505,7 @@ parameter
             <td>::</td>
             <td><strong>hsqt2</strong></td>
 <td> =</td>
-                <td>sqrt(2.0_rk)/2.0_rk</td>
+                <td>sqrt(2.0_dp)/2.0_dp</td>
             <td>
                 
             </td>
@@ -581,7 +581,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-ti1"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -598,7 +598,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-ti2"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -615,7 +615,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-ti3"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -632,7 +632,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-ti4"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -649,7 +649,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-tr1"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -666,7 +666,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-tr2"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -683,7 +683,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-tr3"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -700,7 +700,7 @@ parameter
         <tr>
             <td>
               <span class="anchor" id="variable-tr4"></span>
-              real(kind=rk),
+              real(kind=dp),
             </td>
               <td>public</td>
             <td>
@@ -729,63 +729,65 @@ parameter
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="highlight"><pre><span></span><span class="w">      </span><span class="k">subroutine </span><span class="n">radf4</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">l1</span><span class="p">,</span><span class="n">Cc</span><span class="p">,</span><span class="n">Ch</span><span class="p">,</span><span class="n">Wa1</span><span class="p">,</span><span class="n">Wa2</span><span class="p">,</span><span class="n">Wa3</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">use </span><span class="n">fftpack_kind</span><span class="w"></span>
-<span class="w">      </span><span class="k">implicit none</span>
-<span class="k">      </span><span class="kt">real</span><span class="p">(</span><span class="n">rk</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Cc</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ch</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ci2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ci3</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ci4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">cr2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">cr3</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">cr4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w"></span>
-<span class="w">                  </span><span class="n">ti1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ti2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ti3</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ti4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">tr2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">tr3</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w"></span>
-<span class="w">                  </span><span class="n">tr4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa3</span><span class="w"></span>
-<span class="w">      </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ic</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ido</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">idp2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
-<span class="w">      </span><span class="k">dimension </span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">l1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ch</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">l1</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa1</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa2</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Wa3</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="kt">real</span><span class="p">(</span><span class="n">rk</span><span class="p">),</span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">hsqt2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="mf">2.0_rk</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0_rk</span><span class="w"></span>
-<span class="w">      </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
-<span class="w">         </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
-<span class="w">         </span><span class="n">tr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr2</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">enddo</span>
-<span class="k">      if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">Ido</span><span class="o">&lt;</span><span class="mi">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
-<span class="k">      if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">Ido</span><span class="o">/=</span><span class="mi">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">         </span><span class="n">idp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ido</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">         </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
-<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">Ido</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">               </span><span class="n">ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idp2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
-<span class="w">               </span><span class="n">cr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Wa1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">ci2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Wa1</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">cr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Wa2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">ci3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Wa2</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">cr4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa3</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Wa3</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">ci4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Wa3</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Wa3</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
-<span class="w">               </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cr2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cr4</span><span class="w"></span>
-<span class="w">               </span><span class="n">tr4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cr4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cr2</span><span class="w"></span>
-<span class="w">               </span><span class="n">ti1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ci4</span><span class="w"></span>
-<span class="w">               </span><span class="n">ti4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ci4</span><span class="w"></span>
-<span class="w">               </span><span class="n">ti2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ci3</span><span class="w"></span>
-<span class="w">               </span><span class="n">ti3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ci3</span><span class="w"></span>
-<span class="w">               </span><span class="n">tr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cr3</span><span class="w"></span>
-<span class="w">               </span><span class="n">tr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cr3</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr2</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">ic</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ti2</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti2</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr3</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">ic</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti4</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ti3</span><span class="w"></span>
-<span class="w">               </span><span class="n">Ch</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti3</span><span class="w"></span>
-<span class="w">            </span><span class="k">enddo</span>
-<span class="k">         enddo</span>
-<span class="k">         if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nb">mod</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
-<span class="k">      endif</span>
-<span class="k">      do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
-<span class="w">         </span><span class="n">ti1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">hsqt2</span><span class="o">*</span><span class="p">(</span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="w"></span>
-<span class="w">         </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hsqt2</span><span class="o">*</span><span class="p">(</span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">         </span><span class="n">Ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Cc</span><span class="p">(</span><span class="n">Ido</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">enddo</span>
+    <div class="highlight"><pre><span></span><span class="w">      </span><span class="k">subroutine </span><span class="n">radf4</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">cc</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="n">wa1</span><span class="p">,</span><span class="w"> </span><span class="n">wa2</span><span class="p">,</span><span class="w"> </span><span class="n">wa3</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">use </span><span class="n">fftpack_kind</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rk</span><span class="w"></span>
+<span class="w">         </span><span class="k">implicit none</span>
+<span class="k">         </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
+<span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">wa1</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">wa2</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">wa3</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ch</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ci2</span><span class="p">,</span><span class="w"> </span><span class="n">ci3</span><span class="p">,</span><span class="w"> </span><span class="n">ci4</span><span class="p">,</span><span class="w"> </span><span class="n">cr2</span><span class="p">,</span><span class="w"> </span><span class="n">cr3</span><span class="p">,</span><span class="w"> </span><span class="n">cr4</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w"></span>
+<span class="w">                     </span><span class="n">ti1</span><span class="p">,</span><span class="w"> </span><span class="n">ti2</span><span class="p">,</span><span class="w"> </span><span class="n">ti3</span><span class="p">,</span><span class="w"> </span><span class="n">ti4</span><span class="p">,</span><span class="w"> </span><span class="n">tr1</span><span class="p">,</span><span class="w"> </span><span class="n">tr2</span><span class="p">,</span><span class="w"> </span><span class="n">tr3</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="w"></span>
+<span class="w">                     </span><span class="n">tr4</span><span class="w"></span>
+<span class="w">         </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ic</span><span class="p">,</span><span class="w"> </span><span class="n">idp2</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="w">         </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">hsqt2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="mf">2.0_dp</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0_dp</span><span class="w"></span>
+<span class="w">         </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
+<span class="w">            </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">tr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr2</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">end do</span>
+<span class="k">         if</span><span class="w"> </span><span class="p">(</span><span class="n">ido</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">         if</span><span class="w"> </span><span class="p">(</span><span class="n">ido</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">idp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ido</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">            </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
+<span class="w">               </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idp2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
+<span class="w">                  </span><span class="n">cr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wa1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ci2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">wa1</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">cr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa2</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wa2</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ci3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa2</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">wa2</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">cr4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wa3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ci4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wa3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">wa3</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">                  </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cr2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cr4</span><span class="w"></span>
+<span class="w">                  </span><span class="n">tr4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cr4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cr2</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ti1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ci4</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ti4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ci4</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ti2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ci3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ti3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ci3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">tr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cr3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">tr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cr3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr2</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">ic</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ti2</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti2</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tr3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">ic</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti4</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ti3</span><span class="w"></span>
+<span class="w">                  </span><span class="n">ch</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ti3</span><span class="w"></span>
+<span class="w">               </span><span class="k">end do</span>
+<span class="k">            end do</span>
+<span class="k">            if</span><span class="w"> </span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">         end if</span>
+<span class="k">         do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">l1</span><span class="w"></span>
+<span class="w">            </span><span class="n">ti1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">hsqt2</span><span class="o">*</span><span class="p">(</span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="n">tr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hsqt2</span><span class="o">*</span><span class="p">(</span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tr1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr1</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">ch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cc</span><span class="p">(</span><span class="n">ido</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="k">end do</span>
 <span class="k">      end subroutine </span><span class="n">radf4</span><span class="w"></span>
 </pre></div>
 
@@ -808,7 +810,7 @@ fortran-lang/fftpack contributors<br>&copy; 2025 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2025-09-30 06:13            </p>
+ on 2025-10-14 05:28            </p>
         </div>
       </div>
       <br>
