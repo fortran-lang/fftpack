@@ -1,47 +1,49 @@
-      subroutine passb3(Ido,l1,Cc,Ch,Wa1,Wa2)
-      use fftpack_kind
-      implicit none
-      real(rk) :: Cc , Ch , ci2 , ci3 , cr2 , cr3 , di2 , di3 , &
-                  dr2 , dr3 , ti2 , tr2 , Wa1 , Wa2
-      integer :: i , Ido , k , l1
-      dimension Cc(Ido,3,l1) , Ch(Ido,l1,3) , Wa1(*) , Wa2(*)
-      real(rk),parameter :: taur = -0.5_rk
-      real(rk),parameter :: taui = sqrt(3.0_rk) / 2.0_rk
-      if ( Ido/=2 ) then
-         do k = 1 , l1
-            do i = 2 , Ido , 2
-               tr2 = Cc(i-1,2,k) + Cc(i-1,3,k)
-               cr2 = Cc(i-1,1,k) + taur*tr2
-               Ch(i-1,k,1) = Cc(i-1,1,k) + tr2
-               ti2 = Cc(i,2,k) + Cc(i,3,k)
-               ci2 = Cc(i,1,k) + taur*ti2
-               Ch(i,k,1) = Cc(i,1,k) + ti2
-               cr3 = taui*(Cc(i-1,2,k)-Cc(i-1,3,k))
-               ci3 = taui*(Cc(i,2,k)-Cc(i,3,k))
-               dr2 = cr2 - ci3
-               dr3 = cr2 + ci3
-               di2 = ci2 + cr3
-               di3 = ci2 - cr3
-               Ch(i,k,2) = Wa1(i-1)*di2 + Wa1(i)*dr2
-               Ch(i-1,k,2) = Wa1(i-1)*dr2 - Wa1(i)*di2
-               Ch(i,k,3) = Wa2(i-1)*di3 + Wa2(i)*dr3
-               Ch(i-1,k,3) = Wa2(i-1)*dr3 - Wa2(i)*di3
-            enddo
-         enddo
-      else
-         do k = 1 , l1
-            tr2 = Cc(1,2,k) + Cc(1,3,k)
-            cr2 = Cc(1,1,k) + taur*tr2
-            Ch(1,k,1) = Cc(1,1,k) + tr2
-            ti2 = Cc(2,2,k) + Cc(2,3,k)
-            ci2 = Cc(2,1,k) + taur*ti2
-            Ch(2,k,1) = Cc(2,1,k) + ti2
-            cr3 = taui*(Cc(1,2,k)-Cc(1,3,k))
-            ci3 = taui*(Cc(2,2,k)-Cc(2,3,k))
-            Ch(1,k,2) = cr2 - ci3
-            Ch(1,k,3) = cr2 + ci3
-            Ch(2,k,2) = ci2 + cr3
-            Ch(2,k,3) = ci2 - cr3
-         enddo
-      end if
+      subroutine passb3(ido, l1, cc, ch, wa1, wa2)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: ido, l1
+         real(dp), intent(in) :: cc(ido, 3, l1), wa1(*), wa2(*)
+         real(dp), intent(out) :: ch(ido, l1, 3)
+         real(dp) :: ci2, ci3, cr2, cr3, di2, di3, &
+                     dr2, dr3, ti2, tr2
+         integer :: i, k
+         real(dp), parameter :: taur = -0.5_dp
+         real(dp), parameter :: taui = sqrt(3.0_dp)/2.0_dp
+         if (ido /= 2) then
+            do k = 1, l1
+               do i = 2, ido, 2
+                  tr2 = cc(i - 1, 2, k) + cc(i - 1, 3, k)
+                  cr2 = cc(i - 1, 1, k) + taur*tr2
+                  ch(i - 1, k, 1) = cc(i - 1, 1, k) + tr2
+                  ti2 = cc(i, 2, k) + cc(i, 3, k)
+                  ci2 = cc(i, 1, k) + taur*ti2
+                  ch(i, k, 1) = cc(i, 1, k) + ti2
+                  cr3 = taui*(cc(i - 1, 2, k) - cc(i - 1, 3, k))
+                  ci3 = taui*(cc(i, 2, k) - cc(i, 3, k))
+                  dr2 = cr2 - ci3
+                  dr3 = cr2 + ci3
+                  di2 = ci2 + cr3
+                  di3 = ci2 - cr3
+                  ch(i, k, 2) = wa1(i - 1)*di2 + wa1(i)*dr2
+                  ch(i - 1, k, 2) = wa1(i - 1)*dr2 - wa1(i)*di2
+                  ch(i, k, 3) = wa2(i - 1)*di3 + wa2(i)*dr3
+                  ch(i - 1, k, 3) = wa2(i - 1)*dr3 - wa2(i)*di3
+               end do
+            end do
+         else
+            do k = 1, l1
+               tr2 = cc(1, 2, k) + cc(1, 3, k)
+               cr2 = cc(1, 1, k) + taur*tr2
+               ch(1, k, 1) = cc(1, 1, k) + tr2
+               ti2 = cc(2, 2, k) + cc(2, 3, k)
+               ci2 = cc(2, 1, k) + taur*ti2
+               ch(2, k, 1) = cc(2, 1, k) + ti2
+               cr3 = taui*(cc(1, 2, k) - cc(1, 3, k))
+               ci3 = taui*(cc(2, 2, k) - cc(2, 3, k))
+               ch(1, k, 2) = cr2 - ci3
+               ch(1, k, 3) = cr2 + ci3
+               ch(2, k, 2) = ci2 + cr3
+               ch(2, k, 3) = ci2 - cr3
+            end do
+         end if
       end subroutine passb3
