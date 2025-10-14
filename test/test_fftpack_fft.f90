@@ -84,7 +84,7 @@ program test_fft
    stat = 0
 
    testsuites = [ &
-                new_testsuite("linalg_norm", collect_fft) &
+                new_testsuite("fft", collect_fft) &
                 ]
 
    do is = 1, size(testsuites)

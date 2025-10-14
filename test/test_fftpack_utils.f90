@@ -171,7 +171,7 @@ program test_utils
    stat = 0
 
    testsuites = [ &
-                new_testsuite("linalg_norm", collect_utils) &
+                new_testsuite("utils", collect_utils) &
                 ]
 
    do is = 1, size(testsuites)

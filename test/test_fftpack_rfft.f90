@@ -101,7 +101,7 @@ program test_rfft
    stat = 0
 
    testsuites = [ &
-                new_testsuite("linalg_norm", collect_rfft) &
+                new_testsuite("rfft", collect_rfft) &
                 ]
 
    do is = 1, size(testsuites)
