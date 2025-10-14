@@ -1,35 +1,36 @@
-      subroutine dzfftf(n,r,Azero,a,b,Wsave)
-!
-!     VERSION 3  JUNE 1979
-!
-      use fftpack_kind
-      implicit none
-      real(rk) :: a , Azero , b , cf , cfm , r , Wsave
-      integer :: i , n , ns2 , ns2m
-      dimension r(*) , a(*) , b(*) , Wsave(*)
-      if ( n<2 ) then
-         Azero = r(1)
-         return
-      elseif ( n==2 ) then
-         Azero = 0.5_rk*(r(1)+r(2))
-         a(1) = 0.5_rk*(r(1)-r(2))
-         return
-      else
-         do i = 1 , n
-            Wsave(i) = r(i)
-         enddo
-         call dfftf(n,Wsave,Wsave(n+1))
-         cf = 2.0_rk/real(n, rk)
-         cfm = -cf
-         Azero = 0.5_rk*cf*Wsave(1)
-         ns2 = (n+1)/2
-         ns2m = ns2 - 1
-         do i = 1 , ns2m
-            a(i) = cf*Wsave(2*i)
-            b(i) = cfm*Wsave(2*i+1)
-         enddo
-         if ( mod(n,2)==1 ) return
-         a(ns2) = 0.5_rk*cf*Wsave(n)
-         b(ns2) = 0.0_rk
-      endif
+      subroutine dzfftf(n, r, azero, a, b, wsave)
+!     version 3  june 1979
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: n
+         real(dp), intent(in) :: r(*)
+         real(dp), intent(out) :: azero, a(*), b(*)
+         real(dp), intent(inout) :: wsave(*)
+         real(dp) :: cf, cfm
+         integer :: i, ns2, ns2m
+         if (n < 2) then
+            azero = r(1)
+            return
+         elseif (n == 2) then
+            azero = 0.5_dp*(r(1) + r(2))
+            a(1) = 0.5_dp*(r(1) - r(2))
+            return
+         else
+            do i = 1, n
+               wsave(i) = r(i)
+            end do
+            call dfftf(n, wsave, wsave(n + 1))
+            cf = 2.0_dp/real(n, dp)
+            cfm = -cf
+            azero = 0.5_dp*cf*wsave(1)
+            ns2 = (n + 1)/2
+            ns2m = ns2 - 1
+            do i = 1, ns2m
+               a(i) = cf*wsave(2*i)
+               b(i) = cfm*wsave(2*i + 1)
+            end do
+            if (mod(n, 2) == 1) return
+            a(ns2) = 0.5_dp*cf*wsave(n)
+            b(ns2) = 0.0_dp
+         end if
       end subroutine dzfftf

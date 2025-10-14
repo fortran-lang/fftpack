@@ -1,19 +1,21 @@
-      subroutine dsinqf(n,x,Wsave)
-      use fftpack_kind
-      implicit none
-      integer :: k , kc , n , ns2
-      real(rk) :: Wsave , x , xhold
-      dimension x(*) , Wsave(*)
-      if ( n==1 ) return
-      ns2 = n/2
-      do k = 1 , ns2
-         kc = n - k
-         xhold = x(k)
-         x(k) = x(kc+1)
-         x(kc+1) = xhold
-      enddo
-      call dcosqf(n,x,Wsave)
-      do k = 2 , n , 2
-         x(k) = -x(k)
-      enddo
+      subroutine dsinqf(n, x, wsave)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: n
+         real(dp), intent(inout) :: x(*)
+         real(dp), intent(in) :: wsave(*)
+         integer :: k, kc, ns2
+         real(dp) :: xhold
+         if (n == 1) return
+         ns2 = n/2
+         do k = 1, ns2
+            kc = n - k
+            xhold = x(k)
+            x(k) = x(kc + 1)
+            x(kc + 1) = xhold
+         end do
+         call dcosqf(n, x, wsave)
+         do k = 2, n, 2
+            x(k) = -x(k)
+         end do
       end subroutine dsinqf

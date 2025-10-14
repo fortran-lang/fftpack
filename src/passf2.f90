@@ -1,26 +1,28 @@
-      subroutine passf2(Ido,l1,Cc,Ch,Wa1)
-      use fftpack_kind
-      implicit none
-      real(rk) :: Cc , Ch , ti2 , tr2 , Wa1
-      integer :: i , Ido , k , l1
-      dimension Cc(Ido,2,l1) , Ch(Ido,l1,2) , Wa1(*)
-      if ( Ido>2 ) then
-         do k = 1 , l1
-            do i = 2 , Ido , 2
-               Ch(i-1,k,1) = Cc(i-1,1,k) + Cc(i-1,2,k)
-               tr2 = Cc(i-1,1,k) - Cc(i-1,2,k)
-               Ch(i,k,1) = Cc(i,1,k) + Cc(i,2,k)
-               ti2 = Cc(i,1,k) - Cc(i,2,k)
-               Ch(i,k,2) = Wa1(i-1)*ti2 - Wa1(i)*tr2
-               Ch(i-1,k,2) = Wa1(i-1)*tr2 + Wa1(i)*ti2
-            enddo
-         enddo
-      else
-         do k = 1 , l1
-            Ch(1,k,1) = Cc(1,1,k) + Cc(1,2,k)
-            Ch(1,k,2) = Cc(1,1,k) - Cc(1,2,k)
-            Ch(2,k,1) = Cc(2,1,k) + Cc(2,2,k)
-            Ch(2,k,2) = Cc(2,1,k) - Cc(2,2,k)
-         enddo
-      end if
+      subroutine passf2(ido, l1, cc, ch, wa1)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: ido, l1
+         real(dp), intent(in) :: cc(ido, 2, l1), wa1(*)
+         real(dp), intent(out) :: ch(ido, l1, 2)
+         real(dp) :: ti2, tr2
+         integer :: i, k
+         if (ido > 2) then
+            do k = 1, l1
+               do i = 2, ido, 2
+                  ch(i - 1, k, 1) = cc(i - 1, 1, k) + cc(i - 1, 2, k)
+                  tr2 = cc(i - 1, 1, k) - cc(i - 1, 2, k)
+                  ch(i, k, 1) = cc(i, 1, k) + cc(i, 2, k)
+                  ti2 = cc(i, 1, k) - cc(i, 2, k)
+                  ch(i, k, 2) = wa1(i - 1)*ti2 - wa1(i)*tr2
+                  ch(i - 1, k, 2) = wa1(i - 1)*tr2 + wa1(i)*ti2
+               end do
+            end do
+         else
+            do k = 1, l1
+               ch(1, k, 1) = cc(1, 1, k) + cc(1, 2, k)
+               ch(1, k, 2) = cc(1, 1, k) - cc(1, 2, k)
+               ch(2, k, 1) = cc(2, 1, k) + cc(2, 2, k)
+               ch(2, k, 2) = cc(2, 1, k) - cc(2, 2, k)
+            end do
+         end if
       end subroutine passf2
