@@ -1,9 +1,8 @@
-      subroutine dzffti(n,Wsave)
-      use fftpack_kind
-      implicit none
-      integer :: n
-      real(rk) :: Wsave
-      dimension Wsave(*)
-      if ( n==1 ) return
-      call ezfft1(n,Wsave(2*n+1),Wsave(3*n+1))
+      subroutine dzffti(n, wsave)
+         use fftpack_kind, only: dp => rk
+         implicit none
+         integer, intent(in) :: n
+         real(dp), intent(out) :: wsave(*)
+         if (n == 1) return
+         call ezfft1(n, wsave(2*n + 1), wsave(3*n + 1))
       end subroutine dzffti
