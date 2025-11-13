@@ -10,7 +10,7 @@
          real(dp), parameter :: taur = -0.5_dp
          real(dp), parameter :: taui = sqrt(3.0_dp)/2.0_dp
          if (ido /= 2) then
-            do concurrent(i=2:ido:2, k=1:l1)
+            do concurrent(k=1:l1, i=2:ido:2)
                tr2 = cc(i - 1, 2, k) + cc(i - 1, 3, k)
                cr2 = cc(i - 1, 1, k) + taur*tr2
                ch(i - 1, k, 1) = cc(i - 1, 1, k) + tr2

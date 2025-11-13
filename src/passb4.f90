@@ -8,7 +8,7 @@
                         & ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
          integer :: i, k
          if (ido /= 2) then
-            do concurrent(i=2:ido:2, k=1:l1)
+            do concurrent(k=1:l1, i=2:ido:2)
                ti1 = cc(i, 1, k) - cc(i, 3, k)
                ti2 = cc(i, 1, k) + cc(i, 3, k)
                ti3 = cc(i, 2, k) + cc(i, 4, k)

@@ -63,7 +63,7 @@
                end do
             end if
             if (nbd < l1) then
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                   jc = ipp2 - j
                   c1(i - 1, k, j) = ch(i - 1, k, j) + ch(i - 1, k, jc)
                   c1(i - 1, k, jc) = ch(i, k, j) - ch(i, k, jc)
@@ -71,7 +71,7 @@
                   c1(i, k, jc) = ch(i - 1, k, jc) - ch(i - 1, k, j)
                end do
             else
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                   jc = ipp2 - j
                   c1(i - 1, k, j) = ch(i - 1, k, j) + ch(i - 1, k, jc)
                   c1(i - 1, k, jc) = ch(i, k, j) - ch(i, k, jc)
@@ -112,12 +112,12 @@
                end do
             end do
          end do
-         do concurrent(ik=1:idl1, j=2:ipph)
+         do concurrent(j=2:ipph, ik=1:idl1)
             ch2(ik, 1) = ch2(ik, 1) + c2(ik, j)
          end do
 !
          if (ido < l1) then
-            do concurrent(i=1:ido, k=1:l1)
+            do concurrent(k=1:l1, i=1:ido)
                cc(i, 1, k) = ch(i, k, 1)
             end do
          else
@@ -133,7 +133,7 @@
          end do
          if (ido == 1) return
          if (nbd < l1) then
-            do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+            do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                jc = ipp2 - j
                j2 = j + j
                ic = idp2 - i
@@ -143,7 +143,7 @@
                cc(ic, j2 - 2, k) = ch(i, k, jc) - ch(i, k, j)
             end do
          else
-            do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+            do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                jc = ipp2 - j
                j2 = j + j
                ic = idp2 - i

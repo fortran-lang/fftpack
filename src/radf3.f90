@@ -18,7 +18,7 @@
          end do
          if (ido == 1) return
          idp2 = ido + 2
-         do concurrent(i=3:ido:2, k=1:l1)
+         do concurrent(k=1:l1, i=3:ido:2)
             ic = idp2 - i
             dr2 = wa1(i - 2)*cc(i - 1, k, 2) + wa1(i - 1)*cc(i, k, 2)
             di2 = wa1(i - 2)*cc(i, k, 2) - wa1(i - 1)*cc(i - 1, k, 2)

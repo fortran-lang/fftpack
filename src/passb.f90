@@ -17,16 +17,16 @@
          idp = ip*ido
 !
          if (ido < l1) then
-            do concurrent(i=1:ido, j=2:ipph, k=1:l1)
+            do concurrent(k=1:l1, j=2:ipph, i=1:ido)
                jc = ipp2 - j
                ch(i, k, j) = cc(i, j, k) + cc(i, jc, k)
                ch(i, k, jc) = cc(i, j, k) - cc(i, jc, k)
             end do
-            do concurrent(i=1:ido, k=1:l1)
+            do concurrent(k=1:l1, i=1:ido)
                ch(i, k, 1) = cc(i, 1, k)
             end do
          else
-            do concurrent(i=1:ido, j=2:ipph, k=1:l1)
+            do concurrent(k=1:l1, j=2:ipph, i=1:ido)
                jc = ipp2 - j
                ch(i, k, j) = cc(i, j, k) + cc(i, jc, k)
                ch(i, k, jc) = cc(i, j, k) - cc(i, jc, k)
@@ -61,7 +61,7 @@
          do concurrent(ik=1:idl1, j=2:ipph)
             ch2(ik, 1) = ch2(ik, 1) + ch2(ik, j)
          end do
-         do concurrent(ik=2:idl1:2, j=2:ipph)
+         do concurrent(j=2:ipph, ik=2:idl1:2)
             jc = ipp2 - j
             ch2(ik - 1, j) = c2(ik - 1, j) - c2(ik, jc)
             ch2(ik - 1, jc) = c2(ik - 1, j) + c2(ik, jc)

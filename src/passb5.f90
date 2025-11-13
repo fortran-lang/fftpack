@@ -16,7 +16,7 @@
          real(dp), parameter :: tr12 = cos(4.0_dp*pi/5.0_dp)
          real(dp), parameter :: ti12 = sin(4.0_dp*pi/5.0_dp)
          if (ido /= 2) then
-            do concurrent(i=2:ido:2, k=1:l1)
+            do concurrent(k=1:l1, i=2:ido:2)
                ti5 = cc(i, 2, k) - cc(i, 5, k)
                ti2 = cc(i, 2, k) + cc(i, 5, k)
                ti4 = cc(i, 3, k) - cc(i, 4, k)

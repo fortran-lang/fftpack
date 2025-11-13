@@ -13,7 +13,7 @@
          if (ido < 2) return
          if (ido /= 2) then
             idp2 = ido + 2
-            do concurrent(i=3:ido:2, k=1:l1)
+            do concurrent(k=1:l1, i=3:ido:2)
                ic = idp2 - i
                tr2 = wa1(i - 2)*cc(i - 1, k, 2) + wa1(i - 1)*cc(i, k, 2)
                ti2 = wa1(i - 2)*cc(i, k, 2) - wa1(i - 1)*cc(i - 1, k, 2)

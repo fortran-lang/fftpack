@@ -7,7 +7,7 @@
          real(dp) :: ti2, tr2
          integer :: i, k
          if (ido > 2) then
-            do concurrent(i=2:ido:2, k=1:l1)
+            do concurrent(k=1:l1, i=2:ido:2)
                ch(i - 1, k, 1) = cc(i - 1, 1, k) + cc(i - 1, 2, k)
                tr2 = cc(i - 1, 1, k) - cc(i - 1, 2, k)
                ch(i, k, 1) = cc(i, 1, k) + cc(i, 2, k)

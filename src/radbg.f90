@@ -18,7 +18,7 @@
          ipp2 = ip + 2
          ipph = (ip + 1)/2
          if (ido < l1) then
-            do concurrent(i=1:ido, k=1:l1)
+            do concurrent(k=1:l1, i=1:ido)
                ch(i, k, 1) = cc(i, 1, k)
             end do
          else
@@ -26,7 +26,7 @@
                ch(i, k, 1) = cc(i, 1, k)
             end do
          end if
-         do concurrent(j=2:ipph, k=1:l1)
+         do concurrent(k=1:l1, j=2:ipph)
             jc = ipp2 - j
             j2 = j + j
             ch(1, k, j) = cc(ido, j2 - 2, k) + cc(ido, j2 - 2, k)
@@ -34,7 +34,7 @@
          end do
          if (ido /= 1) then
             if (nbd < l1) then
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(k=1:l1, j=2:ipph, i=3:ido:2)
                   jc = ipp2 - j
                   ic = idp2 - i
                   ch(i - 1, k, j) = cc(i - 1, 2*j - 1, k) + cc(ic - 1, 2*j - 2, k)
@@ -43,7 +43,7 @@
                   ch(i, k, jc) = cc(i, 2*j - 1, k) + cc(ic, 2*j - 2, k)
                end do
             else
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(k=1:l1, j=2:ipph, i=3:ido:2)
                   jc = ipp2 - j
                   ic = idp2 - i
                   ch(i - 1, k, j) = cc(i - 1, 2*j - 1, k) + cc(ic - 1, 2*j - 2, k)
@@ -89,7 +89,7 @@
          end do
          if (ido /= 1) then
             if (nbd < l1) then
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                   jc = ipp2 - j
                   ch(i - 1, k, j) = c1(i - 1, k, j) - c1(i, k, jc)
                   ch(i - 1, k, jc) = c1(i - 1, k, j) + c1(i, k, jc)
@@ -97,7 +97,7 @@
                   ch(i, k, jc) = c1(i, k, j) - c1(i - 1, k, jc)
                end do
             else
-               do concurrent(i=3:ido:2, j=2:ipph, k=1:l1)
+               do concurrent(j=2:ipph, k=1:l1, i=3:ido:2)
                   jc = ipp2 - j
                   ch(i - 1, k, j) = c1(i - 1, k, j) - c1(i, k, jc)
                   ch(i - 1, k, jc) = c1(i - 1, k, j) + c1(i, k, jc)
