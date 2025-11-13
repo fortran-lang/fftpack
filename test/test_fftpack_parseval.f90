@@ -6,7 +6,7 @@ module test_fftpack_parseval
    private
 
    public :: collect_parseval
-   integer, parameter :: n = 1024
+   integer, parameter :: n = 1021
    real(rk), parameter :: atol = n*epsilon(1.0_rk)
    real(rk), parameter :: rtol = sqrt(atol)
 
