@@ -9,17 +9,18 @@ module test_fftpack_original
    real(rk), parameter :: pi = 4.0_rk*atan(1.0_rk)
    real(rk), parameter :: atol = epsilon(1.0_rk)
    real(rk), parameter :: rtol = sqrt(atol)
+   integer, parameter :: nd(1:7) = [120, 54, 49, 32, 4, 3, 2]
 
 contains
 
    subroutine collect_original(testsuite)
       type(unittest_type), allocatable, intent(out) :: testsuite(:)
-      testsuite = [new_unittest("rfft", test_dfft)]
+      testsuite = [new_unittest("dfft", test_dfft)]
+      testsuite = [testsuite, new_unittest("zfft", test_zfft)]
    end subroutine collect_original
 
    subroutine test_dfft(error)
       type(error_type), allocatable, intent(out) :: error
-      integer, parameter :: nd(1:7) = [120, 54, 49, 32, 4, 3, 2]
       real(rk) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz, modn
       real(rk) :: fn, tfn, dt, sum1, sum2, arg, arg1
@@ -107,6 +108,71 @@ contains
          if (allocated(error)) return
       end do
    end subroutine test_dfft
+
+   subroutine test_zfft(error)
+      type(error_type), allocatable, intent(out) :: error
+      integer :: i, j, k, n, nz
+      complex(rk) :: cx(200), cy(200)
+      real(rk) :: w(2000), dt, arg1, arg2, mismatch, cf
+
+      do nz = 1, size(nd)
+         !> Create signal.
+         n = nd(nz)
+         do i = 1, n
+            cx(i) = cmplx(cos(sqrt(2.0_rk)*i), sin(sqrt(2.0_rk)*i**2), kind=rk)
+         end do
+
+         !> Discrete Fourier Transform.
+         dt = 2*pi/n
+         do i = 1, n
+            arg1 = -(i - 1)*dt
+            cy(i) = cmplx(0.0_rk, 0.0_rk, kind=rk)
+            do k = 1, n
+               arg2 = (k - 1)*arg1
+               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=rk)*cx(k)
+            end do
+         end do
+
+         !> Fast Fourier Transform.
+         call zffti(n, w)
+         call zfftf(n, cx, w)
+
+         !> Check error.
+         mismatch = maxval(abs(cx(:n) - cy(:n)))/n
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Inverse Discrete Fourier Transform.
+         cx(:n) = cx(:n)/n ! Scale signal.
+         do i = 1, n
+            arg1 = (i - 1)*dt
+            cy(i) = cmplx(0.0_rk, 0.0_rk, kind=rk)
+            do k = 1, n
+               arg2 = (k - 1)*arg1
+               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=rk)*cx(k)
+            end do
+         end do
+
+         !> Inverse Fast Fourier Transform.
+         call zfftb(n, cx, w)
+
+         !> Check error.
+         mismatch = maxval(abs(cx(:n) - cy(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse Fourier transforms.
+         cx(:n) = cy(:n) ! Restore signal.
+         call zfftf(n, cx, w)
+         call zfftb(n, cx, w)
+
+         !> Check error.
+         cf = 1.0_rk/n
+         mismatch = maxval(abs(cf*cx(:n) - cy(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+      end do
+   end subroutine test_zfft
 end module test_fftpack_original
 
 program test_original
