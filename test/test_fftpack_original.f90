@@ -18,6 +18,7 @@ contains
       testsuite = [new_unittest("dfft", test_dfft)]
       testsuite = [testsuite, new_unittest("zfft", test_zfft)]
       testsuite = [testsuite, new_unittest("sint", test_sint)]
+      testsuite = [testsuite, new_unittest("cost", test_cost)]
    end subroutine collect_original
 
    subroutine test_dfft(error)
@@ -229,6 +230,61 @@ contains
          if (allocated(error)) return
       end do
    end subroutine test_sint
+
+   subroutine test_cost(error)
+      type(error_type), allocatable, intent(out) :: error
+      real(rk) :: x(200), y(200), xh(200), w(2000)
+      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      real(rk) :: dt, sum1, sum2, arg, arg1
+      real(rk) :: mismatch, cf
+
+      do nz = 1, size(nd)
+         !> Create multisine signal.
+         n = nd(nz)
+         modn = mod(n, 2)
+         np1 = n + 1; nm1 = n - 1
+         do j = 1, np1
+            x(j) = sin(j*sqrt(2.0_rk))
+            y(j) = x(j)
+            xh(j) = x(j)
+         end do
+
+         !> Discrete sine transform.
+         dt = pi/n
+         do i = 1, np1
+            x(i) = xh(i)
+         end do
+
+         do i = 1, np1
+            y(i) = 0.5_rk*(x(1) + (-1)**(i + 1)*x(n + 1))
+            arg = (i - 1)*dt
+            do k = 2, n
+               y(i) = y(i) + cos((k - 1)*arg)*x(k)
+            end do
+            y(i) = 2*y(i)
+         end do
+
+         !> Fast Sine Transform.
+         call dcosti(np1, w)
+         call dcost(np1, x, w)
+
+         !> Check error.
+         cf = 0.5_rk/n
+         mismatch = maxval(abs(x(:np1) - y(:np1)))*cf
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse sine transform.
+         x(:np1) = xh(:np1); y(:np1) = x(:np1) ! Restore signals.
+         call dcost(np1, x, w)
+         call dcost(np1, x, w)
+
+         !> Check error.
+         mismatch = maxval(abs(cf*x(:nm1) - y(:nm1)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+      end do
+   end subroutine test_cost
 end module test_fftpack_original
 
 program test_original
