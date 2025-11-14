@@ -20,6 +20,7 @@ contains
       testsuite = [testsuite, new_unittest("sint", test_sint)]
       testsuite = [testsuite, new_unittest("cost", test_cost)]
       testsuite = [testsuite, new_unittest("cosqt", test_cosqt)]
+      testsuite = [testsuite, new_unittest("dzfft", test_dzfft)]
    end subroutine collect_original
 
    subroutine test_dfft(error)
@@ -360,6 +361,106 @@ contains
 
       end do
    end subroutine test_cosqt
+
+   subroutine test_dzfft(error)
+      type(error_type), allocatable, intent(out) :: error
+      real(rk) :: x(200), y(200), xh(200), w(2000)
+      real(rk) :: a(100), b(100), ah(100), bh(100)
+      real(rk) :: azero, azeroh
+      integer :: i, j, k, n, np1, nm1, ns2, ns2m, nz, modn
+      real(rk) :: fn, tfn, dt, sum1, sum2, arg, arg1, arg2
+      real(rk) :: mismatch, cf
+
+      do nz = 1, size(nd)
+         !> Create multisine signal.
+         n = nd(nz)
+         modn = mod(n, 2)
+         fn = real(n, kind=rk)
+         tfn = 2*fn
+         np1 = n + 1; nm1 = n - 1
+         do j = 1, np1
+            x(j) = sin(j*sqrt(2.0_rk))
+            y(j) = x(j)
+            xh(j) = x(j)
+         end do
+
+         !> Discrete Fourier Transform.
+         dt = 2*pi/fn
+         ns2 = (n + 1)/2
+         ns2m = ns2 - 1
+         cf = 2.0_rk/n
+         if (ns2m > 0) then
+            do k = 1, ns2m
+               sum1 = 0.0_rk; sum2 = 0.0_rk
+               arg = k*dt
+               do i = 1, n
+                  arg1 = (i - 1)*arg
+                  sum1 = sum1 + x(i)*cos(arg1)
+                  sum2 = sum2 + x(i)*sin(arg1)
+               end do
+               a(k) = cf*sum1
+               b(k) = cf*sum2
+            end do
+         end if
+         nm1 = n - 1
+         sum1 = 0.0_rk
+         sum2 = 0.0_rk
+         do i = 1, nm1, 2
+            sum1 = sum1 + x(i)
+            sum2 = sum2 + x(i + 1)
+         end do
+         if (modn == 1) sum1 = sum1 + x(n)
+         azero = 0.5_rk*cf*(sum1 + sum2)
+         if (modn == 0) a(ns2) = 0.5_rk*cf*(sum1 - sum2)
+
+         !> Fast Fourier Transform.
+         call dzffti(n, w)
+         call dzfftf(n, x, azeroh, ah, bh, w)
+
+         !> Check error.
+         mismatch = abs(azeroh - azero)
+         if (modn == 0) mismatch = max(mismatch, abs(a(ns2) - ah(ns2)))
+         if (ns2m > 0) then
+            do i = 1, ns2m
+               mismatch = max(mismatch, abs(ah(i) - a(i)), abs(bh(i) - b(i)))
+            end do
+         end if
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Inverse Discrete Fourier Transform
+         ns2 = n/2
+         if (modn == 0) b(ns2) = 0.0_rk
+         do i = 1, n
+            sum1 = azero
+            arg1 = (i - 1)*dt
+            do k = 1, ns2
+               arg2 = k*arg1
+               sum1 = sum1 + a(k)*cos(arg2) + b(k)*sin(arg2)
+            end do
+            x(i) = sum1
+         end do
+
+         !> Fast Inverse Fourier Transform.
+         call dzfftb(n, y, azero, a, b, w)
+
+         !> Check error.
+         mismatch = maxval(abs(x(:n) - y(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse Fourier transforms.
+         x(:n) = xh(:n)
+         call dzfftf(n, x, azero, a, b, w)
+         call dzfftb(n, x, azero, a, b, w)
+
+         !> Check error.
+         mismatch = maxval(abs(x(:n) - y(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+      end do
+   end subroutine test_dzfft
 end module test_fftpack_original
 
 program test_original
