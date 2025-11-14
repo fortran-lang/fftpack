@@ -27,24 +27,21 @@ contains
       type(error_type), allocatable, intent(out) :: error
       real(rk) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz, modn
-      real(rk) :: fn, tfn, dt, sum1, sum2, arg, arg1
+      real(rk) :: dt, sum1, sum2, arg, arg1
       real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
          modn = mod(n, 2)
-         fn = real(n, kind=rk)
-         tfn = 2*fn
          np1 = n + 1; nm1 = n - 1
-         do j = 1, np1
+         do concurrent(j=1:np1)
             x(j) = sin(j*sqrt(2.0_rk))
-            y(j) = x(j)
-            xh(j) = x(j)
          end do
+         y = x; xh = x
 
          !> Discrete Fourier Transform.
-         dt = 2*pi/fn
+         dt = 2*pi/n
          ns2 = (n + 1)/2
          if (ns2 >= 2) then
             do k = 2, ns2
@@ -59,11 +56,8 @@ contains
                y(2*k - 1) = -sum2
             end do
          end if
-         sum1 = 0.0_rk; sum2 = 0.0_rk
-         do i = 1, nm1, 2
-            sum1 = sum1 + x(i)
-            sum2 = sum2 + x(i + 1)
-         end do
+         sum1 = sum(x(1:nm1:2))
+         sum2 = sum(x(2:nm1 + 1:2))
          if (modn == 1) sum1 = sum1 + x(n)
          y(1) = sum1 + sum2
          if (modn == 0) y(n) = sum1 - sum2
@@ -73,7 +67,7 @@ contains
          call dfftf(n, x, w)
 
          !> Check error.
-         mismatch = maxval(abs(x(:n) - y(:n)))/fn
+         mismatch = maxval(abs(x(:n) - y(:n)))/n
          call check(error, mismatch < rtol)
          if (allocated(error)) return
 
@@ -106,7 +100,7 @@ contains
          call dfftf(n, y, w)
 
          !> Check error.
-         cf = 1.0_rk/fn
+         cf = 1.0_rk/n
          mismatch = maxval(abs(cf*y(:n) - x(:n)))
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -122,7 +116,7 @@ contains
       do nz = 1, size(nd)
          !> Create signal.
          n = nd(nz)
-         do i = 1, n
+         do concurrent(i=1:n)
             cx(i) = cmplx(cos(sqrt(2.0_rk)*i), sin(sqrt(2.0_rk)*i**2), kind=rk)
          end do
 
@@ -181,26 +175,21 @@ contains
    subroutine test_sint(error)
       type(error_type), allocatable, intent(out) :: error
       real(rk) :: x(200), y(200), xh(200), w(2000)
-      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      integer :: i, j, k, n, np1, nm1, ns2, nz
       real(rk) :: dt, sum1, sum2, arg, arg1
       real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
-         modn = mod(n, 2)
          np1 = n + 1; nm1 = n - 1
-         do j = 1, np1
+         do concurrent(j=1:np1)
             x(j) = sin(j*sqrt(2.0_rk))
-            y(j) = x(j)
-            xh(j) = x(j)
          end do
+         y = x; xh = x
 
          !> Discrete sine transform.
          dt = pi/n
-         do i = 1, nm1
-            x(i) = xh(i)
-         end do
 
          do i = 1, nm1
             y(i) = 0.0_rk
@@ -236,26 +225,21 @@ contains
    subroutine test_cost(error)
       type(error_type), allocatable, intent(out) :: error
       real(rk) :: x(200), y(200), xh(200), w(2000)
-      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      integer :: i, j, k, n, np1, nm1, ns2, nz
       real(rk) :: dt, sum1, sum2, arg, arg1
       real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
-         modn = mod(n, 2)
          np1 = n + 1; nm1 = n - 1
-         do j = 1, np1
+         do concurrent(j=1:np1)
             x(j) = sin(j*sqrt(2.0_rk))
-            y(j) = x(j)
-            xh(j) = x(j)
          end do
+         y = x; xh = x
 
          !> Discrete sine transform.
          dt = pi/n
-         do i = 1, np1
-            x(i) = xh(i)
-         end do
 
          do i = 1, np1
             y(i) = 0.5_rk*(x(1) + (-1)**(i + 1)*x(n + 1))
@@ -291,24 +275,21 @@ contains
    subroutine test_cosqt(error)
       type(error_type), allocatable, intent(out) :: error
       real(rk) :: x(200), y(200), xh(200), w(2000)
-      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      integer :: i, j, k, n, np1, nm1, ns2, nz
       real(rk) :: dt, sum1, sum2, arg, arg1
       real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
-         modn = mod(n, 2)
          np1 = n + 1; nm1 = n - 1
-         do j = 1, np1
+         do concurrent(j=1:np1)
             x(j) = sin(j*sqrt(2.0_rk))
-            y(j) = x(j)
-            xh(j) = x(j)
          end do
+         y = x; xh = x
 
          !> Discrete quater-cos transform.
          dt = pi/(2*n)
-         y(:n) = xh(:n)
 
          do i = 1, n
             x(i) = 0.0_rk
@@ -345,7 +326,6 @@ contains
 
          !> Check error.
          mismatch = maxval(abs(y(:n) - x(:n)))*cf
-         print *, "Mismatch :", mismatch, rtol
          call check(error, mismatch < rtol)
          if (allocated(error)) return
 
@@ -368,24 +348,21 @@ contains
       real(rk) :: a(100), b(100), ah(100), bh(100)
       real(rk) :: azero, azeroh
       integer :: i, j, k, n, np1, nm1, ns2, ns2m, nz, modn
-      real(rk) :: fn, tfn, dt, sum1, sum2, arg, arg1, arg2
+      real(rk) :: dt, sum1, sum2, arg, arg1, arg2
       real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
          modn = mod(n, 2)
-         fn = real(n, kind=rk)
-         tfn = 2*fn
          np1 = n + 1; nm1 = n - 1
-         do j = 1, np1
+         do concurrent(j=1:np1)
             x(j) = sin(j*sqrt(2.0_rk))
-            y(j) = x(j)
-            xh(j) = x(j)
          end do
+         y = x; xh = x
 
          !> Discrete Fourier Transform.
-         dt = 2*pi/fn
+         dt = 2*pi/n
          ns2 = (n + 1)/2
          ns2m = ns2 - 1
          cf = 2.0_rk/n
@@ -403,12 +380,8 @@ contains
             end do
          end if
          nm1 = n - 1
-         sum1 = 0.0_rk
-         sum2 = 0.0_rk
-         do i = 1, nm1, 2
-            sum1 = sum1 + x(i)
-            sum2 = sum2 + x(i + 1)
-         end do
+         sum1 = sum(x(1:nm1:2))
+         sum2 = sum(x(2:nm1 + 1:2))
          if (modn == 1) sum1 = sum1 + x(n)
          azero = 0.5_rk*cf*(sum1 + sum2)
          if (modn == 0) a(ns2) = 0.5_rk*cf*(sum1 - sum2)
