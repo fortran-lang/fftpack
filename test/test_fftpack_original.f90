@@ -17,6 +17,7 @@ contains
       type(unittest_type), allocatable, intent(out) :: testsuite(:)
       testsuite = [new_unittest("dfft", test_dfft)]
       testsuite = [testsuite, new_unittest("zfft", test_zfft)]
+      testsuite = [testsuite, new_unittest("sint", test_sint)]
    end subroutine collect_original
 
    subroutine test_dfft(error)
@@ -173,6 +174,61 @@ contains
          if (allocated(error)) return
       end do
    end subroutine test_zfft
+
+   subroutine test_sint(error)
+      type(error_type), allocatable, intent(out) :: error
+      real(rk) :: x(200), y(200), xh(200), w(2000)
+      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      real(rk) :: dt, sum1, sum2, arg, arg1
+      real(rk) :: mismatch, cf
+
+      do nz = 1, size(nd)
+         !> Create multisine signal.
+         n = nd(nz)
+         modn = mod(n, 2)
+         np1 = n + 1; nm1 = n - 1
+         do j = 1, np1
+            x(j) = sin(j*sqrt(2.0_rk))
+            y(j) = x(j)
+            xh(j) = x(j)
+         end do
+
+         !> Discrete sine transform.
+         dt = pi/n
+         do i = 1, nm1
+            x(i) = xh(i)
+         end do
+
+         do i = 1, nm1
+            y(i) = 0.0_rk
+            arg1 = i*dt
+            do k = 1, nm1
+               y(i) = y(i) + x(k)*sin(k*arg1)
+            end do
+            y(i) = 2*y(i)
+         end do
+
+         !> Fast Sine Transform.
+         call dsinti(nm1, w)
+         call dsint(nm1, x, w)
+
+         !> Check error.
+         cf = 0.5_rk/n
+         mismatch = maxval(abs(x(:nm1) - y(:nm1)))*cf
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse sine transform.
+         x(:nm1) = xh(:nm1); y(:nm1) = x(:nm1) ! Restore signals.
+         call dsint(nm1, x, w)
+         call dsint(nm1, x, w)
+
+         !> Check error.
+         mismatch = maxval(abs(cf*x(:nm1) - y(:nm1)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+      end do
+   end subroutine test_sint
 end module test_fftpack_original
 
 program test_original
