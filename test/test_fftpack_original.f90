@@ -19,6 +19,7 @@ contains
       testsuite = [testsuite, new_unittest("zfft", test_zfft)]
       testsuite = [testsuite, new_unittest("sint", test_sint)]
       testsuite = [testsuite, new_unittest("cost", test_cost)]
+      testsuite = [testsuite, new_unittest("cosqt", test_cosqt)]
    end subroutine collect_original
 
    subroutine test_dfft(error)
@@ -285,6 +286,80 @@ contains
          if (allocated(error)) return
       end do
    end subroutine test_cost
+
+   subroutine test_cosqt(error)
+      type(error_type), allocatable, intent(out) :: error
+      real(rk) :: x(200), y(200), xh(200), w(2000)
+      integer :: i, j, k, n, np1, nm1, ns2, nz, modn
+      real(rk) :: dt, sum1, sum2, arg, arg1
+      real(rk) :: mismatch, cf
+
+      do nz = 1, size(nd)
+         !> Create multisine signal.
+         n = nd(nz)
+         modn = mod(n, 2)
+         np1 = n + 1; nm1 = n - 1
+         do j = 1, np1
+            x(j) = sin(j*sqrt(2.0_rk))
+            y(j) = x(j)
+            xh(j) = x(j)
+         end do
+
+         !> Discrete quater-cos transform.
+         dt = pi/(2*n)
+         y(:n) = xh(:n)
+
+         do i = 1, n
+            x(i) = 0.0_rk
+            arg = (i - 1)*dt
+            do k = 1, n
+               x(i) = x(i) + y(k)*cos((2*k - 1)*arg)
+            end do
+            x(i) = 4*x(i)
+         end do
+
+         !> Fast Quarter-cos Transform.
+         call dcosqi(n, w)
+         call dcosqb(n, y, w)
+
+         !> Check error.
+         cf = 0.25_rk/n
+         mismatch = maxval(abs(x(:n) - y(:n)))*cf
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Discrete inverse quarter-cos transform.
+         x(:n) = xh(:n)
+         do i = 1, n
+            y(i) = 0.5_rk*x(1)
+            arg = (2*i - 1)*dt
+            do k = 2, n
+               y(i) = y(i) + x(k)*cos((k - 1)*arg)
+            end do
+            y(i) = 2*y(i)
+         end do
+
+         !> Fast inverse quarter-cos transform.
+         call dcosqf(n, x, w)
+
+         !> Check error.
+         mismatch = maxval(abs(y(:n) - x(:n)))*cf
+         print *, "Mismatch :", mismatch, rtol
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse quarter-cos transforms.
+         x(:n) = xh(:n); y(:n) = xh(:n) ! Restore signals.
+         call dcosqb(n, x, w)
+         call dcosqf(n, x, w)
+
+         !> Check error.
+         mismatch = maxval(abs(cf*x(:n) - y(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+      end do
+   end subroutine test_cosqt
 end module test_fftpack_original
 
 program test_original
