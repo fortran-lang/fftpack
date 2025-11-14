@@ -14,16 +14,16 @@ contains
 
    subroutine collect_original(testsuite)
       type(unittest_type), allocatable, intent(out) :: testsuite(:)
-      testsuite = [new_unittest("rfft", test_rfft)]
+      testsuite = [new_unittest("rfft", test_dfft)]
    end subroutine collect_original
 
-   subroutine test_rfft(error)
+   subroutine test_dfft(error)
       type(error_type), allocatable, intent(out) :: error
       integer, parameter :: nd(1:7) = [120, 54, 49, 32, 4, 3, 2]
       real(rk) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz, modn
       real(rk) :: fn, tfn, dt, sum1, sum2, arg, arg1
-      real(rk) :: mismatch
+      real(rk) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
@@ -67,19 +67,46 @@ contains
          call dffti(n, w)
          call dfftf(n, x, w)
 
-         !> Compute error.
-         mismatch = 0.0_rk
+         !> Check error.
+         mismatch = maxval(abs(x(:n) - y(:n)))/fn
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Inverse Discrete Fourier Transform.
+         x(:n) = xh(:n) ! Restore signal.
          do i = 1, n
-            mismatch = max(mismatch, abs(x(i) - y(i)))
-            x(i) = xh(i)
+            sum1 = 0.5_rk*x(1)
+            arg = (i - 1)*dt
+            if (ns2 >= 2) then
+               do k = 2, ns2
+                  arg1 = (k - 1)*arg
+                  sum1 = sum1 + x(2*k - 2)*cos(arg1) - x(2*k - 1)*sin(arg1)
+               end do
+            end if
+            if (modn == 0) sum1 = sum1 + 0.5_rk*(-1)**(i - 1)*x(n)
+            y(i) = 2*sum1
          end do
-         mismatch = mismatch/fn
+
+         !> Perform (real) inverse Fourier Transform.
+         call dfftb(n, x, w)
 
          !> Check error.
-         call check(error, mismatch < n*atol)
+         mismatch = maxval(abs(x(:n) - y(:n)))
+         call check(error, mismatch < rtol)
+         if (allocated(error)) return
+
+         !> Chain direct and inverse Fourier transforms.
+         x(:n) = xh(:n); y(:n) = xh(:n) ! Restore signal.
+         call dfftb(n, y, w)
+         call dfftf(n, y, w)
+
+         !> Check error.
+         cf = 1.0_rk/fn
+         mismatch = maxval(abs(cf*y(:n) - x(:n)))
+         call check(error, mismatch < rtol)
          if (allocated(error)) return
       end do
-   end subroutine
+   end subroutine test_dfft
 end module test_fftpack_original
 
 program test_original
