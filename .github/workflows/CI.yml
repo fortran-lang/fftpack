@@ -21,10 +21,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-14]
         toolchain:
-          - {compiler: gcc, version: 10}
+          # - {compiler: gcc, version: 10}
           - {compiler: gcc, version: 11}
           - {compiler: gcc, version: 12}
           - {compiler: gcc, version: 13}
+          - {compiler: gcc, version: 14}
           - {compiler: intel, version: '2024.1'}          
         build: [cmake]        
         include:
@@ -33,7 +34,7 @@ jobs:
             toolchain: {compiler: intel-classic, version: '2021.10'}            
           - os: ubuntu-latest
             build: cmake-inline
-            toolchain: {compiler: gcc, version: 10}
+            toolchain: {compiler: gcc, version: 14}
         exclude:
           - os: macos-14
             toolchain: {compiler: intel, version: '2024.1'}
