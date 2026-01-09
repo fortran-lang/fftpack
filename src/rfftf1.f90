@@ -63,7 +63,7 @@
             l2 = l1
          end do
          if (na == 1) return
-         do i = 1, n
+         do concurrent(i=1:n)
             c(i) = ch(i)
          end do
       end subroutine rfftf1
