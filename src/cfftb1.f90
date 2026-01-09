@@ -63,7 +63,7 @@
          end do
          if (na == 0) return
          n2 = n + n
-         do i = 1, n2
+         do concurrent(i=1:n2)
             c(i) = ch(i)
          end do
       end subroutine cfftb1

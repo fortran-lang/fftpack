@@ -63,7 +63,7 @@
             iw = iw + (ip - 1)*ido
          end do
          if (na == 0) return
-         do i = 1, n
+         do concurrent(i=1:n)
             c(i) = ch(i)
          end do
       end subroutine rfftb1
