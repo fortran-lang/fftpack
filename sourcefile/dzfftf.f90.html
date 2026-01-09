@@ -89,7 +89,7 @@ fortran-lang/fftpack contributors" >
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 1.2% of total for source files.">35 statements</a>
+               title=" 1.3% of total for source files.">35 statements</a>
           </li>
 
             <li id="source-file">
@@ -224,7 +224,7 @@ fortran-lang/fftpack contributors" >
 <a id="ln-16" name="ln-16" href="#ln-16"></a><span class="w">            </span><span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5_dp</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
 <a id="ln-17" name="ln-17" href="#ln-17"></a><span class="w">            </span><span class="k">return</span>
 <a id="ln-18" name="ln-18" href="#ln-18"></a><span class="k">         else</span>
-<a id="ln-19" name="ln-19" href="#ln-19"></a><span class="k">            do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<a id="ln-19" name="ln-19" href="#ln-19"></a><span class="k">            do</span><span class="w"> </span><span class="k">concurrent</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 <a id="ln-20" name="ln-20" href="#ln-20"></a><span class="w">               </span><span class="n">wsave</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
 <a id="ln-21" name="ln-21" href="#ln-21"></a><span class="w">            </span><span class="k">end do</span>
 <a id="ln-22" name="ln-22" href="#ln-22"></a><span class="k">            call </span><span class="n">dfftf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">wsave</span><span class="p">,</span><span class="w"> </span><span class="n">wsave</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
@@ -233,7 +233,7 @@ fortran-lang/fftpack contributors" >
 <a id="ln-25" name="ln-25" href="#ln-25"></a><span class="w">            </span><span class="n">azero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5_dp</span><span class="o">*</span><span class="n">cf</span><span class="o">*</span><span class="n">wsave</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 <a id="ln-26" name="ln-26" href="#ln-26"></a><span class="w">            </span><span class="n">ns2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"></span>
 <a id="ln-27" name="ln-27" href="#ln-27"></a><span class="w">            </span><span class="n">ns2m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ns2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<a id="ln-28" name="ln-28" href="#ln-28"></a><span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ns2m</span><span class="w"></span>
+<a id="ln-28" name="ln-28" href="#ln-28"></a><span class="w">            </span><span class="k">do</span><span class="w"> </span><span class="k">concurrent</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns2m</span><span class="p">)</span><span class="w"></span>
 <a id="ln-29" name="ln-29" href="#ln-29"></a><span class="w">               </span><span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cf</span><span class="o">*</span><span class="n">wsave</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
 <a id="ln-30" name="ln-30" href="#ln-30"></a><span class="w">               </span><span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfm</span><span class="o">*</span><span class="n">wsave</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 <a id="ln-31" name="ln-31" href="#ln-31"></a><span class="w">            </span><span class="k">end do</span>
@@ -261,7 +261,7 @@ fortran-lang/fftpack contributors<br>&copy; 2026 <a rel="license" href="http://c
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2026-01-09 09:34            </p>
+ on 2026-01-09 09:43            </p>
         </div>
       </div>
       <br>
