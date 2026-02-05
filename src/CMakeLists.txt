@@ -134,11 +134,6 @@ set(SRC
     fftpack_irfft.f90
     fftpack_rfft.f90
     fftpack_utils.f90
-    radf2.f90
-    radf3.f90
-    radf4.f90
-    radf5.f90
-    radfg.f90
     rfftb1.f90
     rfftf1.f90
     rffti1.f90
