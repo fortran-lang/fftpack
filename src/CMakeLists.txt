@@ -101,6 +101,7 @@
 # fypp_f90pp("${fyppFlags}" "${cppFiles}" outPreprocFiles)
 
 set(SRC
+    fftpack_legacy_drivers_pass.f90
     cfftb1.f90
     cfftf1.f90
     cffti1.f90
@@ -132,16 +133,10 @@ set(SRC
     fftpack_irfft.f90
     fftpack_rfft.f90
     fftpack_utils.f90
-    passb2.f90
-    passb3.f90
-    passb4.f90
-    passb5.f90
-    passb.f90
     passf2.f90
     passf3.f90
     passf4.f90
     passf5.f90
-    passf.f90
     radb2.f90
     radb3.f90
     radb4.f90
