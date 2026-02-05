@@ -102,6 +102,7 @@
 
 set(SRC
     fftpack_legacy_drivers_pass.f90
+    fftpack_legacy_drivers_rad.f90
     cfftb1.f90
     cfftf1.f90
     cffti1.f90
@@ -133,11 +134,6 @@ set(SRC
     fftpack_irfft.f90
     fftpack_rfft.f90
     fftpack_utils.f90
-    radb2.f90
-    radb3.f90
-    radb4.f90
-    radb5.f90
-    radbg.f90
     radf2.f90
     radf3.f90
     radf4.f90
