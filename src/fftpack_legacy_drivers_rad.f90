@@ -1,5 +1,5 @@
 module fftpack_legacy_drivers_rad
-   use fftpack_kind, only: dp => rk
+   use fftpack_kinds, only: dp
    implicit none(type, external)
    private
 

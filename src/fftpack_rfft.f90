@@ -3,20 +3,20 @@ submodule(fftpack) fftpack_rfft
 contains
 
    !> Forward transform of a real periodic sequence.
-   pure module function rfft_rk(x, n) result(result)
-      real(kind=rk), intent(in) :: x(:)
+   pure module function rfft_dp(x, n) result(result)
+      real(kind=dp), intent(in) :: x(:)
       integer, intent(in), optional :: n
-      real(kind=rk), allocatable :: result(:)
+      real(kind=dp), allocatable :: result(:)
 
       integer :: lenseq, lensav, i
-      real(kind=rk), allocatable :: wsave(:)
+      real(kind=dp), allocatable :: wsave(:)
 
       if (present(n)) then
          lenseq = n
          if (lenseq <= size(x)) then
             result = x(:lenseq)
          else if (lenseq > size(x)) then
-            result = [x, (0.0_rk, i=1, lenseq - size(x))]
+            result = [x, (0.0_dp, i=1, lenseq - size(x))]
          end if
       else
          lenseq = size(x)
@@ -31,6 +31,6 @@ contains
       !> Forward transformation
       call dfftf(lenseq, result, wsave)
 
-   end function rfft_rk
+   end function rfft_dp
 
 end submodule fftpack_rfft

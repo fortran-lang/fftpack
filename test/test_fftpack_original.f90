@@ -6,9 +6,9 @@ module test_fftpack_original
 
    public :: collect_original
 
-   real(rk), parameter :: pi = 4.0_rk*atan(1.0_rk)
-   real(rk), parameter :: atol = epsilon(1.0_rk)
-   real(rk), parameter :: rtol = sqrt(atol)
+   real(dp), parameter :: pi = 4.0_dp*atan(1.0_dp)
+   real(dp), parameter :: atol = epsilon(1.0_dp)
+   real(dp), parameter :: rtol = sqrt(atol)
    integer, parameter :: nd(1:7) = [120, 54, 49, 32, 4, 3, 2]
 
 contains
@@ -25,10 +25,10 @@ contains
 
    subroutine test_dfft(error)
       type(error_type), allocatable, intent(out) :: error
-      real(rk) :: x(200), y(200), xh(200), w(2000)
+      real(dp) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz, modn
-      real(rk) :: dt, sum1, sum2, arg, arg1
-      real(rk) :: mismatch, cf
+      real(dp) :: dt, sum1, sum2, arg, arg1
+      real(dp) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
@@ -36,7 +36,7 @@ contains
          modn = mod(n, 2)
          np1 = n + 1; nm1 = n - 1
          do concurrent(j=1:np1)
-            x(j) = sin(j*sqrt(2.0_rk))
+            x(j) = sin(j*sqrt(2.0_dp))
          end do
          y = x; xh = x
 
@@ -45,7 +45,7 @@ contains
          ns2 = (n + 1)/2
          if (ns2 >= 2) then
             do k = 2, ns2
-               sum1 = 0.0_rk; sum2 = 0.0_rk
+               sum1 = 0.0_dp; sum2 = 0.0_dp
                arg = (k - 1)*dt
                do i = 1, n
                   arg1 = (i - 1)*arg
@@ -74,7 +74,7 @@ contains
          !> Inverse Discrete Fourier Transform.
          x(:n) = xh(:n) ! Restore signal.
          do i = 1, n
-            sum1 = 0.5_rk*x(1)
+            sum1 = 0.5_dp*x(1)
             arg = (i - 1)*dt
             if (ns2 >= 2) then
                do k = 2, ns2
@@ -82,7 +82,7 @@ contains
                   sum1 = sum1 + x(2*k - 2)*cos(arg1) - x(2*k - 1)*sin(arg1)
                end do
             end if
-            if (modn == 0) sum1 = sum1 + 0.5_rk*(-1)**(i - 1)*x(n)
+            if (modn == 0) sum1 = sum1 + 0.5_dp*(-1)**(i - 1)*x(n)
             y(i) = 2*sum1
          end do
 
@@ -100,7 +100,7 @@ contains
          call dfftf(n, y, w)
 
          !> Check error.
-         cf = 1.0_rk/n
+         cf = 1.0_dp/n
          mismatch = maxval(abs(cf*y(:n) - x(:n)))
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -110,24 +110,24 @@ contains
    subroutine test_zfft(error)
       type(error_type), allocatable, intent(out) :: error
       integer :: i, j, k, n, nz
-      complex(rk) :: cx(200), cy(200)
-      real(rk) :: w(2000), dt, arg1, arg2, mismatch, cf
+      complex(dp) :: cx(200), cy(200)
+      real(dp) :: w(2000), dt, arg1, arg2, mismatch, cf
 
       do nz = 1, size(nd)
          !> Create signal.
          n = nd(nz)
          do concurrent(i=1:n)
-            cx(i) = cmplx(cos(sqrt(2.0_rk)*i), sin(sqrt(2.0_rk)*i**2), kind=rk)
+            cx(i) = cmplx(cos(sqrt(2.0_dp)*i), sin(sqrt(2.0_dp)*i**2), kind=dp)
          end do
 
          !> Discrete Fourier Transform.
          dt = 2*pi/n
          do i = 1, n
             arg1 = -(i - 1)*dt
-            cy(i) = cmplx(0.0_rk, 0.0_rk, kind=rk)
+            cy(i) = cmplx(0.0_dp, 0.0_dp, kind=dp)
             do k = 1, n
                arg2 = (k - 1)*arg1
-               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=rk)*cx(k)
+               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=dp)*cx(k)
             end do
          end do
 
@@ -144,10 +144,10 @@ contains
          cx(:n) = cx(:n)/n ! Scale signal.
          do i = 1, n
             arg1 = (i - 1)*dt
-            cy(i) = cmplx(0.0_rk, 0.0_rk, kind=rk)
+            cy(i) = cmplx(0.0_dp, 0.0_dp, kind=dp)
             do k = 1, n
                arg2 = (k - 1)*arg1
-               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=rk)*cx(k)
+               cy(i) = cy(i) + cmplx(cos(arg2), sin(arg2), kind=dp)*cx(k)
             end do
          end do
 
@@ -165,7 +165,7 @@ contains
          call zfftb(n, cx, w)
 
          !> Check error.
-         cf = 1.0_rk/n
+         cf = 1.0_dp/n
          mismatch = maxval(abs(cf*cx(:n) - cy(:n)))
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -174,17 +174,17 @@ contains
 
    subroutine test_sint(error)
       type(error_type), allocatable, intent(out) :: error
-      real(rk) :: x(200), y(200), xh(200), w(2000)
+      real(dp) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz
-      real(rk) :: dt, sum1, sum2, arg, arg1
-      real(rk) :: mismatch, cf
+      real(dp) :: dt, sum1, sum2, arg, arg1
+      real(dp) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
          np1 = n + 1; nm1 = n - 1
          do concurrent(j=1:np1)
-            x(j) = sin(j*sqrt(2.0_rk))
+            x(j) = sin(j*sqrt(2.0_dp))
          end do
          y = x; xh = x
 
@@ -192,7 +192,7 @@ contains
          dt = pi/n
 
          do i = 1, nm1
-            y(i) = 0.0_rk
+            y(i) = 0.0_dp
             arg1 = i*dt
             do k = 1, nm1
                y(i) = y(i) + x(k)*sin(k*arg1)
@@ -205,7 +205,7 @@ contains
          call dsint(nm1, x, w)
 
          !> Check error.
-         cf = 0.5_rk/n
+         cf = 0.5_dp/n
          mismatch = maxval(abs(x(:nm1) - y(:nm1)))*cf
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -224,17 +224,17 @@ contains
 
    subroutine test_cost(error)
       type(error_type), allocatable, intent(out) :: error
-      real(rk) :: x(200), y(200), xh(200), w(2000)
+      real(dp) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz
-      real(rk) :: dt, sum1, sum2, arg, arg1
-      real(rk) :: mismatch, cf
+      real(dp) :: dt, sum1, sum2, arg, arg1
+      real(dp) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
          np1 = n + 1; nm1 = n - 1
          do concurrent(j=1:np1)
-            x(j) = sin(j*sqrt(2.0_rk))
+            x(j) = sin(j*sqrt(2.0_dp))
          end do
          y = x; xh = x
 
@@ -242,7 +242,7 @@ contains
          dt = pi/n
 
          do i = 1, np1
-            y(i) = 0.5_rk*(x(1) + (-1)**(i + 1)*x(n + 1))
+            y(i) = 0.5_dp*(x(1) + (-1)**(i + 1)*x(n + 1))
             arg = (i - 1)*dt
             do k = 2, n
                y(i) = y(i) + cos((k - 1)*arg)*x(k)
@@ -255,7 +255,7 @@ contains
          call dcost(np1, x, w)
 
          !> Check error.
-         cf = 0.5_rk/n
+         cf = 0.5_dp/n
          mismatch = maxval(abs(x(:np1) - y(:np1)))*cf
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -274,17 +274,17 @@ contains
 
    subroutine test_cosqt(error)
       type(error_type), allocatable, intent(out) :: error
-      real(rk) :: x(200), y(200), xh(200), w(2000)
+      real(dp) :: x(200), y(200), xh(200), w(2000)
       integer :: i, j, k, n, np1, nm1, ns2, nz
-      real(rk) :: dt, sum1, sum2, arg, arg1
-      real(rk) :: mismatch, cf
+      real(dp) :: dt, sum1, sum2, arg, arg1
+      real(dp) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
          n = nd(nz)
          np1 = n + 1; nm1 = n - 1
          do concurrent(j=1:np1)
-            x(j) = sin(j*sqrt(2.0_rk))
+            x(j) = sin(j*sqrt(2.0_dp))
          end do
          y = x; xh = x
 
@@ -292,7 +292,7 @@ contains
          dt = pi/(2*n)
 
          do i = 1, n
-            x(i) = 0.0_rk
+            x(i) = 0.0_dp
             arg = (i - 1)*dt
             do k = 1, n
                x(i) = x(i) + y(k)*cos((2*k - 1)*arg)
@@ -305,7 +305,7 @@ contains
          call dcosqb(n, y, w)
 
          !> Check error.
-         cf = 0.25_rk/n
+         cf = 0.25_dp/n
          mismatch = maxval(abs(x(:n) - y(:n)))*cf
          call check(error, mismatch < rtol)
          if (allocated(error)) return
@@ -313,7 +313,7 @@ contains
          !> Discrete inverse quarter-cos transform.
          x(:n) = xh(:n)
          do i = 1, n
-            y(i) = 0.5_rk*x(1)
+            y(i) = 0.5_dp*x(1)
             arg = (2*i - 1)*dt
             do k = 2, n
                y(i) = y(i) + x(k)*cos((k - 1)*arg)
@@ -344,12 +344,12 @@ contains
 
    subroutine test_dzfft(error)
       type(error_type), allocatable, intent(out) :: error
-      real(rk) :: x(200), y(200), xh(200), w(2000)
-      real(rk) :: a(100), b(100), ah(100), bh(100)
-      real(rk) :: azero, azeroh
+      real(dp) :: x(200), y(200), xh(200), w(2000)
+      real(dp) :: a(100), b(100), ah(100), bh(100)
+      real(dp) :: azero, azeroh
       integer :: i, j, k, n, np1, nm1, ns2, ns2m, nz, modn
-      real(rk) :: dt, sum1, sum2, arg, arg1, arg2
-      real(rk) :: mismatch, cf
+      real(dp) :: dt, sum1, sum2, arg, arg1, arg2
+      real(dp) :: mismatch, cf
 
       do nz = 1, size(nd)
          !> Create multisine signal.
@@ -357,7 +357,7 @@ contains
          modn = mod(n, 2)
          np1 = n + 1; nm1 = n - 1
          do concurrent(j=1:np1)
-            x(j) = sin(j*sqrt(2.0_rk))
+            x(j) = sin(j*sqrt(2.0_dp))
          end do
          y = x; xh = x
 
@@ -365,10 +365,10 @@ contains
          dt = 2*pi/n
          ns2 = (n + 1)/2
          ns2m = ns2 - 1
-         cf = 2.0_rk/n
+         cf = 2.0_dp/n
          if (ns2m > 0) then
             do k = 1, ns2m
-               sum1 = 0.0_rk; sum2 = 0.0_rk
+               sum1 = 0.0_dp; sum2 = 0.0_dp
                arg = k*dt
                do i = 1, n
                   arg1 = (i - 1)*arg
@@ -383,8 +383,8 @@ contains
          sum1 = sum(x(1:nm1:2))
          sum2 = sum(x(2:nm1 + 1:2))
          if (modn == 1) sum1 = sum1 + x(n)
-         azero = 0.5_rk*cf*(sum1 + sum2)
-         if (modn == 0) a(ns2) = 0.5_rk*cf*(sum1 - sum2)
+         azero = 0.5_dp*cf*(sum1 + sum2)
+         if (modn == 0) a(ns2) = 0.5_dp*cf*(sum1 - sum2)
 
          !> Fast Fourier Transform.
          call dzffti(n, w)
@@ -403,7 +403,7 @@ contains
 
          !> Inverse Discrete Fourier Transform
          ns2 = n/2
-         if (modn == 0) b(ns2) = 0.0_rk
+         if (modn == 0) b(ns2) = 0.0_dp
          do i = 1, n
             sum1 = azero
             arg1 = (i - 1)*dt

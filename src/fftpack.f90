@@ -1,5 +1,5 @@
 module fftpack
-   use fftpack_kind, only: rk
+   use fftpack_kinds, only: dp
 
    implicit none
    private
@@ -22,7 +22,7 @@ module fftpack
 
    public :: dsinti, dsint
 
-   public :: rk
+   public :: dp
 
    interface
 
@@ -31,10 +31,10 @@ module fftpack
       !> Initialize `zfftf` and `zfftb`.
       !> ([Specification](../page/specs/fftpack.html#zffti))
       pure subroutine zffti(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine zffti
 
       !> Version: experimental
@@ -42,11 +42,11 @@ module fftpack
       !> Forward transform of a complex periodic sequence.
       !> ([Specification](../page/specs/fftpack.html#zfftf))
       pure subroutine zfftf(n, c, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         complex(kind=rk), intent(inout) :: c(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         complex(dp), intent(inout) :: c(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine zfftf
 
       !> Version: experimental
@@ -54,11 +54,11 @@ module fftpack
       !> Unnormalized inverse of `zfftf`.
       !> ([Specification](../page/specs/fftpack.html#zfftb))
       pure subroutine zfftb(n, c, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         complex(kind=rk), intent(inout) :: c(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         complex(dp), intent(inout) :: c(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine zfftb
 
       !> Version: experimental
@@ -66,10 +66,10 @@ module fftpack
       !> Initialize `dfftf` and `dfftb`.
       !> ([Specification](../page/specs/fftpack.html#dffti))
       pure subroutine dffti(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine dffti
 
       !> Version: experimental
@@ -77,11 +77,11 @@ module fftpack
       !> Forward transform of a real periodic sequence.
       !> ([Specification](../page/specs/fftpack.html#dfftf))
       pure subroutine dfftf(n, r, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: r(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: r(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dfftf
 
       !> Version: experimental
@@ -89,11 +89,11 @@ module fftpack
       !> Unnormalized inverse of `dfftf`.
       !> ([Specification](../page/specs/fftpack.html#dfftb))
       pure subroutine dfftb(n, r, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: r(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: r(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dfftb
 
       !> Version: experimental
@@ -101,10 +101,10 @@ module fftpack
       !> Initialize `dzfftf` and `dzfftb`.
       !> ([Specification](../page/specs/fftpack.html#dzffti))
       pure subroutine dzffti(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine dzffti
 
       !> Version: experimental
@@ -112,13 +112,13 @@ module fftpack
       !> Simplified forward transform of a real periodic sequence.
       !> ([Specification](../page/specs/fftpack.html#dzfftf))
       pure subroutine dzfftf(n, r, azero, a, b, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(in) :: r(*)
-         real(kind=rk), intent(out) :: azero
-         real(kind=rk), intent(out) :: a(*), b(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(in) :: r(*)
+         real(dp), intent(out) :: azero
+         real(dp), intent(out) :: a(*), b(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dzfftf
 
       !> Version: experimental
@@ -126,13 +126,13 @@ module fftpack
       !> Unnormalized inverse of `dzfftf`.
       !> ([Specification](../page/specs/fftpack.html#dzfftb))
       pure subroutine dzfftb(n, r, azero, a, b, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: r(*)
-         real(kind=rk), intent(in) :: azero
-         real(kind=rk), intent(in) :: a(*), b(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(out) :: r(*)
+         real(dp), intent(in) :: azero
+         real(dp), intent(in) :: a(*), b(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dzfftb
 
       !> Version: experimental
@@ -140,10 +140,10 @@ module fftpack
       !> Initialize `dcosqf` and `dcosqb`.
       !> ([Specification](../page/specs/fftpack.html#initialize-dct-2-3-dcosqi-or-dct_t23i))
       pure subroutine dcosqi(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine dcosqi
 
       !> Version: experimental
@@ -151,11 +151,11 @@ module fftpack
       !> Forward transform of quarter wave data.
       !> ([Specification](../page/specs/fftpack.html#compute-dct-3-dcosqf-or-dct_t3))
       pure subroutine dcosqf(n, x, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: x(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: x(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dcosqf
 
       !> Version: experimental
@@ -163,11 +163,11 @@ module fftpack
       !> Unnormalized inverse of `dcosqf`.
       !> ([Specification](../page/specs/fftpack.html#compute-dct-2-dcosqb-or-dct_t2))
       pure subroutine dcosqb(n, x, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: x(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: x(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dcosqb
 
       !> Version: experimental
@@ -175,10 +175,10 @@ module fftpack
       !> Initialize `dcost`.
       !> ([Specification](../page/specs/fftpack.html#initialize-dct-1-dcosti-or-dct_t1i))
       pure subroutine dcosti(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine dcosti
 
       !> Version: experimental
@@ -186,26 +186,26 @@ module fftpack
       !> Discrete fourier cosine transform of an even sequence.
       !> ([Specification](../page/specs/fftpack.html#compute-dct-1-dcost-or-dct_t1))
       pure subroutine dcost(n, x, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: x(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: x(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dcost
 
       pure subroutine dsinti(n, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(out) :: wsave(*)
+         real(dp), intent(out) :: wsave(*)
       end subroutine dsinti
 
       pure subroutine dsint(n, x, wsave)
-         import rk
+         import dp
          implicit none
          integer, intent(in) :: n
-         real(kind=rk), intent(inout) :: x(*)
-         real(kind=rk), intent(in) :: wsave(*)
+         real(dp), intent(inout) :: x(*)
+         real(dp), intent(in) :: wsave(*)
       end subroutine dsint
 
       !> Version: experimental
@@ -235,12 +235,12 @@ module fftpack
    !> Forward transform of a complex periodic sequence.
    !> ([Specifiction](../page/specs/fftpack.html#fft))
    interface fft
-      pure module function fft_rk(x, n) result(result)
+      pure module function fft_dp(x, n) result(result)
          implicit none
-         complex(kind=rk), intent(in) :: x(:)
+         complex(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
-         complex(kind=rk), allocatable :: result(:)
-      end function fft_rk
+         complex(dp), allocatable :: result(:)
+      end function fft_dp
    end interface fft
 
    !> Version: experimental
@@ -248,12 +248,12 @@ module fftpack
    !> Backward transform of a complex periodic sequence.
    !> ([Specifiction](../page/specs/fftpack.html#ifft))
    interface ifft
-      pure module function ifft_rk(x, n) result(result)
+      pure module function ifft_dp(x, n) result(result)
          implicit none
-         complex(kind=rk), intent(in) :: x(:)
+         complex(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
-         complex(kind=rk), allocatable :: result(:)
-      end function ifft_rk
+         complex(dp), allocatable :: result(:)
+      end function ifft_dp
    end interface ifft
 
    !> Version: experimental
@@ -261,12 +261,12 @@ module fftpack
    !> Forward transform of a real periodic sequence.
    !> ([Specifiction](../page/specs/fftpack.html#rfft))
    interface rfft
-      pure module function rfft_rk(x, n) result(result)
+      pure module function rfft_dp(x, n) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
+         real(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
-         real(kind=rk), allocatable :: result(:)
-      end function rfft_rk
+         real(dp), allocatable :: result(:)
+      end function rfft_dp
    end interface rfft
 
    !> Version: experimental
@@ -274,12 +274,12 @@ module fftpack
    !> Backward transform of a real periodic sequence.
    !> ([Specifiction](../page/specs/fftpack.html#irfft))
    interface irfft
-      pure module function irfft_rk(x, n) result(result)
+      pure module function irfft_dp(x, n) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
+         real(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
-         real(kind=rk), allocatable :: result(:)
-      end function irfft_rk
+         real(dp), allocatable :: result(:)
+      end function irfft_dp
    end interface irfft
 
    !> Version: experimental
@@ -287,13 +287,13 @@ module fftpack
    !> Dsicrete cosine transforms.
    !> ([Specification](../page/specs/fftpack.html#simplified-dct-of-types-1-2-3-dct))
    interface dct
-      pure module function dct_rk(x, n, type) result(result)
+      pure module function dct_dp(x, n, type) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
+         real(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
          integer, intent(in), optional :: type
-         real(kind=rk), allocatable :: result(:)
-      end function dct_rk
+         real(dp), allocatable :: result(:)
+      end function dct_dp
    end interface dct
 
    !> Version: experimental
@@ -301,13 +301,13 @@ module fftpack
    !> Inverse discrete cosine transforms.
    !> ([Specification](../page/specs/fftpack.html#simplified-inverse-dct-of-types-1-2-3-idct))
    interface idct
-      pure module function idct_rk(x, n, type) result(result)
+      pure module function idct_dp(x, n, type) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
+         real(dp), intent(in) :: x(:)
          integer, intent(in), optional :: n
          integer, intent(in), optional :: type
-         real(kind=rk), allocatable :: result(:)
-      end function idct_rk
+         real(dp), allocatable :: result(:)
+      end function idct_dp
    end interface idct
 
    !> Version: experimental
@@ -355,16 +355,16 @@ module fftpack
    !> Shifts zero-frequency component to center of spectrum.
    !> ([Specifiction](../page/specs/fftpack.html#fftshift))
    interface fftshift
-      pure module function fftshift_crk(x) result(result)
+      pure module function fftshift_cdp(x) result(result)
          implicit none
-         complex(kind=rk), intent(in) :: x(:)
-         complex(kind=rk), dimension(size(x)) :: result
-      end function fftshift_crk
-      pure module function fftshift_rrk(x) result(result)
+         complex(dp), intent(in) :: x(:)
+         complex(dp), dimension(size(x)) :: result
+      end function fftshift_cdp
+      pure module function fftshift_rdp(x) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
-         real(kind=rk), dimension(size(x)) :: result
-      end function fftshift_rrk
+         real(dp), intent(in) :: x(:)
+         real(dp), dimension(size(x)) :: result
+      end function fftshift_rdp
    end interface fftshift
 
    !> Version: experimental
@@ -372,16 +372,16 @@ module fftpack
    !> Shifts zero-frequency component to beginning of spectrum.
    !> ([Specifiction](../page/specs/fftpack.html#ifftshift))
    interface ifftshift
-      pure module function ifftshift_crk(x) result(result)
+      pure module function ifftshift_cdp(x) result(result)
          implicit none
-         complex(kind=rk), intent(in) :: x(:)
-         complex(kind=rk), dimension(size(x)) :: result
-      end function ifftshift_crk
-      pure module function ifftshift_rrk(x) result(result)
+         complex(dp), intent(in) :: x(:)
+         complex(dp), dimension(size(x)) :: result
+      end function ifftshift_cdp
+      pure module function ifftshift_rdp(x) result(result)
          implicit none
-         real(kind=rk), intent(in) :: x(:)
-         real(kind=rk), dimension(size(x)) :: result
-      end function ifftshift_rrk
+         real(dp), intent(in) :: x(:)
+         real(dp), dimension(size(x)) :: result
+      end function ifftshift_rdp
    end interface ifftshift
 
 end module fftpack

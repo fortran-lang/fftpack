@@ -1,5 +1,5 @@
 module fftpack_legacy_drivers_pass
-   use fftpack_kind, only: dp => rk
+   use fftpack_kinds, only: dp
    implicit none(type, external)
    private
 
@@ -93,8 +93,7 @@ module fftpack_legacy_drivers_pass
 
    interface
       pure module subroutine passf5(ido, l1, cc, ch, wa1, wa2, wa3, wa4)
-         use fftpack_kind, only: dp => rk
-         implicit none
+         implicit none(type, external)
          integer, intent(in) :: ido, l1
          real(dp), intent(in) :: cc(ido, 5, l1), wa1(*), wa2(*), wa3(*), wa4(*)
          real(dp), intent(out) :: ch(ido, l1, 5)

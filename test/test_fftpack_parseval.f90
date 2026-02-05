@@ -1,14 +1,14 @@
 module test_fftpack_parseval
    use fftpack, only: fft
-   use fftpack_kind, only: rk
+   use fftpack_kinds, only: dp
    use testdrive, only: new_unittest, unittest_type, error_type, check
    implicit none
    private
 
    public :: collect_parseval
    integer, parameter :: n = 1021
-   real(rk), parameter :: atol = n*epsilon(1.0_rk)
-   real(rk), parameter :: rtol = sqrt(atol)
+   real(dp), parameter :: atol = n*epsilon(1.0_dp)
+   real(dp), parameter :: rtol = sqrt(atol)
 
 contains
 
@@ -25,14 +25,14 @@ contains
       !-----     COMPLEX(DP) TRANSFORM     -----
       !--------------------------------------
       block
-         complex(rk) :: x(n)
-         real(rk) :: xre(n), xim(n)
-         real(rk) :: norms(2)
-         call random_number(xre); call random_number(xim); x = cmplx(xre, xim, kind=rk)
+         complex(dp) :: x(n)
+         real(dp) :: xre(n), xim(n)
+         real(dp) :: norms(2)
+         call random_number(xre); call random_number(xim); x = cmplx(xre, xim, kind=dp)
          !> Norm of the signal in the time domain.
          norms(1) = sum(abs(x)**2)
          !> Normalize signal.
-         x = x/sqrt(norms(1)); norms(1) = 1.0_rk
+         x = x/sqrt(norms(1)); norms(1) = 1.0_dp
          !> Fourier transform.
          x = fft(x)
          !> Norm of the signal in frequency domain.
@@ -49,10 +49,10 @@ contains
       !-----     COMPLEX(DP) TRANSFORM     -----
       !--------------------------------------
       block
-         complex(rk) :: x(n), y(n), dotprods(2)
-         real(rk) :: xre(n), xim(n)
-         call random_number(xre); call random_number(xim); x = cmplx(xre, xim, kind=rk)
-         call random_number(xre); call random_number(xim); y = cmplx(xre, xim, kind=rk)
+         complex(dp) :: x(n), y(n), dotprods(2)
+         real(dp) :: xre(n), xim(n)
+         call random_number(xre); call random_number(xim); x = cmplx(xre, xim, kind=dp)
+         call random_number(xre); call random_number(xim); y = cmplx(xre, xim, kind=dp)
          !> Normalize signals.
          x = x/sqrt(sum(abs(x)**2)); y = y/sqrt(sum(abs(y)**2))
          !> Dot product in time domain.
