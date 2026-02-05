@@ -1,20 +1,19 @@
 #### Pre-process: .fpp -> .f90 via Fypp
 
 # Create a list of the files to be preprocessed
-# set(fppFiles
-#     stdlib_version.fypp
-# )
+set(fppFiles
+    fftpack_kinds.fypp
+)
 
 # Preprocessed files to contain preprocessor directives -> .F90
 # set(cppFiles
 #     stdlib_linalg_constants.fypp
 # )
 
-# fypp_f90("${fyppFlags}" "${fppFiles}" outFiles)
+fypp_f90("${fyppFlags}" "${fppFiles}" outFiles)
 # fypp_f90pp("${fyppFlags}" "${cppFiles}" outPreprocFiles)
 
 set(SRC
-    fftpack_kinds.f90
     fftpack_legacy_drivers_pass.f90
     fftpack_legacy_drivers_rad.f90
     cfftb1.f90
