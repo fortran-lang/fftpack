@@ -12,7 +12,7 @@ program bench3
    call random_number(x)
    y = x
 
-   print *, "03: Benchmadping dfft & rfft"
+   print *, "03: Benchmarking dfft & rfft"
 
    call cpu_time(t1)
    call dffti(N, w)
