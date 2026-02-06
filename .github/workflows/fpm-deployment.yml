@@ -31,9 +31,9 @@ jobs:
           version: ${{ matrix.toolchain.version }}
 
       - name: Setup Fortran Package Manager
-        uses: fortran-lang/setup-fpm@v5
+        uses: fortran-lang/setup-fpm@v9
         with:
-          fpm-version: 'v0.10.0'
+          fpm-version: 'v0.12.0'
 
       - name: Prepare for code coverage
         if: contains( matrix.os, 'ubuntu')
