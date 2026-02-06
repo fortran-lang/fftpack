@@ -1,0 +1,21 @@
+#:include "common.fypp"
+module fftpack_kinds
+   implicit none(type, external)
+   private
+   public :: sp, dp, xdp, qp, lk
+
+   !> Single precision real numbers.
+   integer, parameter :: sp = selected_real_kind(6)
+
+   !> Double precision real numbers.
+   integer, parameter :: dp = selected_real_kind(8)
+
+   !> Extended double precision real numbers
+   integer, parameter :: xdp = #{if WITH_XDP}#selected_real_kind(18)#{else}#-1#{endif}#
+
+   !> Quadruple precision real numbers
+   integer, parameter :: qp = #{if WITH_QP}#selected_real_kind(33)#{else}#-1#{endif}#
+
+   !> Default logical kind parameter
+   integer, parameter :: lk = kind(.true.)
+end module fftpack_kinds

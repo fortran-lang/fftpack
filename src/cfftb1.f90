@@ -1,5 +1,6 @@
       subroutine cfftb1(n, c, ch, wa, ifac)
-         use fftpack_kind, only: dp => rk
+         use fftpack_kinds, only: dp
+         use fftpack_legacy_drivers_pass, only: passb, passb2, passb3, passb4, passb5
          implicit none
          integer, intent(in) :: n, ifac(*)
          real(dp), intent(in) :: wa(*)

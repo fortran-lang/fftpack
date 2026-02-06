@@ -1,10 +1,10 @@
       subroutine dcost(n, x, wsave)
-         use fftpack_kind, only: rk
+         use fftpack_kinds, only: dp
          implicit none
          integer, intent(in) :: n
-         real(rk), intent(inout) :: wsave(*)
-         real(rk), intent(inout) :: x(*)
-         real(rk) :: c1, t1, t2, tx2, x1h, x1p3, &
+         real(dp), intent(inout) :: wsave(*)
+         real(dp), intent(inout) :: x(*)
+         real(dp) :: c1, t1, t2, tx2, x1h, x1p3, &
                      xi, xim2
          integer :: i, k, kc, modn, nm1, np1, ns2
          nm1 = n - 1

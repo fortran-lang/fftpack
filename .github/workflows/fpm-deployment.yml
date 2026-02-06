@@ -56,6 +56,11 @@ jobs:
       - run: | # Use fpm gnu ci to check xdp and qp 
           python config/fypp_deployment.py --with_xdp --with_qp
           fpm test --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
+          fpm run --example example_bench01_zfft --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
+          fpm run --example example_bench02_zfft --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
+          fpm run --example example_bench03_dfft --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
+          fpm run --example example_real_transforms --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
+          fpm run --example example_complex_transforms --profile release --flag '-DWITH_XDP -DWITH_QP -coverage'
 
       - name: Create coverage report
         run: |

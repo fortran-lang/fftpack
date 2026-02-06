@@ -1,106 +1,21 @@
 #### Pre-process: .fpp -> .f90 via Fypp
 
 # Create a list of the files to be preprocessed
-# set(fppFiles
-#     stdlib_ascii.fypp
-#     stdlib_bitsets.fypp
-#     stdlib_bitsets_64.fypp
-#     stdlib_bitsets_large.fypp
-#     stdlib_codata_type.fypp
-#     stdlib_constants.fypp
-#     stdlib_error.fypp
-#     stdlib_hash_32bit.fypp
-#     stdlib_hash_32bit_fnv.fypp
-#     stdlib_hash_32bit_nm.fypp
-#     stdlib_hash_32bit_water.fypp
-#     stdlib_hash_64bit.fypp
-#     stdlib_hash_64bit_fnv.fypp
-#     stdlib_hash_64bit_pengy.fypp
-#     stdlib_hash_64bit_spookyv2.fypp
-#     stdlib_intrinsics_dot_product.fypp
-#     stdlib_intrinsics_sum.fypp
-#     stdlib_intrinsics.fypp
-#     stdlib_io.fypp
-#     stdlib_io_npy.fypp
-#     stdlib_io_npy_load.fypp
-#     stdlib_io_npy_save.fypp
-#     stdlib_kinds.fypp
-#     stdlib_linalg.fypp
-#     stdlib_linalg_diag.fypp
-#     stdlib_linalg_least_squares.fypp
-#     stdlib_linalg_outer_product.fypp
-#     stdlib_linalg_kronecker.fypp
-#     stdlib_linalg_cross_product.fypp
-#     stdlib_linalg_eigenvalues.fypp
-#     stdlib_linalg_solve.fypp
-#     stdlib_linalg_determinant.fypp
-#     stdlib_linalg_qr.fypp
-#     stdlib_linalg_inverse.fypp
-#     stdlib_linalg_pinv.fypp
-#     stdlib_linalg_norms.fypp
-#     stdlib_linalg_state.fypp
-#     stdlib_linalg_svd.fypp
-#     stdlib_linalg_cholesky.fypp
-#     stdlib_linalg_schur.fypp
-#     stdlib_optval.fypp
-#     stdlib_selection.fypp
-#     stdlib_sorting.fypp
-#     stdlib_sorting_ord_sort.fypp
-#     stdlib_sorting_sort.fypp
-#     stdlib_sorting_sort_index.fypp
-#     stdlib_sparse_constants.fypp
-#     stdlib_sparse_conversion.fypp
-#     stdlib_sparse_kinds.fypp
-#     stdlib_sparse_spmv.fypp
-#     stdlib_specialfunctions_activations.fypp
-#     stdlib_specialfunctions_gamma.fypp
-#     stdlib_specialfunctions.fypp
-#     stdlib_specialmatrices.fypp
-#     stdlib_specialmatrices_tridiagonal.fypp
-#     stdlib_stats.fypp
-#     stdlib_stats_corr.fypp
-#     stdlib_stats_cov.fypp
-#     stdlib_stats_mean.fypp
-#     stdlib_stats_median.fypp
-#     stdlib_stats_moment.fypp
-#     stdlib_stats_moment_all.fypp
-#     stdlib_stats_moment_mask.fypp
-#     stdlib_stats_moment_scalar.fypp
-#     stdlib_stats_distribution_uniform.fypp
-#     stdlib_stats_distribution_normal.fypp
-#     stdlib_stats_distribution_exponential.fypp
-#     stdlib_stats_var.fypp
-#     stdlib_quadrature.fypp
-#     stdlib_quadrature_trapz.fypp
-#     stdlib_quadrature_simps.fypp
-#     stdlib_random.fypp
-#     stdlib_math.fypp
-#     stdlib_math_linspace.fypp
-#     stdlib_math_logspace.fypp
-#     stdlib_math_arange.fypp
-#     stdlib_math_is_close.fypp
-#     stdlib_math_all_close.fypp
-#     stdlib_math_diff.fypp
-#     stdlib_math_meshgrid.fypp
-#     stdlib_str2num.fypp
-#     stdlib_string_type.fypp
-#     stdlib_string_type_constructor.fypp
-#     stdlib_strings_to_string.fypp
-#     stdlib_strings.fypp
-#     stdlib_version.fypp
-# )
+set(fppFiles
+    fftpack_kinds.fypp
+)
 
 # Preprocessed files to contain preprocessor directives -> .F90
 # set(cppFiles
 #     stdlib_linalg_constants.fypp
-#     stdlib_linalg_blas.fypp
-#     stdlib_linalg_lapack.fypp
 # )
 
-# fypp_f90("${fyppFlags}" "${fppFiles}" outFiles)
+fypp_f90("${fyppFlags}" "${fppFiles}" outFiles)
 # fypp_f90pp("${fyppFlags}" "${cppFiles}" outPreprocFiles)
 
 set(SRC
+    fftpack_legacy_drivers_pass.f90
+    fftpack_legacy_drivers_rad.f90
     cfftb1.f90
     cfftf1.f90
     cffti1.f90
@@ -132,30 +47,9 @@ set(SRC
     fftpack_irfft.f90
     fftpack_rfft.f90
     fftpack_utils.f90
-    passb2.f90
-    passb3.f90
-    passb4.f90
-    passb5.f90
-    passb.f90
-    passf2.f90
-    passf3.f90
-    passf4.f90
-    passf5.f90
-    passf.f90
-    radb2.f90
-    radb3.f90
-    radb4.f90
-    radb5.f90
-    radbg.f90
-    radf2.f90
-    radf3.f90
-    radf4.f90
-    radf5.f90
-    radfg.f90
     rfftb1.f90
     rfftf1.f90
     rffti1.f90
-    rk.f90
     sint1.f90
     zfftb.f90
     zfftf.f90
@@ -165,12 +59,6 @@ set(SRC
 )
 
 add_library(${PROJECT_NAME} ${SRC})
-
-# # Link to BLAS and LAPACK
-# if(BLAS_FOUND AND LAPACK_FOUND)
-#   target_link_libraries(${PROJECT_NAME} "BLAS::BLAS")
-#   target_link_libraries(${PROJECT_NAME} "LAPACK::LAPACK")
-# endif()
 
 set_target_properties(
   ${PROJECT_NAME}

@@ -1,5 +1,5 @@
       subroutine sint1(n, war, was, xh, x, ifac)
-         use fftpack_kind, only: dp => rk
+         use fftpack_kinds, only: dp
          implicit none
          integer, intent(in) :: n, ifac(*)
          real(dp), intent(in) :: was(*)
