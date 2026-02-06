@@ -13,7 +13,7 @@ program bench1
    call random_number(x)
    z = x
 
-   print *, "01: Benchmadping zfft"
+   print *, "01: Benchmarking zfft"
    print *, "Initializing"
    call cpu_time(t1)
    call zffti(N, w)
