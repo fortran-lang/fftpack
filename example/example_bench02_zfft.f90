@@ -12,7 +12,7 @@ program bench2
    call random_number(x%re)
    z = x
 
-   print *, "02: Benchmadping zfft & fft"
+   print *, "02: Benchmarking zfft & fft"
 
    call cpu_time(t1)
    call zffti(N, w)
